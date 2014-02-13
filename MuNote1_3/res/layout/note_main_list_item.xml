@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:paddingBottom="4dp"
+    android:paddingTop="4dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tv_note_info_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="你的便利贴。。"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/pale_blue" />
+
+    <LinearLayout
+        android:id="@+id/ll_list_item_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_note_info_title"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_note_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="04月10日"
+            android:textColor="@color/pale_blue" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_list_item_right"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="bottom|right"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="晴"
+            android:lines="1"
+            android:gravity="right"
+            android:maxWidth="80dp"
+            android:textColor="@color/pale_blue" />
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:gravity="right"
+            android:maxWidth="80dp"
+            android:text="北京 大望路 通惠河北路"
+            android:textColor="@color/pale_blue" />
+    </LinearLayout>
+
+</RelativeLayout>

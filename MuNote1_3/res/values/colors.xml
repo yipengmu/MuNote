@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <drawable name="flight_info_press">#000000</drawable>
+    <drawable name="flight_info_normal">#2E4966</drawable>
+
+    <color name="flight_info_activity_normal">#11ffffff</color>
+    <color name="flight_info_activity_pressed">#444c91c5</color>
+    <color name="trip_city_selection_index_color">#8a9ca8</color>
+    <color name="trip_city_slection_item_press_color">#e0e1e7</color>
+    <color name="trip_city_slection_item_normal_color">#ffffff</color>
+    <color name="trip_city_search_item_normal_color">#f9f9fb</color>
+    <color name="trip_wheel_bg">#2e3a4a</color>
+    <color name="title_font_color">#13334d</color>
+    <color name="mid_gray">#2b577a</color>
+    <color name="mid_blue">#4aa1e1</color>
+    <color name="line_color">#dcdcdc</color>
+    <color name="transparent">#00000000</color>
+    <color name="lightblack">#ff202020</color>
+    <color name="border_color">#FF0000</color>
+    <color name="black_light">#636363</color>
+    <color name="black">#000000</color>
+    <color name="prev_next_month_day_color">#999999</color>
+    <color name="text_color">#FFFFFF</color>
+    <color name="text_color1">#EF2701</color>
+    <color name="font_color">#005AF5</color>
+    <color name="sunday_saturday_color">#FAAF2A</color>
+    <color name="white">#FFFFFF</color>
+    <color name="price_Color">#ffff6600</color>
+    <color name="grayish_Color">#2e3947</color>
+    <color name="gray_Color">#2a3c43</color>
+    <color name="shennan_color">#ff006666</color>
+    <color name="pale_white">#f3f5f6</color>
+    <color name="pale_blue">#ff445684</color>
+    <color name="shadow_blue">#1b7793</color>
+    <color name="shadow_orange">#c55908</color>
+    <color name="shadow_dark_gray">#fff7f7f6</color>
+    <color name="index_order">#565656</color>
+    <color name="index_orderno">#777777</color>
+    <color name="index_ordertime">#2387d7</color>
+    <color name="bg_normal">#f1f1f1</color>
+    <color name="bg_label">#dcdcdc</color>
+    <color name="hotflight_highlight">#d9eaff</color>
+    <color name="divider">#cccccc</color>
+    <color name="french_grey">#ff999999</color>
+    <color name="dark_grey">#ff4c4c49</color>
+    <color name="text_light_grey">#b4b4b4</color>
+    <color name="much_dark_grey">#4d4d4d</color>
+    <color name="blue">#ff039fce</color>
+    <color name="fresh_blue">#19a1db</color>
+    <color name="blue_for_block">#b6dce6</color>
+    <color name="red">#ffdd0000</color>
+    <color name="order_train_red">#ff5b45</color>
+    <color name="orange">#ff6600</color>
+    <color name="green">#ff138c0D</color>
+    <color name="fresh_green">#8af63a</color>
+    <color name="dark_blue">#ff232323</color>
+    <color name="secant_blue">#475766</color>
+    <color name="middle_fresh_blue">#2f3841</color>
+    <color name="middle_dark_blue">#2a2a2a</color>
+    <color name="dialog_blue">#01a4d5</color>
+    <color name="gray">#9db2ca</color>
+    <color name="light_gray">#AAAAAA</color>
+    <color name="help_bg">#99000000</color>
+    <color name="mid_black">#b0000000</color>
+    <color name="dialog_black_bg">#bf000000</color>
+    <color name="home_bottom_menu_normal">#ffc9c9c9</color>
+    <color name="home_bottom_menu_select">#ff888888</color>
+    <color name="hotel_filter_bg_highlight">#dadada</color>
+    <color name="train_search_lately_color">#94acc6</color>
+
+    <drawable name="translucent_background">#c8000000</drawable>
+    <drawable name="transparent">#00FFFFFF</drawable>
+    <drawable name="white">#FFFFFFFF</drawable>
+    <drawable name="cent_secant">#CCCCCC</drawable>
+    <drawable name="fresh_gray">#f1f1f1</drawable>
+    <drawable name="fresh_blue">#3388cc</drawable>
+    <drawable name="light_yellow_bg">#fff3d3</drawable>
+    <drawable name="dark_yellow">#eacd95</drawable>
+
+    <color name="half_transparent">#7f000000</color>
+    <color name="F_black_light_4">#FF999999</color>
+    <color name="global_background">#FFF5F5F5</color>
+    <color name="train_detail_line">#DEDEDE</color>
+    <color name="train_detail_list_divider_line">#D3DDE3</color>
+    <color name="train_little_ticket">#FF6347</color>
+    <color name="train_no_ticket">#ff8a9ca8</color>
+    <color name="train_time_table_text">#8a9ca8</color>
+    <color name="train_time_table_light_text">#ffffff</color>
+    <color name="train_details_ticket_type_text_color">#ff2b577a</color>
+    <color name="train_details_price_have_ticket_text_color">#FFFF5b45</color>
+    <color name="train_details_price_no_ticket_text_color">#ff8a9ca8</color>
+    <color name="train_details_is_buy_btn_text_color">#11FFFFFF</color>
+    <color name="train_details_no_tickct_btn_text_color">#FFEDEEF2</color>
+    <color name="train_details_date_text_color">#BF2b577a</color>
+    <color name="train_details_bg_color">#edeef2</color>
+    <color name="train_details_text_shadow_color">#11FFFFFF</color>
+    <color name="train_details_time_table_shadow_color">#11000000</color>
+    <color name="train_detaile_start_text_color">#c3e7fe</color>
+    <color name="train_detaile_station_shadow_color">#44000000</color>
+    <color name="tabbar_text_color_normal">#697d91</color>
+    <color name="tabbar_text_color_checked">#becbdb</color>
+    <color name="tabbar_home_text_color_checked">#67819d</color>
+    <color name="tabbar_home_text_color_normal">#859cab</color>
+
+    <drawable name="trip_bg_flight_list_child_item_normal">#edeef2</drawable>
+    <drawable name="trip_bg_flight_list_child_item_press">#e0e1e7</drawable>
+    <drawable name="trip_bg_flight_list_group_item_normal">#fdfdfd</drawable>
+    <drawable name="trip_bg_flight_list_group_item_press">#e2e5e8</drawable>
+    <drawable name="trip_bg_flight_dynamic_list_item_press">#e4e7ea</drawable>
+
+    <color name="bg_filter_item_pressed">#222b39</color>
+    <color name="bg_filter_item_normal">#2b3644</color>
+    <color name="flight_list_calendar_item_press">#e4e5eb</color>
+
+    <!-- 城市选择 -->
+    <color name="bgcolor">#FFD8D8D8</color>
+    <color name="city_selection_search_bg">#b0000000</color>
+
+    <drawable name="city_divider">#E5eaee</drawable>
+
+    <color name="city_name_color">#2b577a</color>
+    <color name="city_nearname_color">#4ba6e2</color>
+
+    <drawable name="trip_bg_msg_item_pressed">#78bef2</drawable>
+    <drawable name="trip_loading_bg">#FFf1f1f1</drawable>
+
+    <!-- 航班动态 -->
+    <color name="trip_tv_dynamic_query_color_add">#FFFFFF</color>
+    <color name="trip_tv_dynamic_query_color_cancle">#A1ACBD</color>
+    <color name="default_circle_indicator_page_color">#cbd1dc</color>
+    <color name="shadow_title_color">#bfffffff</color>
+
+    <drawable name="bg_flight_dynamic_card_cell_normal">#00FFFFFF</drawable>
+    <drawable name="bg_flight_dynamic_card_cell_pressed">#e2e5e8</drawable>
+    <drawable name="trip_bg_search_header_bar">#f1f3f7</drawable>
+
+    <!-- 微旅行 -->
+    <drawable name="trip_little_travel_list_item_normal">#ffffff</drawable>
+    <drawable name="trip_little_travel_list_item_press">#e2e5e8</drawable>
+
+    <color name="trip_flight_list_bn_apply">#697d91</color>
+    <color name="trip_flight_list_bn_apply_shadow">#bfffffff</color>
+    <color name="trip_flight_list_bn_reservation_shadow">#27000000</color>
+
+    <!-- 酒店搜索列表 -->
+    <drawable name="trip_hotel_list_item_normal">#FDFDFD</drawable>
+    <drawable name="trip_hotel_list_item_press">#e2e5e8</drawable>
+
+    <!-- 酒店详情 -->
+    <color name="trip_hotel_detail_ceil_normal">#fdfdfd</color>
+    <color name="trip_hotel_detail_ceil_press">#e2e5e8</color>
+    <color name="trip_hotel_detail_ceil_text_color">#2b577a</color>
+    <color name="trip_hotel_detail_sanitation_color">#4AA1E1</color>
+    <color name="trip_hotel_detail_serve_color">#33CBAF</color>
+    <color name="trip_hotel_detail_facilities_color">#FF6A5B</color>
+    <color name="trip_hotel_detail_performance_color">#907FCE</color>
+    <color name="trip_hotel_detail_review_good_review">#4aa1e1</color>
+    <color name="trip_hotel_detail_review_middle_review">#16b799</color>
+    <color name="trip_hotel_detail_review_bad_review">#ff6a5b</color>
+    <color name="trip_hotel_detail_review_review_type_shadow">#c0ffffff</color>
+
+    <!-- 航班列表日历 -->
+    <drawable name="trip_flight_list_calendar_normal">#F9F9FB</drawable>
+    <drawable name="trip_flight_list_calendar_press">#ECECF1</drawable>
+
+    <color name="trip_flight_list_calendar_text_disable">#ccd5db</color>
+    
+    
+    <color name="trip_flight_low_subscribe_detail_rule_normal">#FF6A5B</color>
+    <color name="trip_flight_low_subscribe_detail_rule_press">#ED5141</color>
+    
+
+</resources>
