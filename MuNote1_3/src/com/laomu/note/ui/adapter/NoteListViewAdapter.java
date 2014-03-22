@@ -52,7 +52,8 @@ public class NoteListViewAdapter extends BaseAdapter{
 		if(view == null){
 			view = LayoutInflater.from(mContext).inflate(R.layout.note_main_list_item, null);
 			holder = new ViewHolder();
-			holder.tv_note_info_title = (TextView) view.findViewById(R.id.tv_note_info_title);
+			holder.tv_note_info_title = (TextView) view.findViewById(R.id.tv_note_title);
+			holder.tv_note_info = (TextView) view.findViewById(R.id.tv_note_info);
 			holder.tv_note_time = (TextView) view.findViewById(R.id.tv_note_time);
 			holder.tv_weather = (TextView) view.findViewById(R.id.tv_weather);
 			holder.tv_location = (TextView) view.findViewById(R.id.tv_location);
@@ -68,6 +69,9 @@ public class NoteListViewAdapter extends BaseAdapter{
 
 	private void drawItemView(int pos, NoteBean noteBean, ViewHolder holder) {
 		MuLog.logi("drawItemView : start  postion =" + pos);
+		holder.tv_note_time.setText(noteBean.note_time);
+		holder.tv_note_info_title.setText(noteBean.note_title);
+		holder.tv_note_info.setText(noteBean.note_content);
 	}
 
 	@Override
@@ -80,8 +84,10 @@ public class NoteListViewAdapter extends BaseAdapter{
 		mContext = c;
 		notifyDataSetChanged();
 	}
+	
 	class ViewHolder{ 
 		TextView tv_note_info_title;
+		TextView tv_note_info;
 		TextView tv_note_time;
 		TextView tv_weather;
 		TextView tv_location;

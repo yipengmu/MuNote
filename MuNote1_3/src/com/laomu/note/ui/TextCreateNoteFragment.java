@@ -4,6 +4,7 @@
 package com.laomu.note.ui;
 
 import com.laomu.note.R;
+import com.laomu.note.ui.base.NoteBaseFragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

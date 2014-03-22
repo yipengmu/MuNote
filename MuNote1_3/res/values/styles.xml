@@ -1,20 +1,660 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <style name="background">
+        <item name="android:background">#ffffff</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:shadowRadius">2.0</item>
+    </style>
+
+    <style name="cent_secant">
+        <item name="android:background">#cccccc</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1px</item>
+    </style>
+    
+     <style name="cent_secant_cfd5dd_2px">
+        <item name="android:background">#cfd5dd</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">2px</item>
+    </style>
+    
+         
+    <style name="cent_secant_dedde5_1px">
+        <item name="android:background">#dedde5</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1px</item>
+    </style>
+    
+    <style name="cent_secant_for_hotel_detail_rp_item">
+        <item name="android:background">#cccccc</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:paddingLeft">10px</item>
+    </style>
+
+    <style name="cent_secant_2px">
+        <item name="android:background">#e7e7e7</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">2px</item>
+    </style>
+
+    <style name="cent_secant_section">
+        <item name="android:background">#e8eaf3</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">2px</item>
+    </style>
+
+    <style name="cent_secant_dark_blue">
+        <item name="android:background">#3d3d3d</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1px</item>
+    </style>
+
+    <style name="cent_secant_blue">
+        <item name="android:background">#475766</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1px</item>
+    </style>
+
+    <style name="cent_secant_blue_home">
+        <item name="android:background">#94d3e6</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1px</item>
+    </style>
+
+    <style name="cent_secant_blue_home_vertical">
+        <item name="android:background">#94d3e6</item>
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="cent_secant_darkblue">
+        <item name="android:background">@color/dark_blue</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1px</item>
+    </style>
+
+    <style name="cent_secant_vertical">
+        <item name="android:background">#cccccc</item>
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="cent_secant_vertical_red_for_1px">
+        <item name="android:background">#e0c2c2</item>
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="cent_secant_vertical_2px">
+        <item name="android:background">#b2c0d0</item>
+        <item name="android:layout_width">2px</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="cent_secant_vertical_dark_blue">
+        <item name="android:background">#3d3d3d</item>
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="cent_secant_red">
+        <item name="android:background">#e0c2c2</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">2px</item>
+    </style>
+
+    <style name="cent_secant_red_for_1px">
+        <item name="android:background">#e0c2c2</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1px</item>
+    </style>
+
+    <style name="cent_secant_layer">
+        <item name="android:background">#232b36</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1px</item>
+    </style>
+
+    <style name="top_status_bar">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">60dip</item>
+        <item name="android:background">#f1f1f1</item>
+    </style>
+
+    <style name="top_status_bar_blue">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">60dip</item>
+        <item name="android:background">@color/blue</item>
+    </style>
+
+    <style name="bottom_status_bar">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">40dip</item>
+        <item name="android:background">#f1f1f1</item>
+    </style>
+
+    <style name="btn_small_font">
+        <item name="android:textSize">11dp</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:shadowColor">#27000000</item>
+        <item name="android:shadowRadius">1.0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+
+    <style name="title_font">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#13334d</item>
+        <item name="android:shadowColor">#bfffffff</item>
+        <item name="android:shadowRadius">1.0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+    
     <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+          <item name="android:shadowRadius">1.0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item> 
+        <item name="android:shadowColor">#bfffffff</item>
     -->
-    <style name="AppBaseTheme" parent="android:Theme.Light">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
+    <style name="cell_font">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#2b577a</item>
     </style>
 
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    <style name="cell_shadow_font">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#2b577a</item>
+        <item name="android:shadowColor">#ffffffff</item>
+        <item name="android:shadowRadius">1.0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
     </style>
+
+    <style name="cell_shadow_font2">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">#7b92a7</item>
+        <item name="android:shadowColor">#ffffffff</item>
+        <item name="android:shadowRadius">1.0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+
+    <style name="shadowstyle">
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDy">0.2</item>
+        <item name="android:alpha">0.15</item>
+    </style>
+
+    <style name="cell_font2">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#4aa1e1</item>
+        <item name="android:textColorHint">#ffe2e4eb</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="cell_second_font">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">#8a9ca8</item>
+        <item name="android:shadowColor">#bfffffff</item>
+        <item name="android:shadowRadius">1.0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+
+    <style name="special_city_cell_font">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#2b577a</item>
+        <item name="android:shadowColor">#27ffffff</item>
+        <item name="android:shadowRadius">1.0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+
+    <style name="shadow_text_font">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">#becbdb</item>
+        <item name="android:shadowColor">#27000000</item>
+        <item name="android:shadowRadius">1.0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+
+    <style name="no_result_font">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#8a9ca8</item>
+        <item name="android:shadowColor">#bfffffff</item>
+        <item name="android:shadowRadius">1.0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+    
+    <style name="no_result_gray_font">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#515e70</item>
+        <item name="android:shadowColor">#27000000</item>
+        <item name="android:shadowRadius">1.0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+
+    <style name="wheel_select_font">
+        <item name="android:textSize">19dp</item>
+        <item name="android:textColor">#eef6fa</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">#27000000</item>
+        <item name="android:shadowRadius">1.0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+
+    <style name="wheel_no_select_font">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#8a9ca8</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">#27000000</item>
+        <item name="android:shadowRadius">1.0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+
+    <style name="login_edit_text">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#4aa1e1</item>
+        <item name="android:textColorHint">#ffe2e4eb</item>
+        <item name="android:shadowColor">#bfffffff</item>
+        <item name="android:shadowRadius">1.0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="home_bottom_menu_font">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/home_bottom_menu_normal</item>
+        <item name="android:shadowColor">#ff2e2e2e</item>
+        <item name="android:shadowRadius">1.0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+
+    <style name="hotel_tab_select_font">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#484848</item>
+        <item name="android:shadowColor">#ffffff</item>
+        <item name="android:shadowRadius">1.0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+
+    <style name="hotel_tab_normal_font">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#666666</item>
+        <item name="android:shadowColor">#ffffff</item>
+    </style>
+
+    <style name="map_express_font">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:shadowColor">#ffd15000</item>
+        <item name="android:shadowRadius">1.0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+
+    <style name="map_font">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:shadowColor">#ff1f8fc3</item>
+        <item name="android:shadowRadius">1.0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+
+    <style name="show_more_font">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ff4c4c49</item>
+        <item name="android:shadowColor">#fff7f7f6</item>
+        <item name="android:shadowRadius">1.0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+
+    <style name="french_grey14_for_cell">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">#8a9ca8</item>
+    </style>
+    
+    <style name="french_grey">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#999999</item>
+        <item name="android:shadowRadius">2.0</item>
+    </style>
+
+    <style name="french_grey10">
+        <item name="android:textSize">10dp</item>
+        <item name="android:textColor">#999999</item>
+        <item name="android:shadowRadius">2.0</item>
+    </style>
+
+    <style name="french_grey12">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">#999999</item>
+        <item name="android:shadowRadius">2.0</item>
+    </style>
+
+    <style name="french_grey13">
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">#9c9c9c</item>
+        <item name="android:shadowRadius">2.0</item>
+    </style>
+
+    <style name="french_grey14">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">#999999</item>
+        <item name="android:shadowRadius">2.0</item>
+    </style>
+
+    <style name="french_grey15">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">#999999</item>
+        <item name="android:shadowRadius">2.0</item>
+    </style>
+
+    <style name="french_grey18">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">#999999</item>
+        <item name="android:shadowRadius">2.0</item>
+    </style>
+
+    <style name="small_french_grey">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">#999999</item>
+        <item name="android:shadowRadius">2.0</item>
+    </style>
+
+    <style name="dark_grey">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#4c4c49</item>
+        <item name="android:shadowRadius">2.0</item>
+    </style>
+
+    <style name="dark_grey20">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#4c4c49</item>
+        <item name="android:shadowRadius">2.0</item>
+    </style>
+
+    <style name="dark_grey24">
+        <item name="android:textSize">24dp</item>
+        <item name="android:textColor">#4c4c49</item>
+        <item name="android:shadowRadius">2.0</item>
+    </style>
+
+    <style name="text_dark_grey">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">#b4b4b4</item>
+        <item name="android:shadowRadius">2.0</item>
+    </style>
+
+    <style name="dark_grey_bold">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="pale_blue">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
+    <style name="pale_blue_small">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
+    <style name="pale_blue_12">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/pale_blue</item>
+    </style>
+
+    <style name="pale_blue_14">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
+    <style name="red">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#dd0000</item>
+    </style>
+
+    <style name="red14">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">#dd0000</item>
+    </style>
+
+    <style name="orange">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/orange</item>
+    </style>
+
+    <style name="orange12">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/orange</item>
+    </style>
+
+    <style name="orange14">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/orange</item>
+    </style>
+
+    <style name="orange16">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/orange</item>
+    </style>
+
+    <style name="orange18">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/orange</item>
+    </style>
+
+    <style name="orange22">
+        <item name="android:textSize">22dp</item>
+        <item name="android:textColor">@color/orange</item>
+    </style>
+
+    <style name="gray12">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="gray14">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="gray15">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="gray16">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="gray18">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="gray20">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="gray24">
+        <item name="android:textSize">24dp</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="gray46">
+        <item name="android:textSize">46dp</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="dark_grey12">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/dark_grey</item>
+    </style>
+
+    <style name="dark_grey13">
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">@color/dark_grey</item>
+    </style>
+
+    <style name="dark_grey14">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/dark_grey</item>
+    </style>
+
+    <style name="dark_grey15">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/dark_grey</item>
+    </style>
+
+    <style name="dark_grey16">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/dark_grey</item>
+    </style>
+
+    <style name="dark_grey18">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/dark_grey</item>
+    </style>
+
+    <style name="black14">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="black15">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="black16">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="black20">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="white16">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="white18">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="white15">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:shadowRadius">2.0</item>
+    </style>
+
+    <style name="white12">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:shadowRadius">2.0</item>
+    </style>
+
+    <style name="white14">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:shadowRadius">2.0</item>
+    </style>
+
+    <style name="white">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:shadowColor">@color/black</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">-1</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
+
+    <style name="silver_btn_text">
+        <item name="android:textColor">#ff000000</item>
+        <item name="android:shadowColor">#ffeeeeee</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">2.0</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="custom_dialog_title">
+        <item name="android:textColor">#ff666666</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="txt_white_black_16">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:shadowColor">@color/black</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="header_page_indicator_title">
+        <item name="android:textSize">14dp</item>
+        <item name="android:shadowColor">#bfffffff</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
+
+    <style name="dynamic_card_text1">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:shadowColor">#26000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
+
+    <style name="dynamic_card_text2">
+        <item name="android:textColor">#b2ffffff</item>
+        <item name="android:shadowColor">#26000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">2</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:textSize">13dp</item>
+    </style>
+
+    <style name="trip_tv_list_calendar_flight_day_can_click">
+        <item name="android:textColor">#8a9ca8</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="trip_tv_list_calendar_flight_day_not_click">
+        <item name="android:textColor">#e2e4eb</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+
 
 </resources>

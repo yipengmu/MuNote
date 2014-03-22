@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.laomu.note.ui.NoteMainFragment;
-import com.laomu.note.ui.SampleListFragment;
+import com.umeng.analytics.MobclickAgent;
 
 public class MainActivity extends SlidingFragmentActivity{
 
@@ -15,13 +15,14 @@ public class MainActivity extends SlidingFragmentActivity{
 		setContentView(R.layout.welcome);
 		initSlidingMenu(savedInstanceState);
 		getSupportFragmentManager().beginTransaction().replace(R.id.fl_container, new NoteMainFragment()).commit();
+	
+		//开启友盟 统计
+		MobclickAgent.updateOnlineConfig(this);
 	}
 	
 	private void initSlidingMenu(Bundle savedInstanceState) {
 		setBehindContentView(R.layout.left_menu_frame);
 		
-		getSupportFragmentManager().beginTransaction().add(new SampleListFragment(), "left")
-				.commit();
 		SlidingMenu sm = getSlidingMenu();
 		sm.setMode(SlidingMenu.LEFT);
 		sm.setShadowWidthRes(R.dimen.shadow_width);

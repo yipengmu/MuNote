@@ -27,7 +27,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	/** ���캯�� �� ������ݿ�DB�ļ� */
 	public DatabaseHelper(Context context) {
-		// CursorFactory����Ϊnull,ʹ��Ĭ��ֵ
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
@@ -53,7 +52,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	 */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		// TODO Auto-generated method stub
 		db.execSQL("ALTER TABLE note ADD COLUMN other STRING");
 	}
 

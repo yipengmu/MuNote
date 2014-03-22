@@ -19,34 +19,51 @@ import android.database.sqlite.SQLiteDatabase;
 public class DBManager {
 	private DatabaseHelper helper;
 	private SQLiteDatabase db;
-
+	private static DBManager instance ;
 	/**
 	 * construct
 	 */
-	public DBManager(Context c) {
+	private DBManager(Context c) {
 		helper = new DatabaseHelper(c);
-		// ��ΪgetWritableDatabase�ڲ�������mContext.openOrCreateDatabase(mName, 0,
-		// mFactory);
-		// ����Ҫȷ��context�ѳ�ʼ��,���ǿ��԰�ʵ��DBManager�Ĳ������Activity��onCreate��
 		db = helper.getWritableDatabase();
+	}
+
+	public static DBManager instance(Context c){
+		if(instance == null){
+			instance = new DBManager(c);
+		}
+		return instance;
+	}
+	
+	/**
+	 * add database cursor
+	 * */
+	public void add(List<NoteBean> noteList) {
+		db.beginTransaction(); 
+		try {
+			for (NoteBean note : noteList) {
+				db.execSQL("INSERT INTO note VALUES(null, ?, ?, ?)", new Object[] {
+						note.note_title, note.note_content, note.note_time });
+			}
+			db.setTransactionSuccessful();
+		} finally {
+			db.endTransaction();
+		}
 	}
 
 	/**
 	 * add database cursor
 	 * */
-	public void add(List<NoteBean> noteBean) {
-		db.beginTransaction(); // ��ʼ����
+	public void add(NoteBean note) {
+		db.beginTransaction(); 
 		try {
-			for (NoteBean note : noteBean) {
-				db.execSQL("INSERT INTO note VALUES(null, ?, ?, ?)", new Object[] {
+			db.execSQL("INSERT INTO note VALUES(null, ?, ?, ?)", new Object[] {
 						note.note_title, note.note_content, note.note_time });
-			}
-			db.setTransactionSuccessful(); // ��������ɹ����
+			db.setTransactionSuccessful();
 		} finally {
-			db.endTransaction(); // ��������
+			db.endTransaction();
 		}
 	}
-
 	/**
 	 * query all notebeans, return cursor
 	 * 
@@ -60,7 +77,7 @@ public class DBManager {
 	/**
 	 * close database
 	 */
-	public List<NoteBean> queryAllData() {
+	public ArrayList<NoteBean> queryAllData() {
 		ArrayList<NoteBean> persons = new ArrayList<NoteBean>();
 		Cursor c = queryTheCursor();
 		while (c.moveToNext()) {
@@ -116,13 +133,13 @@ public class DBManager {
 	 * @param mNoteBean
 	 */
 	public void addNoteBean(NoteBean note) {
-		db.beginTransaction(); // ��ʼ����
+		db.beginTransaction(); 
 		try {
 			db.execSQL("INSERT INTO note VALUES(null, ?, ?, ?)", new Object[] { note.note_title,
 					note.note_content, note.note_time });
-			db.setTransactionSuccessful(); // ��������ɹ����
+			db.setTransactionSuccessful(); 
 		} finally {
-			db.endTransaction(); // ��������
+			db.endTransaction(); 
 		}
 	}
 }
