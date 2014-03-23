@@ -4,88 +4,58 @@
     android:layout_height="match_parent"
     android:background="@color/bg_normal" >
 
-    <RelativeLayout
+    <include
         android:id="@+id/main_head"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/pale_blue"
-        android:padding="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        layout="@layout/common_head" >
 
-        <ImageView
-            android:id="@+id/iv_left_user"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_menu_user" />
-
-        <TextView
-            android:id="@+id/main_title"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name" />
-        
-        
-        <ImageView
-            android:id="@+id/iv_right_setting"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_menu_setting" />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/main_content"
-        android:layout_below="@+id/main_head"
-        android:layout_above="@+id/main_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
-
-        <ListView
-            android:id="@+id/lv_note_main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </ListView>
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/main_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true" >
-
+    </include>
         <LinearLayout
+            android:id="@+id/main_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#25000000"
-            android:gravity="center_horizontal" >
+            android:layout_height="match_parent"
+            android:layout_above="@+id/main_bottom"
+            android:layout_below="@+id/main_head"
+            android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/btn_camera_make"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_create_camera" />
-
-            <Button
-                android:id="@+id/btn_text_make"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_create_text"
-                />
-
-            <Button
-                android:id="@+id/btn_speak_make"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_create_voice" />
+            <ListView
+                android:id="@+id/lv_note_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </ListView>
         </LinearLayout>
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/main_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#25000000"
+                android:gravity="center" >
+
+                <Button
+                    android:id="@+id/btn_camera_make"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_create_camera" />
+
+                <Button
+                    android:id="@+id/btn_text_make"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_create_text" />
+
+                <Button
+                    android:id="@+id/btn_speak_make"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_create_voice" />
+            </LinearLayout>
+        </RelativeLayout>
 
 </RelativeLayout>

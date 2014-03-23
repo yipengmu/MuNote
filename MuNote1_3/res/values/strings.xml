@@ -3,5 +3,7 @@
 
     <string name="app_name">便利贴</string>
     <string name="action_settings">Settings</string>
+    <string name="create_note">创建便贴</string>
+    <string name="text_here">记录从这儿开始</string>
 
 </resources>

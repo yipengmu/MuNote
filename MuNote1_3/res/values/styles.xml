@@ -429,6 +429,16 @@
         <item name="android:textColor">@color/blue</item>
     </style>
 
+    <style name="pale_blue_18">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/blue</item>
+    </style>
+    
+    <style name="pale_blue_20">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/blue</item>
+    </style>
+    
     <style name="red">
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">#dd0000</item>

@@ -67,6 +67,7 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 
 
 	private void initView(Bundle savedInstanceState) {
+		setTitle(R.drawable.ic_menu_user, R.string.app_name, R.drawable.ic_menu_setting);
 		btn_text_make = mView.findViewById(R.id.btn_text_make);
 		btn_camera_make = mView.findViewById(R.id.btn_camera_make);
 		btn_speak_make = mView.findViewById(R.id.btn_speak_make);
@@ -75,6 +76,7 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 		btn_camera_make.setOnClickListener(this);
 		btn_speak_make.setOnClickListener(this);
 		initNoteListView();
+		
 	}
 
 	private void initNoteListView() {

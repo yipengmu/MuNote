@@ -1,43 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@drawable/bg2"
-    android:layout_height="match_parent" >
+    android:layout_height="wrap_content"
+    android:background="@color/white" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <include
         android:id="@+id/rl_text_note_head"
-        android:background="#88ffffff"
-        android:layout_height="40dp" >
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <Button
-            android:id="@+id/btn_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/icon_share_icon"
-            />
-
-    </RelativeLayout>
+        android:layout_alignParentTop="true"
+        layout="@layout/common_head" />
 
     <EditText
         android:id="@+id/et_text_note"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/rl_text_note_head"
+        style="@style/pale_blue_20"
         android:layout_width="fill_parent"
+        android:background="@null"
+        android:padding="4dp"
+        android:hint="@string/text_here"
+        android:gravity="top|left"
         android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:gravity="top|left"
-        style="@style/white18"
-        android:background="#33ffffff"
-        android:layout_margin="10dp"/>
+        android:layout_below="@id/rl_text_note_head" />
 
 </RelativeLayout>

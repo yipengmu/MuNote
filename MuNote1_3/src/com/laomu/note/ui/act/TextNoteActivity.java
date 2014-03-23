@@ -3,9 +3,13 @@
  */
 package com.laomu.note.ui.act;
 
+import java.util.Date;
+
 import com.laomu.note.R;
 import com.laomu.note.data.DBManager;
 import com.laomu.note.data.NoteBean;
+import com.laomu.note.ui.base.NoteBaseActivity;
+import com.laomu.note.ui.util.Utils;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -18,7 +22,7 @@ import android.widget.EditText;
  *
  * 2014-2-17
  */
-public class TextNoteActivity extends Activity {
+public class TextNoteActivity extends NoteBaseActivity{
 
 	private NoteBean mNoteBean;
 	private int MODE_CREATE = 1;
@@ -36,6 +40,7 @@ public class TextNoteActivity extends Activity {
 	}
 	
 	private void initView() {
+		setTitle(0,R.string.create_note,0);
 		et_text_note = (EditText)findViewById(R.id.et_text_note);		
 		
 		if(null != mNoteBean){
@@ -68,10 +73,19 @@ public class TextNoteActivity extends Activity {
 		//save content
 		saveNoteContent();
 		if(mMode == MODE_CREATE){
-			DBManager.instance(getApplicationContext()).add(mNoteBean);
+			if(hasRealData()){
+				DBManager.instance(getApplicationContext()).add(mNoteBean);
+			}
 		}else{
 			DBManager.instance(getApplicationContext()).updateAge(mNoteBean);
 		}
+	}
+
+	private boolean hasRealData() {
+		if(mNoteBean != null && !TextUtils.isEmpty(mNoteBean.note_content)){
+			return true;
+		}
+		return false;
 	}
 
 	private void saveNoteContent() {
@@ -86,6 +100,7 @@ public class TextNoteActivity extends Activity {
 			labelTitle = labelTitle.substring(0, 10);
 		}
 		mNoteBean.note_title = labelTitle;
-		mNoteBean.note_time = "" + SystemClock.currentThreadTimeMillis();
+		Date date = new Date(System.currentTimeMillis());
+		mNoteBean.note_time = "" + Utils.getTimeInfo(date);
 	}
 }
