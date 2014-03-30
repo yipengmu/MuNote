@@ -1,6 +1,7 @@
 package com.laomu.note.common.lbs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 
@@ -8,10 +9,12 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.location.LocationManagerProxy;
 import com.amap.api.location.LocationProviderProxy;
+import com.laomu.note.common.CommonDefine;
+import com.laomu.note.ui.NoteApplication;
 
 public class LocationInfoManeger implements AMapLocationListener {
 
-	private LocationInfo mLocation;
+	private static LocationInfo mLocation;
 	private static LocationInfoImp mLocationInfoImp;
 	private static LocationInfoManeger instance;
 	private LocationManagerProxy mAMapLocManager = null;
@@ -98,7 +101,15 @@ public class LocationInfoManeger implements AMapLocationListener {
 			mLocation.setDistrict(aLocation.getDistrict());
 			mLocation.setProvider(aLocation.getProvider());
 			mLocation.setAmapModel(aLocation);
+			
+			sendBroadcastLBSInfo();
 		}
+	}
+
+	private void sendBroadcastLBSInfo() {
+		Intent intent = new Intent();
+        intent.setAction(CommonDefine.LBS_ACTION);
+        NoteApplication.appContext.sendBroadcast(intent);
 	}
 
 }

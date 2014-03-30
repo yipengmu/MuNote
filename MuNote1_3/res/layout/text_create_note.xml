@@ -9,16 +9,44 @@
         android:layout_alignParentTop="true"
         layout="@layout/common_head" />
 
+    <LinearLayout
+        android:id="@+id/rl_note_desc_info"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:gravity="bottom|right"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_weather_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="天气信息" />
+
+        <ImageView
+            android:id="@+id/iv_weather_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_weather_sunny" />
+
+        <TextView
+            android:id="@+id/tv_location_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="位置信息" />
+    </LinearLayout>
+
     <EditText
         android:id="@+id/et_text_note"
         style="@style/pale_blue_20"
         android:layout_width="fill_parent"
-        android:background="@null"
-        android:padding="4dp"
-        android:hint="@string/text_here"
-        android:gravity="top|left"
         android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/rl_text_note_head" />
+        android:layout_below="@id/rl_text_note_head"
+        android:background="@null"
+        android:gravity="top|left"
+        android:hint="@string/text_here"
+        android:padding="4dp" />
 
 </RelativeLayout>

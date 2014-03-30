@@ -5,8 +5,11 @@ package com.laomu.note.ui;
 
 import java.util.ArrayList;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +21,9 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
 import com.laomu.note.R;
+import com.laomu.note.common.CommonDefine;
 import com.laomu.note.common.MuLog;
+import com.laomu.note.common.lbs.LocationInfo;
 import com.laomu.note.data.DBManager;
 import com.laomu.note.data.NoteBean;
 import com.laomu.note.ui.act.CameraNoteActivity;
@@ -68,6 +73,12 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 
 	private void initView(Bundle savedInstanceState) {
 		setTitle(R.drawable.ic_menu_user, R.string.app_name, R.drawable.ic_menu_setting);
+		findViews();
+		initNoteListView();
+	}
+
+	
+	private void findViews() {
 		btn_text_make = mView.findViewById(R.id.btn_text_make);
 		btn_camera_make = mView.findViewById(R.id.btn_camera_make);
 		btn_speak_make = mView.findViewById(R.id.btn_speak_make);
@@ -75,8 +86,6 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 		btn_text_make.setOnClickListener(this);
 		btn_camera_make.setOnClickListener(this);
 		btn_speak_make.setOnClickListener(this);
-		initNoteListView();
-		
 	}
 
 	private void initNoteListView() {
@@ -189,4 +198,5 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 		notifyNoteDatasChange();
 	}
 
+	
 }

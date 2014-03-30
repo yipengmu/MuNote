@@ -1,5 +1,8 @@
 package com.laomu.note.common.lbs;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.amap.api.location.AMapLocation;
 
 
@@ -10,7 +13,7 @@ import com.amap.api.location.AMapLocation;
  * 
  * 2013-7-25
  */
-public class LocationInfo {
+public class LocationInfo implements Parcelable {
 	/**经度*/
 	private double longtitude;
 	/**纬度*/
@@ -96,6 +99,16 @@ public class LocationInfo {
 	}
 	public void setAmapModel(AMapLocation aLocation) {
 		this.aLocation = aLocation;
+	}
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

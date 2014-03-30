@@ -5,17 +5,24 @@ package com.laomu.note.ui.act;
 
 import java.util.Date;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.animation.AlphaAnimation;
+import android.widget.EditText;
+import android.widget.TextView;
+
 import com.laomu.note.R;
+import com.laomu.note.common.CommonDefine;
+import com.laomu.note.common.lbs.LocationInfo;
 import com.laomu.note.data.DBManager;
 import com.laomu.note.data.NoteBean;
+import com.laomu.note.ui.NoteApplication;
 import com.laomu.note.ui.base.NoteBaseActivity;
 import com.laomu.note.ui.util.Utils;
-
-import android.app.Activity;
-import android.os.Bundle;
-import android.os.SystemClock;
-import android.text.TextUtils;
-import android.widget.EditText;
 
 /**
  * @author luoyuan.myp
@@ -30,6 +37,9 @@ public class TextNoteActivity extends NoteBaseActivity{
 	private int mMode = 0;
 	private EditText et_text_note;
 
+	private LocationInfo mLocation;
+	private TextView mLocationTextViewDesc;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,16 +51,36 @@ public class TextNoteActivity extends NoteBaseActivity{
 	
 	private void initView() {
 		setTitle(0,R.string.create_note,0);
-		et_text_note = (EditText)findViewById(R.id.et_text_note);		
-		
+		findViews();
+		registeLbsLis();
+		initUIWidget();
+	}
+
+	private void initUIWidget() {
 		if(null != mNoteBean){
 			et_text_note.setText("" + mNoteBean.note_content);
 		}
+		
+		if(mLocation != null){
+			mLocationTextViewDesc.setText(String.valueOf(mLocation.getDesc()));
+		}
 	}
 
+	private void findViews() {
+		et_text_note = (EditText)findViewById(R.id.et_text_note);		
+		mLocationTextViewDesc = (TextView) findViewById(R.id.tv_location_desc);
+	}
+
+	/**注册定位回调*/
+	private void registeLbsLis() {
+		IntentFilter filter = new IntentFilter(CommonDefine.LBS_ACTION);
+		registerReceiver(new LocationRecevier(), filter);
+	}
+
+	
 	private void initData() {
 		mNoteBean = getIntent().getParcelableExtra("note_bean");
-
+		mLocation = NoteApplication.getLBSManeger().getmLocationInfoModel();
 		initMode();
 	}
 
@@ -102,5 +132,25 @@ public class TextNoteActivity extends NoteBaseActivity{
 		mNoteBean.note_title = labelTitle;
 		Date date = new Date(System.currentTimeMillis());
 		mNoteBean.note_time = "" + Utils.getTimeInfo(date);
+	}
+	
+	class LocationRecevier extends BroadcastReceiver{
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			updateLBSInfo();
+		}
+		
+	}
+
+	/**在主线程中更新ui*/
+	public void updateLBSInfo() {
+		mLocation = NoteApplication.getLBSManeger().getmLocationInfoModel();
+		if(null != mLocation){
+			mLocationTextViewDesc.setText(mLocation.getDesc());
+			AlphaAnimation aam = new AlphaAnimation(0, 1);
+			aam.setDuration(400);
+			mLocationTextViewDesc.startAnimation(aam);
+		}
 	}
 }
