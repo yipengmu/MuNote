@@ -3,7 +3,14 @@ package com.laomu.note.ui.util;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.laomu.note.common.MuLog;
+import com.laomu.note.ui.NoteApplication;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.SystemClock;
+import android.widget.Toast;
 
 /**
  * @author luoyuan.myp
@@ -36,6 +43,26 @@ public class Utils {
 			return true;
 		}
 		return false;
+	}
+	
+	public static boolean isNetReady() {
+	    ConnectivityManager connMgr = (ConnectivityManager) 
+	        NoteApplication.appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+	    if (networkInfo != null && networkInfo.isConnected()) {
+	        // fetch data
+	    	return true;
+	    } else {
+	    	return false;
+	    }
+	}
+	
+	public static void toast(String toastInfo){
+		Toast.makeText(NoteApplication.appContext, toastInfo, Toast.LENGTH_SHORT).show();
+	}
+	
+	public static  void logd(String logInfo){
+		MuLog.logd(logInfo);
 	}
 
 }

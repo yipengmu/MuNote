@@ -2,6 +2,7 @@ package com.laomu.note.common.lbs;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 import com.amap.api.location.AMapLocation;
 
@@ -30,6 +31,8 @@ public class LocationInfo implements Parcelable {
 	private String cityCode;
 	/**高德 原始 location model*/
 	private AMapLocation aLocation;
+	/**位置描述*/
+	private String desc;
 	
 	public AMapLocation getAMapLocation() {
 		return aLocation;
@@ -92,9 +95,10 @@ public class LocationInfo implements Parcelable {
 	
 	public String getDesc(){
 		StringBuilder sb = new StringBuilder();
-		sb.append(province + ",");
-		sb.append(city + ",");
-		sb.append(district + ",");
+		
+		if(!TextUtils.isEmpty(desc)){
+			sb.append(desc);
+		}
 		return sb.toString() ;
 	}
 	public void setAmapModel(AMapLocation aLocation) {
@@ -109,6 +113,9 @@ public class LocationInfo implements Parcelable {
 	public void writeToParcel(Parcel dest, int flags) {
 		// TODO Auto-generated method stub
 		
+	}
+	public void setDesc(String areDesc) {
+		desc = areDesc;
 	}
 	
 }

@@ -6,6 +6,8 @@ package com.laomu.note.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.laomu.note.data.model.NoteBean;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;

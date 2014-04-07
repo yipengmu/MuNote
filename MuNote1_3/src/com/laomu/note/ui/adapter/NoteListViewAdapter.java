@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import com.laomu.note.R;
 import com.laomu.note.common.MuLog;
-import com.laomu.note.data.NoteBean;
+import com.laomu.note.data.model.NoteBean;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -68,7 +68,7 @@ public class NoteListViewAdapter extends BaseAdapter{
 	}
 
 	private void drawItemView(int pos, NoteBean noteBean, ViewHolder holder) {
-		MuLog.logi("drawItemView : start  postion =" + pos);
+		MuLog.logd("drawItemView : start  postion =" + pos);
 		holder.tv_note_time.setText(noteBean.note_time);
 		holder.tv_note_info_title.setText(noteBean.note_title);
 		holder.tv_note_info.setText(noteBean.note_content);

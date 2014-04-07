@@ -101,7 +101,7 @@ public class LocationInfoManeger implements AMapLocationListener {
 			mLocation.setDistrict(aLocation.getDistrict());
 			mLocation.setProvider(aLocation.getProvider());
 			mLocation.setAmapModel(aLocation);
-			
+			mLocation.setDesc(String.valueOf(aLocation.getExtras().get("desc")));
 			sendBroadcastLBSInfo();
 		}
 	}

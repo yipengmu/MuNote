@@ -12,8 +12,8 @@ import android.util.Log;
  */
 public class MuLog {
 	
-	public static void logi(String log){
-		Log.d("Mu note", "" + log);
+	public static void logd(String log){
+		Log.d("Mu note", "munote: " + log);
 	}
 
 }

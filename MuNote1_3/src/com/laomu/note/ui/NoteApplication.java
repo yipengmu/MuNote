@@ -3,10 +3,18 @@
  */
 package com.laomu.note.ui;
 
-import com.laomu.note.common.lbs.LocationInfoManeger;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import android.app.Application;
 import android.content.Context;
+import android.text.TextUtils;
+
+import com.laomu.note.common.lbs.LocationInfoManeger;
+import com.laomu.note.common.preferences.PreferenceCenter;
 
 /**
  * @author luoyuan.myp
@@ -29,6 +37,20 @@ public class NoteApplication extends Application{
 	private void initNoteApplication() {
 		appContext = getApplicationContext();
 		initLBS();
+		initWeatherData();
+	}
+	private void initWeatherData() {
+		if(TextUtils.isEmpty(PreferenceCenter.getPreferences(appContext).getCityNames())){
+			try {
+				//read data
+				InputStream cityNameInput = getAssets().open("cityName.txt");
+				InputStreamReader cityNameINR = new InputStreamReader(cityNameInput);
+				BufferedReader cityNameBr = new BufferedReader(cityNameINR);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	private void initLBS() {
 		mLBSManeger = LocationInfoManeger.getInstance();	

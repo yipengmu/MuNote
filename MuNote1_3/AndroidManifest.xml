@@ -72,6 +72,9 @@
         </activity>
         <activity android:name="com.laomu.note.ui.act.CameraNoteActivity" >
         </activity>
+        
+         <activity android:name="com.laomu.note.ui.act.CitySelectionActivity" >
+        </activity>
 
         <!-- ###################注册SDK使用的Activity###################### -->
         <!-- 分享编辑页 -->

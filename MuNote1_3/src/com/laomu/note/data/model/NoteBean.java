@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.laomu.note.data;
+package com.laomu.note.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -7,8 +7,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.laomu.note.R;
+import com.laomu.note.common.MuLog;
+import com.laomu.note.ui.NoteApplication;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.controller.RequestType;
 import com.umeng.socialize.controller.UMServiceFactory;
@@ -32,8 +35,13 @@ public class NoteBaseActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
 		initView();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
 	}
 	
 	private void initView() {
@@ -77,5 +85,13 @@ public class NoteBaseActivity extends Activity{
 		if(mCommonTitle != null){
 			mCommonTitle.setText(midTitle);
 		}
+	}
+	
+	public void toast(String toastInfo){
+		Toast.makeText(NoteApplication.appContext, toastInfo, Toast.LENGTH_SHORT).show();
+	}
+	
+	public void logd(String logInfo){
+		MuLog.logd(logInfo);
 	}
 }

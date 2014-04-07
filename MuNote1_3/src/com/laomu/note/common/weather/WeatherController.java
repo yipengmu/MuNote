@@ -3,6 +3,8 @@
  */
 package com.laomu.note.common.weather;
 
+import com.laomu.note.common.http.response.bean.WeatherBean;
+
 /**
  * @author luoyuan.myp
  *

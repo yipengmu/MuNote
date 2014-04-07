@@ -13,8 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.laomu.note.R;
+import com.laomu.note.common.MuLog;
+import com.laomu.note.ui.NoteApplication;
 
 /**
  * @author luoyuan.myp
@@ -75,5 +78,13 @@ public class NoteBaseFragment extends Fragment{
 		if(mCommonTitle != null){
 			mCommonTitle.setText(midTitle);
 		}
+	}
+	
+	public void toast(String toastInfo){
+		Toast.makeText(NoteApplication.appContext, toastInfo, Toast.LENGTH_SHORT).show();
+	}
+	
+	public void logd(String logInfo){
+		MuLog.logd(logInfo);
 	}
 }

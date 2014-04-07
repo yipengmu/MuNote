@@ -1,7 +1,10 @@
 /**
  * 
  */
-package com.laomu.note.common.weather;
+package com.laomu.note.common.http.response.bean;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * @author luoyuan.myp
@@ -9,7 +12,7 @@ package com.laomu.note.common.weather;
  *  "SD":"11%","WSE":"2","time":"15:45","isRadar":"1","Radar":"JC_RADAR_AZ9010_JB"}}
  * 2014-3-30
  */
-public class WeatherBean {
+public class WeatherBean implements Parcelable{
 	/**城市名 北京*/
 	private String city;
 	/**城市id 101010100*/
@@ -78,6 +81,18 @@ public class WeatherBean {
 	}
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

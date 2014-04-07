@@ -25,7 +25,7 @@ import com.laomu.note.common.CommonDefine;
 import com.laomu.note.common.MuLog;
 import com.laomu.note.common.lbs.LocationInfo;
 import com.laomu.note.data.DBManager;
-import com.laomu.note.data.NoteBean;
+import com.laomu.note.data.model.NoteBean;
 import com.laomu.note.ui.act.CameraNoteActivity;
 import com.laomu.note.ui.act.TextNoteActivity;
 import com.laomu.note.ui.adapter.NoteListViewAdapter;
@@ -119,11 +119,11 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 	}
 
 	private void makeNoteBySpeak() {
-		MuLog.logi("makeNoteBySpeak start");
+		MuLog.logd("makeNoteBySpeak start");
 	}
 
 	private void makeNoteByCamera() {
-		MuLog.logi("makeNoteByCamera start");
+		MuLog.logd("makeNoteByCamera start");
 
 		Intent intent = new Intent(getActivity(),CameraNoteActivity.class);
 		startActivityForResult(intent, CODE_FOR_CAMERA_CREATE );
@@ -131,7 +131,7 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 	}
 
 	private void makeNoteByText() {
-		MuLog.logi("makeNoteByText start");
+		MuLog.logd("makeNoteByText start");
 		Intent intent = new Intent(getActivity(),TextNoteActivity.class);
 		startActivityForResult(intent, CODE_FOR_TEXT_CREATE );
 //		openPage("text_create", new TextCreateNoteFragment());
@@ -163,7 +163,7 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long arg3) {
-		MuLog.logi("editNoteByText start");
+		MuLog.logd("editNoteByText start");
 		Intent intent = new Intent(getActivity(),TextNoteActivity.class);
 		intent.putExtra("note_bean", mNoteDBData.get(pos));
 		startActivityForResult(intent, CODE_FOR_TEXT_CREATE );
