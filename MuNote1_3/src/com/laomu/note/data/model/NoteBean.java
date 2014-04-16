@@ -3,6 +3,8 @@
  */
 package com.laomu.note.data.model;
 
+import com.j256.ormlite.field.DatabaseField;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -12,18 +14,26 @@ import android.os.Parcelable;
  * 2013-6-22
  */
 public class NoteBean implements Parcelable {
+	@DatabaseField(generatedId=true)
+	private int id;
+	@DatabaseField
 	public int note_index;
+	@DatabaseField
 	public String note_title;
+	@DatabaseField
 	public String note_content;
+	@DatabaseField
 	public String note_time;
+	public LocationBean note_location;
 	
 	/**
 	 * constructer
 	 */
-	public NoteBean(String title ,String content, String time) {
+	public NoteBean(String title ,String content, String time,LocationBean l) {
 		note_title = title;
 		note_content = content;
 		note_time = time;
+		note_location = l;
 	}
 	
 	public NoteBean(){
@@ -38,6 +48,7 @@ public class NoteBean implements Parcelable {
 		note_title = in.readString();
 		note_content = in.readString();
 		note_time = in.readString();
+		note_location = in.readParcelable(LocationBean.class.getClassLoader());
 	}
 
 	/* (non-Javadoc)
@@ -57,6 +68,7 @@ public class NoteBean implements Parcelable {
 		out.writeString(note_title);
 		out.writeString(note_content);
 		out.writeString(note_time);
+		out.writeParcelable(note_location,Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
 	}
 	
 	public static final Parcelable.Creator<NoteBean> CREATOR = new Parcelable.Creator<NoteBean>() {

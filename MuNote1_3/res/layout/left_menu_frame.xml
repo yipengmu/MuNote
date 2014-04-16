@@ -8,34 +8,43 @@
 
     <ImageView
         android:id="@+id/iv_lmenu_logo"
-        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:src="@drawable/ic_launcher" />
 
     <TextView
         android:id="@+id/tv_personal_clock"
+        style="@style/white18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="个人闹钟"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="@string/personnal_clock" />
 
     <TextView
         android:id="@+id/tv_map_mark"
+        style="@style/white18"
         android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
-        android:text="地图足迹"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginTop="10dp"
+        android:text="@string/location_mark" />
 
     <TextView
         android:id="@+id/tv_info"
-        android:layout_marginTop="10dp"
+        style="@style/white18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="信息"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginTop="10dp"
+        android:text="@string/city_location" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_music"
+        style="@style/white18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/personnal_music" />
 
     <LinearLayout
         android:layout_width="match_parent"

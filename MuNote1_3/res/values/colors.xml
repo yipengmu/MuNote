@@ -92,6 +92,7 @@
     <drawable name="dark_yellow">#eacd95</drawable>
 
     <color name="half_transparent">#7f000000</color>
+    <color name="half_blue">#6f0000FF</color>
     <color name="F_black_light_4">#FF999999</color>
     <color name="global_background">#FFF5F5F5</color>
     <color name="train_detail_line">#DEDEDE</color>

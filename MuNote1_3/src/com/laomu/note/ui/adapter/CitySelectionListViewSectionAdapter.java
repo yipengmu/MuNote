@@ -74,7 +74,6 @@ public class CitySelectionListViewSectionAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 			initItemUI(position,holder,convertView,false);
 		}
-		
 		return convertView;
 	}
 

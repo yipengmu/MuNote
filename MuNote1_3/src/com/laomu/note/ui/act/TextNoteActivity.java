@@ -24,8 +24,9 @@ import com.laomu.note.common.http.HttpReqBean;
 import com.laomu.note.common.http.excutor.HttpExcutor;
 import com.laomu.note.common.http.imp.HttpMethod;
 import com.laomu.note.common.http.response.bean.WeatherBean;
-import com.laomu.note.common.lbs.LocationInfo;
-import com.laomu.note.data.DBManager;
+import com.laomu.note.data.database.OrmDbManeger;
+import com.laomu.note.data.database.old.DBManager;
+import com.laomu.note.data.model.LocationBean;
 import com.laomu.note.data.model.NoteBean;
 import com.laomu.note.ui.NoteApplication;
 import com.laomu.note.ui.base.NoteBaseActivity;
@@ -44,7 +45,7 @@ public class TextNoteActivity extends NoteBaseActivity{
 	private int mMode = 0;
 	private EditText et_text_note;
 
-	private LocationInfo mLocation;
+	private LocationBean mLocation;
 	private TextView mLocationTextViewDesc;
 
 	private LocationRecevier lbsRecevier = new LocationRecevier();
@@ -135,10 +136,12 @@ public class TextNoteActivity extends NoteBaseActivity{
 		saveNoteContent();
 		if(mMode == MODE_CREATE){
 			if(hasRealData()){
-				DBManager.instance(getApplicationContext()).add(mNoteBean);
+				OrmDbManeger.getInstance().addNote(mNoteBean);
+//				DBManager.instance(getApplicationContext()).add(mNoteBean);
 			}
 		}else{
-			DBManager.instance(getApplicationContext()).updateAge(mNoteBean);
+			OrmDbManeger.getInstance().updateNote(mNoteBean);
+//			DBManager.instance(getApplicationContext()).updateAge(mNoteBean);
 		}
 	}
 
@@ -163,6 +166,7 @@ public class TextNoteActivity extends NoteBaseActivity{
 		mNoteBean.note_title = labelTitle;
 		Date date = new Date(System.currentTimeMillis());
 		mNoteBean.note_time = "" + Utils.getTimeInfo(date);
+//		mNoteBean.note_location = mLocation;
 	}
 	
 	class LocationRecevier extends BroadcastReceiver{

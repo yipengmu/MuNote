@@ -16,11 +16,23 @@
         android:layout_height="fill_parent" >
     </ListView>
 
-    <ListView
+    <com.laomu.note.ui.widget.CityLetterListView
         android:id="@+id/lv_city_section"
         android:layout_width="30dp"
         android:layout_alignParentRight="true"
         android:layout_height="fill_parent" >
-    </ListView>
+    </com.laomu.note.ui.widget.CityLetterListView>
+
+    <TextView
+        android:id="@+id/overlay"
+        android:layout_centerInParent="true"
+        android:text="#"
+        android:visibility="gone"
+        style="@style/black20"
+        android:gravity="center"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@color/half_blue"
+        />
 
 </RelativeLayout>

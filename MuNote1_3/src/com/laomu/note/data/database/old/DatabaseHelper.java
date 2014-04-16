@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.laomu.note.data;
+package com.laomu.note.data.database.old;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

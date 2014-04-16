@@ -40,7 +40,7 @@ public class NoteApplication extends Application{
 		initWeatherData();
 	}
 	private void initWeatherData() {
-		if(TextUtils.isEmpty(PreferenceCenter.getPreferences(appContext).getCityNames())){
+		if(TextUtils.isEmpty(PreferenceCenter.getPreferences().getCityNames())){
 			try {
 				//read data
 				InputStream cityNameInput = getAssets().open("cityName.txt");

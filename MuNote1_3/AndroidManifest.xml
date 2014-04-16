@@ -68,13 +68,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.laomu.note.ui.act.TextNoteActivity" >
-        </activity>
-        <activity android:name="com.laomu.note.ui.act.CameraNoteActivity" >
-        </activity>
-        
-         <activity android:name="com.laomu.note.ui.act.CitySelectionActivity" >
-        </activity>
+        <activity android:name="com.laomu.note.ui.act.TextNoteActivity" />
+        <activity android:name="com.laomu.note.ui.act.CameraNoteActivity" />
+        <activity android:name="com.laomu.note.ui.act.CitySelectionActivity" />
+        <activity android:name="com.laomu.note.ui.webview.BaseWebviewActivity" />
 
         <!-- ###################注册SDK使用的Activity###################### -->
         <!-- 分享编辑页 -->

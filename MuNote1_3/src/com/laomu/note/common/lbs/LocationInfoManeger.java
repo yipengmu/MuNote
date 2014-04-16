@@ -10,11 +10,12 @@ import com.amap.api.location.AMapLocationListener;
 import com.amap.api.location.LocationManagerProxy;
 import com.amap.api.location.LocationProviderProxy;
 import com.laomu.note.common.CommonDefine;
+import com.laomu.note.data.model.LocationBean;
 import com.laomu.note.ui.NoteApplication;
 
 public class LocationInfoManeger implements AMapLocationListener {
 
-	private static LocationInfo mLocation;
+	private static LocationBean mLocation;
 	private static LocationInfoImp mLocationInfoImp;
 	private static LocationInfoManeger instance;
 	private LocationManagerProxy mAMapLocManager = null;
@@ -59,7 +60,7 @@ public class LocationInfoManeger implements AMapLocationListener {
 	}
 
 	/** 返回地理数据 model 信息 mLocation */
-	public LocationInfo getmLocationInfoModel() {
+	public LocationBean getmLocationInfoModel() {
 		return instance.mLocation;
 	}
 
@@ -93,7 +94,7 @@ public class LocationInfoManeger implements AMapLocationListener {
 		if (aLocation != null) {
 			String cityName = aLocation.getCity();
 
-			mLocation = new LocationInfo();
+			mLocation = new LocationBean();
 			mLocation.setLongtitude(aLocation.getLongitude());
 			mLocation.setLatitude(aLocation.getLatitude());
 			mLocation.setProvince(aLocation.getProvince());

@@ -23,8 +23,9 @@ import android.widget.ListView;
 import com.laomu.note.R;
 import com.laomu.note.common.CommonDefine;
 import com.laomu.note.common.MuLog;
-import com.laomu.note.common.lbs.LocationInfo;
-import com.laomu.note.data.DBManager;
+import com.laomu.note.data.database.OrmDbManeger;
+import com.laomu.note.data.database.old.DBManager;
+import com.laomu.note.data.model.LocationBean;
 import com.laomu.note.data.model.NoteBean;
 import com.laomu.note.ui.act.CameraNoteActivity;
 import com.laomu.note.ui.act.TextNoteActivity;
@@ -67,7 +68,9 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 	}
 	
 	private void initData() {
-		mNoteDBData = DBManager.instance(getActivity()).queryAllData();
+		mNoteDBData = (ArrayList<NoteBean>) OrmDbManeger.getInstance().queryNote();
+//				DBManager.instance(getActivity()).queryAllData();
+//		mNoteDBData = DBManager.instance(getActivity()).queryAllData();
 	}
 
 
@@ -154,9 +157,7 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 	}
 
 	private void notifyNoteDatasChange() {
-
-		mNoteDBData = DBManager.instance(getActivity()).queryAllData();
-
+		mNoteDBData = (ArrayList<NoteBean>) OrmDbManeger.getInstance().queryNote();
 		mListViewAdapter.setDatasource(getActivity(), mNoteDBData);
 		mListViewAdapter.notifyDataSetChanged();
 	}

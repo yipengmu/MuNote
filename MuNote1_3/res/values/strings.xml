@@ -6,5 +6,9 @@
     <string name="create_note">创建便贴</string>
     <string name="text_here">记录从这儿开始</string>
     <string name="city_list">城市列表</string>
+    <string name="city_location">城市位置</string>
+    <string name="location_mark">地图足迹</string>
+    <string name="personnal_clock">个人闹钟</string>
+    <string name="personnal_music">随身音乐</string>
 
 </resources>

@@ -69,9 +69,18 @@ public class NoteListViewAdapter extends BaseAdapter{
 
 	private void drawItemView(int pos, NoteBean noteBean, ViewHolder holder) {
 		MuLog.logd("drawItemView : start  postion =" + pos);
-		holder.tv_note_time.setText(noteBean.note_time);
-		holder.tv_note_info_title.setText(noteBean.note_title);
-		holder.tv_note_info.setText(noteBean.note_content);
+		if(null != noteBean.note_time){
+			holder.tv_note_time.setText(noteBean.note_time);
+		}
+		if(null != noteBean.note_title){
+			holder.tv_note_info_title.setText(noteBean.note_title);
+		}
+		if(null != noteBean.note_content){
+			holder.tv_note_info.setText(noteBean.note_content);
+		}
+//		if(null != noteBean.note_location){
+//			holder.tv_location.setText(noteBean.note_location.getDesc());
+//		}
 	}
 
 	@Override

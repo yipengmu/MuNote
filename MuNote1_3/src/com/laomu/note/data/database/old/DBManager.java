@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.laomu.note.data;
+package com.laomu.note.data.database.old;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +60,7 @@ public class DBManager {
 		db.beginTransaction(); 
 		try {
 			db.execSQL("INSERT INTO note VALUES(null, ?, ?, ?)", new Object[] {
-						note.note_title, note.note_content, note.note_time });
+						note.note_title, note.note_content, note.note_time});
 			db.setTransactionSuccessful();
 		} finally {
 			db.endTransaction();

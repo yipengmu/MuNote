@@ -1,9 +1,12 @@
-/**
+/** 
  * 
  */
 package com.laomu.note.common.preferences;
 
+import java.util.HashMap;
 import java.util.Set;
+
+import com.laomu.note.ui.NoteApplication;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -19,7 +22,9 @@ public class PreferenceCenter {
 
 	private SharedPreferences mPref;
 	private Editor mEditor;
-	private String WEATHER_CITY_NAME_LIST;
+	private String WEATHER_CITY_NAME_LIST = "weather_city_name_list";
+	private String LOCAL_CACHE_URL_JSONED = "local_cache_url_jsoned";
+
 
 	private static PreferenceCenter mInstance = null;
 
@@ -28,9 +33,9 @@ public class PreferenceCenter {
 		mEditor = mPref.edit();
 	}
 
-	public static PreferenceCenter getPreferences(Context context) {
+	public static PreferenceCenter getPreferences() {
 		if (null == mInstance) {
-			mInstance = new PreferenceCenter(context);
+			mInstance = new PreferenceCenter(NoteApplication.appContext);
 		}
 
 		return mInstance;
@@ -44,4 +49,14 @@ public class PreferenceCenter {
 	public String getCityNames(){
 		return mPref.getString(WEATHER_CITY_NAME_LIST, null);
 	}
+	
+	public void setUrlLocalCacheMap(String json){
+		mEditor.putString(LOCAL_CACHE_URL_JSONED, json);
+		mEditor.commit();
+	}
+
+	public String getUrlLocalCacheMap() {
+		return mPref.getString(LOCAL_CACHE_URL_JSONED, null);
+	}
+
 }

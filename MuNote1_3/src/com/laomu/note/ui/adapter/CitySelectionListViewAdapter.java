@@ -13,17 +13,17 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.laomu.note.R;
-import com.laomu.note.common.MuLog;
 import com.laomu.note.data.model.CityBean;
 import com.laomu.note.ui.NoteApplication;
 import com.laomu.note.ui.util.Utils;
+import com.laomu.note.ui.widget.OnTouchingLetterChangedListener;
 
 /**
  * @author luoyuan.myp
  *
  * 2014-4-7
  */
-public class CitySelectionListViewAdapter extends BaseAdapter {
+public class CitySelectionListViewAdapter extends BaseAdapter implements OnTouchingLetterChangedListener{
 
 	private ArrayList<CityBean> mListData;
 	private Context mContext;
@@ -84,6 +84,11 @@ public class CitySelectionListViewAdapter extends BaseAdapter {
 
 	class ViewHolder {
 		TextView tvMiddle;
+		
+	}
+
+	@Override
+	public void onTouchingLetterChanged(String s) {
 		
 	}
 }
