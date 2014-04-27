@@ -37,7 +37,6 @@ public class NoteBaseFragment extends Fragment{
 	
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onViewCreated(view, savedInstanceState);
 		initView();
 	}
@@ -53,8 +52,9 @@ public class NoteBaseFragment extends Fragment{
 			 mFragmentManeger = getFragmentManager().beginTransaction();
 		}
 		mFragmentManeger.add(R.id.fl_container, fragment, fragmentName).commit();
+		mFragmentManeger.addToBackStack(fragmentName);
 	}
-
+	
 	/**note 对话框，传入 string数组*/
 	public void showAlertDialog(String[] itemList,OnClickListener listener){
 		new AlertDialog.Builder(getActivity())

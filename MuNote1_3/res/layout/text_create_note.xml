@@ -9,35 +9,39 @@
         android:layout_alignParentTop="true"
         layout="@layout/common_head" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/rl_note_desc_info"
         android:layout_width="fill_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:gravity="bottom|right"
-        android:orientation="vertical" >
+        android:gravity="bottom|right">
 
         <TextView
             android:id="@+id/tv_weather_desc"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/french_grey14"
-            android:text="天气信息" />
+            style="@style/french_grey14" />
 
         <ImageView
             android:id="@+id/iv_weather_icon"
-            android:layout_width="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/tv_weather_desc"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             android:src="@drawable/ic_weather_sunny" />
 
         <TextView
             android:id="@+id/tv_location_desc"
             android:layout_width="wrap_content"
+            android:layout_below="@+id/tv_weather_desc"
+            android:layout_alignParentRight="true"
             android:layout_height="wrap_content"
-            style="@style/french_grey14"
-            android:text="位置信息" />
-    </LinearLayout>
+            style="@style/french_grey14" />
+    </RelativeLayout>
 
     <EditText
         android:id="@+id/et_text_note"

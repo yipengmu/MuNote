@@ -23,13 +23,11 @@ public class OrmDbManeger {
 	private Context mContext;
 	private Dao<NoteBean, Integer> noteDao = null;
 	private Dao<LocationBean, Integer> locationDao = null;
-	private TableHelper4NoteBean mTableHelper4NoteBean;
-	private TableHelper4LocationBean mTableHelper4LocationBean;
+	private TableHelper4db mTableHelper4db;
 	
 	private OrmDbManeger(Context c){
 		mContext = c;
-		mTableHelper4NoteBean = new TableHelper4NoteBean(mContext);
-		mTableHelper4LocationBean = new TableHelper4LocationBean(mContext);
+		mTableHelper4db = new TableHelper4db(mContext);
 	}
 	
 	public static OrmDbManeger getInstance(){
@@ -41,7 +39,7 @@ public class OrmDbManeger {
 	
 	public void addNote(NoteBean note){
 		try {
-			noteDao = mTableHelper4NoteBean.getDao(NoteBean.class);
+			noteDao = mTableHelper4db.getDao(NoteBean.class);
 			noteDao.create(note);
 			noteDao.clearObjectCache();
 		} catch (SQLException e) {
@@ -51,7 +49,7 @@ public class OrmDbManeger {
 	
 	public void delNote(NoteBean note){
 		try {
-			noteDao = mTableHelper4NoteBean.getDao(NoteBean.class);
+			noteDao = mTableHelper4db.getDao(NoteBean.class);
 			noteDao.delete(note);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -60,7 +58,7 @@ public class OrmDbManeger {
 	
 	public void updateNote(NoteBean note){
 		try {
-			noteDao = mTableHelper4NoteBean.getDao(NoteBean.class);
+			noteDao = mTableHelper4db.getDao(NoteBean.class);
 			noteDao.update(note);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -70,7 +68,7 @@ public class OrmDbManeger {
 	public List<NoteBean> queryNote(){
 		List<NoteBean> list = null;
 		try {
-			noteDao = mTableHelper4NoteBean.getDao(NoteBean.class);
+			noteDao = mTableHelper4db.getDao(NoteBean.class);
 			list = noteDao.queryForAll();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -78,14 +76,56 @@ public class OrmDbManeger {
 		return list;
 	}
 	
-	public void addLocation(LocationBean loc){
+	public List<NoteBean> queryNote(int searchId){
+		List<NoteBean> list = null;
 		try {
-			locationDao = mTableHelper4LocationBean.getDao(LocationBean.class);
-			locationDao.create(loc);
-			locationDao.clearObjectCache();
+			noteDao = mTableHelper4db.getDao(NoteBean.class);
+			list = noteDao.queryForEq("id",searchId);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return list;
 	}
+	
+	
+	public int addLocation(LocationBean loc){
+		int locationId = -1;
+		try {
+			locationDao = mTableHelper4db.getDao(LocationBean.class);
+			//向location 表中先插入一条记录
+			locationDao.create(loc);
+			//在从表中尝试取出此条记录，并拿到主键的key,即locationId
+			List<LocationBean> resultList = locationDao.queryForMatching(loc);
+			if(resultList != null && resultList.size() == 1){
+				locationId = resultList.get(0).id;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return locationId;
+	}
+	
+	public List<LocationBean> queryLocation(int searchId){
+		List<LocationBean> list = null;
+		try {
+			locationDao = mTableHelper4db.getDao(LocationBean.class);
+			list = locationDao.queryForEq("id",searchId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	public void queryLocationId(LocationBean mLocation) {
+		try {
+			noteDao = mTableHelper4db.getDao(LocationBean.class);
+			noteDao.queryForId(0);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	
 }

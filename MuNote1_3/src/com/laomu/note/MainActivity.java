@@ -12,13 +12,26 @@ import com.umeng.analytics.MobclickAgent;
 
 public class MainActivity extends SlidingFragmentActivity{
 
+	private String TAG_LEFT = "left";
+	private String TAG_RIGHT = "right";
+	private String TAG_MAIN = "main";
+	
+	private FragmentTransaction frameManager;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.welcome);
+		
+		frameManager = getSupportFragmentManager().beginTransaction();
+		
 		initSlidingMenu(savedInstanceState);
-		getSupportFragmentManager().beginTransaction().replace(R.id.fl_container, new NoteMainFragment()).commit();
-	
+		//添加主视图
+		frameManager.replace(R.id.fl_container, new NoteMainFragment(),TAG_MAIN);
+		
+		//提交事务
+		frameManager.commit();
+		
 		//开启友盟 统计
 		MobclickAgent.updateOnlineConfig(this);
 	}
@@ -31,14 +44,16 @@ public class MainActivity extends SlidingFragmentActivity{
 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		sm.setFadeDegree(0.35f);
 		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-		
-		FragmentTransaction frameManager = getSupportFragmentManager().beginTransaction();
+	
 		//左侧menu
 		setBehindContentView(R.layout.menu_frame_ono);
-		frameManager.replace(R.id.menu_frame_one,new LeftSlidingMenu());
-
+		frameManager.replace(R.id.menu_frame_one,new LeftSlidingMenu(),TAG_LEFT);
+		
+		//fragment into back-stack
+//		frameManager.addToBackStack(TAG_LEFT);
+		
 		//右侧menu
 		sm.setSecondaryMenu(R.layout.menu_frame_two);					
-		frameManager.replace(R.id.menu_frame_two,new RightSlidingMenu()).commit();
+		frameManager.replace(R.id.menu_frame_two,new RightSlidingMenu(),TAG_RIGHT);
 	}
 }

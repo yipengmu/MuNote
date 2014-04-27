@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
@@ -92,17 +93,26 @@ public class LocationInfoManeger implements AMapLocationListener {
 	public void onLocationChanged(AMapLocation aLocation) {
 		// TODO 高德定位接口回调成功
 		if (aLocation != null) {
-			String cityName = aLocation.getCity();
-
 			mLocation = new LocationBean();
-			mLocation.setLongtitude(aLocation.getLongitude());
-			mLocation.setLatitude(aLocation.getLatitude());
-			mLocation.setProvince(aLocation.getProvince());
-			mLocation.setCity(cityName);
-			mLocation.setDistrict(aLocation.getDistrict());
-			mLocation.setProvider(aLocation.getProvider());
-			mLocation.setAmapModel(aLocation);
-			mLocation.setDesc(String.valueOf(aLocation.getExtras().get("desc")));
+			
+			mLocation.longtitude = String.valueOf(aLocation.getLongitude());
+			mLocation.latitude = String.valueOf(aLocation.getLatitude());
+			if(!TextUtils.isEmpty(aLocation.getProvince())){
+				mLocation.province = aLocation.getProvince();
+			}
+			if(!TextUtils.isEmpty(aLocation.getCity())){
+				mLocation.city = aLocation.getCity();
+			}
+			if(!TextUtils.isEmpty(aLocation.getDistrict())){
+				mLocation.district = aLocation.getDistrict();
+			}
+			if(!TextUtils.isEmpty(aLocation.getProvider())){
+				mLocation.provider = aLocation.getProvider();
+			}
+			String desc = String.valueOf(aLocation.getExtras().get("desc"));
+			if(!TextUtils.isEmpty(desc)){
+				mLocation.desc = desc;
+			}
 			sendBroadcastLBSInfo();
 		}
 	}

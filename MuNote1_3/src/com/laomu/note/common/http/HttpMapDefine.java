@@ -10,4 +10,5 @@ package com.laomu.note.common.http;
  */
 public class HttpMapDefine {
 	public final static String Weather = "REQ_WEATHER";
+	public final static String Bitmap = "REQ_BITMAP";
 }

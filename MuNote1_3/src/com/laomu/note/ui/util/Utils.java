@@ -1,5 +1,10 @@
 package com.laomu.note.ui.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -11,8 +16,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.TextUtils;
 import android.webkit.URLUtil;
 import android.webkit.WebResourceResponse;
 import android.widget.Toast;
@@ -20,6 +28,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.laomu.note.common.MuLog;
 import com.laomu.note.common.preferences.PreferenceCenter;
+import com.laomu.note.data.database.OrmDbManeger;
+import com.laomu.note.data.model.LocationBean;
 import com.laomu.note.ui.NoteApplication;
 
 /**
@@ -104,5 +114,47 @@ public class Utils {
 		type = uc.getContentType();
 		return type;
 	}
+
+	public static int getLocationIdFromDB(LocationBean mLocation) {
+		return OrmDbManeger.getInstance().addLocation(mLocation);
+	}
+
+	public static Bitmap getBitmapFromUrl(String urlSrc) {
+		try {
+			if (TextUtils.isEmpty(urlSrc)) {
+				return null;
+			}
+			URL url = new URL(urlSrc);
+			if (url.getProtocol().equals("file")) { // 本地文件
+				String file_path = url.getPath();
+				if (TextUtils.isEmpty(file_path)) {
+					return null;
+				}
+				File file = new File(file_path);
+				FileInputStream io = new FileInputStream(file);
+				Bitmap myBitmap = BitmapFactory.decodeStream(io);
+				io.close();
+				return myBitmap;
+			} else {
+				HttpURLConnection connection = (HttpURLConnection) url
+						.openConnection();
+				connection.setDoInput(true);
+				connection.connect();
+				InputStream input = connection.getInputStream();
+				Bitmap myBitmap = BitmapFactory.decodeStream(input);
+				return myBitmap;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public static String getWeatherUrl(String wUrl) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 
 }

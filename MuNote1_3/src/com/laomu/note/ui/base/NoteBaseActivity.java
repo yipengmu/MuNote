@@ -3,8 +3,8 @@
  */
 package com.laomu.note.ui.base;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +22,7 @@ import com.umeng.socialize.controller.UMSocialService;
  *
  * 2014-2-17
  */
-public class NoteBaseActivity extends Activity{
+public class NoteBaseActivity extends FragmentActivity{
 
 	private TextView mCommonTitle;
 	private ImageView mCommonLeftImageView;

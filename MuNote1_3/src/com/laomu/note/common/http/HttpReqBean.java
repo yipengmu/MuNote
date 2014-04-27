@@ -33,7 +33,7 @@ public class HttpReqBean {
 		mParams = params;
 		mHandler = uiHandler;
 	}
-
+	
 	public HttpMethod getMethod() {
 		return mMethod;
 	}

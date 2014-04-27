@@ -4,7 +4,9 @@
 package com.laomu.note.ui.menu;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,29 +15,28 @@ import android.widget.TextView;
 
 import com.laomu.note.R;
 import com.laomu.note.ui.act.CitySelectionActivity;
+import com.laomu.note.ui.act.MapNoteActivity;
 import com.laomu.note.ui.base.NoteBaseFragment;
 import com.laomu.note.ui.webview.BaseWebviewActivity;
 
 /**
  * @author luoyuan.myp
- *
- * 2014-4-7
+ * 
+ *         2014-4-7
  */
-public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener  {
+public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener {
 	private TextView tv_personal_clock;
 	private TextView tv_map_mark;
 	private TextView tv_info;
-	private TextView tv_music;
-	
-	private int FLAG_FOR_CITY_SELECTION = 1;
-	private int FLAG_FOR_MUSIC_CHANNEL = 2;
-	
-	
+
+	private int FLAG_FOR_CITY_LIST = 1;
+	private int FLAG_FOR_MAP_VIEW = 2;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.left_menu_frame, container, false);
 	}
-	
+
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -48,17 +49,16 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
 	}
 
 	private void initUI() {
-		
+
 	}
 
 	private void findviews(View view) {
 		tv_personal_clock = (TextView) view.findViewById(R.id.tv_personal_clock);
 		tv_map_mark = (TextView) view.findViewById(R.id.tv_map_mark);
 		tv_info = (TextView) view.findViewById(R.id.tv_info);
-		tv_music = (TextView) view.findViewById(R.id.tv_music);
-		
+
+		tv_map_mark.setOnClickListener(this);
 		tv_info.setOnClickListener(this);
-		tv_music.setOnClickListener(this);
 	}
 
 	@Override
@@ -67,10 +67,10 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
 		case R.id.tv_info:
 			intoCityList();
 			break;
-		case R.id.tv_music:
-			intoMusicChannel();
+		case R.id.tv_map_mark:
+			intoMapView();
 			break;
-			
+
 		default:
 			break;
 		}
@@ -78,12 +78,12 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
 
 	private void intoCityList() {
 		Intent intent = new Intent(getActivity(), CitySelectionActivity.class);
-		startActivityForResult(intent, FLAG_FOR_CITY_SELECTION );
+		startActivityForResult(intent, FLAG_FOR_CITY_LIST);
 	}
-	
-	private void intoMusicChannel() {
-		Intent intent = new Intent(getActivity(), BaseWebviewActivity.class);
-		startActivityForResult(intent, FLAG_FOR_MUSIC_CHANNEL );
+
+	private void intoMapView() {
+		Intent intent = new Intent(getActivity(), MapNoteActivity.class);
+		startActivityForResult(intent, FLAG_FOR_MAP_VIEW);
 	}
-	
+
 }

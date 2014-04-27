@@ -15,41 +15,38 @@
 
     <TextView
         android:id="@+id/tv_personal_clock"
-        style="@style/white18"
-        android:layout_width="wrap_content"
+        style="@style/white20"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:padding="10dp"
         android:text="@string/personnal_clock" />
 
     <TextView
         android:id="@+id/tv_map_mark"
-        style="@style/white18"
-        android:layout_width="wrap_content"
+        style="@style/white20"
+        android:gravity="center"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:padding="10dp"
         android:text="@string/location_mark" />
 
     <TextView
         android:id="@+id/tv_info"
-        style="@style/white18"
-        android:layout_width="wrap_content"
+        style="@style/white20"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:padding="10dp"
         android:text="@string/city_location" >
     </TextView>
-
-    <TextView
-        android:id="@+id/tv_music"
-        style="@style/white18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/personnal_music" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:visibility="gone"
         android:gravity="center_horizontal" >
 
         <Button

@@ -66,7 +66,7 @@ public class CameraNoteActivity extends NoteBaseActivity implements OnClickListe
 				// bundle = new Bundle();
 				// bundle.putByteArray("bytes", data); //
 				// 将图片字节数据保存在bundle当中，实现数据交换
-				// saveToSDCard(data); // 保存图片到sd卡中
+				saveToSDCard(data); // 保存图片到sd卡中
 				Toast.makeText(getApplicationContext(), "ss", Toast.LENGTH_SHORT).show();
 				camera.startPreview(); // 拍完照后，重新开始预览
 
@@ -138,6 +138,11 @@ public class CameraNoteActivity extends NoteBaseActivity implements OnClickListe
 			break;
 		}
 		return degree;
+	}
+
+	public void saveToSDCard(byte[] data) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override

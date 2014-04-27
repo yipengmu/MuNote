@@ -4,10 +4,7 @@
 package com.laomu.note.ui.adapter;
 
 import java.util.ArrayList;
-
-import com.laomu.note.R;
-import com.laomu.note.common.MuLog;
-import com.laomu.note.data.model.NoteBean;
+import java.util.List;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,6 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.laomu.note.R;
+import com.laomu.note.common.MuLog;
+import com.laomu.note.data.database.OrmDbManeger;
+import com.laomu.note.data.model.LocationBean;
+import com.laomu.note.data.model.NoteBean;
 
 /**
  * @author luoyuan.myp
@@ -52,10 +55,9 @@ public class NoteListViewAdapter extends BaseAdapter{
 		if(view == null){
 			view = LayoutInflater.from(mContext).inflate(R.layout.note_main_list_item, null);
 			holder = new ViewHolder();
-			holder.tv_note_info_title = (TextView) view.findViewById(R.id.tv_note_title);
 			holder.tv_note_info = (TextView) view.findViewById(R.id.tv_note_info);
 			holder.tv_note_time = (TextView) view.findViewById(R.id.tv_note_time);
-			holder.tv_weather = (TextView) view.findViewById(R.id.tv_weather);
+			holder.tv_weather_info = (TextView) view.findViewById(R.id.tv_weather_info);
 			holder.tv_location = (TextView) view.findViewById(R.id.tv_location);
 			view.setTag(holder); 
 		}else{
@@ -72,15 +74,17 @@ public class NoteListViewAdapter extends BaseAdapter{
 		if(null != noteBean.note_time){
 			holder.tv_note_time.setText(noteBean.note_time);
 		}
-		if(null != noteBean.note_title){
-			holder.tv_note_info_title.setText(noteBean.note_title);
-		}
 		if(null != noteBean.note_content){
 			holder.tv_note_info.setText(noteBean.note_content);
 		}
-//		if(null != noteBean.note_location){
-//			holder.tv_location.setText(noteBean.note_location.getDesc());
-//		}
+		if(null != noteBean.note_weather_info){
+			holder.tv_weather_info.setText(noteBean.note_weather_info);
+		}
+		
+		if(0 != noteBean.note_location_id){
+			List<LocationBean> listLocation = OrmDbManeger.getInstance().queryLocation(noteBean.note_location_id);
+			holder.tv_location.setText(listLocation.get(0).desc);
+		}
 	}
 
 	@Override
@@ -95,10 +99,9 @@ public class NoteListViewAdapter extends BaseAdapter{
 	}
 	
 	class ViewHolder{ 
-		TextView tv_note_info_title;
 		TextView tv_note_info;
 		TextView tv_note_time;
-		TextView tv_weather;
+		TextView tv_weather_info;
 		TextView tv_location;
 	}
 }

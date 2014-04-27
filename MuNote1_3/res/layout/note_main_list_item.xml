@@ -1,84 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="65dp"
+    android:layout_height="100dp"
     android:background="@drawable/note_main_list_item"
-    android:orientation="vertical">
+    android:minHeight="60dp"
+    android:padding="4dp" >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_height="match_parent"
+    <TextView
+        android:id="@+id/tv_note_info"
+        style="@style/pale_blue_18"
+        android:gravity="left"
         android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/ll_list_item_right"
-        android:orientation="vertical" >
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/tv_weather_info"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="note..." />
 
-        <TextView
-            android:id="@+id/tv_note_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:lines="1"
-            android:text="note..."
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/pale_blue" />
+    <TextView
+        android:id="@+id/tv_note_time"
+        style="@style/french_grey12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tv_note_info"
+        android:gravity="bottom"
+        android:text="04月10日" />
 
-        <LinearLayout
-            android:id="@+id/ll_list_item_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/tv_note_time"
-                style="@style/pale_blue_12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="04月10日" />
-
-            <TextView
-                android:id="@+id/tv_note_title"
-                style="@style/pale_blue_12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="note title" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_list_item_right"
-        android:layout_width="90dp"
-        android:layout_height="match_parent"
+    <TextView
+        android:id="@+id/tv_weather_info"
+        style="@style/french_grey12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:gravity="bottom|right"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="vertical" >
+        android:gravity="right"
+        android:text="晴" />
 
-        <TextView
-            android:id="@+id/tv_weather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:lines="1"
-            android:maxWidth="80dp"
-            android:text="晴"
-            android:textColor="@color/pale_blue" />
-
-        <TextView
-            android:id="@+id/tv_location"
-            style="@style/pale_blue_12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:lines="1"
-            android:maxWidth="80dp"
-            android:text="北京 大望路 通惠河北路" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_location"
+        style="@style/french_grey12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/tv_note_time"
+        android:ellipsize="end"
+        android:gravity="right"
+        android:lines="1"
+        android:text="北京 国贸 大望路 国家广告产业园.." />
 
 </RelativeLayout>

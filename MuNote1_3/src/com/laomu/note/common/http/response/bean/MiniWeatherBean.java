@@ -8,11 +8,29 @@ import android.os.Parcelable;
 
 /**
  * @author luoyuan.myp
- *{"weatherinfo":{"city":"北京","cityid":"101010100","temp":"24","WD":"东风","WS":"2级",
- *  "SD":"11%","WSE":"2","time":"15:45","isRadar":"1","Radar":"JC_RADAR_AZ9010_JB"}}
+
+ * 
+ * {
+    "weatherinfo": {
+        "city": "北京",
+        "cityid": "101010100",
+        "temp": "15",
+        "WD": "东南风",
+        "WS": "2级",
+        "SD": "65%",
+        "WSE": "2",
+        "time": "19:05",
+        "isRadar": "1",
+        "Radar": "JC_RADAR_AZ9010_JB"
+    }
+}
+ * 
+ * 
+ * 
  * 2014-3-30
  */
-public class WeatherBean implements Parcelable{
+public class MiniWeatherBean implements Parcelable{
+	
 	/**城市名 北京*/
 	private String city;
 	/**城市id 101010100*/
@@ -29,6 +47,10 @@ public class WeatherBean implements Parcelable{
 	private String WSE;
 	/**城市天气更新时间*/
 	private String time;
+	/**是否是雷达*/
+	private String isRadar;
+	/**雷达id*/
+	private String Radar;
 
 	public String desc() {
 		return city + ": 气温" +temp + " " +WD +WS + " 湿度 "+SD;
@@ -82,6 +104,22 @@ public class WeatherBean implements Parcelable{
 	public void setTime(String time) {
 		this.time = time;
 	}
+	
+	public String getIsRadar() {
+		return isRadar;
+	}
+
+	public void setIsRadar(String isRadar) {
+		this.isRadar = isRadar;
+	}
+
+	public String getRadar() {
+		return Radar;
+	}
+
+	public void setRadar(String radar) {
+		Radar = radar;
+	}
 
 	@Override
 	public int describeContents() {
@@ -94,7 +132,15 @@ public class WeatherBean implements Parcelable{
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
+
+	/**简洁版 天气介绍 ，例如： 【15 度 / 东北风-2级】*/
+	public String getMiniDesc() {
+	    StringBuilder sb = new StringBuilder(temp);
+		sb.append(" 度 / ");
+		sb.append(WD);
+		sb.append("-");
+		sb.append(WS);
+		return sb.toString();
+	}
 	
 }

@@ -20,6 +20,13 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -72,6 +79,7 @@
         <activity android:name="com.laomu.note.ui.act.CameraNoteActivity" />
         <activity android:name="com.laomu.note.ui.act.CitySelectionActivity" />
         <activity android:name="com.laomu.note.ui.webview.BaseWebviewActivity" />
+        <activity android:name="com.laomu.note.ui.act.MapNoteActivity" />
 
         <!-- ###################注册SDK使用的Activity###################### -->
         <!-- 分享编辑页 -->
