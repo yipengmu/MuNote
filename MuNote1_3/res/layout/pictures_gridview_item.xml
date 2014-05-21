@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/white"
+    android:orientation="vertical"
+     >
+
+    <ImageView
+        android:id="@+id/iv_grid_item_img"
+        android:layout_margin="10dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/icon_camera_focus_success" />
+
+    <TextView
+        android:id="@+id/tv_grid_item_text"
+        style="@style/pale_blue_18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:lines="1"
+        android:text="time..." />
+
+</LinearLayout>

@@ -1,0 +1,7 @@
+picasso 为图片的缓存下载 开源包 
+	http://square.github.io/picasso/
+ 	Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(imageView);
+SocialSDK_xx 是友盟的分享包
+pinyin4j 是拼音的转化库
+gson google json 的库
+Map 高德lbssdk库

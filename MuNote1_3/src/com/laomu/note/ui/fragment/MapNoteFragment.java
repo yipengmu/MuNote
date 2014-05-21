@@ -53,7 +53,6 @@ public class MapNoteFragment extends NoteBaseFragment implements OnMarkerClickLi
 			aMap.setOnMarkerClickListener(this);
 			aMap.setOnMapLoadedListener(this);
 			aMap.setInfoWindowAdapter(this);// 添加显示infowindow监听事件
-
 			uiSettings.setScaleControlsEnabled(true);
 			uiSettings.setZoomControlsEnabled(true);
 			uiSettings.setCompassEnabled(true);

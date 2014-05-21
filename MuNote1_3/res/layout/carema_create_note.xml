@@ -4,39 +4,44 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <SurfaceView
+    <com.laomu.note.common.Camera.CameraSurfaceView
         android:id="@+id/sv_camera"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_above="@+id/ll_camera_menu_bar"
-        />
+        android:layout_height="fill_parent" />
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/iv_camera_focus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/icon_camera_focus_success" />
+
+    <RelativeLayout
         android:id="@+id/ll_camera_menu_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_alignParentBottom="true"
-        android:gravity="center"
         android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
+        <ImageView
+            android:id="@+id/iv_pic_preview"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="10dp"
+            android:background="@color/white"
+            android:visibility="gone"
+            android:padding="4dp" />
 
         <Button
             android:id="@+id/btn_take_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="take photo" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-    </LinearLayout>
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_camera_icon" />
+    </RelativeLayout>
 
 </RelativeLayout>

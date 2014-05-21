@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent" >
+
+    <include layout="@layout/common_head" android:id="@+id/pictures_grid_head"/>
+    <GridView
+        android:id="@+id/gv_pictures"
+        android:layout_below="@id/pictures_grid_head"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="3" >
+    </GridView>
+
+</RelativeLayout>

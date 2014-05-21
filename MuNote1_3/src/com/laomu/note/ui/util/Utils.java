@@ -87,9 +87,10 @@ public class Utils {
 	}
 
 	public static WebResourceResponse getLocalWebResource(String url) {
-		if(Utils.isUrlCached(url)){
-			
-//			WebResourceResponse m = new WebResourceResponse(Utils.getMimeType(url), encoding, )
+		if (Utils.isUrlCached(url)) {
+
+			// WebResourceResponse m = new
+			// WebResourceResponse(Utils.getMimeType(url), encoding, )
 		}
 		return null;
 	}
@@ -136,8 +137,7 @@ public class Utils {
 				io.close();
 				return myBitmap;
 			} else {
-				HttpURLConnection connection = (HttpURLConnection) url
-						.openConnection();
+				HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 				connection.setDoInput(true);
 				connection.connect();
 				InputStream input = connection.getInputStream();
@@ -154,7 +154,28 @@ public class Utils {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
+
+	public static int computeInitialSampleSize(BitmapFactory.Options options, int minSideLength,
+			int maxNumOfPixels) {
+		double w = options.outWidth;
+		double h = options.outHeight;
+		int lowerBound = (maxNumOfPixels == -1) ? 1 : (int) Math.ceil(Math.sqrt(w * h
+				/ maxNumOfPixels));
+		int upperBound = (minSideLength == -1) ? 128 : (int) Math.min(
+				Math.floor(w / minSideLength),
+
+				Math.floor(h / minSideLength));
+		if (upperBound < lowerBound) {
+			// return the larger one when there is no overlapping zone.
+			return lowerBound;
+		}
+		if ((maxNumOfPixels == -1) && (minSideLength == -1)) {
+			return 1;
+		} else if (minSideLength == -1) {
+			return lowerBound;
+		} else {
+			return upperBound;
+		}
+	}
 
 }
