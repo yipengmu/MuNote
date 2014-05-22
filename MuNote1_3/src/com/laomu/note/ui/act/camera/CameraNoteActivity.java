@@ -43,7 +43,7 @@ public class CameraNoteActivity extends NoteBaseActivity implements OnClickListe
 	private Button mBtnTakePhoto;
 	private ImageView mImageView;
 	private CameraSurfaceView surfaceView;
-
+	private Thread mDataLoadThread ; 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,7 +57,8 @@ public class CameraNoteActivity extends NoteBaseActivity implements OnClickListe
 
 	//后台线程启动去加载munote的对应图片
 	private void loadImageData() {
-		new Thread(new DataLoadThread(getPicturesFilePath())).start();
+		mDataLoadThread = new Thread(new DataLoadThread(getPicturesFilePath())); 
+		mDataLoadThread.start();
 	}
 
 	private void initPictureCards() {
@@ -127,6 +128,16 @@ public class CameraNoteActivity extends NoteBaseActivity implements OnClickListe
 
 	private void takePhotoBtn() {
 		surfaceView.takePicture();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if(mDataLoadThread !=null){
+			mDataLoadThread.stop();
+			mDataLoadThread =null;
+		}
+	
 	}
 
 }

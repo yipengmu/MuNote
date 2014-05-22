@@ -11,8 +11,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.laomu.note.R;
 import com.laomu.note.common.Camera.DataLoadThread;
@@ -24,8 +27,9 @@ import com.laomu.note.ui.base.NoteBaseActivity;
  * 
  *         2014-5-21
  */
-public class CameraPicturesActivity extends NoteBaseActivity {
+public class CameraPicturesActivity extends NoteBaseActivity implements OnItemClickListener {
 
+	private String mTitle = "相机图片";
 	private GridView mGridView;
 	private PicturesGridViewAdatper mGridViewAdapter;
 	private ArrayList<String> filePaths;
@@ -37,8 +41,15 @@ public class CameraPicturesActivity extends NoteBaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pictures_grid_layout);
+		
 		initData();
-		findViews();
+		initViews();
+	}
+
+	private void initViews() {
+		findViews();		
+		setTitle(mTitle);
+		mGridView.setOnItemClickListener(this);
 	}
 
 	private void initData() {
@@ -90,6 +101,12 @@ public class CameraPicturesActivity extends NoteBaseActivity {
 				refActivity.handleDataLoaded();
 			}
 		}
+	}
+
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		Toast.makeText(getApplicationContext(), "p= " + position, Toast.LENGTH_SHORT).show();
 	}
 
 }
