@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.laomu.note.data.model.ImageModel;
 import com.laomu.note.ui.util.Utils;
 
 import android.app.Activity;
@@ -25,20 +26,29 @@ import android.view.Surface;
  * 
  *         2014-5-20
  */
-public class CameraManeger {
-	private static LruCache<String, Bitmap> mImageCacheLru = new LruCache<String, Bitmap>(50);
+public class ImageManeger {
+	private static LruCache<String, ImageModel> mImageCacheLru = new LruCache<String, ImageModel>(50);
 
-	public static LruCache<String, Bitmap> getImageLruCache() {
+	public static LruCache<String, ImageModel> getImageLruCache() {
 		return mImageCacheLru;
 	}
 
 	public static Bitmap getImage(String filePath) {
-		Bitmap image = mImageCacheLru.get(filePath);
-		if (image == null) {
+		ImageModel model = mImageCacheLru.get(filePath);
+		if(model == null || model.bitmap ==null){
+			setImageCache(filePath);
+		}
+		return mImageCacheLru.get(filePath).bitmap;
+	}
+	
+	public static ImageModel getImageModel(String filePath) {
+		ImageModel imageModel = mImageCacheLru.get(filePath);
+		if (imageModel == null) {
 			setImageCache(filePath);
 		}
 		return mImageCacheLru.get(filePath);
 	}
+
 
 	private static void setImageCache(String filePath) {
 		Bitmap image = null;
@@ -49,13 +59,14 @@ public class CameraManeger {
 		opts.inJustDecodeBounds = false;
 		image = BitmapFactory.decodeFile(filePath, opts);
 		// 将当前filepath对应的图片加载到lrucache中
-		mImageCacheLru.put(filePath, image);
+		
+		mImageCacheLru.put(filePath, new ImageModel(image,Utils.getFileName(filePath),Utils.getFileTimeStamp(filePath),Utils.getLocation()));
 	}
 
 	public static void setImagesLruCache(List<String> imageFiles) {
 		for(int i =0;i<imageFiles.size();i++){
-			Bitmap image = mImageCacheLru.get(imageFiles.get(i));
-			if (image == null) {
+			ImageModel model = mImageCacheLru.get(imageFiles.get(i));
+			if(model==null || model.bitmap ==null){
 				setImageCache(imageFiles.get(i));
 			}
 		}
@@ -90,7 +101,7 @@ public class CameraManeger {
 
 	public static String[] getNotePictrueFiles() {
 		String[] filesList = null;
-		File pathDir = new File(CameraManeger.getExternPicturecDir());
+		File pathDir = new File(ImageManeger.getExternPicturecDir());
 		if (pathDir.exists()) {
 			filesList = pathDir.list();
 		}

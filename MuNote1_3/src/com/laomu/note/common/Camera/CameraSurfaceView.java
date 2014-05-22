@@ -63,7 +63,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
 			camera = Camera.open();// 摄像头的初始化
 			camera.setPreviewDisplay(holder);
 			camera.startPreview();
-			CameraManeger.setPreviewDegree(mActivity, camera);
+			ImageManeger.setPreviewDegree(mActivity, camera);
 		} catch (Exception e) {
 		}
 	}

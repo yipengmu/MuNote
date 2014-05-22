@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+        android:background="@color/white"
+    android:clickable="true"
+    android:layout_height="match_parent" >
+
+    <include
+        android:id="@+id/image_detail_head"
+        android:layout_alignParentTop="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_head" />
+
+    <ImageView
+        android:id="@+id/iv_image_main"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_image_detail_bottom"
+        android:layout_below="@+id/image_detail_head"
+        android:scaleType="fitXY"
+        android:background="@color/white"
+        android:src="@drawable/bg_home_dark" />
+
+    <LinearLayout
+        android:id="@+id/ll_image_detail_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dark_grey"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/tv_image_time"
+            style="@style/white14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="时间：" />
+
+        <TextView
+            android:id="@+id/tv_image_location"
+            style="@style/white14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="位置：" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -28,7 +28,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.laomu.note.R;
-import com.laomu.note.common.Camera.CameraManeger;
+import com.laomu.note.common.Camera.ImageManeger;
 import com.laomu.note.common.Camera.CameraSurfaceView;
 import com.laomu.note.common.Camera.DataLoadThread;
 import com.laomu.note.ui.base.NoteBaseActivity;
@@ -45,7 +45,7 @@ public class CameraNoteActivity extends NoteBaseActivity implements OnClickListe
 	private CameraSurfaceView surfaceView;
 	private Thread mDataLoadThread ; 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.carema_create_note);
 
@@ -66,16 +66,16 @@ public class CameraNoteActivity extends NoteBaseActivity implements OnClickListe
 
 			@Override
 			public void run() {
-				String[] filePath = CameraManeger.getNotePictrueFiles();
+				String[] filePath = ImageManeger.getNotePictrueFiles();
 				if (filePath.length == 0) {
 					return;
 				}
 
-				String pictureFile = CameraManeger.getExternPicturecDir() + File.separator
+				String pictureFile = ImageManeger.getExternPicturecDir() + File.separator
 						+ filePath[filePath.length - 1];
 			
 				mImageView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha_in));
-				mImageView.setImageBitmap(CameraManeger.getImage(pictureFile));
+				mImageView.setImageBitmap(ImageManeger.getImage(pictureFile));
 				mImageView.setVisibility(View.VISIBLE);
 				}
 		},40);
@@ -83,9 +83,9 @@ public class CameraNoteActivity extends NoteBaseActivity implements OnClickListe
 
 	public List<String> getPicturesFilePath(){
 
-		String[] filePath = CameraManeger.getNotePictrueFiles();
+		String[] filePath = ImageManeger.getNotePictrueFiles();
 		List<String> paths = new ArrayList<String>();
-		String dirPath = CameraManeger.getExternPicturecDir() + File.separator;
+		String dirPath = ImageManeger.getExternPicturecDir() + File.separator;
 		for(int i =0;i<filePath.length;i++){
 			paths.add(dirPath + filePath[i]);
 		}
@@ -134,10 +134,8 @@ public class CameraNoteActivity extends NoteBaseActivity implements OnClickListe
 	protected void onDestroy() {
 		super.onDestroy();
 		if(mDataLoadThread !=null){
-			mDataLoadThread.stop();
-			mDataLoadThread =null;
+			mDataLoadThread.interrupt();
 		}
-	
 	}
 
 }

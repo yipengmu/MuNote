@@ -15,7 +15,7 @@
 
     <TextView
         android:id="@+id/tv_grid_item_text"
-        style="@style/pale_blue_18"
+        style="@style/pale_blue_12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"

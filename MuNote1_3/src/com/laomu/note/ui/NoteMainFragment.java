@@ -75,7 +75,7 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 
 
 	private void initView(Bundle savedInstanceState) {
-		setTitle(R.drawable.ic_menu_user, R.string.app_name, R.drawable.ic_menu_setting);
+		setTitle(mView,R.drawable.ic_menu_user, R.string.app_name, R.drawable.ic_menu_setting);
 		findViews();
 		initNoteListView();
 	}

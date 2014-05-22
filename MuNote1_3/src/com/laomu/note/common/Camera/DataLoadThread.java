@@ -27,7 +27,7 @@ public class DataLoadThread implements Runnable {
 
 	@Override
 	public void run() {
-		CameraManeger.setImagesLruCache(filePaths);
+		ImageManeger.setImagesLruCache(filePaths);
 		if (mDataLoadedHandler != null) {
 			mDataLoadedHandler.sendEmptyMessage(CommonDefine.TAG_LOADED_COMPELETED);
 		}

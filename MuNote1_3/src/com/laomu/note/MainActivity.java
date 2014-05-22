@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.laomu.note.ui.NoteMainFragment;
+import com.laomu.note.ui.base.NoteBaseActivity;
 import com.laomu.note.ui.menu.LeftSlidingMenu;
 import com.laomu.note.ui.menu.RightSlidingMenu;
 import com.umeng.analytics.MobclickAgent;
@@ -15,7 +16,6 @@ public class MainActivity extends SlidingFragmentActivity{
 	private String TAG_LEFT = "left";
 	private String TAG_RIGHT = "right";
 	private String TAG_MAIN = "main";
-	
 	private FragmentTransaction frameManager;
 	
 	@Override

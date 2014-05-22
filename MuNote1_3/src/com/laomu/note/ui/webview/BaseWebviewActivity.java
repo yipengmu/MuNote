@@ -26,7 +26,7 @@ public class BaseWebviewActivity extends NoteBaseActivity{
 	protected String mGeneralUrl;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.general_webview_layout);
 		findviews();

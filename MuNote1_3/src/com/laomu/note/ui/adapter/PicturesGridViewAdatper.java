@@ -16,7 +16,8 @@ import android.widget.TextView;
 
 import com.laomu.note.R;
 import com.laomu.note.common.MuLog;
-import com.laomu.note.common.Camera.CameraManeger;
+import com.laomu.note.common.Camera.ImageManeger;
+import com.laomu.note.data.model.ImageModel;
 
 /**
  * @author luoyuan.myp
@@ -68,11 +69,13 @@ public class PicturesGridViewAdatper extends BaseAdapter {
 
 	private void drawItemView(int pos, String filedir, ViewHolder holder) {
 		MuLog.logd("drawItemView : start  postion =" + pos);
-		holder.iv_grid_item_img.setImageBitmap(loadDrawableImage(pos));
+		ImageModel imageModel = loadDrawableImage(pos);
+		holder.iv_grid_item_img.setImageBitmap(imageModel.bitmap);
+		holder.tv_grid_item_text.setText(imageModel.name);
 	}
 
-	public Bitmap loadDrawableImage(int pos) {
-		return CameraManeger.getImage(mImagePaths.get(pos));
+	public ImageModel loadDrawableImage(int pos) {
+		return ImageManeger.getImageModel(mImagePaths.get(pos));
 	}
 
 	@Override

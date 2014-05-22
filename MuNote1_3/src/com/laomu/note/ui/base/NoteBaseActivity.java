@@ -5,10 +5,12 @@ package com.laomu.note.ui.base;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.laomu.note.R;
 import com.laomu.note.common.MuLog;
 import com.laomu.note.ui.NoteApplication;
@@ -27,15 +29,14 @@ public class NoteBaseActivity extends FragmentActivity{
 	private TextView mCommonTitle;
 	private ImageView mCommonLeftImageView;
 	private ImageView mCommonRightImageView;
-	
 	protected final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share",
             RequestType.SOCIAL);
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		initView();
+		initBaseView();
 	}
 	
 	@Override
@@ -44,7 +45,7 @@ public class NoteBaseActivity extends FragmentActivity{
 		super.onDestroy();
 	}
 	
-	private void initView() {
+	private void initBaseView() {
 		initHeadView();
 	}
 
@@ -82,6 +83,9 @@ public class NoteBaseActivity extends FragmentActivity{
 	}
 	
 	protected void setTitle(String midTitle){
+		if(mCommonTitle == null){
+			mCommonTitle = (TextView) findViewById(R.id.tv_common_head_title);
+		}
 		if(mCommonTitle != null){
 			mCommonTitle.setText(midTitle);
 		}

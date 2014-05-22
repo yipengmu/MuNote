@@ -39,7 +39,7 @@ public class CitySelectionActivity extends NoteBaseActivity{
 	private OverlayThread overlayThread;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.city_selection_layout);
 		initViews();

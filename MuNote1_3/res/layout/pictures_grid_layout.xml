@@ -18,8 +18,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_loading_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:padding="6dp"
         android:layout_centerInParent="true"
         android:background="@drawable/icon_loading_bg" >
@@ -27,23 +27,31 @@
         <ProgressBar
             android:id="@+id/wv_general_progress_bar"
             android:layout_width="wrap_content"
+            
             android:layout_height="wrap_content"
             android:indeterminateBehavior="repeat"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:indeterminateDrawable="@drawable/loading_circle"
             android:indeterminateOnly="true" />
 
         <TextView
             android:id="@+id/trip_tv_loading"
             android:layout_width="wrap_content"
-            android:layout_below="@+id/wv_general_progress_bar"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
             android:shadowColor="#ffffff"
+            android:layout_alignParentBottom="true"
             android:shadowRadius="1"
             android:text="正在加载"
             android:textColor="#7193a9"
             android:textSize="12sp" >
         </TextView>
     </RelativeLayout>
+    
 
+    <FrameLayout android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/picture_fragment_container"/>
+    
 </RelativeLayout>

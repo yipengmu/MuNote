@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.laomu.note.common.MuLog;
+import com.laomu.note.common.lbs.LocationInfoManeger;
 import com.laomu.note.common.preferences.PreferenceCenter;
 import com.laomu.note.data.database.OrmDbManeger;
 import com.laomu.note.data.model.LocationBean;
@@ -178,4 +180,26 @@ public class Utils {
 		}
 	}
 
+	public static String getFileTimeStamp(String filePath) {
+		File file = new File(filePath);
+		long timeL = 0;
+		if (file != null) {
+			timeL = file.lastModified();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			return formatter.format(timeL);
+		}
+		return "时间：--";
+	}
+
+	public static String getFileName(String filePath) {
+		File file = new File(filePath);
+		if (file.isFile()) {
+			return file.getName();
+		}
+		return filePath;
+	}
+
+	public static LocationBean getLocation() {
+		return LocationInfoManeger.getInstance().getmLocationInfoModel();
+	}
 }

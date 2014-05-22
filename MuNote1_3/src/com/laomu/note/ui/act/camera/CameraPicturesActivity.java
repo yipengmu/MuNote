@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.AdapterView;
@@ -19,8 +20,10 @@ import android.widget.Toast;
 
 import com.laomu.note.R;
 import com.laomu.note.common.Camera.DataLoadThread;
+import com.laomu.note.ui.NoteMainFragment;
 import com.laomu.note.ui.adapter.PicturesGridViewAdatper;
 import com.laomu.note.ui.base.NoteBaseActivity;
+import com.laomu.note.ui.fragment.ImagePictureFragment;
 
 /**
  * @author luoyuan.myp
@@ -38,16 +41,16 @@ public class CameraPicturesActivity extends NoteBaseActivity implements OnItemCl
 	private DataLoadedHandler mDataLoadedHandler = new DataLoadedHandler(this);
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pictures_grid_layout);
-		
+
 		initData();
 		initViews();
 	}
 
 	private void initViews() {
-		findViews();		
+		findViews();
 		setTitle(mTitle);
 		mGridView.setOnItemClickListener(this);
 	}
@@ -61,9 +64,9 @@ public class CameraPicturesActivity extends NoteBaseActivity implements OnItemCl
 		mLoadingView = (RelativeLayout) findViewById(R.id.rl_loading_view);
 		mGridViewAdapter = new PicturesGridViewAdatper();
 		mGridView.setAdapter(mGridViewAdapter);
-		
+
 		showLoadingImageView();
-		new Thread(new DataLoadThread(filePaths,mDataLoadedHandler)).start();
+		new Thread(new DataLoadThread(filePaths, mDataLoadedHandler)).start();
 	}
 
 	private void showLoadingImageView() {
@@ -73,7 +76,7 @@ public class CameraPicturesActivity extends NoteBaseActivity implements OnItemCl
 	private void hideLoadingImageView() {
 		AlphaAnimation aAlphaAnimation = new AlphaAnimation(1, 0);
 		aAlphaAnimation.setDuration(500);
-		mLoadingView.startAnimation(aAlphaAnimation);		
+		mLoadingView.startAnimation(aAlphaAnimation);
 		mLoadingView.setVisibility(View.GONE);
 	}
 
@@ -85,7 +88,6 @@ public class CameraPicturesActivity extends NoteBaseActivity implements OnItemCl
 		}
 	}
 
-	
 	static class DataLoadedHandler extends Handler {
 		WeakReference<CameraPicturesActivity> mActivity;
 
@@ -103,10 +105,26 @@ public class CameraPicturesActivity extends NoteBaseActivity implements OnItemCl
 		}
 	}
 
-
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		Toast.makeText(getApplicationContext(), "p= " + position, Toast.LENGTH_SHORT).show();
+//		Toast.makeText(getApplicationContext(), "p= " + position, Toast.LENGTH_SHORT).show();
+		openImageFragment(position);
+	}
+
+	private void openImageFragment(int position) {
+		ImagePictureFragment mImagePictureFragment =  new ImagePictureFragment();
+		Bundle bundle = new Bundle();
+		if(position < filePaths.size()){
+			bundle.putString("imagePath", filePaths.get(position));
+		}
+		mImagePictureFragment.setArguments(bundle);
+		FragmentTransaction frameManager = getSupportFragmentManager().beginTransaction();
+		// 添加主视图
+		frameManager.replace(R.id.picture_fragment_container,mImagePictureFragment ,
+				ImagePictureFragment.mTAG);
+		frameManager.addToBackStack(ImagePictureFragment.mTAG);
+		// 提交事务
+		frameManager.commit();
 	}
 
 }
