@@ -5,6 +5,8 @@ package com.laomu.note.common.Camera;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.laomu.note.ui.util.Utils;
 
@@ -26,25 +28,39 @@ import android.view.Surface;
 public class CameraManeger {
 	private static LruCache<String, Bitmap> mImageCacheLru = new LruCache<String, Bitmap>(50);
 
-	public static LruCache<String, Bitmap> getImageLruCache(){
+	public static LruCache<String, Bitmap> getImageLruCache() {
 		return mImageCacheLru;
 	}
-	
-	public static Bitmap getImage(String filePath){
+
+	public static Bitmap getImage(String filePath) {
 		Bitmap image = mImageCacheLru.get(filePath);
-		if(image == null){
-			BitmapFactory.Options opts = new BitmapFactory.Options();
-			opts.inJustDecodeBounds = true;
-			BitmapFactory.decodeFile(filePath, opts);
-			opts.inSampleSize = Utils.computeInitialSampleSize(opts, 600, 128*128);  
-			opts.inJustDecodeBounds = false;
-			image = BitmapFactory.decodeFile(filePath, opts);
-			
-			//将当前filepath对应的图片加载到lrucache中
-			mImageCacheLru.put(filePath, image);
+		if (image == null) {
+			setImageCache(filePath);
 		}
-		return image;
+		return mImageCacheLru.get(filePath);
 	}
+
+	private static void setImageCache(String filePath) {
+		Bitmap image = null;
+		BitmapFactory.Options opts = new BitmapFactory.Options();
+		opts.inJustDecodeBounds = true;
+		BitmapFactory.decodeFile(filePath, opts);
+		opts.inSampleSize = Utils.computeInitialSampleSize(opts, 600, 128 * 128);
+		opts.inJustDecodeBounds = false;
+		image = BitmapFactory.decodeFile(filePath, opts);
+		// 将当前filepath对应的图片加载到lrucache中
+		mImageCacheLru.put(filePath, image);
+	}
+
+	public static void setImagesLruCache(List<String> imageFiles) {
+		for(int i =0;i<imageFiles.size();i++){
+			Bitmap image = mImageCacheLru.get(imageFiles.get(i));
+			if (image == null) {
+				setImageCache(imageFiles.get(i));
+			}
+		}
+	}
+
 	public static String getExternPicturecDir() {
 		return Environment.getExternalStorageDirectory() + "/munote/pics";
 	}

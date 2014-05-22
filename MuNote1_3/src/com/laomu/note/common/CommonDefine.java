@@ -11,4 +11,6 @@ package com.laomu.note.common;
 public class CommonDefine {
 
 	public static String LBS_ACTION = "ACTTIONI_LOCATION_INFO";
+	public static int TAG_LOADED_COMPELETED = 0;
+	
 }

@@ -26,13 +26,6 @@
         <item name="android:layout_height">1px</item>
     </style>
     
-    <style name="cent_secant_for_hotel_detail_rp_item">
-        <item name="android:background">#cccccc</item>
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">1px</item>
-        <item name="android:paddingLeft">10px</item>
-    </style>
-
     <style name="cent_secant_2px">
         <item name="android:background">#e7e7e7</item>
         <item name="android:layout_width">fill_parent</item>

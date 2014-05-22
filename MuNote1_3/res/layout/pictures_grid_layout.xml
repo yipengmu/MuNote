@@ -1,16 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/white"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@color/white" >
 
-    <include layout="@layout/common_head" android:id="@+id/pictures_grid_head"/>
+    <include
+        android:id="@+id/pictures_grid_head"
+        layout="@layout/common_head" />
+
     <GridView
         android:id="@+id/gv_pictures"
-        android:layout_below="@id/pictures_grid_head"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/pictures_grid_head"
         android:numColumns="3" >
     </GridView>
+
+    <RelativeLayout
+        android:id="@+id/rl_loading_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/icon_loading_bg" >
+
+        <ProgressBar
+            android:id="@+id/wv_general_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateBehavior="repeat"
+            android:indeterminateDrawable="@drawable/loading_circle"
+            android:indeterminateOnly="true" />
+
+        <TextView
+            android:id="@+id/trip_tv_loading"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/wv_general_progress_bar"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:shadowColor="#ffffff"
+            android:shadowRadius="1"
+            android:text="正在加载"
+            android:textColor="#7193a9"
+            android:textSize="12sp" >
+        </TextView>
+    </RelativeLayout>
 
 </RelativeLayout>

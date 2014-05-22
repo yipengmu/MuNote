@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import com.laomu.note.R;
 import com.laomu.note.common.Camera.CameraManeger;
 import com.laomu.note.common.Camera.CameraSurfaceView;
+import com.laomu.note.common.Camera.DataLoadThread;
 import com.laomu.note.ui.base.NoteBaseActivity;
 
 /**
@@ -51,6 +52,12 @@ public class CameraNoteActivity extends NoteBaseActivity implements OnClickListe
 		initView();
 		// 初始化左下图片卡片集
 		initPictureCards();
+		loadImageData();
+	}
+
+	//后台线程启动去加载munote的对应图片
+	private void loadImageData() {
+		new Thread(new DataLoadThread(getPicturesFilePath())).start();
 	}
 
 	private void initPictureCards() {

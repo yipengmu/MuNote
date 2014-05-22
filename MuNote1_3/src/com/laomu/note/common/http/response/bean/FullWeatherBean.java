@@ -238,7 +238,6 @@ public class FullWeatherBean implements Parcelable{
 	public String index_ls;
 	public String index_ag;
 	
-
 	public String desc() {
 		return city + ": "+ weather1 + " [" +temp1 + "] " + index;
 	}
