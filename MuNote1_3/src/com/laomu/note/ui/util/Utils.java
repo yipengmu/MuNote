@@ -30,6 +30,7 @@ import com.google.gson.Gson;
 import com.laomu.note.common.MuLog;
 import com.laomu.note.common.lbs.LocationInfoManeger;
 import com.laomu.note.common.preferences.PreferenceCenter;
+import com.laomu.note.common.weather.WeatherController;
 import com.laomu.note.data.database.OrmDbManeger;
 import com.laomu.note.data.model.LocationBean;
 import com.laomu.note.ui.NoteApplication;
@@ -152,9 +153,8 @@ public class Utils {
 		}
 	}
 
-	public static String getWeatherUrl(String wUrl) {
-		// TODO Auto-generated method stub
-		return null;
+	public static String getWeatherUrl(String city) {
+		return WeatherController.getWeatherUrl(city);
 	}
 
 	public static int computeInitialSampleSize(BitmapFactory.Options options, int minSideLength,

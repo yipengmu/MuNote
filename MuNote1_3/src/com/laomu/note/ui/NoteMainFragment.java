@@ -69,8 +69,6 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 	
 	private void initData() {
 		mNoteDBData = (ArrayList<NoteBean>) OrmDbManeger.getInstance().queryNote();
-//				DBManager.instance(getActivity()).queryAllData();
-//		mNoteDBData = DBManager.instance(getActivity()).queryAllData();
 	}
 
 

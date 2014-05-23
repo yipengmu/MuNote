@@ -4,6 +4,7 @@
 package com.laomu.note.ui.act;
 
 import java.util.Date;
+import java.util.List;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -28,7 +29,7 @@ import com.laomu.note.common.http.excutor.HttpExcutor;
 import com.laomu.note.common.http.imp.HttpMethod;
 import com.laomu.note.common.http.response.BaiduWeatherResult;
 import com.laomu.note.common.http.response.bean.BaiduWeatherBean;
-import com.laomu.note.common.weather.WeatherController;
+import com.laomu.note.common.lbs.LocationInfoManeger;
 import com.laomu.note.data.database.OrmDbManeger;
 import com.laomu.note.data.model.LocationBean;
 import com.laomu.note.data.model.NoteBean;
@@ -63,7 +64,7 @@ public class TextNoteActivity extends NoteBaseActivity {
 			super.handleMessage(msg);
 			mWeather = (BaiduWeatherResult) msg.getData().get("res");
 			if(null != mWeather){
-				updateWeatherUI(mWeather.getDefaultBean());
+				updateWeatherUI(mWeather.getDefaultBean().getDefaultData().desc(),mWeather.getDefaultBean().getDefaultData().dayPictureUrl);
 			}
 		}
 
@@ -85,11 +86,13 @@ public class TextNoteActivity extends NoteBaseActivity {
 		initView();
 	}
 
-	protected void updateWeatherUI(final BaiduWeatherBean results) {
-		if (null != results) {
-			mWeatherTextViewDesc.setText(results.getDefaultData().desc());
-			HttpReqBean req = new HttpReqBean(HttpMethod.get,
-					results.getDefaultData().dayPictureUrl, null, mWeatherIconHandler);
+	protected void updateWeatherUI(final String weatherInfo, String dayPictureUrl) {
+		if (null != weatherInfo) {
+			mWeatherTextViewDesc.setText(weatherInfo);
+			AlphaAnimation aam = new AlphaAnimation(0, 1);
+			aam.setDuration(2000);
+			mWeatherTextViewDesc.startAnimation(aam);
+			HttpReqBean req = new HttpReqBean(HttpMethod.get,dayPictureUrl, null, mWeatherIconHandler);
 			new HttpExcutor().req(HttpMapDefine.Bitmap, req);
 		}
 	}
@@ -97,24 +100,55 @@ public class TextNoteActivity extends NoteBaseActivity {
 	private void initView() {
 		setTitle(0, R.string.create_note, 0);
 		findViews();
-		registeLbsLis();
-		if(mLocation != null){
-			registeWeatherCall(WeatherController.getWeatherUrl(mLocation.city));
-		}else{
-			new Handler().postDelayed(new Runnable() {
-
-				@Override
-				public void run() {
-
-					if (mLocation != null) {
-						registeWeatherCall(Utils.getWeatherUrl(mLocation.city));
-					}
-				}
-			}, 500);
-		}
+		initLBSServer();
+		initWeatherServer();
 		initUIWidget();
 	}
 
+	private void initLBSServer() {
+		if(mNoteBean !=null){
+			//已有的便利贴，可能是从noteList或者从地图 marker上跳转过来的
+			if(mNoteBean.note_location_id <=0){
+				//之前的noteBean没有位置信息
+				registeLbsLis();
+			}else{
+				//之前的noteBean有位置信息，就当前noteBean的定位地址信息
+				List<LocationBean> loc = OrmDbManeger.getInstance().queryLocation(mNoteBean.note_location_id);
+				if(loc.size()>0){
+					updateLBSInfo(loc.get(0));
+				}
+			}
+		}else{
+			//新打开的便利贴
+			registeLbsLis();
+		}
+	}
+
+	private void initWeatherServer() {
+		if(mNoteBean != null && TextUtils.isEmpty(mNoteBean.note_weather_info)){
+
+		}else{
+			if(mLocation != null){
+				registeWeatherCall(Utils.getWeatherUrl(mLocation.city));
+			}else{
+				mLocation = LocationInfoManeger.getInstance().getmLocationInfoModel();
+				startRequestWeatherInfo(mLocation);
+			}	
+		}
+			
+	}
+
+	private void startRequestWeatherInfo(final LocationBean location){
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+
+				if (location != null) {
+					registeWeatherCall(Utils.getWeatherUrl(location.city));
+				}
+			}
+		}, 50);
+	}
 	private void registeWeatherCall(String url) {
 		HttpExcutor ex = new HttpExcutor();
 		ex.req(HttpMapDefine.Weather, new HttpReqBean(HttpMethod.get, url, null, mWeatherHandler));
@@ -145,7 +179,6 @@ public class TextNoteActivity extends NoteBaseActivity {
 
 	private void initData() {
 		mNoteBean = getIntent().getParcelableExtra("note_bean");
-		mLocation = NoteApplication.getLBSManeger().getmLocationInfoModel();
 		initMode();
 	}
 
@@ -217,23 +250,29 @@ public class TextNoteActivity extends NoteBaseActivity {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			updateLBSInfo();
+			mLocation = NoteApplication.getLBSManeger().getmLocationInfoModel();
+			updateLBSInfo(mLocation);
 		}
 
 	}
 
-	/** 在主线程中更新ui */
-	public void updateLBSInfo() {
-		mLocation = NoteApplication.getLBSManeger().getmLocationInfoModel();
-		String locationLabel = mLocation.desc;
+	/** 在主线程中更新ui 
+	 * @param mLocation */
+	public void updateLBSInfo(LocationBean location) {
+		if(location == null){
+			return;
+		}
+		String locationLabel = location.desc;
 		String currentLabel = mLocationTextViewDesc.getText().toString();
-		if (null != mLocation && !TextUtils.isEmpty(locationLabel)
-				&& !locationLabel.equals(currentLabel)) {
-			mLocationTextViewDesc.setText(mLocation.desc);
+		if (!TextUtils.isEmpty(locationLabel) && !locationLabel.equals(currentLabel)) {
+			mLocationTextViewDesc.setText(location.desc);
 			AlphaAnimation aam = new AlphaAnimation(0, 1);
 			aam.setDuration(2000);
 			mLocationTextViewDesc.startAnimation(aam);
 		}
+		
+		//启动基于位置的天气信息请求
+		startRequestWeatherInfo(location);
 	}
 
 	@Override
@@ -243,6 +282,9 @@ public class TextNoteActivity extends NoteBaseActivity {
 	}
 
 	private void unRegisteLbsLis() {
-		unregisterReceiver(lbsRecevier);
+		try {
+			unregisterReceiver(lbsRecevier);
+		} catch (Exception e) {
+		}
 	}
 }
