@@ -8,17 +8,39 @@
 
     <ImageView
         android:id="@+id/imageView1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/icon_adward_box" />
 
     <TextView
-        android:id="@+id/tv_personal_clock"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_ad_wall"
+        style="@style/white20"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="新浪微博"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:text="友情推荐" />
+
+    <TextView
+        android:id="@+id/tv_feedback"
+        style="@style/white20"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="产品建议" />
+
+    <TextView
+        android:id="@+id/tv_about_us"
+        style="@style/white20"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="关于我们" />
 
 </LinearLayout>

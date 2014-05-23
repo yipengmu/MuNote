@@ -1,12 +1,12 @@
 package com.laomu.note;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
+import android.widget.Toast;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.laomu.note.ui.NoteMainFragment;
-import com.laomu.note.ui.base.NoteBaseActivity;
 import com.laomu.note.ui.menu.LeftSlidingMenu;
 import com.laomu.note.ui.menu.RightSlidingMenu;
 import com.umeng.analytics.MobclickAgent;
@@ -16,7 +16,8 @@ public class MainActivity extends SlidingFragmentActivity{
 	private String TAG_LEFT = "left";
 	private String TAG_RIGHT = "right";
 	private String TAG_MAIN = "main";
-	private FragmentTransaction frameManager;
+	private android.support.v4.app.FragmentTransaction frameManager;
+	private long mFirstime;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -55,5 +56,21 @@ public class MainActivity extends SlidingFragmentActivity{
 		//右侧menu
 		sm.setSecondaryMenu(R.layout.menu_frame_two);					
 		frameManager.replace(R.id.menu_frame_two,new RightSlidingMenu(),TAG_RIGHT);
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			long secondtime = System.currentTimeMillis();
+			if (secondtime - mFirstime > 3000) {
+				Toast.makeText(MainActivity.this, "再按一次返回键退出", Toast.LENGTH_SHORT).show();
+				mFirstime = System.currentTimeMillis();
+				return true;
+			} else {
+				finish();
+				System.exit(0);
+			}
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }

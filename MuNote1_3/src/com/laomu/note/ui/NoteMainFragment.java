@@ -37,6 +37,7 @@ import com.umeng.socialize.controller.RequestType;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
 import com.umeng.socialize.media.UMImage;
+import com.umeng.update.UmengUpdateAgent;
 
 /**
  * @author luoyuan.myp
@@ -65,6 +66,10 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 		
 		initData();
 		initView(savedInstanceState);
+		
+		//wifi下检查更新
+//		考虑到用户流量的限制，目前我们默认在Wi-Fi接入情况下才进行自动提醒。如需要在任意网络环境下都进行更新自动提醒，则请在update调用之前添加以下代码：UmengUpdateAgent.setUpdateOnlyWifi(false)
+		UmengUpdateAgent.update(getActivity());
 	}
 	
 	private void initData() {

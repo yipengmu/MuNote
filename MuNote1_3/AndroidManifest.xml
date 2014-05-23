@@ -85,7 +85,6 @@
         <activity
             android:name="com.laomu.note.ui.act.camera.CameraNoteActivity"
             android:screenOrientation="portrait" />
-        
         <activity
             android:name="com.laomu.note.ui.act.camera.CameraPicturesActivity"
             android:screenOrientation="portrait" />
@@ -106,13 +105,25 @@
             android:noHistory="true"
             android:windowSoftInputMode="stateVisible|adjustResize" >
         </activity>
+        <!-- 用户反馈页 -->
+        <activity android:name="com.umeng.fb.ConversationActivity" />
+        <activity android:name="com.umeng.fb.ContactActivity" />
 
         <service
             android:name="com.umeng.common.net.DownloadingService"
             android:exported="true"
             android:process=":DownloadingService" >
         </service>
-
+         <!-- uMeng 版本更新 -->
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        <!-- end uMeng -->
         <receiver android:name="com.laomu.note.common.lbs.LocationReceiver" >
             <intent-filter>
                 <action android:name="ACTTIONI_LOCATION_INFO" />

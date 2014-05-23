@@ -3,8 +3,10 @@
  */
 package com.laomu.note.ui.menu;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -57,6 +59,7 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
 		tv_map_mark = (TextView) view.findViewById(R.id.tv_map_mark);
 		tv_info = (TextView) view.findViewById(R.id.tv_info);
 
+		tv_personal_clock.setOnClickListener(this);
 		tv_map_mark.setOnClickListener(this);
 		tv_info.setOnClickListener(this);
 	}
@@ -64,6 +67,9 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.tv_personal_clock:
+			intoPerSonalClock();
+			break;
 		case R.id.tv_info:
 			intoCityList();
 			break;
@@ -74,6 +80,33 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
 		default:
 			break;
 		}
+	}
+
+	private void intoPerSonalClock() {
+		PackageManager packageManager = getActivity().getPackageManager();
+		if (packageManager != null) {
+
+			Intent AlarmClockIntent = new Intent(Intent.ACTION_MAIN).addCategory(
+					Intent.CATEGORY_LAUNCHER).setComponent(
+					new ComponentName("com.android.deskclock", "com.android.deskclock.DeskClock"));
+
+			ResolveInfo resolved = packageManager.resolveActivity(AlarmClockIntent,
+					PackageManager.MATCH_DEFAULT_ONLY);
+			if (resolved != null) {
+				startActivity(AlarmClockIntent);
+				return;
+			} else {
+				// required activity can not be located!
+
+				Intent intent = new Intent();
+				ComponentName comp = new ComponentName("com.android.settings",
+						"com.android.settings.Settings");
+				intent.setComponent(comp);
+				intent.setAction("android.intent.action.VIEW");
+				startActivity(intent);
+			}
+		}
+
 	}
 
 	private void intoCityList() {
