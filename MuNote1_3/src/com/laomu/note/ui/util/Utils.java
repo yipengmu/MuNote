@@ -208,13 +208,17 @@ public class Utils {
 		return LocationInfoManeger.getInstance().getmLocationInfoModel();
 	}
 
-	public static void startCameraKacha(Context c) {
+	public static int prepareCameraKacha(Context c) {
+		final SoundPool soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 100);
+		return soundPool.load(c, R.raw.kacha, 1);
+	}
+
+	public static void startCameraKacha(Context c,final int id) {
 		final SoundPool soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 100);
 		AudioManager mgr = (AudioManager) c.getSystemService(Context.AUDIO_SERVICE);
 		float streamVolumeCurrent = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);
 		float streamVolumeMax = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 		final float volume = streamVolumeCurrent / streamVolumeMax;
-		final int id = soundPool.load(c, R.raw.kacha, 1);
 		new Handler().postDelayed(new Runnable() {
 			
 			@Override

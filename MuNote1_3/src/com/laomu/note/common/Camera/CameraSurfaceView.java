@@ -34,12 +34,13 @@ import android.widget.Toast;
  */
 public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Callback,
 		Camera.PictureCallback {
-	
+
 	private SurfaceHolder holder;
 	private Camera camera;
 	private boolean af;
 	private static PictureCallback mPictureCallback;
 	private Activity mActivity;
+//	private int prepareCameraKachaId = -1;
 
 	public CameraSurfaceView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -67,13 +68,15 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
 			camera.setPreviewDisplay(holder);
 			camera.startPreview();
 			ImageManeger.setPreviewDegree(mActivity, camera);
+//			prepareCameraKachaId = Utils.prepareCameraKacha(mActivity);
+
 		} catch (Exception e) {
 		}
 	}
 
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {// Surface改变事件的处理
-//		camera.startPreview();// 开始预览
+	// camera.startPreview();// 开始预览
 	}
 
 	public void surfaceDestroyed(SurfaceHolder holder) {// Surface销毁时的处理
@@ -87,7 +90,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 	}
-	
+
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {// 屏幕触摸事件
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {// 按下时自动对焦
@@ -105,7 +108,9 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
 	@Override
 	public void onPictureTaken(byte[] data, Camera camera) {
 		try {
-//			Utils.startCameraKacha(mActivity);
+//			if(prepareCameraKachaId != -1){
+//				Utils.startCameraKacha(mActivity,prepareCameraKachaId);
+//			}
 			saveToSDCard(data);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -120,10 +125,10 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
 		if (!pathDir.exists()) {
 			pathDir.mkdirs();
 		}
-		
+
 		Toast.makeText(mActivity, "图片已保存在： " + pathDir.getAbsolutePath() + fileName,
 				Toast.LENGTH_SHORT).show();
-		
+
 		File file = new File(pathDir, fileName);
 		FileOutputStream outStream = new FileOutputStream(file);
 		bitmap.compress(CompressFormat.JPEG, 100, outStream);

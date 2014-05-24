@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
@@ -54,6 +55,7 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 	private View mView;
 	private final int CODE_FOR_TEXT_CREATE = 1;
 	private int CODE_FOR_CAMERA_CREATE = 2;
+	private View tv_common_head_title;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -88,18 +90,21 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 		btn_text_make = mView.findViewById(R.id.btn_text_make);
 		btn_camera_make = mView.findViewById(R.id.btn_camera_make);
 		btn_speak_make = mView.findViewById(R.id.btn_speak_make);
+		tv_common_head_title = mView.findViewById(R.id.tv_common_head_title);
 		
 		btn_text_make.setOnClickListener(this);
 		btn_camera_make.setOnClickListener(this);
 		btn_speak_make.setOnClickListener(this);
+		tv_common_head_title.setOnClickListener(this);
+		
 	}
 
 	private void initNoteListView() {
 		mNoteListView = (ListView) mView.findViewById(R.id.lv_note_main);
 		mListViewAdapter = new NoteListViewAdapter();
 		mListViewAdapter.setDatasource(getActivity(), mNoteDBData);
-		mNoteListView.setAdapter(mListViewAdapter);
-
+		mNoteListView.setAdapter(mListViewAdapter);	
+		mNoteListView.setSmoothScrollbarEnabled(true);
 		mNoteListView.setOnItemClickListener(this);
 		mNoteListView.setOnItemLongClickListener(this);
 	}
@@ -119,9 +124,18 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 			makeNoteBySpeak();
 			break;
 
+		case R.id.tv_common_head_title:
+			scrollTop2NoteList();
+			break;
+			
 		default:
 			break;
 		}
+	}
+
+	private void scrollTop2NoteList() {
+		mNoteListView.setSelection(0);
+		Toast.makeText(getActivity(), "已回到顶部", Toast.LENGTH_SHORT).show();
 	}
 
 	private void makeNoteBySpeak() {

@@ -44,6 +44,7 @@ public class CameraNoteActivity extends NoteBaseActivity implements OnClickListe
 	private ImageView mImageView;
 	private CameraSurfaceView surfaceView;
 	private Thread mDataLoadThread ; 
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
