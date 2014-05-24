@@ -19,14 +19,19 @@ import org.json.JSONException;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.webkit.URLUtil;
 import android.webkit.WebResourceResponse;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.laomu.note.R;
 import com.laomu.note.common.MuLog;
 import com.laomu.note.common.lbs.LocationInfoManeger;
 import com.laomu.note.common.preferences.PreferenceCenter;
@@ -202,4 +207,21 @@ public class Utils {
 	public static LocationBean getLocation() {
 		return LocationInfoManeger.getInstance().getmLocationInfoModel();
 	}
+
+	public static void startCameraKacha(Context c) {
+		final SoundPool soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 100);
+		AudioManager mgr = (AudioManager) c.getSystemService(Context.AUDIO_SERVICE);
+		float streamVolumeCurrent = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);
+		float streamVolumeMax = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+		final float volume = streamVolumeCurrent / streamVolumeMax;
+		final int id = soundPool.load(c, R.raw.kacha, 1);
+		new Handler().postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				soundPool.play(id, volume, volume, 1, 0, 1f);
+			}
+		}, 20);
+	}
+
 }

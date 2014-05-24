@@ -17,8 +17,9 @@
         android:id="@+id/tv_ad_wall"
         style="@style/white20"
         android:layout_width="fill_parent"
+        android:padding="10dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
         android:text="友情推荐" />
 
@@ -27,7 +28,6 @@
         style="@style/white20"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"

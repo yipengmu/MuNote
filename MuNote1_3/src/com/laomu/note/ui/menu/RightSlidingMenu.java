@@ -3,6 +3,7 @@
  */
 package com.laomu.note.ui.menu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.laomu.note.R;
+import com.laomu.note.ui.act.business.AboutUsActivity;
 import com.laomu.note.ui.base.NoteBaseFragment;
 import com.umeng.fb.FeedbackAgent;
 
@@ -56,10 +58,18 @@ public class RightSlidingMenu extends NoteBaseFragment implements OnClickListene
 		case R.id.tv_feedback:
 			gotoFeedBack();
 			break;
+		case R.id.tv_about_us:
+			gotoAboutUs();
+			break;
 			
 		default:
 			break;
 		}
+	}
+
+	private void gotoAboutUs() {
+		Intent intent = new Intent(getActivity(),AboutUsActivity.class);
+		startActivity(intent);
 	}
 
 	private void gotoFeedBack() {

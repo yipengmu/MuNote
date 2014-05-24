@@ -70,31 +70,21 @@
             android:value="0df310c924619611b33dbc6d75c34c43" />
         <!-- gaode end. -->
 
-        <activity
-            android:name="com.laomu.note.MainActivity"
-            android:screenOrientation="portrait" >
+        <activity android:name="com.laomu.note.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.laomu.note.ui.act.TextNoteActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.laomu.note.ui.act.camera.CameraNoteActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.laomu.note.ui.act.camera.CameraPicturesActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.laomu.note.ui.act.CitySelectionActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.laomu.note.ui.webview.BaseWebviewActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name="com.laomu.note.ui.act.TextNoteActivity" />
+        <activity android:name="com.laomu.note.ui.act.camera.CameraNoteActivity" />
+        <activity android:name="com.laomu.note.ui.act.camera.CameraPicturesActivity" />
+        <activity android:name="com.laomu.note.ui.act.CitySelectionActivity" />
+        <activity android:name="com.laomu.note.ui.webview.BaseWebviewActivity" />
         <activity android:name="com.laomu.note.ui.act.MapNoteActivity" />
+        <activity android:name="com.laomu.note.ui.webview.WebviewActivity" />
+        <activity android:name="com.laomu.note.ui.act.business.AboutUsActivity" />
 
         <!-- ###################注册SDK使用的Activity###################### -->
         <!-- 分享编辑页 -->
@@ -114,11 +104,12 @@
             android:exported="true"
             android:process=":DownloadingService" >
         </service>
-         <!-- uMeng 版本更新 -->
+        <!-- uMeng 版本更新 -->
         <service
             android:name="com.umeng.update.net.DownloadingService"
             android:process=":DownloadingService" >
         </service>
+
         <activity
             android:name="com.umeng.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >

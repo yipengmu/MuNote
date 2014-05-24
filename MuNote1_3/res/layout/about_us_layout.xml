@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
+    <include
+        android:id="@+id/rl_aboutus_head"
+        android:layout_alignParentTop="true"
+        layout="@layout/common_head" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_aboutus_head"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_happy_time"
+            style="@style/gray18"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="幸福时光" />
+
+        <View style="@style/cent_secant_blue" />
+
+        <TextView
+            android:id="@+id/tv_app_history_version"
+            style="@style/gray18"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="历史版本" />
+
+        <View style="@style/cent_secant_blue" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_about_us_info"
+        style="@style/gray14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/bg_home_dark"
+        android:padding="10dp"
+        android:text="@string/app_about_us" />
+
+</RelativeLayout>

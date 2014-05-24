@@ -1,31 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/head_height"
+    android:clickable="true"
+    android:background="@color/pale_blue">
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/pale_blue"
-        android:padding="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/common_head_secent"
+        android:padding="10dp" >
 
         <ImageView
             android:id="@+id/iv_common_head_left"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" />
 
         <TextView
             android:id="@+id/tv_common_head_title"
-            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_height="wrap_content" />
-        
-        
+            android:layout_centerVertical="true" />
+
         <ImageView
             android:id="@+id/iv_common_head_right"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
     </RelativeLayout>
+
+    <View style="@style/cent_secant" android:id="@+id/common_head_secent" android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

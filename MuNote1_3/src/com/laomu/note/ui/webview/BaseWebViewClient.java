@@ -31,7 +31,8 @@ public class BaseWebViewClient extends WebViewClient{
 	
 	@Override
 	public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
-		return Utils.getLocalWebResource(url);
+//		return Utils.getLocalWebResource(url);
+		return super.shouldInterceptRequest(view, url);
 	}
 	
 	@Override

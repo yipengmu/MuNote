@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-        android:background="@color/white"
-    android:clickable="true"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true" >
 
     <include
         android:id="@+id/image_detail_head"
         android:layout_alignParentTop="true"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         layout="@layout/common_head" />
 
     <ImageView
         android:id="@+id/iv_image_main"
         android:layout_width="match_parent"
-        android:padding="10dp"
         android:layout_height="match_parent"
         android:layout_above="@+id/ll_image_detail_bottom"
         android:layout_below="@+id/image_detail_head"
-        android:scaleType="fitXY"
         android:background="@color/white"
+        android:padding="10dp"
+        android:scaleType="fitXY"
         android:src="@drawable/bg_home_dark" />
 
     <LinearLayout
         android:id="@+id/ll_image_detail_bottom"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/dark_grey"
         android:layout_alignParentBottom="true"
+        android:background="@color/dark_grey"
         android:orientation="vertical"
         android:padding="10dp" >
 

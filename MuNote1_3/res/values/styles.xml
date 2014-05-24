@@ -460,46 +460,55 @@
     <style name="orange16">
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">@color/orange</item>
+        <item name="android:background">@drawable/bg_white_textview</item>
     </style>
 
     <style name="orange18">
         <item name="android:textSize">18dp</item>
         <item name="android:textColor">@color/orange</item>
+        <item name="android:background">@drawable/bg_white_textview</item>
     </style>
 
     <style name="orange22">
         <item name="android:textSize">22dp</item>
         <item name="android:textColor">@color/orange</item>
+        <item name="android:background">@drawable/bg_white_textview</item>
     </style>
 
     <style name="gray12">
         <item name="android:textSize">12dp</item>
         <item name="android:textColor">@color/gray</item>
+        <item name="android:background">@drawable/bg_white_textview</item>
     </style>
 
     <style name="gray14">
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">@color/gray</item>
+        <item name="android:background">@drawable/bg_white_textview</item>
     </style>
 
     <style name="gray15">
         <item name="android:textSize">15dp</item>
         <item name="android:textColor">@color/gray</item>
+        <item name="android:background">@drawable/bg_white_textview</item>
     </style>
 
     <style name="gray16">
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">@color/gray</item>
+        <item name="android:background">@drawable/bg_white_textview</item>
     </style>
 
     <style name="gray18">
         <item name="android:textSize">18dp</item>
         <item name="android:textColor">@color/gray</item>
+        <item name="android:background">@drawable/bg_white_textview</item>
     </style>
 
     <style name="gray20">
         <item name="android:textSize">20dp</item>
         <item name="android:textColor">@color/gray</item>
+        <item name="android:background">@drawable/bg_white_textview</item>
     </style>
 
     <style name="gray24">

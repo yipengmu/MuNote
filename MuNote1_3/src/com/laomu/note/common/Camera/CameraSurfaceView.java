@@ -7,7 +7,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import com.laomu.note.R;
 import com.laomu.note.ui.act.camera.CameraNoteActivity;
+import com.laomu.note.ui.util.Utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,6 +19,7 @@ import android.graphics.Canvas;
 import android.graphics.Bitmap.CompressFormat;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
+import android.media.MediaPlayer;
 import android.os.Environment;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -102,6 +105,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
 	@Override
 	public void onPictureTaken(byte[] data, Camera camera) {
 		try {
+//			Utils.startCameraKacha(mActivity);
 			saveToSDCard(data);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -109,18 +113,21 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
 	}
 
 	public void saveToSDCard(byte[] data) throws IOException {
+
 		Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 		String fileName = "munote" + System.currentTimeMillis() + ".jpg";
 		File pathDir = new File(Environment.getExternalStorageDirectory() + "/munote/pics");
 		if (!pathDir.exists()) {
 			pathDir.mkdirs();
 		}
+		
+		Toast.makeText(mActivity, "图片已保存在： " + pathDir.getAbsolutePath() + fileName,
+				Toast.LENGTH_SHORT).show();
+		
 		File file = new File(pathDir, fileName);
 		FileOutputStream outStream = new FileOutputStream(file);
 		bitmap.compress(CompressFormat.JPEG, 100, outStream);
 		outStream.close();// 重新浏览
-		Toast.makeText(mActivity, "图片已保存在： " + pathDir.getAbsolutePath() + fileName,
-				Toast.LENGTH_SHORT).show();
 	}
 
 }

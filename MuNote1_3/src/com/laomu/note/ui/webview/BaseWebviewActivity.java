@@ -4,10 +4,12 @@
 package com.laomu.note.ui.webview;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.laomu.note.R;
 import com.laomu.note.ui.base.NoteBaseActivity;
@@ -24,16 +26,33 @@ public class BaseWebviewActivity extends NoteBaseActivity{
 	protected BaseWebChromeClient mBaseWebChromeClient;
 	protected String mCurrentUrl = "http://www.taobao.com";
 	protected String mGeneralUrl;
+	protected String mTitle;
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.general_webview_layout);
-		findviews();
-		initWebviewSettings();
-		loadUrl(mCurrentUrl);
+		initData();
+		initViews();
 	}
 	
+	private void initViews() {
+		findviews();
+		initWebviewSettings();
+		initTitle();
+		loadWebviewUrl(mCurrentUrl);
+	}
+
+	private void initTitle() {
+		setTitle(mTitle);
+	}
+
+	private void initData() {
+		mGeneralUrl = mCurrentUrl = getIntent().getStringExtra("url");
+		mTitle = getIntent().getStringExtra("title");
+	}
+
 	private void initWebviewSettings() {
 		mWebview.setWebChromeClient(new BaseWebChromeClient());
 		mWebview.setWebViewClient(new BaseWebViewClient());
@@ -48,8 +67,17 @@ public class BaseWebviewActivity extends NoteBaseActivity{
 		mWebview = (WebView) findViewById(R.id.wv_general);
 	}
 	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+	}
 	
-	protected void loadUrl(String url){
-		mWebview.loadUrl(url);
+	protected void loadWebviewUrl(String url){
+		if(!TextUtils.isEmpty(url)){
+			mWebview.loadUrl(url);
+		}else{
+			toast("无效的 url..");
+		}
 	}
 }

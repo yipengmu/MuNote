@@ -21,7 +21,7 @@
     <dimen name="list_margin">10dp</dimen>
     <dimen name="shadow_width">15dp</dimen>
 
-    <dimen name="head_height">55dp</dimen>
+    <dimen name="head_height">45dp</dimen>
     <integer name="num_cols">1</integer>
 
     <dimen name="list_item">50dp</dimen>
