@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.laomu.note.R;
+import com.laomu.note.ui.act.ad.JumiAdActivity;
 import com.laomu.note.ui.act.business.AboutUsActivity;
 import com.laomu.note.ui.base.NoteBaseFragment;
 import com.umeng.fb.FeedbackAgent;
@@ -78,6 +79,7 @@ public class RightSlidingMenu extends NoteBaseFragment implements OnClickListene
 	}
 
 	private void gotoAdWall() {
-		
+		Intent intent = new Intent(getActivity(), JumiAdActivity.class);
+		startActivity(intent);
 	}
 }

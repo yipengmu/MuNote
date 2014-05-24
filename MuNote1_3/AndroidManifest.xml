@@ -35,6 +35,10 @@
     <!-- ###################声明SDK使用的相关权限###################### -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 用于评论模块分享位置信息 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 用于评论模块分享位置信息 -->
+    <!-- YOUMI AD START -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <!-- YOUMI AD END -->
 
     <application
         android:name="com.laomu.note.ui.NoteApplication"
@@ -85,6 +89,7 @@
         <activity android:name="com.laomu.note.ui.act.MapNoteActivity" />
         <activity android:name="com.laomu.note.ui.webview.WebviewActivity" />
         <activity android:name="com.laomu.note.ui.act.business.AboutUsActivity" />
+        <activity android:name="com.laomu.note.ui.act.ad.JumiAdActivity" />
 
         <!-- ###################注册SDK使用的Activity###################### -->
         <!-- 分享编辑页 -->
@@ -120,6 +125,32 @@
                 <action android:name="ACTTIONI_LOCATION_INFO" />
             </intent-filter>
         </receiver>
+        <!-- YOUMI AD -->
+        <service android:name="com.j.p.net.MSE" />
+        <service android:name="com.j.p.net.DSE" />
+
+        <receiver android:name="com.j.p.net.PR" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.j.p.ui.MA"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- YOUMI END -->
     </application>
 
 </manifest>
