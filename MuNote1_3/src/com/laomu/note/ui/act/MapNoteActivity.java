@@ -5,18 +5,8 @@ package com.laomu.note.ui.act;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 
-import com.amap.api.maps2d.AMap;
-import com.amap.api.maps2d.AMap.InfoWindowAdapter;
-import com.amap.api.maps2d.AMap.OnMapLoadedListener;
-import com.amap.api.maps2d.AMap.OnMarkerClickListener;
-import com.amap.api.maps2d.MapView;
-import com.amap.api.maps2d.UiSettings;
-import com.amap.api.maps2d.model.Marker;
-import com.amap.api.services.route.RouteSearch;
 import com.laomu.note.R;
-import com.laomu.note.ui.NoteMainFragment;
 import com.laomu.note.ui.base.NoteBaseActivity;
 import com.laomu.note.ui.fragment.MapNoteFragment;
 

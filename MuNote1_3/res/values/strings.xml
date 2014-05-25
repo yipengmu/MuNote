@@ -10,6 +10,6 @@
     <string name="location_mark">地图足迹</string>
     <string name="personnal_clock">个人闹钟</string>
     <string name="personnal_music">随身音乐</string>
-    <string name="app_about_us">  本软件是有laomu个人开发者独立开发，本品最初是为了做一个小记事本，记录女朋友每天让我做的事情清单，并且保存相关事情的地理位置，以方便我后期好对女朋友的任何时刻的拷问对答如流。软件并不复杂，但希望为您们的日常的工作和生活带来和方便，祝你们幸福!</string>
+    <string name="app_about_us">  \t本app最初只是为了做一个小小的手机记事本。\n\t为了记录女朋友每天让我做的事情清单，并且保存相关事情的地理位置，以方便我后期好对女朋友的任何时刻的拷问对答如流而产生开发的念头的。\n\t软件并不复杂，但希望为您们的日常的工作和生活带来和方便，祝你们幸福!\n\n\t我每天都会关注你们的反馈，如果有任何你们希望的功能，通过反馈模块告诉我，我会在下一个版本中尽量为你们加进去的哈~\n\n\t一起加油!</string>
 
 </resources>

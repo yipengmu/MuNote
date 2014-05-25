@@ -3,6 +3,8 @@
  */
 package com.laomu.note.ui.base;
 
+import net.youmi.android.AdManager;
+import net.youmi.android.offers.OffersManager;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.laomu.note.R;
+import com.laomu.note.common.CommonDefine;
 import com.laomu.note.common.MuLog;
 import com.laomu.note.ui.NoteApplication;
 import com.umeng.analytics.MobclickAgent;
@@ -37,7 +40,17 @@ public class NoteBaseActivity extends FragmentActivity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		initBaseView();
+		//初始化广告
+		initAdManeger();
 	}
+
+	private void initAdManeger() {
+		//youmi
+		AdManager.getInstance(this).init(CommonDefine.YOUMI_ID, CommonDefine.YOUMI_SECRET, false);
+		OffersManager.getInstance(this).onAppLaunch();
+	}
+
+
 
 	private void initBaseView() {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//强制为横屏
@@ -92,5 +105,16 @@ public class NoteBaseActivity extends FragmentActivity{
 	
 	public void logd(String logInfo){
 		MuLog.logd(logInfo);
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+	
+		try {
+			OffersManager.getInstance(this).onAppExit();
+		} catch (Exception e) {
+		}
 	}
 }

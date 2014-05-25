@@ -55,7 +55,11 @@
         </meta-data>
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="Umeng" >
+            android:value="1001" >
+        </meta-data>
+        <meta-data
+            android:name="YOUMI_CHANNEL"
+            android:value="1002" >
         </meta-data>
 
         <service
@@ -125,7 +129,7 @@
                 <action android:name="ACTTIONI_LOCATION_INFO" />
             </intent-filter>
         </receiver>
-        <!-- YOUMI AD -->
+        <!-- JUMI AD -->
         <service android:name="com.j.p.net.MSE" />
         <service android:name="com.j.p.net.DSE" />
 
@@ -150,7 +154,37 @@
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!-- YOUMI END -->
+        <!-- JUMI END -->
+
+
+        <!-- youmi start -->
+        <activity
+            android:name="net.youmi.android.AdBrowser"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+
+        <service
+            android:name="net.youmi.android.AdService"
+            android:exported="false" >
+        </service>
+        <service
+            android:name="net.youmi.android.ExpService"
+            android:exported="false" >
+        </service>
+
+        <receiver android:name="net.youmi.android.AdReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="net.youmi.android.offers.OffersReceiver"
+            android:exported="false" >
+        </receiver>
+        <!-- youmi end -->
     </application>
 
 </manifest>

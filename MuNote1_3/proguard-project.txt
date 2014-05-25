@@ -32,6 +32,12 @@
 -keep class com.umeng.**{*;}
 -keep class com.umeng.socialize.**{*;}
 -keep class com.umeng.socom.**{*;}
+#end
+
+-dontwarn net.youmi.android.**
+-keep class net.youmi.android.** {
+    *;
+}
 
 -keepclasseswithmembernames class * {
 native ;
