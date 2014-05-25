@@ -66,8 +66,21 @@ public class CameraPicturesActivity extends NoteBaseActivity implements OnItemCl
 		mGridView.setAdapter(mGridViewAdapter);
 
 		showLoadingImageView();
-		new Thread(new DataLoadThread(filePaths, mDataLoadedHandler)).start();
+//		new Thread(new DataLoadThread(filePaths, mDataLoadedHandler)).start();
+		new Thread(new DataLoadThread(filePaths, mUnStaticHander4DataLoaded )).start();
+	
 	}
+	
+	Handler mUnStaticHander4DataLoaded = new Handler(){
+	@Override
+	public void handleMessage(Message msg) {
+		super.handleMessage(msg);
+		
+		if (msg.what == TAG_LOADED_COMPELETED) {
+			handleDataLoaded();
+		}
+	}
+	};
 
 	private void showLoadingImageView() {
 		mLoadingView.setVisibility(View.VISIBLE);

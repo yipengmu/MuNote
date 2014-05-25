@@ -16,7 +16,13 @@ import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
@@ -24,6 +30,7 @@ import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.webkit.URLUtil;
@@ -39,6 +46,9 @@ import com.laomu.note.common.weather.WeatherController;
 import com.laomu.note.data.database.OrmDbManeger;
 import com.laomu.note.data.model.LocationBean;
 import com.laomu.note.ui.NoteApplication;
+import com.umeng.update.UmengUpdateAgent;
+import com.umeng.update.UmengUpdateListener;
+import com.umeng.update.UpdateResponse;
 
 /**
  * @author luoyuan.myp
@@ -227,5 +237,63 @@ public class Utils {
 			}
 		}, 20);
 	}
+
+	public static String getVersionName(Context c) {
+		 String version = "v--";
+		 // 获取packagemanager的实例
+        PackageManager packageManager = c.getPackageManager();
+        // getPackageName()是你当前类的包名，0代表是获取版本信息
+        PackageInfo packInfo = null;
+		try {
+			packInfo = packageManager.getPackageInfo("com.laomu.note",0);
+			version = packInfo.versionName;
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+        return version;
+	}
+
+	public static void checkUpdate(final Context c) {
+		UmengUpdateAgent.setUpdateOnlyWifi(true);
+        UmengUpdateAgent.setUpdateAutoPopup(false);
+        UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
+
+            @Override
+            public void onUpdateReturned(int updateStatus,
+                    UpdateResponse updateInfo) {
+                if (updateStatus == 0 && updateInfo != null) {
+                    showUpdateDialog(c,updateInfo.path, updateInfo.updateLog);
+                }
+                // case 0: // has update
+                // case 1: // has no update
+                // case 2: // none wifi
+                // case 3: // time out
+            }
+
+        });
+
+        UmengUpdateAgent.update(c);		
+	}
+	
+	 public static void showUpdateDialog(final Context c,final String downloadUrl, final String message) {
+	        AlertDialog.Builder updateAlertDialog = new AlertDialog.Builder(c);
+	        updateAlertDialog.setIcon(R.drawable.ic_launcher);
+	        updateAlertDialog.setTitle(R.string.app_name);
+	        updateAlertDialog.setMessage("有新版本了");
+	        updateAlertDialog.setNegativeButton("ok",
+	                new DialogInterface.OnClickListener() {
+	                    @Override
+	                    public void onClick(DialogInterface dialog, int which) {
+	                        dialog.dismiss();
+	                        try {
+	                            c.startActivity(new Intent(Intent.ACTION_VIEW, Uri
+	                                    .parse(downloadUrl)));
+	                        } catch (Exception ex) {
+
+	                        }
+	                    }
+	                }).setPositiveButton("no", null);
+	            updateAlertDialog.show();
+	    }
 
 }

@@ -21,23 +21,22 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="hold any"
             android:layout_marginTop="20dp"
+            android:text="hold any"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_marginTop="20dp"
             android:layout_width="fill_parent"
-            
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:src="@drawable/bg_about_us" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:visibility="gone" >
 
             <TextView
                 android:id="@+id/tv_happy_time"
@@ -59,7 +58,35 @@
 
             <View style="@style/cent_secant_blue" />
         </LinearLayout>
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/rl_aboutus_head"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btn_check_app_update"
+            style="@style/white12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:drawableLeft="@drawable/icon_touch_update"
+            android:text="检查更新" />
+
+        <Button
+            android:id="@+id/tv_app_version"
+            style="@style/french_grey10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@null"
+            android:drawableLeft="@drawable/icon_version_logo"
+            android:text="version" />
     </LinearLayout>
 
     <TextView
@@ -72,5 +99,6 @@
         android:background="@drawable/bg_home_dark"
         android:padding="10dp"
         android:text="@string/app_about_us" />
+
 
 </RelativeLayout>

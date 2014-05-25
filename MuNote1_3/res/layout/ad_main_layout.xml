@@ -20,13 +20,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="30dp"
-            android:autoLink="all"
             android:ellipsize="marquee"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:marqueeRepeatLimit="marquee_forever"
             android:singleLine="true"
-            android:text="wifi君:                       下载有奖哦                                                                                         下载有奖哦                                                                                         下载有奖哦                                                         " />
+            android:text="        wifi君:                       下载有奖哦                                                                                         下载有奖哦                                                                                         下载有奖哦                                                         " />
     </RelativeLayout>
 
 </LinearLayout>

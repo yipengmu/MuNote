@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.laomu.note.R;
 import com.laomu.note.ui.base.NoteBaseActivity;
+import com.laomu.note.ui.util.Utils;
 import com.laomu.note.ui.webview.WebviewActivity;
 
 /**
@@ -21,9 +23,10 @@ import com.laomu.note.ui.webview.WebviewActivity;
 public class AboutUsActivity extends NoteBaseActivity implements OnClickListener {
 
 	private TextView mTvHappyTime;
-	private TextView mTvHistoryVersion;
 	private String mTitle = "关于我们";
-
+	private Button mTvCurrentVersion;
+	private Button mBtnAppUpdate;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,13 +38,15 @@ public class AboutUsActivity extends NoteBaseActivity implements OnClickListener
 	private void initViews() {
 		findViews();
 		setTitle(mTitle);
+		mTvCurrentVersion.setText("v " + Utils.getVersionName(this));
 	}
 
 	private void findViews() {
 		mTvHappyTime = (TextView) findViewById(R.id.tv_happy_time);
-		mTvHistoryVersion = (TextView) findViewById(R.id.tv_app_history_version);
+		mTvCurrentVersion = (Button) findViewById(R.id.tv_app_version);
+		mBtnAppUpdate = (Button) findViewById(R.id.btn_check_app_update);
+		mBtnAppUpdate.setOnClickListener(this);
 		mTvHappyTime.setOnClickListener(this);
-		mTvHistoryVersion.setOnClickListener(this);
 	}
 
 	@Override
@@ -50,17 +55,18 @@ public class AboutUsActivity extends NoteBaseActivity implements OnClickListener
 		case R.id.tv_happy_time:
 			gotoHappyTime();
 			break;
-		case R.id.tv_app_history_version:
-			gotoAppHistoryVersion();
-			break;
 
+		case R.id.btn_check_app_update:
+			checkAppUpdate();
+			break;
+			
 		default:
 			break;
 		}
 	}
 
-	private void gotoAppHistoryVersion() {
-		
+	private void checkAppUpdate() {
+		Utils.checkUpdate(this);
 	}
 
 	private void gotoHappyTime() {

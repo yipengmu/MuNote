@@ -1,16 +1,39 @@
--optimizationpasses 5
--dontusemixedcaseclassnames
--dontskipnonpubliclibraryclasses
--dontpreverify
--verbose
+-dontpreverify 
+-dontoptimize 
+-dontusemixedcaseclassnames 
+-keepattributes Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,LocalVariable*Table,*Annotation*,Synthetic,EnclosingMethod
+-repackageclasses '' 
+-allowaccessmodification 
+-printmapping map.txt 
 
--optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+-optimizationpasses 7 
+-verbose 
+-dontskipnonpubliclibraryclasses 
+-dontskipnonpubliclibraryclassmembers 
+
+#不混淆所有内容
+#-dontobfuscate
+#-dontoptimize
+
+
 -keep public class * extends android.app.Activity
+-keep public class * extends android.support.v4.app.Fragment
+-keep public class * extends android.support.v4.app.FragmentActivity
 -keep public class * extends android.app.Application
 -keep public class * extends android.app.Service
 -keep public class * extends android.content.BroadcastReceiver
 -keep public class * extends android.content.ContentProvider
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
 -keep public class com.android.vending.licensing.ILicensingService
+
+
+
+-keep public class com.alipay.android.app.**
+-keep public class com.amap.**
+-keep public class com.autonavi.**
+-keep public class com.mapabc.**
+
 
 #keep 3rd libs
 -keep class com.j.p.**{*;}
@@ -35,24 +58,85 @@
 #end
 
 -dontwarn net.youmi.android.**
+-dontwarn com.hp.hpl.sparta.**
+-dontwarn demo.**
+-dontwarn net.sourceforge.pinyin4j.**
+-dontwarn pinyindb.**
+-dontwarn com.umeng.**
+-dontwarn com.tencent.weibo.sdk.**
+-dontwarn demo.Pinyin4jAppletDemo.**
+-dontwarn com.squareup.picasso.**
+
 -keep class net.youmi.android.** {
     *;
 }
 
--keepclasseswithmembernames class * {
-native ;
+#loactioin start
+-dontwarn com.amap.api.**
+-dontwarn com.autonavi.amap.mapcore.**
+-dontwarn com.amap.api.location.**
+-dontwarn com.autonavi.aps.amapapi.**
+-dontwarn com.amap.api.search.**
+
+-keep class com.amap.api.**{*;}
+-keep class com.autonavi.amap.mapcore.**{*;}
+-keep class com.amap.api.location.**{*;}
+-keep class com.autonavi.aps.amapapi.**{*;}
+-keep class com.amap.api.search.**{*;}
+#location end
+
+#jsonobject start
+-keep public class org.json.**{*;}
+#jsonobject end
+
+
+#fastjson start
+-keep public class com.alibaba.fastjson.**{*;}
+#fastjson end
+
+-keep public class com.tencent.mm.**
+
+-keep class com.tencent.mm.sdk.openapi.WXMediaMessage { *;}
+-keep class com.tencent.mm.sdk.openapi.** implements com.tencent.mm.sdk.openapi.WXMediaMessage$IMediaObject {*;}
+
+
+-keepclassmembers class **.R$* {
+    public static <fields>;
 }
+
 -keepclasseswithmembernames class * {
-public (android.content.Context, android.util.AttributeSet);
+    native <methods>;
 }
--keepclasseswithmembernames class * {
-public (android.content.Context, android.util.AttributeSet, int);
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+-keepclassmembers class * extends android.app.Activity {
+   public void *(android.view.View);
 }
 
 -keepclassmembers enum * {
-public static **[] values();
-public static ** valueOf(java.lang.String);
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
 }
+
 -keep class * implements android.os.Parcelable {
-public static final android.os.Parcelable$Creator *;
+  public static final android.os.Parcelable$Creator *;
 }
+
+# Explicitly preserve all serialization members. The Serializable interface
+# is only a marker interface, so it wouldn't save them.
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
+}
+
+-keep public class * implements java.io.Serializable {*;}

@@ -5,39 +5,29 @@ package com.laomu.note.ui;
 
 import java.util.ArrayList;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.laomu.note.R;
-import com.laomu.note.common.CommonDefine;
 import com.laomu.note.common.MuLog;
 import com.laomu.note.data.database.OrmDbManeger;
 import com.laomu.note.data.database.old.DBManager;
-import com.laomu.note.data.model.LocationBean;
 import com.laomu.note.data.model.NoteBean;
 import com.laomu.note.ui.act.TextNoteActivity;
 import com.laomu.note.ui.act.camera.CameraNoteActivity;
 import com.laomu.note.ui.adapter.NoteListViewAdapter;
 import com.laomu.note.ui.base.NoteBaseFragment;
 import com.laomu.note.ui.share.ShareManeger;
-import com.umeng.socialize.common.SocializeConstants;
-import com.umeng.socialize.controller.RequestType;
-import com.umeng.socialize.controller.UMServiceFactory;
-import com.umeng.socialize.controller.UMSocialService;
-import com.umeng.socialize.media.UMImage;
 import com.umeng.update.UmengUpdateAgent;
 
 /**

@@ -9,7 +9,9 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.laomu.note.ui.NoteMainFragment;
 import com.laomu.note.ui.menu.LeftSlidingMenu;
 import com.laomu.note.ui.menu.RightSlidingMenu;
+import com.laomu.note.ui.util.Utils;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.update.UmengUpdateAgent;
 
 public class MainActivity extends SlidingFragmentActivity{
 
@@ -33,10 +35,17 @@ public class MainActivity extends SlidingFragmentActivity{
 		//提交事务
 		frameManager.commit();
 		
-		//开启友盟 统计
-		MobclickAgent.updateOnlineConfig(this);
 	}
 	
+	private void initUmengTrack() {
+
+		//开启友盟 统计
+		MobclickAgent.updateOnlineConfig(this);
+		Utils.checkUpdate(this);
+		//友盟app版本升级检测模块
+		UmengUpdateAgent.update(this);
+	}
+
 	private void initSlidingMenu(Bundle savedInstanceState) {
 		SlidingMenu sm = getSlidingMenu();
 		sm.setMode(SlidingMenu.LEFT_RIGHT);

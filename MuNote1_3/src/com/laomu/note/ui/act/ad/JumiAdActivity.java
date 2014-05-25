@@ -31,17 +31,10 @@ public class JumiAdActivity extends NoteBaseActivity {
 		setContentView(R.layout.ad_main_layout);
 		initViews();
 		setTitle(mTitle);
-
 		startADs();
-//		new Handler().postDelayed(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				startADs();
-//			}
-//		}, 1500);
 	}
 
+	
 	private void startADs() {
 
 		// startYoumiAd();
@@ -75,4 +68,5 @@ public class JumiAdActivity extends NoteBaseActivity {
 		mJuMiManager.o(getApplicationContext(), false, 4, true, true, true);
 		mJuMiManager.s(this);
 	}
+	
 }

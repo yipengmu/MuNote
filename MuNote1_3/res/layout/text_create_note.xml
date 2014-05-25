@@ -9,6 +9,33 @@
         android:layout_alignParentTop="true"
         layout="@layout/common_head" />
 
+    <EditText
+        android:id="@+id/et_text_note"
+        style="@style/pale_blue_20"
+        android:layout_below="@id/rl_text_note_head"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="50dp"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="top|left"
+        android:hint="@string/text_here"
+        android:padding="4dp" >
+
+    </EditText>
+
+    <Button
+        android:id="@+id/btn_voice_make_text"
+        android:layout_below="@+id/rl_text_note_head"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        style="@style/french_grey14"
+        android:drawableLeft="@drawable/btn_create_voice"
+        android:text="咦!试一试" />
+
     <RelativeLayout
         android:id="@+id/rl_note_desc_info"
         android:layout_width="fill_parent"
@@ -42,17 +69,5 @@
             android:layout_height="wrap_content"
             style="@style/french_grey14" />
     </RelativeLayout>
-
-    <EditText
-        android:id="@+id/et_text_note"
-        style="@style/pale_blue_20"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/rl_text_note_head"
-        android:background="@null"
-        android:gravity="top|left"
-        android:hint="@string/text_here"
-        android:padding="4dp" />
 
 </RelativeLayout>
