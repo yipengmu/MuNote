@@ -4,22 +4,18 @@
 package com.laomu.note.common.Camera;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.util.ArrayList;
 import java.util.List;
-
-import com.laomu.note.data.model.ImageModel;
-import com.laomu.note.ui.util.Utils;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Bitmap.CompressFormat;
-import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.os.Environment;
 import android.support.v4.util.LruCache;
 import android.view.Surface;
+
+import com.laomu.note.data.model.ImageModel;
+import com.laomu.note.ui.util.Utils;
 
 /**
  * @author luoyuan.myp

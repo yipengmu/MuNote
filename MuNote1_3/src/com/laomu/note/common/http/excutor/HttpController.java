@@ -3,8 +3,6 @@
  */
 package com.laomu.note.common.http.excutor;
 
-import java.util.Map;
-
 import com.laomu.note.common.http.HttpReqBean;
 
 /**

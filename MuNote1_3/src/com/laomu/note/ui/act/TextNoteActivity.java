@@ -3,6 +3,7 @@
  */
 package com.laomu.note.ui.act;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.speech.RecognizerIntent;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +26,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.iflytek.speech.SpeechConstant;
 import com.laomu.note.R;
 import com.laomu.note.common.CommonDefine;
 import com.laomu.note.common.http.HttpMapDefine;
@@ -50,7 +53,7 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 	private int MODE_CREATE = 1;
 	private int MODE_EDIT = 2;
 	private int mMode = 0;
-	private EditText et_text_note;
+	private EditText mEditNotecontent;
 	private ImageView iv_weather_icon;
 	private LocationBean mLocation;
 	private BaiduWeatherResult mWeather;
@@ -61,6 +64,8 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 	private LocationRecevier lbsRecevier = new LocationRecevier();
 	private String wUrl = "http://api.map.baidu.com/telematics/v3/weather?location=%E5%8C%97%E4%BA%AC&output=json&ak=37c73c4541273cbafd0b7695d0667a17";
 
+	private static final int REQUEST_CODE_SEARCH = 1099;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -163,7 +168,7 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 
 	private void initUIWidget() {
 		if (null != mNoteBean) {
-			et_text_note.setText("" + mNoteBean.note_content);
+			mEditNotecontent.setText("" + mNoteBean.note_content);
 		}
 
 		if (mLocation != null) {
@@ -172,7 +177,7 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 	}
 
 	private void findViews() {
-		et_text_note = (EditText) findViewById(R.id.et_text_note);
+		mEditNotecontent = (EditText) findViewById(R.id.et_text_note);
 		mLocationTextViewDesc = (TextView) findViewById(R.id.tv_location_desc);
 		mWeatherTextViewDesc = (TextView) findViewById(R.id.tv_weather_desc);
 		iv_weather_icon = (ImageView) findViewById(R.id.iv_weather_icon);
@@ -227,7 +232,7 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 	}
 
 	private void saveNoteContent() {
-		String label = et_text_note.getText().toString().trim();
+		String label = mEditNotecontent.getText().toString().trim();
 		String labelTitle = label;
 
 		if (null == mNoteBean) {
@@ -329,6 +334,30 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 	}
 
 	private void makeNoteFromVoice() {
-		
+		if(Utils.isActionSupport(this)){
+			Intent intent = new Intent();
+			// 指定action名字
+			intent.setAction(CommonDefine.XUNFEI_ACTION_INPUT);
+			intent.putExtra(SpeechConstant.PARAMS, "asr_ptt=1");
+			intent.putExtra(SpeechConstant.VAD_EOS, "1000");
+			// 设置弹出框的两个按钮名称
+			intent.putExtra(CommonDefine.XUNFEI_TITLE_DONE, "确定");
+			intent.putExtra(CommonDefine.XUNFEI_TITLE_CANCEL, "取消");
+			startActivityForResult(intent,REQUEST_CODE_SEARCH);
+		} else {
+			toast("请先安装讯飞语音+(1.0.1011以上版本)");
+		}	
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode == REQUEST_CODE_SEARCH && resultCode == RESULT_OK)
+		{
+			// 取得识别的字符串
+			ArrayList<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+			String res = results.get(0);
+			mEditNotecontent.append("\n" + res);			
+		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 }

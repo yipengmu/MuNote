@@ -16,11 +16,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.laomu.note.R;
 import com.laomu.note.common.Camera.DataLoadThread;
-import com.laomu.note.ui.NoteMainFragment;
 import com.laomu.note.ui.adapter.PicturesGridViewAdatper;
 import com.laomu.note.ui.base.NoteBaseActivity;
 import com.laomu.note.ui.fragment.ImagePictureFragment;
@@ -38,7 +36,7 @@ public class CameraPicturesActivity extends NoteBaseActivity implements OnItemCl
 	private ArrayList<String> filePaths;
 	private RelativeLayout mLoadingView;
 	private static int TAG_LOADED_COMPELETED = 0;
-	private DataLoadedHandler mDataLoadedHandler = new DataLoadedHandler(this);
+//	private DataLoadedHandler mDataLoadedHandler = new DataLoadedHandler(this);
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

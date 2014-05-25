@@ -5,7 +5,6 @@ package com.laomu.note.ui.act.ad;
 
 import net.youmi.android.offers.OffersManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.widget.TextView;
 
 import com.j.p.api.PopManager;

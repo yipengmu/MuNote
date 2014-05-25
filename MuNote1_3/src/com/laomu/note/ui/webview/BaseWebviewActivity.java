@@ -5,11 +5,8 @@ package com.laomu.note.ui.webview;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 import com.laomu.note.R;
 import com.laomu.note.ui.base.NoteBaseActivity;

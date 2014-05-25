@@ -13,8 +13,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.laomu.note.R;
-import com.laomu.note.common.MuLog;
-import com.laomu.note.data.model.CityBean;
 import com.laomu.note.ui.NoteApplication;
 import com.laomu.note.ui.util.Utils;
 

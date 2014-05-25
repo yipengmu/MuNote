@@ -4,21 +4,11 @@
 package com.laomu.note.ui.act.camera;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Bitmap.CompressFormat;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.view.SurfaceHolder;
 import android.view.View;
@@ -28,9 +18,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.laomu.note.R;
-import com.laomu.note.common.Camera.ImageManeger;
 import com.laomu.note.common.Camera.CameraSurfaceView;
 import com.laomu.note.common.Camera.DataLoadThread;
+import com.laomu.note.common.Camera.ImageManeger;
 import com.laomu.note.ui.base.NoteBaseActivity;
 
 /**

@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,7 +18,6 @@ import com.laomu.note.R;
 import com.laomu.note.ui.act.CitySelectionActivity;
 import com.laomu.note.ui.act.MapNoteActivity;
 import com.laomu.note.ui.base.NoteBaseFragment;
-import com.laomu.note.ui.webview.BaseWebviewActivity;
 
 /**
  * @author luoyuan.myp

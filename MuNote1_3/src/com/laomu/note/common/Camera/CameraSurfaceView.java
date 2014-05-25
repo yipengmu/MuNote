@@ -7,19 +7,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import com.laomu.note.R;
-import com.laomu.note.ui.act.camera.CameraNoteActivity;
-import com.laomu.note.ui.util.Utils;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Bitmap.CompressFormat;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
-import android.media.MediaPlayer;
 import android.os.Environment;
 import android.util.AttributeSet;
 import android.view.MotionEvent;

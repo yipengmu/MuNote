@@ -1,19 +1,12 @@
 package com.laomu.note.ui;
 
-import com.laomu.note.R;
-import com.laomu.note.R.id;
-import com.laomu.note.R.layout;
-
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import com.laomu.note.R;
 
 public class SampleListFragment extends Fragment {
 

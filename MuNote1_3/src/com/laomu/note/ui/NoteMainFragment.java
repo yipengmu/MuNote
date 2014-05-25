@@ -21,7 +21,6 @@ import android.widget.Toast;
 import com.laomu.note.R;
 import com.laomu.note.common.MuLog;
 import com.laomu.note.data.database.OrmDbManeger;
-import com.laomu.note.data.database.old.DBManager;
 import com.laomu.note.data.model.NoteBean;
 import com.laomu.note.ui.act.TextNoteActivity;
 import com.laomu.note.ui.act.camera.CameraNoteActivity;
@@ -178,16 +177,16 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 	}
 
 	@Override
-	public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+	public boolean onItemLongClick(AdapterView<?> arg0, View arg1,final int pos, long arg3) {
 		String[] itemArr = {"删除","分享"};
 		showAlertDialog(itemArr,new android.content.DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if(which == 0){
-					delNoteItem(which);
+					delNoteItem(pos);
 				}else if(which == 1){
-					shareNoteItem(which);
+					shareNoteItem(pos);
 				}
 			}
 		});
@@ -201,8 +200,8 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 	}
 	
 	/**删除 某一个note item */
-	protected void delNoteItem(int which) {
-		DBManager.instance(getActivity()).deleteOldNote(mNoteDBData.get(which));
+	protected void delNoteItem(int pos) {
+		OrmDbManeger.getInstance().delNote(mNoteDBData.get(pos));
 		notifyNoteDatasChange();
 	}
 

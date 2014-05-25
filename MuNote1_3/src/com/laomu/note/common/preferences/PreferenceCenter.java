@@ -3,15 +3,14 @@
  */
 package com.laomu.note.common.preferences;
 
-import java.util.HashMap;
 import java.util.Set;
-
-import com.laomu.note.ui.NoteApplication;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
+
+import com.laomu.note.ui.NoteApplication;
 
 /**
  * @author luoyuan.myp

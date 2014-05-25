@@ -5,10 +5,9 @@ package com.laomu.note.data.model;
 
 import java.util.Locale;
 
-import com.laomu.note.ui.util.PinyinUtil;
-
-import net.sourceforge.pinyin4j.PinyinHelper;
 import android.text.TextUtils;
+
+import com.laomu.note.ui.util.PinyinUtil;
 
 /**
  * @author luoyuan.myp

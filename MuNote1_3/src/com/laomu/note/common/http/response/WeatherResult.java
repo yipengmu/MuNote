@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.laomu.note.common.http.response.bean.FullWeatherBean;
-import com.laomu.note.common.http.response.bean.MiniWeatherBean;
 
 /**
  * @author luoyuan.myp

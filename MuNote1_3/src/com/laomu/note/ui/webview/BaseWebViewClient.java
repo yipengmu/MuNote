@@ -3,8 +3,6 @@
  */
 package com.laomu.note.ui.webview;
 
-import com.laomu.note.ui.util.Utils;
-
 import android.graphics.Bitmap;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;

@@ -6,18 +6,20 @@ package com.laomu.note.data.database.old;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.laomu.note.data.model.NoteBean;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.laomu.note.data.model.NoteBean;
+
 /**
  * @author luoyuan.myp
- * 
+ * 代码已废弃
+ * 全部使用OrmDbManeger.getInstance()
  *         2013-6-22
  */
+@Deprecated
 public class DBManager {
 	private DatabaseHelper helper;
 	private SQLiteDatabase db;

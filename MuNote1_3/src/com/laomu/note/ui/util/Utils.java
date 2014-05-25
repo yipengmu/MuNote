@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,22 +24,21 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.webkit.URLUtil;
 import android.webkit.WebResourceResponse;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.laomu.note.R;
+import com.laomu.note.common.CommonDefine;
 import com.laomu.note.common.MuLog;
 import com.laomu.note.common.lbs.LocationInfoManeger;
 import com.laomu.note.common.preferences.PreferenceCenter;
@@ -223,14 +223,14 @@ public class Utils {
 		return soundPool.load(c, R.raw.kacha, 1);
 	}
 
-	public static void startCameraKacha(Context c,final int id) {
+	public static void startCameraKacha(Context c, final int id) {
 		final SoundPool soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 100);
 		AudioManager mgr = (AudioManager) c.getSystemService(Context.AUDIO_SERVICE);
 		float streamVolumeCurrent = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);
 		float streamVolumeMax = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 		final float volume = streamVolumeCurrent / streamVolumeMax;
 		new Handler().postDelayed(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				soundPool.play(id, volume, volume, 1, 0, 1f);
@@ -239,61 +239,76 @@ public class Utils {
 	}
 
 	public static String getVersionName(Context c) {
-		 String version = "v--";
-		 // 获取packagemanager的实例
-        PackageManager packageManager = c.getPackageManager();
-        // getPackageName()是你当前类的包名，0代表是获取版本信息
-        PackageInfo packInfo = null;
+		String version = "v--";
+		// 获取packagemanager的实例
+		PackageManager packageManager = c.getPackageManager();
+		// getPackageName()是你当前类的包名，0代表是获取版本信息
+		PackageInfo packInfo = null;
 		try {
-			packInfo = packageManager.getPackageInfo("com.laomu.note",0);
+			packInfo = packageManager.getPackageInfo("com.laomu.note", 0);
 			version = packInfo.versionName;
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
-        return version;
+		return version;
 	}
 
 	public static void checkUpdate(final Context c) {
 		UmengUpdateAgent.setUpdateOnlyWifi(true);
-        UmengUpdateAgent.setUpdateAutoPopup(false);
-        UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
+		UmengUpdateAgent.setUpdateAutoPopup(false);
+		UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
 
-            @Override
-            public void onUpdateReturned(int updateStatus,
-                    UpdateResponse updateInfo) {
-                if (updateStatus == 0 && updateInfo != null) {
-                    showUpdateDialog(c,updateInfo.path, updateInfo.updateLog);
-                }
-                // case 0: // has update
-                // case 1: // has no update
-                // case 2: // none wifi
-                // case 3: // time out
-            }
+			@Override
+			public void onUpdateReturned(int updateStatus, UpdateResponse updateInfo) {
+				if (updateStatus == 0 && updateInfo != null) {
+					showUpdateDialog(c, updateInfo.path, updateInfo.updateLog);
+				}
+				// case 0: // has update
+				// case 1: // has no update
+				// case 2: // none wifi
+				// case 3: // time out
+			}
 
-        });
+		});
 
-        UmengUpdateAgent.update(c);		
+		UmengUpdateAgent.update(c);
 	}
-	
-	 public static void showUpdateDialog(final Context c,final String downloadUrl, final String message) {
-	        AlertDialog.Builder updateAlertDialog = new AlertDialog.Builder(c);
-	        updateAlertDialog.setIcon(R.drawable.ic_launcher);
-	        updateAlertDialog.setTitle(R.string.app_name);
-	        updateAlertDialog.setMessage("有新版本了");
-	        updateAlertDialog.setNegativeButton("ok",
-	                new DialogInterface.OnClickListener() {
-	                    @Override
-	                    public void onClick(DialogInterface dialog, int which) {
-	                        dialog.dismiss();
-	                        try {
-	                            c.startActivity(new Intent(Intent.ACTION_VIEW, Uri
-	                                    .parse(downloadUrl)));
-	                        } catch (Exception ex) {
 
-	                        }
-	                    }
-	                }).setPositiveButton("no", null);
-	            updateAlertDialog.show();
-	    }
+	public static void showUpdateDialog(final Context c, final String downloadUrl,
+			final String message) {
+		AlertDialog.Builder updateAlertDialog = new AlertDialog.Builder(c);
+		updateAlertDialog.setIcon(R.drawable.ic_launcher);
+		updateAlertDialog.setTitle(R.string.app_name);
+		updateAlertDialog.setMessage("有新版本了");
+		updateAlertDialog.setNegativeButton("ok", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				try {
+					c.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(downloadUrl)));
+				} catch (Exception ex) {
+
+				}
+			}
+		}).setPositiveButton("no", null);
+		updateAlertDialog.show();
+	}
+
+	/**
+	 * 判断action是否存在。
+	 * 
+	 * @param context
+	 * @return
+	 */
+	public static boolean isActionSupport(Context context) {
+
+		final PackageManager packageManager = context.getPackageManager();
+		final Intent intent = new Intent(CommonDefine.XUNFEI_ACTION_INPUT);
+		// 检索所有可用于给定的意图进行的活动。如果没有匹配的活动，则返回一个空列表。
+		List<ResolveInfo> list = packageManager.queryIntentActivities(intent,
+				PackageManager.MATCH_DEFAULT_ONLY);
+		return list.size() > 0;
+
+	}
 
 }

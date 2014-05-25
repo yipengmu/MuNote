@@ -3,8 +3,6 @@
  */
 package com.laomu.note.common.http;
 
-import java.io.InputStream;
-
 import android.os.Handler;
 
 /**

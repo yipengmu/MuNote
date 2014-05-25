@@ -8,12 +8,10 @@ import net.youmi.android.offers.OffersManager;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.laomu.note.R;
 import com.laomu.note.common.CommonDefine;
 import com.laomu.note.common.MuLog;
