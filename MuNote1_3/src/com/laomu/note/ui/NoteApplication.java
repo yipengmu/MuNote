@@ -14,6 +14,7 @@ import android.text.TextUtils;
 
 import com.laomu.note.common.lbs.LocationInfoManeger;
 import com.laomu.note.common.preferences.PreferenceCenter;
+import com.laomu.note.ui.util.Utils;
 
 /**
  * @author luoyuan.myp
@@ -36,8 +37,14 @@ public class NoteApplication extends Application{
 	private void initNoteApplication() {
 		appContext = getApplicationContext();
 		initLBS();
-		initWeatherData();
+//		initWeatherData();
+		initPush();
 	}
+	
+	private void initPush() {
+		Utils.initPush(appContext);
+	}
+	
 	private void initWeatherData() {
 		if(TextUtils.isEmpty(PreferenceCenter.getPreferences().getCityNames())){
 			try {

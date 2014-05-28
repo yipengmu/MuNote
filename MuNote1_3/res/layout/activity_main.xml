@@ -7,55 +7,42 @@
     <include
         android:id="@+id/main_head"
         layout="@layout/common_head" >
-
     </include>
+
+    <ListView
+        android:id="@+id/lv_note_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/main_bottom"
+        android:layout_below="@+id/main_head" >
+    </ListView>
+
+    <RelativeLayout
+        android:id="@+id/main_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true" >
+
         <LinearLayout
-            android:id="@+id/main_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/main_bottom"
-            android:layout_below="@+id/main_head"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content"
+            android:background="#25000000"
+            android:gravity="center" >
 
-            <ListView
-                android:id="@+id/lv_note_main"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-            </ListView>
-        </LinearLayout>
-
-        <RelativeLayout
-            android:id="@+id/main_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true" >
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btn_camera_make"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#25000000"
-                android:gravity="center" >
+                android:background="@drawable/btn_create_camera" />
 
-                <Button
-                    android:id="@+id/btn_camera_make"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_create_camera" />
+            <Button
+                android:id="@+id/btn_text_make"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/btn_create_text" />
 
-                <Button
-                    android:id="@+id/btn_text_make"
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_create_text" />
-
-                <Button
-                    android:id="@+id/btn_speak_make"
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_create_voice" />
-            </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

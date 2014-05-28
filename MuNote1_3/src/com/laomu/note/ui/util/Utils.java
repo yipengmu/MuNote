@@ -42,10 +42,17 @@ import com.laomu.note.common.CommonDefine;
 import com.laomu.note.common.MuLog;
 import com.laomu.note.common.lbs.LocationInfoManeger;
 import com.laomu.note.common.preferences.PreferenceCenter;
+import com.laomu.note.common.push.PushManeger;
 import com.laomu.note.common.weather.WeatherController;
 import com.laomu.note.data.database.OrmDbManeger;
 import com.laomu.note.data.model.LocationBean;
 import com.laomu.note.ui.NoteApplication;
+import com.umeng.message.PushAgent;
+import com.umeng.message.UTrack;
+import com.umeng.message.UmengMessageHandler;
+import com.umeng.message.UmengNotificationClickHandler;
+import com.umeng.message.UmengRegistrar;
+import com.umeng.message.entity.UMessage;
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
@@ -308,7 +315,15 @@ public class Utils {
 		List<ResolveInfo> list = packageManager.queryIntentActivities(intent,
 				PackageManager.MATCH_DEFAULT_ONLY);
 		return list.size() > 0;
-
 	}
+
+	public static String getUmengPushTocken(Context c){
+		return UmengRegistrar.getRegistrationId(c);
+	}
+
+	public static void initPush(Context context) {
+		PushManeger.build();
+	}
+	
 
 }

@@ -345,7 +345,7 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 			intent.putExtra(CommonDefine.XUNFEI_TITLE_CANCEL, "取消");
 			startActivityForResult(intent,REQUEST_CODE_SEARCH);
 		} else {
-			toast("请先安装讯飞语音+(1.0.1011以上版本)");
+			toast("语音输入有问题，请在产品建议里留言哈，我们会尽快修复的+(1.0.1011以上版本)");
 		}	
 	}
 	

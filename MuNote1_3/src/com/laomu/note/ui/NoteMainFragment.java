@@ -27,7 +27,7 @@ import com.laomu.note.ui.act.camera.CameraNoteActivity;
 import com.laomu.note.ui.adapter.NoteListViewAdapter;
 import com.laomu.note.ui.base.NoteBaseFragment;
 import com.laomu.note.ui.share.ShareManeger;
-import com.umeng.update.UmengUpdateAgent;
+import com.laomu.note.ui.util.Utils;
 
 /**
  * @author luoyuan.myp
@@ -40,7 +40,6 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 	private ArrayList<NoteBean> mNoteDBData;
 	private View btn_text_make;
 	private View btn_camera_make;
-	private View btn_speak_make;
 	private View mView;
 	private final int CODE_FOR_TEXT_CREATE = 1;
 	private int CODE_FOR_CAMERA_CREATE = 2;
@@ -60,7 +59,8 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 		
 		//wifi下检查更新
 //		考虑到用户流量的限制，目前我们默认在Wi-Fi接入情况下才进行自动提醒。如需要在任意网络环境下都进行更新自动提醒，则请在update调用之前添加以下代码：UmengUpdateAgent.setUpdateOnlyWifi(false)
-		UmengUpdateAgent.update(getActivity());
+//		UmengUpdateAgent.update(getActivity());
+
 	}
 	
 	private void initData() {
@@ -78,12 +78,10 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 	private void findViews() {
 		btn_text_make = mView.findViewById(R.id.btn_text_make);
 		btn_camera_make = mView.findViewById(R.id.btn_camera_make);
-		btn_speak_make = mView.findViewById(R.id.btn_speak_make);
 		tv_common_head_title = mView.findViewById(R.id.tv_common_head_title);
 		
 		btn_text_make.setOnClickListener(this);
 		btn_camera_make.setOnClickListener(this);
-		btn_speak_make.setOnClickListener(this);
 		tv_common_head_title.setOnClickListener(this);
 		
 	}
@@ -109,9 +107,6 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 		case R.id.btn_text_make:
 			makeNoteByText();
 			break;
-		case R.id.btn_speak_make:
-			makeNoteBySpeak();
-			break;
 
 		case R.id.tv_common_head_title:
 			scrollTop2NoteList();
@@ -125,10 +120,6 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 	private void scrollTop2NoteList() {
 		mNoteListView.setSelection(0);
 		Toast.makeText(getActivity(), "已回到顶部", Toast.LENGTH_SHORT).show();
-	}
-
-	private void makeNoteBySpeak() {
-		MuLog.logd("makeNoteBySpeak start");
 	}
 
 	private void makeNoteByCamera() {
@@ -196,6 +187,9 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 	protected void shareNoteItem(int which) {
 		//分享note
 		ShareManeger sm  = ShareManeger.instance();
+		sm.setShareContent(mNoteDBData.get(which).note_content);
+		sm.setBitmapUrl(null);
+		sm.setBitmapResource(getActivity(),R.drawable.ic_launcher);
 		sm.shareInfo(getActivity());
 	}
 	

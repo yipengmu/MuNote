@@ -5,6 +5,7 @@ package com.laomu.note.ui.act.business;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import com.laomu.note.R;
 import com.laomu.note.ui.base.NoteBaseActivity;
 import com.laomu.note.ui.util.Utils;
 import com.laomu.note.ui.webview.WebviewActivity;
+import com.umeng.message.PushAgent;
 
 /**
  * @author luoyuan.myp
@@ -26,6 +28,7 @@ public class AboutUsActivity extends NoteBaseActivity implements OnClickListener
 	private String mTitle = "关于我们";
 	private Button mTvCurrentVersion;
 	private Button mBtnAppUpdate;
+	private PushAgent mPushAgent;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,30 @@ public class AboutUsActivity extends NoteBaseActivity implements OnClickListener
 
 	private void checkAppUpdate() {
 		Utils.checkUpdate(this);
+
+		mPushAgent = PushAgent.getInstance(this);
+		mPushAgent.onAppStart();
+		mPushAgent.enable();
+		 final Handler handler = new Handler();
+		final Runnable update = new Runnable() {
+			@Override
+			public void run() {
+				updateStatus();
+				handler.postDelayed(this, 300);
+			}
+		};
+		handler.postDelayed(update, 300);
+		
+		String tocken = Utils.getUmengPushTocken(this);
+		toast(tocken);
+		
+	}
+	private void updateStatus() {
+//		String info = String.format("enabled:%s  isRegistered:%s \n DeviceToken:%s",
+//				mPushAgent.isEnabled(), mPushAgent.isRegistered(),
+//				mPushAgent.getRegistrationId());
+//		tvStatus.setText(info);
+//		btnEnable.setChecked(mPushAgent.isEnabled());
 	}
 
 	private void gotoHappyTime() {

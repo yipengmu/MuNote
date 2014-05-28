@@ -5,6 +5,9 @@ package com.laomu.note.ui.act.ad;
 
 import net.youmi.android.offers.OffersManager;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.j.p.api.PopManager;
@@ -30,6 +33,8 @@ public class JumiAdActivity extends NoteBaseActivity {
 		setContentView(R.layout.ad_main_layout);
 		initViews();
 		setTitle(mTitle);
+		
+
 		startADs();
 	}
 
@@ -43,6 +48,12 @@ public class JumiAdActivity extends NoteBaseActivity {
 
 	private void initViews() {
 		mTvDownloadInfo = (TextView) findViewById(R.id.tv_download_info);
+		mTvDownloadInfo.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startADs();
+			}
+		});
 	}
 
 	private void startYoumiAd() {
@@ -57,6 +68,14 @@ public class JumiAdActivity extends NoteBaseActivity {
 		mJuMiManager.q();
 	}
 
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		//点击后抬手显示广告条
+		if(event.getAction() == MotionEvent.ACTION_UP){
+			startADs();
+		}
+		return super.onTouchEvent(event);
+	}
 	private void startJumiAd() {
 
 		mJuMiManager = PopManager.getInstance(getApplicationContext(),

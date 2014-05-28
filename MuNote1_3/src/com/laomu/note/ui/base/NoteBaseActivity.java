@@ -17,6 +17,7 @@ import com.laomu.note.common.CommonDefine;
 import com.laomu.note.common.MuLog;
 import com.laomu.note.ui.NoteApplication;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.message.PushAgent;
 import com.umeng.socialize.controller.RequestType;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
@@ -40,6 +41,8 @@ public class NoteBaseActivity extends FragmentActivity{
 		initBaseView();
 		//初始化广告
 		initAdManeger();
+		
+		PushAgent.getInstance(this).onAppStart();
 	}
 
 	private void initAdManeger() {
