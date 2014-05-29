@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -37,9 +38,13 @@ import android.text.TextUtils;
 import android.webkit.WebResourceResponse;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.laomu.note.R;
 import com.laomu.note.common.CommonDefine;
 import com.laomu.note.common.MuLog;
+import com.laomu.note.common.http.response.BaiduWeatherResult;
 import com.laomu.note.common.lbs.LocationInfoManeger;
 import com.laomu.note.common.preferences.PreferenceCenter;
 import com.laomu.note.common.push.PushManeger;
@@ -323,6 +328,12 @@ public class Utils {
 
 	public static void initPush(Context context) {
 		PushManeger.build();
+	}
+
+	public static String getJsonString(Object o) {
+		Gson gson = new Gson();  
+		String jsonString = gson.toJson(o);  
+		return jsonString;
 	}
 	
 

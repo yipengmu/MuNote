@@ -186,7 +186,7 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 
 	protected void shareNoteItem(int which) {
 		//分享note
-		ShareManeger sm  = ShareManeger.instance();
+		ShareManeger sm  = ShareManeger.instance(getActivity());
 		sm.setShareContent(mNoteDBData.get(which).note_content);
 		sm.setBitmapUrl(null);
 		sm.setBitmapResource(getActivity(),R.drawable.ic_launcher);

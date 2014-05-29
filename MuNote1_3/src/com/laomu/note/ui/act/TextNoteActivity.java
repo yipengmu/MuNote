@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +28,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.iflytek.speech.SpeechConstant;
 import com.laomu.note.R;
 import com.laomu.note.common.CommonDefine;
@@ -41,6 +45,7 @@ import com.laomu.note.data.model.NoteBean;
 import com.laomu.note.ui.NoteApplication;
 import com.laomu.note.ui.base.NoteBaseActivity;
 import com.laomu.note.ui.util.Utils;
+import com.tencent.weibo.sdk.android.api.util.JsonUtil;
 
 /**
  * @author luoyuan.myp
@@ -62,7 +67,6 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 	private Button mBtnVoiceMakeNote;
 	
 	private LocationRecevier lbsRecevier = new LocationRecevier();
-	private String wUrl = "http://api.map.baidu.com/telematics/v3/weather?location=%E5%8C%97%E4%BA%AC&output=json&ak=37c73c4541273cbafd0b7695d0667a17";
 
 	private static final int REQUEST_CODE_SEARCH = 1099;
 	
@@ -73,18 +77,6 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 
 		initData();
 		initView();
-	}
-
-	protected void updateWeatherUI(final String weatherInfo, String dayPictureUrl) {
-		if (null != weatherInfo) {
-			mWeatherTextViewDesc.setText(weatherInfo);
-			AlphaAnimation aam = new AlphaAnimation(0, 1);
-			aam.setDuration(2000);
-			mWeatherTextViewDesc.startAnimation(aam);
-			HttpReqBean req = new HttpReqBean(HttpMethod.get, dayPictureUrl, null,
-					mWeatherIconHandler);
-			new HttpExcutor().req(HttpMapDefine.Bitmap, req);
-		}
 	}
 
 	private void initView() {
@@ -134,7 +126,8 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			mWeather = (BaiduWeatherResult) msg.getData().get("res");
-			if (null != mWeather) {
+			logd(" weather result: " + Utils.getJsonString(mWeather));
+			if (null != mWeather && null != mWeather.getDefaultBean() && null != mWeather.getDefaultBean().getDefaultData()) {
 				updateWeatherUI(mWeather.getDefaultBean().getDefaultData().desc(), mWeather
 						.getDefaultBean().getDefaultData().dayPictureUrl);
 			}
@@ -161,9 +154,22 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 		}, 50);
 	}
 
+	protected void updateWeatherUI(final String weatherInfo, String dayPictureUrl) {
+		if (null != weatherInfo) {
+			mWeatherTextViewDesc.setText(weatherInfo);
+			AlphaAnimation aam = new AlphaAnimation(0, 1);
+			aam.setDuration(2000);
+			mWeatherTextViewDesc.startAnimation(aam);
+			HttpReqBean req = new HttpReqBean(HttpMethod.get, dayPictureUrl, null,
+					mWeatherIconHandler);
+			new HttpExcutor().req(HttpMapDefine.Bitmap, req);
+		}
+	}
+
 	private void registeWeatherCall(String url) {
 		HttpExcutor ex = new HttpExcutor();
 		ex.req(HttpMapDefine.Weather, new HttpReqBean(HttpMethod.get, url, null, mWeatherHandler));
+		logd("weather url :" + url);
 	}
 
 	private void initUIWidget() {
@@ -252,7 +258,7 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 			mNoteBean.note_location_id = 0;
 		}
 		// 天气
-		if (mWeather != null) {
+		if (null !=mWeather  && null != mWeather.getDefaultBean() && null != mWeather.getDefaultBean().getDefaultData()) {
 			mNoteBean.note_weather_temp = mWeather.getDefaultBean().getDefaultData().temperature;
 			mNoteBean.note_weather_info = mWeather.getDefaultBean().getDefaultData().desc();
 		} else {

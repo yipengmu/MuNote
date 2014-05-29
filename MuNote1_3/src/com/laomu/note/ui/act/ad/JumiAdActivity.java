@@ -33,7 +33,6 @@ public class JumiAdActivity extends NoteBaseActivity {
 		setContentView(R.layout.ad_main_layout);
 		initViews();
 		setTitle(mTitle);
-		
 
 		startADs();
 	}
@@ -76,6 +75,7 @@ public class JumiAdActivity extends NoteBaseActivity {
 		}
 		return super.onTouchEvent(event);
 	}
+	
 	private void startJumiAd() {
 
 		mJuMiManager = PopManager.getInstance(getApplicationContext(),
@@ -87,4 +87,10 @@ public class JumiAdActivity extends NoteBaseActivity {
 		mJuMiManager.s(this);
 	}
 	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		mJuMiManager.s(this);
+	}
 }

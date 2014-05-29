@@ -1,5 +1,8 @@
 package com.laomu.note.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.j256.ormlite.field.DatabaseField;
 
 /**
@@ -43,28 +46,28 @@ public class LocationBean
 		
 	}
 	
-//	public static final Parcelable.Creator<LocationBean> CREATOR = new Parcelable.Creator<LocationBean>() {
-//		// 重写Creator
-//
-//		@Override
-//		public LocationBean createFromParcel(Parcel source) {
-//			LocationBean location = new LocationBean();
-//			location.city = source.readString();
-//			location.cityCode = source.readString();
-//			location.desc = source.readString();
-//			location.district = source.readString();
-//			location.province = source.readString();
-//			location.provider = source.readString();
-//			location.longtitude = source.readString();
-//			location.latitude = source.readString();
-//			return location;
-//		}
-//
-//		@Override
-//		public LocationBean[] newArray(int size) {
-//			return null;
-//		}
-//	};
+	public static final Parcelable.Creator<LocationBean> CREATOR = new Parcelable.Creator<LocationBean>() {
+		// 重写Creator
+
+		@Override
+		public LocationBean createFromParcel(Parcel source) {
+			LocationBean location = new LocationBean();
+			location.city = source.readString();
+			location.cityCode = source.readString();
+			location.desc = source.readString();
+			location.district = source.readString();
+			location.province = source.readString();
+			location.provider = source.readString();
+			location.longtitude = source.readString();
+			location.latitude = source.readString();
+			return location;
+		}
+
+		@Override
+		public LocationBean[] newArray(int size) {
+			return null;
+		}
+	};
 
 //	public String getLongtitude() {
 //		return longtitude;

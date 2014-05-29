@@ -6,7 +6,7 @@ package com.laomu.note.common.http.response;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.laomu.note.common.http.response.bean.BaiduWeatherBean;
+import com.laomu.note.data.bean.BaiduWeatherBean;
 
 /**
  * @author luoyuan.myp
@@ -68,7 +68,7 @@ public class BaiduWeatherResult implements Parcelable{
 	public BaiduWeatherBean[] results;
 
 	public BaiduWeatherBean getDefaultBean(){
-		if(results.length >=0){
+		if(null != results && results.length >=0){
 			return results[0];
 		}
 		return null;
@@ -76,14 +76,33 @@ public class BaiduWeatherResult implements Parcelable{
 	
 	@Override
 	public int describeContents() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		// TODO Auto-generated method stub
-		
+		dest.writeString(error);
+		dest.writeString(status);
+		dest.writeString(date);
+		dest.writeArray(results);
 	}
 	
+	public static final Parcelable.Creator<BaiduWeatherResult> CREATOR = new Parcelable.Creator<BaiduWeatherResult>() {
+		// 重写Creator
+
+		@Override
+		public BaiduWeatherResult createFromParcel(Parcel source) {
+			BaiduWeatherResult bean = new BaiduWeatherResult();
+			bean.error = source.readString();
+			bean.status = source.readString();
+			bean.date = source.readString();
+			bean.results = (BaiduWeatherBean[]) source.readArray(BaiduWeatherBean.class.getClassLoader());
+			return bean;
+		}
+
+		@Override
+		public BaiduWeatherResult[] newArray(int size) {
+			return null;
+		}
+	};
 }

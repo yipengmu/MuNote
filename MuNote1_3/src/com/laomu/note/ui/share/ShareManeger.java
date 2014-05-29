@@ -8,12 +8,14 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.laomu.note.R;
+import com.laomu.note.common.CommonDefine;
 import com.laomu.note.ui.NoteApplication;
 import com.umeng.socialize.common.SocializeConstants;
 import com.umeng.socialize.controller.RequestType;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
 import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.sso.QZoneSsoHandler;
 import com.umeng.socialize.sso.UMWXHandler;
 
 /**
@@ -34,8 +36,10 @@ public class ShareManeger {
 	private String contentUrl = "http://www.umeng.com/social";
 	private UMWXHandler circleHandler;
 	private static ShareManeger instance = null;
-
-	public static ShareManeger instance() {
+	private static Activity mActivity;
+		
+	public static ShareManeger instance(Activity act) {
+		mActivity = act;
 		if (instance == null) {
 			instance = new ShareManeger();
 		}
@@ -46,18 +50,23 @@ public class ShareManeger {
 	 * 
 	 */
 	public ShareManeger() {
+		initControllerManeger();
 		initWeixinSNS();
+	}
+
+	private void initControllerManeger() {
+		mController.getConfig().setSsoHandler( new QZoneSsoHandler(mActivity, CommonDefine.OpenQQ_AppID,  CommonDefine.OpenQQ_AppKey) ); 		
 	}
 
 	private void initWeixinSNS() {
 		// 添加微信平台，参数1为当前Activity, 参数2为用户申请的AppID, 参数3为点击分享内容跳转到的目标url
-		wxHandler = mController.getConfig().supportWXPlatform(NoteApplication.appContext, appID,
+		wxHandler = mController.getConfig().supportWXPlatform(NoteApplication.appContext, CommonDefine.Weixin_AppID,
 				contentUrl);
 		// 设置分享标题
 		wxHandler.setWXTitle(mTitle);
 		// 支持微信朋友圈
 		circleHandler = mController.getConfig().supportWXCirclePlatform(
-				NoteApplication.appContext, appID, contentUrl);
+				NoteApplication.appContext, CommonDefine.Weixin_AppID, contentUrl);
 		circleHandler.setIcon(R.drawable.ic_launcher);
 		circleHandler.setWXTitle(mTitle);		
 	}

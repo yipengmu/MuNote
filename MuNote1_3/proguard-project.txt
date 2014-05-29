@@ -34,7 +34,34 @@
 -keep public class com.autonavi.**
 -keep public class com.mapabc.**
 
+#orm的死穴
+-keep class com.laomu.note.data.**{*;}
+-keepclassmembers class com.laomu.note.data.** {
+     *;
+}
+-keep class com.laomu.note.data.**$* {
+   *;
+}
 
+-keep class com.laomu.note.common.http.**{*;}
+-keepclassmembers class com.laomu.note.common.http.** {
+     *;
+}
+-keep class com.laomu.note.common.http.**$* {
+   *;
+}
+
+#umeng依赖
+-keepclassmembers class * {
+   public <init>(org.json.JSONObject);
+}
+-keep public class com.laomu.note.R$*{
+public static final int *;
+}
+-keep public class com.umeng.fb.ui.ThreadView {
+}
+
+  
 #keep 3rd libs
 -keep class com.j.p.**{*;}
 -keep class com.tencent.weibo.sdk.android.**{*;}
@@ -66,6 +93,7 @@
 -dontwarn com.tencent.weibo.sdk.**
 -dontwarn demo.Pinyin4jAppletDemo.**
 -dontwarn com.squareup.picasso.**
+-dontwarn com.facebook.widget.**
 
 -keep class net.youmi.android.** {
     *;

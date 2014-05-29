@@ -25,7 +25,7 @@
             android:focusableInTouchMode="true"
             android:marqueeRepeatLimit="marquee_forever"
             android:singleLine="true"
-            android:text="        wifi君:                       下载有奖哦                                                                                         下载有奖哦                                                                                         下载有奖哦                                                         " />
+            android:text= "@string/ad_download_fee"></TextView>
     </RelativeLayout>
 
 </LinearLayout>
