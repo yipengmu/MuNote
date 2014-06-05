@@ -2183,8 +2183,6 @@ com.jeremyfeinstein.slidingmenu.lib.SlidingMenu:
     439:439:public boolean isSlidingEnabled()
     458:458:public int getMode()
     467:478:public void setStatic(boolean)
-    484:485:public void showMenu()
-    501:502:public void showSecondaryMenu()
     534:535:public void toggle()
     543:548:public void toggle(boolean)
     574:574:public int getBehindOffset()
@@ -2250,8 +2248,6 @@ com.jeremyfeinstein.slidingmenu.lib.app.SlidingPreferenceActivity:
     132:133:public void showSecondaryMenu()
     139:140:public void setSlidingActionBarEnabled(boolean)
 com.laomu.note.BuildConfig
-com.laomu.note.MainActivity:
-    44:48:private void initUmengTrack()
 com.laomu.note.R:
     10:10:public R()
 com.laomu.note.common.Camera.CameraSurfaceView:
@@ -2290,7 +2286,7 @@ com.laomu.note.data.database.DBConfig
 com.laomu.note.data.database.old.DBManager
 com.laomu.note.data.database.old.DatabaseHelper
 com.laomu.note.ui.NoteApplication:
-    49:60:private void initWeatherData()
+    54:65:private void initWeatherData()
 com.laomu.note.ui.act.CitySelectionActivity:
     private com.laomu.note.ui.adapter.CitySelectionListViewSectionAdapter mSectionAdatper
 com.laomu.note.ui.act.CitySelectionActivity$OverlayThread:
@@ -2310,14 +2306,17 @@ com.laomu.note.ui.base.NoteBaseFragment:
     86:87:public void toast(java.lang.String)
     90:91:public void logd(java.lang.String)
 com.laomu.note.ui.fragment.package-info
+com.laomu.note.ui.imp.package-info
 com.laomu.note.ui.loadingview.NoteLoadingView:
     private android.view.animation.Animation mLoadingAnimation
     32:34:public NoteLoadingView(android.content.Context)
     42:44:public void show()
     47:48:public void dismiss()
 com.laomu.note.ui.loadingview.package-info
+com.laomu.note.ui.menu.LeftSlidingMenu:
+    private com.laomu.note.ui.imp.SlidingMenuShowLis mSMShowLis
 com.laomu.note.ui.share.ShareManeger:
-    100:101:public void openUserCenter(android.app.Activity)
+    108:109:public void openUserCenter(android.app.Activity)
 com.laomu.note.ui.util.Base64
 com.laomu.note.ui.util.PinyinUtil:
     11:11:public PinyinUtil()

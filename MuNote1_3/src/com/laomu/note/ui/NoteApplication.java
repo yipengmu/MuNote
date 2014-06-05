@@ -15,6 +15,7 @@ import android.text.TextUtils;
 import com.laomu.note.common.lbs.LocationInfoManeger;
 import com.laomu.note.common.preferences.PreferenceCenter;
 import com.laomu.note.ui.util.Utils;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * @author luoyuan.myp
@@ -39,8 +40,12 @@ public class NoteApplication extends Application{
 		initLBS();
 //		initWeatherData();
 		initPush();
+		initUmeng();
 	}
 	
+	private void initUmeng() {
+		MobclickAgent.setDebugMode( true );
+	}
 	private void initPush() {
 		Utils.initPush(appContext);
 	}

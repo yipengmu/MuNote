@@ -16,6 +16,7 @@ import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.sso.QZoneSsoHandler;
+import com.umeng.socialize.sso.SinaSsoHandler;
 import com.umeng.socialize.sso.UMWXHandler;
 
 /**
@@ -24,16 +25,14 @@ import com.umeng.socialize.sso.UMWXHandler;
  *         2014-2-20
  */
 public class ShareManeger {
-	protected UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.login",
+	protected static UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.login",
 			RequestType.SOCIAL);
-	private String bitMapUrl = "http://www.umeng.com/images/pic/banner_module_social.png";
+	private String bitMapUrl = "http://www.eoemarket.com/soft/154351.html";
 	private String shareContent = "便利贴";
 	private String mTitle = "便利贴";
 	private UMWXHandler wxHandler;
-	// wx967daebe835fbeac是你在微信开发平台注册应用的AppID, 这里需要替换成你注册的AppID
-	private String appID = "wx967daebe835fbeac";
 	// 微信图文分享必须设置一个url
-	private String contentUrl = "http://www.umeng.com/social";
+	private String contentUrl = "http://www.eoemarket.com/soft/154351.html";
 	private UMWXHandler circleHandler;
 	private static ShareManeger instance = null;
 	private static Activity mActivity;
@@ -55,9 +54,18 @@ public class ShareManeger {
 	}
 
 	private void initControllerManeger() {
+		//openqq
 		mController.getConfig().setSsoHandler( new QZoneSsoHandler(mActivity, CommonDefine.OpenQQ_AppID,  CommonDefine.OpenQQ_AppKey) ); 		
+		//opensinaweibo
+		mController.getConfig().setSinaSsoHandler(new SinaSsoHandler());
+	
+		mController.getConfig().setSsoHandler(new SinaSsoHandler());
 	}
 
+	public static UMSocialService getController (){
+		return mController;
+	}
+	
 	private void initWeixinSNS() {
 		// 添加微信平台，参数1为当前Activity, 参数2为用户申请的AppID, 参数3为点击分享内容跳转到的目标url
 		wxHandler = mController.getConfig().supportWXPlatform(NoteApplication.appContext, CommonDefine.Weixin_AppID,
@@ -83,7 +91,7 @@ public class ShareManeger {
 
 	public void setShareContent(String sContent) {
 		if (!TextUtils.isEmpty(sContent)) {
-			mController.setShareContent(sContent);
+			mController.setShareContent(sContent + " 点击下载便利贴:" + contentUrl);
 			circleHandler.setCircleTitle(sContent);
 		}
 	}

@@ -14010,12 +14010,14 @@ com.jeremyfeinstein.slidingmenu.lib.SlidingMenu -> com.jeremyfeinstein.slidingme
     411:413:void setSecondaryMenu(android.view.View) -> c
     420:420:android.view.View getSecondaryMenu() -> c
     447:451:void setMode(int) -> d
+    484:485:void showMenu() -> d
     493:494:void showMenu(boolean) -> a
+    501:502:void showSecondaryMenu() -> e
     511:512:void showSecondaryMenu(boolean) -> b
-    518:519:void showContent() -> d
+    518:519:void showContent() -> f
     527:528:void showContent(boolean) -> c
-    556:556:boolean isMenuShowing() -> e
-    565:565:boolean isSecondaryMenuShowing() -> f
+    556:556:boolean isMenuShowing() -> g
+    565:565:boolean isSecondaryMenuShowing() -> h
     588:589:void setBehindOffset(int) -> e
     598:600:void setBehindOffsetRes(int) -> f
     629:642:void setBehindWidth(int) -> g
@@ -14549,14 +14551,20 @@ com.laiwang.sdk.utils.LWAPIUtils -> com.laiwang.sdk.utils.LWAPIUtils:
     56:64:boolean isIntentAvailable(android.content.Context,android.content.Intent,java.lang.String) -> isIntentAvailable
     101:124:java.lang.Object remoteProcedureCall(com.laiwang.sdk.channel.IILWAPIChannel,java.lang.Class,java.lang.Object,java.lang.String,java.lang.Class[],java.lang.Object[]) -> remoteProcedureCall
 com.laomu.note.MainActivity -> com.laomu.note.MainActivity:
-    java.lang.String TAG_LEFT -> n
-    java.lang.String TAG_RIGHT -> o
-    java.lang.String TAG_MAIN -> p
-    android.support.v4.app.FragmentTransaction frameManager -> q
-    long mFirstime -> r
-    27:39:void onCreate(android.os.Bundle) -> onCreate
-    51:69:void initSlidingMenu(android.os.Bundle) -> a
-    73:84:boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+    java.lang.String TAG_LEFT -> p
+    java.lang.String TAG_RIGHT -> q
+    java.lang.String TAG_MAIN -> r
+    android.support.v4.app.FragmentTransaction frameManager -> s
+    long mFirstime -> t
+    com.jeremyfeinstein.slidingmenu.lib.SlidingMenu sm -> n
+    com.laomu.note.ui.imp.SlidingMenuShowLis lis -> o
+    26:38:void onCreate(android.os.Bundle) -> onCreate
+    61:76:void initSlidingMenu(android.os.Bundle) -> a
+    80:91:boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+com.laomu.note.MainActivity$1 -> com.laomu.note.MainActivity$1:
+    com.laomu.note.MainActivity this$0 -> a
+    44:48:void showleftMenu() -> a
+    52:57:void showRightMenu() -> b
 com.laomu.note.R -> com.laomu.note.R:
 com.laomu.note.R$anim -> com.laomu.note.R$anim:
     int alpha_in -> alpha_in
@@ -14794,7 +14802,10 @@ com.laomu.note.R$drawable -> com.laomu.note.R$drawable:
     int gtk_media_pause -> gtk_media_pause
     int gtk_media_play -> gtk_media_play
     int ic_element_cell_arrow_normal -> ic_element_cell_arrow_normal
+    int ic_group_edit_member_more -> ic_group_edit_member_more
+    int ic_group_edit_member_more_highlighted -> ic_group_edit_member_more_highlighted
     int ic_launcher -> ic_launcher
+    int ic_launcher_fang -> ic_launcher_fang
     int ic_menu_setting -> ic_menu_setting
     int ic_menu_user -> ic_menu_user
     int ic_title_home_default -> ic_title_home_default
@@ -14815,6 +14826,7 @@ com.laomu.note.R$drawable -> com.laomu.note.R$drawable:
     int icon_loading_bg -> icon_loading_bg
     int icon_location_highlighted -> icon_location_highlighted
     int icon_location_in -> icon_location_in
+    int icon_menu_more -> icon_menu_more
     int icon_mopi_a -> icon_mopi_a
     int icon_mopi_b -> icon_mopi_b
     int icon_share_icon -> icon_share_icon
@@ -15173,6 +15185,7 @@ com.laomu.note.R$id -> com.laomu.note.R$id:
     int tv_note_info -> tv_note_info
     int tv_note_time -> tv_note_time
     int tv_personal_clock -> tv_personal_clock
+    int tv_version_history -> tv_version_history
     int tv_weather_desc -> tv_weather_desc
     int tv_weather_info -> tv_weather_info
     int umeng_common_icon_view -> umeng_common_icon_view
@@ -15408,6 +15421,7 @@ com.laomu.note.R$string -> com.laomu.note.R$string:
     int com_facebook_loading -> com_facebook_loading
     int create_note -> create_note
     int location_mark -> location_mark
+    int map_marks -> map_marks
     int personnal_clock -> personnal_clock
     int personnal_music -> personnal_music
     int pull_to_refresh_pull_label -> pull_to_refresh_pull_label
@@ -15995,46 +16009,56 @@ com.laomu.note.data.model.NoteBean$1 -> com.laomu.note.data.model.NoteBean$1:
 com.laomu.note.ui.NoteApplication -> com.laomu.note.ui.NoteApplication:
     com.laomu.note.common.lbs.LocationInfoManeger mLBSManeger -> b
     android.content.Context appContext -> a
-    32:36:void onCreate() -> onCreate
-    38:42:void initNoteApplication() -> b
-    45:46:void initPush() -> c
-    62:64:void initLBS() -> d
-    67:67:com.laomu.note.common.lbs.LocationInfoManeger getLBSManeger() -> a
+    33:37:void onCreate() -> onCreate
+    39:44:void initNoteApplication() -> b
+    47:48:void initUmeng() -> c
+    50:51:void initPush() -> d
+    67:69:void initLBS() -> e
+    72:72:com.laomu.note.common.lbs.LocationInfoManeger getLBSManeger() -> a
 com.laomu.note.ui.NoteMainFragment -> com.laomu.note.ui.NoteMainFragment:
-    android.widget.ListView mNoteListView -> a
-    com.laomu.note.ui.adapter.NoteListViewAdapter mListViewAdapter -> b
-    java.util.ArrayList mNoteDBData -> c
-    android.view.View btn_text_make -> d
-    android.view.View btn_camera_make -> e
-    android.view.View mView -> f
-    int CODE_FOR_TEXT_CREATE -> g
-    int CODE_FOR_CAMERA_CREATE -> h
-    android.view.View tv_common_head_title -> i
-    50:50:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    55:64:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    67:68:void initData() -> a
-    72:75:void initView(android.os.Bundle) -> a
-    79:87:void findViews() -> b
-    90:97:void initNoteListView() -> c
-    103:118:void onClick(android.view.View) -> onClick
-    121:123:void scrollTop2NoteList() -> d
-    126:131:void makeNoteByCamera() -> e
-    134:138:void makeNoteByText() -> f
-    142:154:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
-    157:160:void notifyNoteDatasChange() -> g
-    164:168:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-    172:184:boolean onItemLongClick(android.widget.AdapterView,android.view.View,int,long) -> onItemLongClick
-    189:194:void shareNoteItem(int) -> a
-    198:200:void delNoteItem(int) -> b
+    android.widget.ListView mNoteListView -> d
+    com.laomu.note.ui.adapter.NoteListViewAdapter mListViewAdapter -> e
+    java.util.ArrayList mNoteDBData -> f
+    android.view.View btn_text_make -> g
+    android.view.View btn_camera_make -> h
+    android.view.View mView -> i
+    int CODE_FOR_TEXT_CREATE -> j
+    int CODE_FOR_CAMERA_CREATE -> k
+    android.view.View tv_common_head_title -> l
+    com.laomu.note.ui.imp.SlidingMenuShowLis mSMShowLis -> m
+    64:64:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    69:78:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    81:82:void initData() -> a
+    85:89:void initView(android.os.Bundle) -> a
+    92:107:void initTitleView() -> b
+    110:118:void findViews() -> c
+    121:128:void initNoteListView() -> d
+    132:147:void onClick(android.view.View) -> onClick
+    150:152:void scrollTop2NoteList() -> e
+    155:160:void makeNoteByCamera() -> f
+    163:167:void makeNoteByText() -> g
+    171:180:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    183:186:void notifyNoteDatasChange() -> h
+    190:194:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+    198:210:boolean onItemLongClick(android.widget.AdapterView,android.view.View,int,long) -> onItemLongClick
+    215:220:void shareNoteItem(int) -> a
+    224:226:void delNoteItem(int) -> b
+    56:56:com.laomu.note.ui.imp.SlidingMenuShowLis access$0(com.laomu.note.ui.NoteMainFragment) -> a
 com.laomu.note.ui.NoteMainFragment$1 -> com.laomu.note.ui.NoteMainFragment$1:
     com.laomu.note.ui.NoteMainFragment this$0 -> a
+    96:97:void onClick(android.view.View) -> onClick
+com.laomu.note.ui.NoteMainFragment$2 -> com.laomu.note.ui.NoteMainFragment$2:
+    com.laomu.note.ui.NoteMainFragment this$0 -> a
+    104:105:void onClick(android.view.View) -> onClick
+com.laomu.note.ui.NoteMainFragment$3 -> com.laomu.note.ui.NoteMainFragment$3:
+    com.laomu.note.ui.NoteMainFragment this$0 -> a
     int val$pos -> b
-    177:182:void onClick(android.content.DialogInterface,int) -> onClick
+    203:208:void onClick(android.content.DialogInterface,int) -> onClick
 com.laomu.note.ui.SampleListFragment -> com.laomu.note.ui.SampleListFragment:
     14:14:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     18:19:void onActivityCreated(android.os.Bundle) -> onActivityCreated
 com.laomu.note.ui.TextCreateNoteFragment -> com.laomu.note.ui.TextCreateNoteFragment:
-    android.view.View mView -> a
+    android.view.View mView -> d
     25:25:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     31:32:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
 com.laomu.note.ui.act.CitySelectionActivity -> com.laomu.note.ui.act.CitySelectionActivity:
@@ -16268,15 +16292,15 @@ com.laomu.note.ui.base.NoteBaseFragment -> com.laomu.note.ui.base.NoteBaseFragme
     71:74:void initHeadViewByView(android.view.View) -> a
     77:83:void setTitle(android.view.View,java.lang.String) -> a
 com.laomu.note.ui.fragment.ImagePictureFragment -> com.laomu.note.ui.fragment.ImagePictureFragment:
-    android.os.Bundle bundleData -> b
-    java.lang.String mTAG -> a
-    java.lang.String mImagePicturePath -> c
-    com.laomu.note.data.model.ImageModel mImageModel -> d
-    android.widget.ImageView mImageView -> e
-    android.view.View mView -> f
-    android.widget.TextView mImageTime -> g
-    android.widget.TextView mImageLocation -> h
-    java.lang.String mTitle -> i
+    android.os.Bundle bundleData -> e
+    java.lang.String mTAG -> d
+    java.lang.String mImagePicturePath -> f
+    com.laomu.note.data.model.ImageModel mImageModel -> g
+    android.widget.ImageView mImageView -> h
+    android.view.View mView -> i
+    android.widget.TextView mImageTime -> j
+    android.widget.TextView mImageLocation -> k
+    java.lang.String mTitle -> l
     38:38:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     43:47:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     50:53:void initViews() -> a
@@ -16284,100 +16308,119 @@ com.laomu.note.ui.fragment.ImagePictureFragment -> com.laomu.note.ui.fragment.Im
     64:67:void findviews() -> c
     70:73:void initData() -> d
 com.laomu.note.ui.fragment.MapNoteFragment -> com.laomu.note.ui.fragment.MapNoteFragment:
-    android.view.View mView -> a
-    com.amap.api.maps2d.AMap aMap -> b
-    com.amap.api.maps2d.MapView mapView -> c
-    com.amap.api.maps2d.LocationSource$OnLocationChangedListener mListener -> d
-    com.amap.api.location.LocationManagerProxy aMapManager -> e
-    java.lang.String mTitle -> f
-    java.util.ArrayList mNoteDBData -> g
-    java.util.List mNoteLocationData -> h
-    com.amap.api.maps2d.model.Marker mPoiMarker -> i
-    62:62:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    67:72:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    75:78:void initViews() -> a
-    81:82:void loadNoteData() -> b
-    85:103:void initMapView() -> c
-    106:112:void drawMapViewLayers() -> d
-    116:126:void drawMapItem(com.laomu.note.data.model.NoteBean) -> a
-    129:140:void renderInfoWindow(com.amap.api.maps2d.model.Marker,android.view.View) -> a
-    143:147:void gotoNoteDetailActivity(com.amap.api.maps2d.model.Marker) -> a
-    150:152:void findViews(android.os.Bundle) -> a
-    159:162:void onLocationChanged(com.amap.api.location.AMapLocation) -> onLocationChanged
-    169:179:void activate(com.amap.api.maps2d.LocationSource$OnLocationChangedListener) -> activate
-    183:189:void deactivate() -> deactivate
-    196:198:void onResume() -> onResume
-    205:208:void onPause() -> onPause
-    215:217:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
-    221:223:void onDestroy() -> onDestroy
-    227:227:boolean onMarkerClick(com.amap.api.maps2d.model.Marker) -> onMarkerClick
-    233:233:void onLocationChanged(android.location.Location) -> onLocationChanged
-    238:238:void onStatusChanged(java.lang.String,int,android.os.Bundle) -> onStatusChanged
-    243:243:void onProviderEnabled(java.lang.String) -> onProviderEnabled
-    248:248:void onProviderDisabled(java.lang.String) -> onProviderDisabled
-    253:253:void onMapLoaded() -> onMapLoaded
-    257:257:android.view.View getInfoContents(com.amap.api.maps2d.model.Marker) -> getInfoContents
-    262:265:android.view.View getInfoWindow(com.amap.api.maps2d.model.Marker) -> getInfoWindow
-    273:273:void onClick(android.view.View) -> onClick
+    android.view.View mView -> d
+    com.amap.api.maps2d.AMap aMap -> e
+    com.amap.api.maps2d.MapView mapView -> f
+    com.amap.api.maps2d.LocationSource$OnLocationChangedListener mListener -> g
+    com.amap.api.location.LocationManagerProxy aMapManager -> h
+    java.lang.String mTitle -> i
+    java.util.ArrayList mNoteDBData -> j
+    java.util.List mNoteLocationData -> k
+    com.amap.api.maps2d.model.Marker mPoiMarker -> l
+    int mMapType -> m
+    65:65:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    70:74:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    77:81:void initViews() -> a
+    84:106:void initRightBtnLis() -> b
+    109:110:void loadNoteData() -> c
+    113:131:void initMapView() -> d
+    134:140:void drawMapViewLayers() -> e
+    144:154:void drawMapItem(com.laomu.note.data.model.NoteBean) -> a
+    157:168:void renderInfoWindow(com.amap.api.maps2d.model.Marker,android.view.View) -> a
+    172:177:void setMapType(int) -> a
+    180:184:void gotoNoteDetailActivity(com.amap.api.maps2d.model.Marker) -> a
+    187:189:void findViews(android.os.Bundle) -> a
+    196:199:void onLocationChanged(com.amap.api.location.AMapLocation) -> onLocationChanged
+    206:216:void activate(com.amap.api.maps2d.LocationSource$OnLocationChangedListener) -> activate
+    220:226:void deactivate() -> deactivate
+    233:235:void onResume() -> onResume
+    242:245:void onPause() -> onPause
+    252:254:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
+    258:260:void onDestroy() -> onDestroy
+    264:264:boolean onMarkerClick(com.amap.api.maps2d.model.Marker) -> onMarkerClick
+    270:270:void onLocationChanged(android.location.Location) -> onLocationChanged
+    275:275:void onStatusChanged(java.lang.String,int,android.os.Bundle) -> onStatusChanged
+    280:280:void onProviderEnabled(java.lang.String) -> onProviderEnabled
+    285:285:void onProviderDisabled(java.lang.String) -> onProviderDisabled
+    290:290:void onMapLoaded() -> onMapLoaded
+    294:294:android.view.View getInfoContents(com.amap.api.maps2d.model.Marker) -> getInfoContents
+    299:302:android.view.View getInfoWindow(com.amap.api.maps2d.model.Marker) -> getInfoWindow
+    310:310:void onClick(android.view.View) -> onClick
+    171:171:void access$0(com.laomu.note.ui.fragment.MapNoteFragment,int) -> a
 com.laomu.note.ui.fragment.MapNoteFragment$1 -> com.laomu.note.ui.fragment.MapNoteFragment$1:
     com.laomu.note.ui.fragment.MapNoteFragment this$0 -> a
+    92:104:void onClick(android.view.View) -> onClick
+    88:88:com.laomu.note.ui.fragment.MapNoteFragment access$0(com.laomu.note.ui.fragment.MapNoteFragment$1) -> a
+com.laomu.note.ui.fragment.MapNoteFragment$1$1 -> com.laomu.note.ui.fragment.MapNoteFragment$1$1:
+    com.laomu.note.ui.fragment.MapNoteFragment$1 this$1 -> a
+    97:102:void onClick(android.content.DialogInterface,int) -> onClick
+com.laomu.note.ui.fragment.MapNoteFragment$2 -> com.laomu.note.ui.fragment.MapNoteFragment$2:
+    com.laomu.note.ui.fragment.MapNoteFragment this$0 -> a
     com.amap.api.maps2d.model.Marker val$marker -> b
-    137:138:void onClick(android.view.View) -> onClick
+    165:166:void onClick(android.view.View) -> onClick
+com.laomu.note.ui.imp.SlidingMenuShowLis -> fz:
+    void showleftMenu() -> a
+    void showRightMenu() -> b
 com.laomu.note.ui.loadingview.NoteLoadingView -> com.laomu.note.ui.loadingview.NoteLoadingView:
     android.widget.ImageView mLoadingImageView -> a
     37:39:void init() -> a
     52:52:void onLayout(boolean,int,int,int,int) -> onLayout
 com.laomu.note.ui.menu.LeftSlidingMenu -> com.laomu.note.ui.menu.LeftSlidingMenu:
-    android.widget.TextView tv_personal_clock -> a
-    android.widget.TextView tv_map_mark -> b
-    android.widget.TextView tv_info -> c
-    int FLAG_FOR_CITY_LIST -> d
-    int FLAG_FOR_MAP_VIEW -> e
-    37:37:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    42:44:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    47:49:void initViews(android.view.View) -> a
-    53:53:void initUI() -> a
-    56:63:void findviews(android.view.View) -> b
-    67:81:void onClick(android.view.View) -> onClick
-    84:108:void intoPerSonalClock() -> b
-    111:113:void intoCityList() -> c
-    116:118:void intoMapView() -> d
+    android.widget.TextView tv_personal_clock -> e
+    android.widget.TextView tv_map_mark -> f
+    android.widget.TextView tv_info -> g
+    int FLAG_FOR_CITY_LIST -> h
+    int FLAG_FOR_MAP_VIEW -> i
+    java.lang.String LEFT_MENU_TAG -> d
+    48:49:void setArguments(android.os.Bundle) -> setArguments
+    54:54:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    59:61:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    64:66:void initViews(android.view.View) -> a
+    70:70:void initUI() -> a
+    73:80:void findviews(android.view.View) -> b
+    84:98:void onClick(android.view.View) -> onClick
+    101:125:void intoPerSonalClock() -> b
+    128:130:void intoCityList() -> c
+    133:135:void intoMapView() -> d
 com.laomu.note.ui.menu.RightSlidingMenu -> com.laomu.note.ui.menu.RightSlidingMenu:
-    android.widget.TextView mTvFeedBack -> a
-    android.widget.TextView mTvAboutUs -> b
-    android.view.View mView -> c
-    android.widget.TextView mTvAdWall -> d
-    33:33:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    38:41:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    44:51:void findviews() -> a
-    55:69:void onClick(android.view.View) -> onClick
-    72:74:void gotoAboutUs() -> b
-    77:79:void gotoFeedBack() -> c
-    82:84:void gotoAdWall() -> d
-com.laomu.note.ui.share.ShareManeger -> fz:
+    android.widget.TextView mTvFeedBack -> e
+    android.widget.TextView mTvAboutUs -> f
+    android.view.View mView -> g
+    android.widget.TextView mTvAdWall -> h
+    android.widget.TextView mTvHistoryVersion -> i
+    java.lang.String RIGHT_MENU_TAG -> d
+    37:37:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    42:45:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    48:57:void findviews() -> a
+    61:79:void onClick(android.view.View) -> onClick
+    82:88:void openAppHistoryVersion() -> b
+    91:93:void gotoAboutUs() -> c
+    96:98:void gotoFeedBack() -> d
+    101:103:void gotoAdWall() -> e
+com.laomu.note.ui.share.ShareManeger -> ga:
     com.umeng.socialize.controller.UMSocialService mController -> a
     java.lang.String bitMapUrl -> b
     java.lang.String shareContent -> c
     java.lang.String mTitle -> d
     com.umeng.socialize.sso.UMWXHandler wxHandler -> e
-    java.lang.String appID -> f
-    java.lang.String contentUrl -> g
-    com.umeng.socialize.sso.UMWXHandler circleHandler -> h
-    com.laomu.note.ui.share.ShareManeger instance -> i
-    android.app.Activity mActivity -> j
-    42:46:com.laomu.note.ui.share.ShareManeger instance(android.app.Activity) -> a
-    58:59:void initControllerManeger() -> a
-    63:72:void initWeixinSNS() -> b
-    75:76:void shareInfo(android.app.Activity) -> b
-    79:82:void setBitmapUrl(java.lang.String) -> a
-    85:89:void setShareContent(java.lang.String) -> b
-    92:97:void setBitmapResource(android.content.Context,int) -> a
-com.laomu.note.ui.util.PinyinUtil -> ga:
+    java.lang.String contentUrl -> f
+    com.umeng.socialize.sso.UMWXHandler circleHandler -> g
+    com.laomu.note.ui.share.ShareManeger instance -> h
+    android.app.Activity mActivity -> i
+    41:45:com.laomu.note.ui.share.ShareManeger instance(android.app.Activity) -> a
+    58:63:void initControllerManeger() -> b
+    66:66:com.umeng.socialize.controller.UMSocialService getController() -> a
+    71:80:void initWeixinSNS() -> c
+    83:84:void shareInfo(android.app.Activity) -> b
+    87:90:void setBitmapUrl(java.lang.String) -> a
+    93:97:void setShareContent(java.lang.String) -> b
+    100:105:void setBitmapResource(android.content.Context,int) -> a
+com.laomu.note.ui.util.PinyinUtil -> gb:
     191:213:char[] getHeadByChar(char,boolean) -> a
     229:229:java.lang.String[] getHeadByString(java.lang.String) -> a
     238:238:java.lang.String[] getHeadByString(java.lang.String,boolean) -> a
     248:271:java.lang.String[] getHeadByString(java.lang.String,boolean,java.lang.String) -> a
-com.laomu.note.ui.util.Utils -> gb:
+com.laomu.note.ui.util.Utils -> gc:
     73:89:java.lang.String getTimeInfo(java.util.Date) -> a
     116:117:void logd(java.lang.String) -> a
     150:150:int getLocationIdFromDB(com.laomu.note.data.model.LocationBean) -> a
@@ -16393,15 +16436,15 @@ com.laomu.note.ui.util.Utils -> gb:
     326:326:java.lang.String getUmengPushTocken(android.content.Context) -> d
     330:331:void initPush(android.content.Context) -> e
     334:336:java.lang.String getJsonString(java.lang.Object) -> a
-com.laomu.note.ui.util.Utils$2 -> gb$1:
+com.laomu.note.ui.util.Utils$2 -> gc$1:
     android.content.Context val$c -> a
     275:282:void onUpdateReturned(int,com.umeng.update.UpdateResponse) -> onUpdateReturned
-com.laomu.note.ui.util.Utils$3 -> gb$2:
+com.laomu.note.ui.util.Utils$3 -> gc$2:
     android.content.Context val$c -> a
     java.lang.String val$downloadUrl -> b
     298:304:void onClick(android.content.DialogInterface,int) -> onClick
-com.laomu.note.ui.webview.BaseWebChromeClient -> gc:
-com.laomu.note.ui.webview.BaseWebViewClient -> gd:
+com.laomu.note.ui.webview.BaseWebChromeClient -> gd:
+com.laomu.note.ui.webview.BaseWebViewClient -> ge:
     21:22:void onPageStarted(android.webkit.WebView,java.lang.String,android.graphics.Bitmap) -> onPageStarted
     27:28:void onPageFinished(android.webkit.WebView,java.lang.String) -> onPageFinished
     33:33:android.webkit.WebResourceResponse shouldInterceptRequest(android.webkit.WebView,java.lang.String) -> shouldInterceptRequest
@@ -16417,8 +16460,8 @@ com.laomu.note.ui.webview.BaseWebviewActivity -> com.laomu.note.ui.webview.BaseW
     49:51:void initData() -> h
     54:60:void initWebviewSettings() -> i
     64:65:void findviews() -> j
-    70:71:void onDestroy() -> onDestroy
-    74:79:void loadWebviewUrl(java.lang.String) -> e
+    69:70:void onDestroy() -> onDestroy
+    73:78:void loadWebviewUrl(java.lang.String) -> e
 com.laomu.note.ui.webview.WebviewActivity -> com.laomu.note.ui.webview.WebviewActivity:
     17:18:void onCreate(android.os.Bundle) -> onCreate
 com.laomu.note.ui.widget.CityLetterListView -> com.laomu.note.ui.widget.CityLetterListView:
@@ -16431,7 +16474,7 @@ com.laomu.note.ui.widget.CityLetterListView -> com.laomu.note.ui.widget.CityLett
     70:107:boolean dispatchTouchEvent(android.view.MotionEvent) -> dispatchTouchEvent
     113:113:boolean onTouchEvent(android.view.MotionEvent) -> onTouchEvent
     118:119:void setOnTouchingLetterChangedListener(com.laomu.note.ui.widget.OnTouchingLetterChangedListener) -> a
-com.laomu.note.ui.widget.OnTouchingLetterChangedListener -> ge:
+com.laomu.note.ui.widget.OnTouchingLetterChangedListener -> gf:
     void onTouchingLetterChanged(java.lang.String) -> a
 com.laomu.note.wxapi.WXEntryActivity -> com.laomu.note.wxapi.WXEntryActivity:
 com.squareup.picasso.Action -> com.squareup.picasso.Action:
@@ -31286,16 +31329,16 @@ com.umeng.update.g -> com.umeng.update.g:
     25:48:org.json.JSONObject a(android.content.Context,boolean) -> a
     55:55:org.json.JSONObject a() -> a
     61:61:java.lang.String b() -> b
-im.yixin.algorithm.MD5 -> gf:
+im.yixin.algorithm.MD5 -> gg:
     char[] hexDigitalArray -> a
     java.lang.String getMessageDigest(byte[]) -> a
-im.yixin.sdk.api.BaseReq -> gg:
+im.yixin.sdk.api.BaseReq -> gh:
     java.lang.String transaction -> a
     int getType() -> a
     boolean checkArgs() -> b
     void toBundle(android.os.Bundle) -> a
     void fromBundle(android.os.Bundle) -> b
-im.yixin.sdk.api.BaseResp -> gh:
+im.yixin.sdk.api.BaseResp -> gi:
     int errCode -> a
     java.lang.String errStr -> b
     java.lang.String transaction -> c
@@ -31306,32 +31349,32 @@ im.yixin.sdk.api.BaseYXEntryActivity -> im.yixin.sdk.api.BaseYXEntryActivity:
     void onNewIntent(android.content.Intent) -> onNewIntent
     void handleIntent() -> handleIntent
     im.yixin.sdk.api.IYXAPI getIYXAPI() -> getIYXAPI
-im.yixin.sdk.api.IYXAPI -> gi:
+im.yixin.sdk.api.IYXAPI -> gj:
     boolean registerApp() -> a
     boolean isYXAppInstalled() -> b
     boolean sendRequest(im.yixin.sdk.api.BaseReq) -> a
     boolean handleIntent(android.content.Intent,im.yixin.sdk.api.IYXAPICallbackEventHandler) -> a
     java.lang.String getAppId() -> c
-im.yixin.sdk.api.IYXAPICallbackEventHandler -> gj:
+im.yixin.sdk.api.IYXAPICallbackEventHandler -> gk:
     void onReq(im.yixin.sdk.api.BaseReq) -> onReq
     void onResp(im.yixin.sdk.api.BaseResp) -> onResp
-im.yixin.sdk.api.SendMessageToYX -> gk:
-im.yixin.sdk.api.SendMessageToYX$Req -> gk$a:
+im.yixin.sdk.api.SendMessageToYX -> gl:
+im.yixin.sdk.api.SendMessageToYX$Req -> gl$a:
     im.yixin.sdk.api.YXMessage message -> b
     int scene -> c
     int getType() -> a
     void fromBundle(android.os.Bundle) -> b
     void toBundle(android.os.Bundle) -> a
     boolean checkArgs() -> b
-im.yixin.sdk.api.SendMessageToYX$Resp -> gk$b:
+im.yixin.sdk.api.SendMessageToYX$Resp -> gl$b:
     int getType() -> a
     void fromBundle(android.os.Bundle) -> a
 im.yixin.sdk.api.YXAPIBaseBroadcastReceiver -> im.yixin.sdk.api.YXAPIBaseBroadcastReceiver:
-im.yixin.sdk.api.YXAPIFactory -> gl:
+im.yixin.sdk.api.YXAPIFactory -> gm:
     im.yixin.sdk.api.IYXAPI instance -> a
     im.yixin.sdk.api.IYXAPI createYXAPI(android.content.Context,java.lang.String) -> a
     im.yixin.sdk.api.IYXAPI getInstance() -> a
-im.yixin.sdk.api.YXApiImplementation -> gm:
+im.yixin.sdk.api.YXApiImplementation -> gn:
     android.content.Context applicationContext -> a
     java.lang.String appId -> b
     boolean isYXAppInstalled() -> b
@@ -31346,16 +31389,16 @@ im.yixin.sdk.api.YXApiImplementation -> gm:
     java.lang.String getAppId() -> c
     android.content.Context access$000(im.yixin.sdk.api.YXApiImplementation) -> a
     void access$100(im.yixin.sdk.api.YXApiImplementation) -> b
-im.yixin.sdk.api.YXApiImplementation$2 -> gm$1:
+im.yixin.sdk.api.YXApiImplementation$2 -> gn$1:
     im.yixin.sdk.api.YXApiImplementation this$0 -> a
     void run() -> run
-im.yixin.sdk.api.YXFileMessageData -> gn:
+im.yixin.sdk.api.YXFileMessageData -> go:
     byte[] fileData -> a
     java.lang.String filePath -> b
     boolean verifyData() -> a
     void read(android.os.Bundle) -> a
     void write(android.os.Bundle) -> b
-im.yixin.sdk.api.YXImageMessageData -> go:
+im.yixin.sdk.api.YXImageMessageData -> gp:
     byte[] imageData -> a
     java.lang.String imagePath -> b
     java.lang.String imageUrl -> c
@@ -31389,7 +31432,7 @@ im.yixin.sdk.api.YXMessage$YXMessageData -> im.yixin.sdk.api.YXMessage$b:
     boolean verifyData() -> a
     void read(android.os.Bundle) -> a
     void write(android.os.Bundle) -> b
-im.yixin.sdk.api.YXMusicMessageData -> gp:
+im.yixin.sdk.api.YXMusicMessageData -> gq:
     java.lang.String musicUrl -> a
     java.lang.String musicLowBandUrl -> b
     java.lang.String musicDataUrl -> c
@@ -31397,23 +31440,23 @@ im.yixin.sdk.api.YXMusicMessageData -> gp:
     boolean verifyData() -> a
     void read(android.os.Bundle) -> a
     void write(android.os.Bundle) -> b
-im.yixin.sdk.api.YXTextMessageData -> gq:
+im.yixin.sdk.api.YXTextMessageData -> gr:
     java.lang.String text -> a
     boolean verifyData() -> a
     void read(android.os.Bundle) -> a
     void write(android.os.Bundle) -> b
-im.yixin.sdk.api.YXVideoMessageData -> gr:
+im.yixin.sdk.api.YXVideoMessageData -> gs:
     java.lang.String videoUrl -> a
     java.lang.String videoLowBandUrl -> b
     boolean verifyData() -> a
     void read(android.os.Bundle) -> a
     void write(android.os.Bundle) -> b
-im.yixin.sdk.api.YXWebPageMessageData -> gs:
+im.yixin.sdk.api.YXWebPageMessageData -> gt:
     java.lang.String webPageUrl -> a
     boolean verifyData() -> a
     void read(android.os.Bundle) -> a
     void write(android.os.Bundle) -> b
-im.yixin.sdk.channel.YXMessageActivityChannel -> gt:
+im.yixin.sdk.channel.YXMessageActivityChannel -> gu:
     boolean sendData2Yixin(android.content.Context,java.lang.String,java.lang.String,java.lang.String,android.os.Bundle) -> a
 im.yixin.sdk.channel.YXMessageChannel -> im.yixin.sdk.channel.YXMessageChannel:
     boolean sendData2Yixin(android.content.Context,java.lang.String,java.lang.String,java.lang.String,android.os.Bundle) -> a
@@ -31424,7 +31467,7 @@ im.yixin.sdk.channel.YXMessageChannel$Receiver -> im.yixin.sdk.channel.YXMessage
     java.util.Map callbacks -> a
     im.yixin.sdk.channel.YXMessageChannel$CallBack defaultCallback -> b
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
-im.yixin.sdk.channel.YXMessageProtocol -> gu:
+im.yixin.sdk.channel.YXMessageProtocol -> gv:
     java.lang.String uri -> a
     java.lang.String appId -> b
     java.lang.String command -> c
@@ -31435,12 +31478,12 @@ im.yixin.sdk.channel.YXMessageProtocol -> gu:
     im.yixin.sdk.channel.YXMessageProtocol parseProtocol(android.content.Intent) -> a
     void parseUri(java.lang.String) -> a
     java.lang.String getCommand() -> b
-im.yixin.sdk.channel.YXMessageUtil -> gv:
+im.yixin.sdk.channel.YXMessageUtil -> gw:
     byte[] generateCheckSum(java.lang.String,java.lang.String) -> a
     boolean isBlank(java.lang.String) -> a
-im.yixin.sdk.util.BitmapUtil -> gw:
+im.yixin.sdk.util.BitmapUtil -> gx:
     android.graphics.Bitmap byteArrayToBmp(byte[]) -> a
-im.yixin.sdk.util.SDKHttpUtils -> gx:
+im.yixin.sdk.util.SDKHttpUtils -> gy:
     im.yixin.sdk.util.SDKHttpUtils instance -> a
     org.apache.http.impl.client.DefaultHttpClient client -> b
     im.yixin.sdk.util.SDKHttpUtils getInstance() -> a
@@ -31448,17 +31491,17 @@ im.yixin.sdk.util.SDKHttpUtils -> gx:
     java.lang.String get4ErrorLog(java.lang.Class,java.lang.Class,java.lang.String) -> a
     java.lang.String get(java.lang.String,java.util.Map) -> a
     org.apache.http.HttpEntity getEntity(java.lang.String,java.util.Map) -> b
-im.yixin.sdk.util.SDKLogger -> gy:
+im.yixin.sdk.util.SDKLogger -> gz:
     boolean isOpenInfoLogger -> a
     boolean isOpenErrorLogger -> b
     void i(java.lang.Class,java.lang.String) -> a
     void e(java.lang.Class,java.lang.String) -> b
-im.yixin.sdk.util.StringUtil -> gz:
+im.yixin.sdk.util.StringUtil -> ha:
     boolean isBlank(java.lang.CharSequence) -> a
     boolean isNotBlank(java.lang.CharSequence) -> b
     java.lang.String substringByByteCount(java.lang.String,int,boolean) -> a
     java.lang.String CR2Blank(java.lang.String) -> a
-net.sourceforge.pinyin4j.ChineseToPinyinResource -> ha:
+net.sourceforge.pinyin4j.ChineseToPinyinResource -> hb:
     java.util.Properties unicodeToHanyuPinyinTable -> a
     void setUnicodeToHanyuPinyinTable(java.util.Properties) -> a
     java.util.Properties getUnicodeToHanyuPinyinTable() -> b
@@ -31467,13 +31510,13 @@ net.sourceforge.pinyin4j.ChineseToPinyinResource -> ha:
     boolean isValidRecord(java.lang.String) -> a
     java.lang.String getHanyuPinyinRecordFromChar(char) -> b
     net.sourceforge.pinyin4j.ChineseToPinyinResource getInstance() -> a
-net.sourceforge.pinyin4j.ChineseToPinyinResource$1 -> ha$1:
-net.sourceforge.pinyin4j.ChineseToPinyinResource$ChineseToPinyinResourceHolder -> ha$a:
+net.sourceforge.pinyin4j.ChineseToPinyinResource$1 -> hb$1:
+net.sourceforge.pinyin4j.ChineseToPinyinResource$ChineseToPinyinResourceHolder -> hb$a:
     net.sourceforge.pinyin4j.ChineseToPinyinResource theInstance -> a
-net.sourceforge.pinyin4j.PinyinHelper -> hb:
+net.sourceforge.pinyin4j.PinyinHelper -> hc:
     java.lang.String[] toHanyuPinyinStringArray(char) -> a
     java.lang.String[] getUnformattedHanyuPinyinStringArray(char) -> b
-net.sourceforge.pinyin4j.ResourceHelper -> hc:
+net.sourceforge.pinyin4j.ResourceHelper -> hd:
     java.lang.Class class$net$sourceforge$pinyin4j$ResourceHelper -> a
     java.io.BufferedInputStream getResourceInputStream(java.lang.String) -> a
     java.lang.Class class$(java.lang.String) -> b
@@ -35101,9 +35144,9 @@ net.youmi.android.spot.j -> net.youmi.android.spot.j:
 net.youmi.android.spot.k -> net.youmi.android.spot.k:
     net.youmi.android.spot.h a -> a
     void run() -> run
-org.agoo.ut.device.UTDevice -> hd:
+org.agoo.ut.device.UTDevice -> he:
     16:16:java.lang.String getUtdid(android.content.Context) -> a
-org.android.agoo.a.a -> he:
+org.android.agoo.a.a -> hf:
     115:121:void a(android.content.Context,java.lang.String,long,java.lang.String) -> a
     124:125:java.lang.String b(android.content.Context) -> a
     129:130:long c(android.content.Context) -> b
@@ -35134,7 +35177,7 @@ org.android.agoo.a.a -> he:
     361:366:void a(android.content.Context,boolean,long) -> a
     369:384:boolean w(android.content.Context) -> s
     388:393:void a(android.content.Context,long,int) -> a
-org.android.agoo.b.a -> hf:
+org.android.agoo.b.a -> hg:
     org.android.agoo.b.b a -> a
     16:16:void b(boolean) -> a
     19:24:void a(android.content.Context) -> a
@@ -35145,7 +35188,7 @@ org.android.agoo.b.a -> hf:
     70:73:void d(java.lang.String,java.lang.String,java.lang.Throwable) -> a
     76:79:void e(java.lang.String,java.lang.String) -> e
     82:85:void e(java.lang.String,java.lang.String,java.lang.Throwable) -> b
-org.android.agoo.b.a.a -> hg:
+org.android.agoo.b.a.a -> hh:
     boolean c -> a
     boolean d -> b
     java.util.logging.Logger e -> c
@@ -35163,12 +35206,12 @@ org.android.agoo.b.a.a -> hg:
     238:281:java.lang.String a(int) -> a
     352:355:java.lang.String a(long) -> a
     26:26:java.lang.String a(java.lang.Throwable) -> a
-org.android.agoo.b.a.a$1 -> hg$1:
-org.android.agoo.b.a.a$a -> hg$a:
+org.android.agoo.b.a.a$1 -> hh$1:
+org.android.agoo.b.a.a$a -> hh$a:
     java.lang.String a -> a
     289:314:void a(java.util.logging.LogRecord) -> a
     319:346:java.lang.String format(java.util.logging.LogRecord) -> format
-org.android.agoo.b.b -> hh:
+org.android.agoo.b.b -> hi:
     void a(java.lang.String,java.lang.String) -> a
     void b(java.lang.String,java.lang.String) -> b
     void c(java.lang.String,java.lang.String) -> c
@@ -35176,7 +35219,7 @@ org.android.agoo.b.b -> hh:
     void d(java.lang.String,java.lang.String,java.lang.Throwable) -> a
     void e(java.lang.String,java.lang.String) -> e
     void e(java.lang.String,java.lang.String,java.lang.Throwable) -> b
-org.android.agoo.b.c -> hi:
+org.android.agoo.b.c -> hj:
     void start(android.content.Context,java.lang.String,java.lang.String,java.lang.String) -> start
     void stop(android.content.Context) -> stop
     void onCaughException(java.lang.Throwable) -> onCaughException
@@ -35184,12 +35227,12 @@ org.android.agoo.b.c -> hi:
     void commitEvent(int,java.lang.Object,java.lang.Object,java.lang.Object) -> commitEvent
     void commitEvent(int,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.String[]) -> commitEvent
     java.lang.String getUtdId(android.content.Context) -> getUtdId
-org.android.agoo.b.d -> hj:
+org.android.agoo.b.d -> hk:
     org.android.agoo.b.d a -> a
     org.android.agoo.b.c b -> b
     16:16:org.android.agoo.b.d a() -> a
     21:37:org.android.agoo.b.c a(android.content.Context) -> a
-org.android.agoo.b.e -> hk:
+org.android.agoo.b.e -> hl:
     org.android.agoo.b.c v -> a
     boolean w -> b
     43:52:void a(android.content.Context) -> a
@@ -35214,7 +35257,7 @@ org.android.agoo.b.e -> hk:
     404:412:void g(android.content.Context) -> f
     416:424:void h(android.content.Context) -> g
     428:436:void i(android.content.Context,java.lang.String) -> h
-org.android.agoo.c.a -> hl:
+org.android.agoo.c.a -> hm:
     org.android.agoo.c.d f -> e
     java.lang.String g -> f
     android.content.Context a -> a
@@ -35236,10 +35279,10 @@ org.android.agoo.c.a -> hl:
     void e() -> e
     boolean f() -> f
     void g() -> g
-org.android.agoo.c.d -> hm:
+org.android.agoo.c.d -> hn:
     void onHandleMessage(java.lang.String) -> onHandleMessage
     void onHandleError(java.lang.String) -> onHandleError
-org.android.agoo.c.e -> hn:
+org.android.agoo.c.e -> ho:
     long n -> e
     long o -> f
     long p -> g
@@ -35315,7 +35358,7 @@ org.android.agoo.c.e -> hn:
     41:41:long m(org.android.agoo.c.e) -> m
     41:41:android.app.AlarmManager n(org.android.agoo.c.e) -> n
     41:41:void a(org.android.agoo.c.e,boolean) -> a
-org.android.agoo.c.e$a -> hn$a:
+org.android.agoo.c.e$a -> ho$a:
     android.content.IntentFilter c -> b
     android.app.PendingIntent d -> c
     android.content.Intent e -> d
@@ -35330,7 +35373,7 @@ org.android.agoo.c.e$a -> hn$a:
     573:573:boolean a(org.android.agoo.c.e$a) -> a
     573:573:long b(org.android.agoo.c.e$a) -> b
     573:573:long c(org.android.agoo.c.e$a) -> c
-org.android.agoo.c.e$b -> hn$b:
+org.android.agoo.c.e$b -> ho$b:
     android.content.IntentFilter j -> b
     android.app.PendingIntent k -> c
     android.content.Intent l -> d
@@ -35352,11 +35395,11 @@ org.android.agoo.c.e$b -> hn$b:
     853:862:void onReceive(android.content.Context,android.content.Intent) -> onReceive
     866:875:void a() -> a
     687:687:void a(org.android.agoo.c.e$b) -> a
-org.android.agoo.c.f -> ho:
+org.android.agoo.c.f -> hp:
     int b -> b
     org.android.agoo.c.e a -> a
     87:105:void onReceive(android.content.Context,android.content.Intent) -> onReceive
-org.android.agoo.c.g -> hp:
+org.android.agoo.c.g -> hq:
     long b -> b
     org.android.agoo.c.e a -> a
     271:280:void a(int,java.util.Map) -> a
@@ -35364,17 +35407,17 @@ org.android.agoo.c.g -> hp:
     292:300:void a(int,java.util.Map,java.lang.Throwable) -> a
     304:308:void a(char[]) -> a
     312:319:void a(java.lang.String) -> a
-org.android.agoo.c.h -> hq:
+org.android.agoo.c.h -> hr:
     org.android.agoo.c.e a -> a
     364:370:void a(java.lang.String) -> a
     374:382:void a(int,java.lang.String) -> a
-org.android.agoo.c.i -> hr:
+org.android.agoo.c.i -> hs:
     android.content.Intent a -> a
     android.content.Context b -> b
     org.android.agoo.c.e$a c -> c
     598:610:void run() -> run
     613:624:void a(long) -> a
-org.android.agoo.c.j -> hs:
+org.android.agoo.c.j -> ht:
     boolean a -> a
     java.lang.String b -> b
     18:21:long a() -> a
@@ -35418,20 +35461,20 @@ org.android.agoo.client.AgooSettings$Mode -> org.android.agoo.client.AgooSetting
     160:160:int getValue() -> getValue
     int getPushApollPort() -> getPushApollPort
     java.lang.String getPushApollIp() -> getPushApollIp
-org.android.agoo.client.AgooSettings$Mode$1 -> ht:
+org.android.agoo.client.AgooSettings$Mode$1 -> hu:
     123:123:java.lang.String getPushApollIp() -> getPushApollIp
     128:128:int getPushApollPort() -> getPushApollPort
-org.android.agoo.client.AgooSettings$Mode$2 -> hu:
+org.android.agoo.client.AgooSettings$Mode$2 -> hv:
     134:134:java.lang.String getPushApollIp() -> getPushApollIp
     139:139:int getPushApollPort() -> getPushApollPort
-org.android.agoo.client.AgooSettings$Mode$3 -> hv:
+org.android.agoo.client.AgooSettings$Mode$3 -> hw:
     145:145:java.lang.String getPushApollIp() -> getPushApollIp
     150:150:int getPushApollPort() -> getPushApollPort
 org.android.agoo.client.BaseBroadcastReceiver -> org.android.agoo.client.BaseBroadcastReceiver:
     14:27:void onReceive(android.content.Context,android.content.Intent) -> onReceive
     30:30:void a(android.content.Context,android.content.Intent) -> a
     java.lang.String a(android.content.Context) -> a
-org.android.agoo.client.BaseBroadcastReceiver$1 -> hw:
+org.android.agoo.client.BaseBroadcastReceiver$1 -> hx:
     android.content.Context a -> a
     android.content.Intent b -> b
     org.android.agoo.client.BaseBroadcastReceiver c -> c
@@ -35506,21 +35549,21 @@ org.android.agoo.client.BaseIntentService -> org.android.agoo.client.BaseIntentS
     50:50:org.android.agoo.service.IMessageService a(org.android.agoo.client.BaseIntentService,org.android.agoo.service.IMessageService) -> a
     50:50:void b(org.android.agoo.client.BaseIntentService,android.content.Context) -> b
     50:50:void c(org.android.agoo.client.BaseIntentService,android.content.Context) -> c
-org.android.agoo.client.BaseIntentService$1 -> hx:
+org.android.agoo.client.BaseIntentService$1 -> hy:
     org.android.agoo.client.BaseIntentService a -> a
     700:714:void onServiceConnected(android.content.ComponentName,android.os.IBinder) -> onServiceConnected
     717:721:void onServiceDisconnected(android.content.ComponentName) -> onServiceDisconnected
-org.android.agoo.client.BaseIntentService$2 -> hy:
+org.android.agoo.client.BaseIntentService$2 -> hz:
     java.lang.String a -> a
     java.lang.String b -> b
     android.content.Context c -> c
     org.android.agoo.client.BaseIntentService d -> d
     811:833:void run() -> run
-org.android.agoo.client.BaseIntentService$3 -> hz:
+org.android.agoo.client.BaseIntentService$3 -> ia:
     org.android.agoo.client.BaseIntentService a -> a
     841:848:void onServiceConnected(android.content.ComponentName,android.os.IBinder) -> onServiceConnected
     851:854:void onServiceDisconnected(android.content.ComponentName) -> onServiceDisconnected
-org.android.agoo.client.BaseRegistrar -> ia:
+org.android.agoo.client.BaseRegistrar -> ib:
     15:15:void checkDevice(android.content.Context) -> checkDevice
     18:18:void d(android.content.Context) -> d
     21:21:void e(android.content.Context) -> e
@@ -35533,28 +35576,28 @@ org.android.agoo.client.BaseRegistrar -> ia:
     84:91:void c(android.content.Context) -> c
     94:99:java.lang.String getRegistrationId(android.content.Context) -> getRegistrationId
     104:109:boolean isRegistered(android.content.Context) -> isRegistered
-org.android.agoo.client.DeviceService -> ib:
+org.android.agoo.client.DeviceService -> ic:
     23:64:java.lang.String a(android.content.Context,java.lang.String,java.lang.String,java.lang.String) -> b
     69:75:java.lang.String getRegistrationId(android.content.Context,java.lang.String,java.lang.String,java.lang.String) -> a
-org.android.agoo.client.IntentHelper -> ic:
+org.android.agoo.client.IntentHelper -> id:
     19:23:android.content.Intent createComandIntent(android.content.Context,java.lang.String) -> a
     27:30:java.lang.String getAgooCommand(android.content.Context) -> a
     33:36:java.lang.String getAgooStart(android.content.Context) -> b
     40:43:java.lang.String getAgooCockroach(android.content.Context) -> c
-org.android.agoo.client.IppFacade -> id:
+org.android.agoo.client.IppFacade -> ie:
     java.lang.String a -> a
     20:69:void performProtectOnlyOnce(android.content.Context) -> a
     14:14:java.lang.String a() -> a
-org.android.agoo.client.IppFacade$1 -> ie:
+org.android.agoo.client.IppFacade$1 -> if:
     android.content.ServiceConnection b -> b
     android.content.Context a -> a
     31:44:void run() -> run
     47:51:boolean a(java.lang.String) -> a
-org.android.agoo.client.IppFacade$1$1 -> if:
+org.android.agoo.client.IppFacade$1$1 -> ig:
     org.android.agoo.client.IppFacade$1 a -> a
     57:61:void onServiceConnected(android.content.ComponentName,android.os.IBinder) -> onServiceConnected
     64:64:void onServiceDisconnected(android.content.ComponentName) -> onServiceDisconnected
-org.android.agoo.client.MessageService -> ig:
+org.android.agoo.client.MessageService -> ih:
     android.database.sqlite.SQLiteOpenHelper q -> a
     org.android.agoo.client.MessageService r -> b
     android.content.Context s -> c
@@ -35568,16 +35611,16 @@ org.android.agoo.client.MessageService -> ig:
     295:317:void handleMessageAtTime(java.lang.String,java.lang.String,java.lang.String,java.lang.String,int) -> a
     322:353:void a(java.lang.String,java.lang.String,java.lang.String,long,int,int) -> a
     356:382:boolean report(java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
-org.android.agoo.client.MessageService$MessageDBHelper -> ig$a:
+org.android.agoo.client.MessageService$MessageDBHelper -> ih$a:
     63:77:java.lang.String a() -> a
     81:81:java.lang.String b() -> b
     85:85:java.lang.String c() -> c
     91:99:void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
     103:103:void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
-org.android.agoo.d.a -> ih:
+org.android.agoo.d.a -> ii:
     10:14:java.lang.String a(android.content.Context) -> a
     18:25:int b(android.content.Context) -> b
-org.android.agoo.d.b -> ii:
+org.android.agoo.d.b -> ij:
     byte[] n -> a
     byte[] o -> b
     byte[] p -> c
@@ -35588,7 +35631,7 @@ org.android.agoo.d.b -> ii:
     361:387:int a(byte[],int,byte[],int,int) -> a
     393:424:byte[] b(byte[],int,int,int) -> a
     432:441:byte[] a(java.lang.String,int) -> a
-org.android.agoo.d.c -> ij:
+org.android.agoo.d.c -> ik:
     java.lang.String a -> a
     java.lang.String f -> b
     java.lang.String g -> c
@@ -35596,18 +35639,18 @@ org.android.agoo.d.c -> ij:
     16:16:java.lang.String a() -> a
     16:16:java.lang.String b() -> b
     16:16:java.lang.String c() -> c
-org.android.agoo.d.d -> ik:
+org.android.agoo.d.d -> il:
     android.content.Context a -> a
     36:55:void run() -> run
-org.android.agoo.d.e -> il:
+org.android.agoo.d.e -> im:
     46:49:java.lang.String a(long) -> a
-org.android.agoo.d.f -> im:
+org.android.agoo.d.f -> in:
     67:70:java.lang.String a(java.io.InputStream) -> a
     89:100:java.lang.String a(java.io.InputStream,java.lang.String) -> a
     105:108:java.lang.String c(java.io.InputStream) -> b
     112:112:java.lang.String a(byte[]) -> a
     117:122:java.lang.String a(byte[],java.lang.String) -> a
-org.android.agoo.d.g -> in:
+org.android.agoo.d.g -> io:
     byte[] f -> a
     java.lang.ThreadLocal g -> b
     java.security.spec.AlgorithmParameterSpec h -> c
@@ -35619,26 +35662,26 @@ org.android.agoo.d.g -> in:
     119:140:javax.crypto.spec.SecretKeySpec a(byte[],int) -> a
     145:149:byte[] a(byte[]) -> a
     154:162:byte[] b(byte[]) -> b
-org.android.agoo.d.h -> io:
+org.android.agoo.d.h -> ip:
     java.lang.String a -> a
     65:77:java.lang.String a(byte[]) -> a
-org.android.agoo.d.i -> ip:
+org.android.agoo.d.i -> iq:
     33:78:int a(byte[],int,int,int) -> a
     82:82:int a(long) -> a
     86:94:int a(long,java.lang.String) -> a
-org.android.agoo.d.j -> iq:
+org.android.agoo.d.j -> ir:
     19:51:void a(android.content.Context) -> a
     54:77:void a(android.content.Context,java.lang.Class) -> a
     80:103:void b(android.content.Context,java.lang.Class) -> b
-org.android.agoo.d.k -> ir:
+org.android.agoo.d.k -> is:
     22:29:void a(android.content.Context,java.lang.Class) -> a
     32:42:void b(android.content.Context,java.lang.Class) -> b
     45:63:void a(android.content.Context) -> a
-org.android.agoo.d.l -> is:
+org.android.agoo.d.l -> it:
     int b -> a
     12:12:int a() -> a
     16:23:void a(java.lang.Runnable) -> a
-org.android.agoo.helper.PhoneHelper -> it:
+org.android.agoo.helper.PhoneHelper -> iu:
     29:50:java.lang.String a() -> b
     55:72:java.lang.String getImei(android.content.Context) -> a
     76:93:java.lang.String getImsi(android.content.Context) -> b
@@ -35647,7 +35690,7 @@ org.android.agoo.helper.PhoneHelper -> it:
     124:128:java.lang.String getOriginalImsi(android.content.Context) -> e
     132:140:java.lang.String getSerialNum() -> a
     144:145:java.lang.String getAndroidId(android.content.Context) -> f
-org.android.agoo.helper.a -> iu:
+org.android.agoo.helper.a -> iv:
     int e -> a
     java.util.concurrent.ThreadPoolExecutor f -> b
     org.android.agoo.net.a.k g -> c
@@ -35664,16 +35707,16 @@ org.android.agoo.helper.a -> iu:
     30:30:org.android.agoo.net.a.k a(org.android.agoo.helper.a) -> a
     30:30:org.android.agoo.net.a.k a(org.android.agoo.helper.a,org.android.agoo.net.a.k) -> a
     30:30:void a(org.android.agoo.helper.a,org.android.agoo.net.a.k$a,org.android.agoo.helper.a$b,org.android.agoo.client.AgooSettings$Mode) -> a
-org.android.agoo.helper.a$a -> iu$a:
+org.android.agoo.helper.a$a -> iv$a:
     java.lang.String a -> a
     org.android.agoo.helper.a$b b -> b
     android.content.Context c -> c
     org.android.agoo.helper.a d -> d
     148:188:void run() -> run
-org.android.agoo.helper.a$b -> iu$b:
+org.android.agoo.helper.a$b -> iv$b:
     void a(java.lang.String) -> a
     void a(int,java.lang.String) -> a
-org.android.agoo.net.a -> iv:
+org.android.agoo.net.a -> iw:
     java.lang.String A -> a
     int B -> b
     java.lang.String C -> c
@@ -35688,7 +35731,7 @@ org.android.agoo.net.a -> iv:
     207:207:java.lang.String c() -> c
     211:211:java.lang.String d() -> d
     215:215:int e() -> e
-org.android.agoo.net.a.a -> iw:
+org.android.agoo.net.a.a -> ix:
     int g -> a
     int h -> b
     org.apache.http.impl.client.DefaultHttpClient i -> c
@@ -35698,16 +35741,16 @@ org.android.agoo.net.a.a -> iw:
     121:121:org.apache.http.protocol.HttpContext getHttpContext() -> b
     158:162:java.lang.String a(java.lang.String,org.android.agoo.net.a.i) -> a
     43:43:java.util.Map a(org.android.agoo.net.a.a) -> a
-org.android.agoo.net.a.a$a -> iw$a:
+org.android.agoo.net.a.a$a -> ix$a:
     171:171:java.io.InputStream getContent() -> getContent
     175:175:long getContentLength() -> getContentLength
-org.android.agoo.net.a.b -> ix:
+org.android.agoo.net.a.b -> iy:
     org.android.agoo.net.a.a a -> a
     82:88:void process(org.apache.http.HttpRequest,org.apache.http.protocol.HttpContext) -> process
-org.android.agoo.net.a.c -> iy:
+org.android.agoo.net.a.c -> iz:
     org.android.agoo.net.a.a a -> a
     93:106:void process(org.apache.http.HttpResponse,org.apache.http.protocol.HttpContext) -> process
-org.android.agoo.net.a.d -> iz:
+org.android.agoo.net.a.d -> ja:
     java.util.concurrent.ThreadPoolExecutor b -> a
     java.util.Map c -> b
     64:65:void get(android.content.Context,java.lang.String,org.android.agoo.net.a.i,org.android.agoo.net.a.f) -> a
@@ -35715,7 +35758,7 @@ org.android.agoo.net.a.d -> iz:
     104:117:void a(android.content.Context,org.apache.http.impl.client.DefaultHttpClient,org.apache.http.protocol.HttpContext,org.apache.http.HttpHost,org.apache.http.client.methods.HttpUriRequest,java.lang.String,org.android.agoo.net.a.f) -> a
     24:24:org.apache.http.protocol.HttpContext getHttpContext() -> b
     24:24:org.apache.http.impl.client.DefaultHttpClient getHttpClient() -> a
-org.android.agoo.net.a.e -> ja:
+org.android.agoo.net.a.e -> jb:
     org.apache.http.impl.client.AbstractHttpClient b -> a
     org.apache.http.protocol.HttpContext c -> b
     org.apache.http.client.methods.HttpUriRequest d -> c
@@ -35726,7 +35769,7 @@ org.android.agoo.net.a.e -> ja:
     46:68:void run() -> run
     71:80:void a() -> a
     83:102:void b() -> b
-org.android.agoo.net.a.f -> jb:
+org.android.agoo.net.a.f -> jc:
     android.os.Handler a -> a
     46:46:void onStart() -> a
     49:49:void onFinish() -> b
@@ -35744,10 +35787,10 @@ org.android.agoo.net.a.f -> jb:
     113:118:void b(android.os.Message) -> b
     121:129:android.os.Message a(int,java.lang.Object) -> a
     133:152:void a(org.apache.http.HttpResponse) -> a
-org.android.agoo.net.a.g -> jc:
+org.android.agoo.net.a.g -> jd:
     org.android.agoo.net.a.f a -> a
     39:40:void handleMessage(android.os.Message) -> handleMessage
-org.android.agoo.net.a.h -> jd:
+org.android.agoo.net.a.h -> je:
     java.lang.String[] a -> a
     31:31:void a(byte[]) -> a
     34:35:void b(java.lang.Throwable,byte[]) -> b
@@ -35757,7 +35800,7 @@ org.android.agoo.net.a.h -> jd:
     52:53:void c(java.lang.Throwable,byte[]) -> c
     56:68:void a(android.os.Message) -> a
     71:109:void a(org.apache.http.HttpResponse) -> a
-org.android.agoo.net.a.i -> je:
+org.android.agoo.net.a.i -> jf:
     java.lang.String b -> b
     java.util.concurrent.ConcurrentHashMap a -> a
     74:77:void a(java.lang.String,java.lang.String) -> a
@@ -35765,20 +35808,20 @@ org.android.agoo.net.a.i -> je:
     120:121:void d() -> c
     124:130:java.util.List b() -> a
     134:134:java.lang.String c() -> b
-org.android.agoo.net.a.j -> jf:
+org.android.agoo.net.a.j -> jg:
     java.util.HashSet b -> a
     java.util.HashSet c -> b
     int d -> c
     47:81:boolean retryRequest(java.io.IOException,int,org.apache.http.protocol.HttpContext) -> retryRequest
-org.android.agoo.net.a.k -> jg:
+org.android.agoo.net.a.k -> jh:
     29:29:org.android.agoo.net.a.k$a get(android.content.Context,java.lang.String,org.android.agoo.net.a.i) -> a
     39:76:org.android.agoo.net.a.k$a get(android.content.Context,org.apache.http.HttpHost,java.lang.String,org.android.agoo.net.a.i) -> a
     21:21:org.apache.http.protocol.HttpContext getHttpContext() -> b
     21:21:org.apache.http.impl.client.DefaultHttpClient getHttpClient() -> a
-org.android.agoo.net.a.k$a -> jg$a:
+org.android.agoo.net.a.k$a -> jh$a:
     int a -> a
     java.lang.String b -> b
-org.android.agoo.net.b.a -> jh:
+org.android.agoo.net.b.a -> ji:
     java.util.concurrent.ThreadPoolExecutor p -> g
     org.android.agoo.net.b.h q -> h
     java.util.concurrent.Future r -> i
@@ -35822,20 +35865,20 @@ org.android.agoo.net.b.a -> jh:
     370:370:int j() -> m
     374:377:boolean k() -> n
     30:30:void a(org.android.agoo.net.b.a) -> a
-org.android.agoo.net.b.b -> ji:
+org.android.agoo.net.b.b -> jj:
     java.lang.String a -> a
     org.android.agoo.net.b.a b -> b
     127:132:void run() -> run
-org.android.agoo.net.b.c -> jj:
+org.android.agoo.net.b.c -> jk:
     long a -> a
     java.lang.String b -> b
     org.android.agoo.net.b.a c -> c
     138:156:void run() -> run
-org.android.agoo.net.b.d -> jk:
+org.android.agoo.net.b.d -> jl:
     int a -> a
     org.android.agoo.net.b.a b -> b
     177:187:void run() -> run
-org.android.agoo.net.b.e -> jl:
+org.android.agoo.net.b.e -> jm:
     org.android.agoo.net.b.a a -> a
     204:212:void run() -> run
 org.android.agoo.net.b.f -> org.android.agoo.net.b.f:
@@ -35846,7 +35889,7 @@ org.android.agoo.net.b.f -> org.android.agoo.net.b.f:
     org.android.agoo.net.b.f[] e -> e
     11:11:org.android.agoo.net.b.f[] values() -> values
     11:11:org.android.agoo.net.b.f valueOf(java.lang.String) -> valueOf
-org.android.agoo.net.b.g -> jm:
+org.android.agoo.net.b.g -> jn:
     java.net.HttpURLConnection m -> g
     32:68:void a(java.lang.String) -> a
     71:88:java.util.Map a(java.net.HttpURLConnection) -> a
@@ -35857,18 +35900,18 @@ org.android.agoo.net.b.g -> jm:
     24:24:void addHeader(java.lang.String,java.lang.String) -> a
     24:24:boolean hasCallError() -> a
     24:24:void callError(boolean) -> a
-org.android.agoo.net.b.h -> jn:
+org.android.agoo.net.b.h -> jo:
     void a(int,java.util.Map) -> a
     void a() -> a
     void a(int,java.util.Map,java.lang.Throwable) -> a
     void a(char[]) -> a
     void a(java.lang.String) -> a
-org.android.agoo.net.mtop.IMtopSynClient -> jo:
+org.android.agoo.net.mtop.IMtopSynClient -> jp:
     void setDefaultAppkey(java.lang.String) -> a
     void setDefaultAppSecret(java.lang.String) -> b
     void setBaseUrl(java.lang.String) -> c
     org.android.agoo.net.mtop.Result getV3(android.content.Context,org.android.agoo.net.mtop.MtopRequest) -> a
-org.android.agoo.net.mtop.MtopAsyncClientV3 -> jp:
+org.android.agoo.net.mtop.MtopAsyncClientV3 -> jq:
     java.lang.String b -> a
     java.lang.String c -> b
     java.lang.String d -> c
@@ -35876,7 +35919,7 @@ org.android.agoo.net.mtop.MtopAsyncClientV3 -> jp:
     30:31:void setDefaultAppSecret(java.lang.String) -> b
     35:43:void getV3(android.content.Context,org.android.agoo.net.mtop.MtopRequest,org.android.agoo.net.mtop.MtopResponseHandler) -> a
     46:47:void setBaseUrl(java.lang.String) -> c
-org.android.agoo.net.mtop.MtopHttpChunked -> jq:
+org.android.agoo.net.mtop.MtopHttpChunked -> jr:
     java.lang.String l -> g
     java.lang.String m -> h
     java.lang.String n -> i
@@ -35887,7 +35930,7 @@ org.android.agoo.net.mtop.MtopHttpChunked -> jq:
     76:86:java.lang.String a(android.content.Context) -> a
     90:118:java.lang.String b(android.content.Context) -> b
     122:126:java.lang.String a(java.lang.String,org.android.agoo.net.a.i) -> a
-org.android.agoo.net.mtop.MtopRequest -> jr:
+org.android.agoo.net.mtop.MtopRequest -> js:
     java.lang.String a -> a
     java.lang.String b -> b
     java.lang.String c -> c
@@ -35919,19 +35962,19 @@ org.android.agoo.net.mtop.MtopRequest -> jr:
     140:141:void setAppKey(java.lang.String) -> e
     144:144:java.lang.String getAppSecret() -> l
     148:149:void setAppSecret(java.lang.String) -> f
-org.android.agoo.net.mtop.MtopRequestHelper -> js:
+org.android.agoo.net.mtop.MtopRequestHelper -> jt:
     25:31:void checkAppKeyAndAppSecret(org.android.agoo.net.mtop.MtopRequest,java.lang.String,java.lang.String) -> a
     35:94:org.android.agoo.net.a.i getUrlWithRequestParams(android.content.Context,org.android.agoo.net.mtop.MtopRequest) -> a
     98:98:long a() -> a
     125:154:java.lang.String a(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,long,java.lang.String,java.lang.String) -> a
     158:159:java.lang.String a(java.util.Map) -> a
-org.android.agoo.net.mtop.MtopResponseHandler -> jt:
+org.android.agoo.net.mtop.MtopResponseHandler -> ju:
     21:31:void b(java.lang.String) -> c
     34:34:void onFailure(java.lang.String,java.lang.String) -> a
     38:39:void onFailure(java.lang.Throwable,java.lang.String) -> a
-org.android.agoo.net.mtop.MtopResponseHelper -> ju:
+org.android.agoo.net.mtop.MtopResponseHelper -> jv:
     21:48:org.android.agoo.net.mtop.Result parse(java.lang.String) -> a
-org.android.agoo.net.mtop.MtopSyncClientV3 -> jv:
+org.android.agoo.net.mtop.MtopSyncClientV3 -> jw:
     java.lang.String a -> a
     java.lang.String b -> b
     java.lang.String c -> c
@@ -35939,7 +35982,7 @@ org.android.agoo.net.mtop.MtopSyncClientV3 -> jv:
     31:32:void setDefaultAppSecret(java.lang.String) -> b
     35:36:void setBaseUrl(java.lang.String) -> c
     40:59:org.android.agoo.net.mtop.Result getV3(android.content.Context,org.android.agoo.net.mtop.MtopRequest) -> a
-org.android.agoo.net.mtop.Result -> jw:
+org.android.agoo.net.mtop.Result -> jx:
     boolean a -> a
     java.lang.String b -> b
     java.lang.String c -> c
@@ -35964,15 +36007,15 @@ org.android.agoo.proc.ServiceProtect -> org.android.agoo.proc.ServiceProtect:
     47:54:int a(java.lang.String,java.lang.String,java.lang.String,int) -> a
     58:65:void b() -> b
     68:80:boolean c() -> c
-org.android.agoo.proc.a -> jx:
+org.android.agoo.proc.a -> jy:
     byte[] a -> a
     7:7:byte[] a(byte[]) -> a
     10:98:byte[] a(byte[],int) -> a
-org.android.agoo.proc.a.a.a -> jy:
+org.android.agoo.proc.a.a.a -> jz:
     8:8:byte[] a() -> a
-org.android.agoo.proc.a.b.a -> jz:
+org.android.agoo.proc.a.b.a -> ka:
     8:8:byte[] a() -> a
-org.android.agoo.proc.a.c.a -> ka:
+org.android.agoo.proc.a.c.a -> kb:
     9:9:byte[] a() -> a
 org.android.agoo.proc.b -> org.android.agoo.proc.b:
     int b -> b
@@ -36005,9 +36048,9 @@ org.android.agoo.proc.b -> org.android.agoo.proc.b:
     void a(android.content.Intent,int,int) -> a
     void d() -> d
     void e() -> e
-org.android.agoo.proc.c -> kb:
+org.android.agoo.proc.c -> kc:
     19:53:byte[] a(java.lang.String,java.lang.String) -> a
-org.android.agoo.proc.d -> kc:
+org.android.agoo.proc.d -> kd:
     java.lang.String h -> b
     java.lang.String a -> a
     java.lang.String[] j -> c
@@ -36026,7 +36069,7 @@ org.android.agoo.proc.d -> kc:
     186:188:void b(java.lang.String) -> b
     192:195:java.lang.String a(android.os.Build,java.lang.String) -> a
     203:266:java.io.File c(java.lang.String) -> c
-org.android.agoo.proc.d$a -> kc$a:
+org.android.agoo.proc.d$a -> kd$a:
     boolean a -> a
     boolean b -> b
     274:274:boolean a() -> a
@@ -36073,11 +36116,11 @@ org.android.agoo.service.AgooService -> org.android.agoo.service.AgooService:
     46:46:android.content.Context k(org.android.agoo.service.AgooService) -> k
     46:46:android.content.Context l(org.android.agoo.service.AgooService) -> l
     46:46:android.app.AlarmManager a(org.android.agoo.service.AgooService,android.app.AlarmManager) -> a
-org.android.agoo.service.AgooService$1 -> kd:
+org.android.agoo.service.AgooService$1 -> ke:
     org.android.agoo.service.AgooService a -> a
     342:345:boolean ping() -> a
     350:372:void probe() -> b
-org.android.agoo.service.AgooService$1$1 -> ke:
+org.android.agoo.service.AgooService$1$1 -> kf:
     org.android.agoo.service.AgooService$1 a -> a
     353:369:void run() -> run
 org.android.agoo.service.AgooService$ReElection -> org.android.agoo.service.AgooService$a:
@@ -36091,7 +36134,7 @@ org.android.agoo.service.AgooService$ReElection -> org.android.agoo.service.Agoo
     442:459:void onReceive(android.content.Context,android.content.Intent) -> onReceive
     463:477:void destory() -> b
     375:375:boolean a(org.android.agoo.service.AgooService$ReElection,boolean) -> a
-org.android.agoo.service.AgooService$ReElection$1 -> kf:
+org.android.agoo.service.AgooService$ReElection$1 -> kg:
     android.content.Context a -> a
     org.android.agoo.service.AgooService$ReElection b -> b
     447:453:void run() -> run
@@ -36132,10 +36175,10 @@ org.android.agoo.service.ElectionService -> org.android.agoo.service.ElectionSer
     43:43:java.util.Map c(org.android.agoo.service.ElectionService) -> c
     43:43:java.util.Map d(org.android.agoo.service.ElectionService) -> d
     43:43:void a(org.android.agoo.service.ElectionService,java.lang.String) -> a
-org.android.agoo.service.ElectionService$1 -> kg:
+org.android.agoo.service.ElectionService$1 -> kh:
     org.android.agoo.service.ElectionService a -> a
     130:134:void election(java.lang.String,long,java.lang.String) -> a
-org.android.agoo.service.ElectionService$2 -> kh:
+org.android.agoo.service.ElectionService$2 -> ki:
     org.android.agoo.service.ElectionService a -> a
     213:280:void onSuccess(java.lang.String) -> a
     283:285:void onFailure(java.lang.String,java.lang.String) -> a
@@ -36152,29 +36195,29 @@ org.android.agoo.service.ElectionService$ElectionResult -> org.android.agoo.serv
     376:377:void putSudo(java.lang.String,java.lang.String) -> a
     381:381:int describeContents() -> describeContents
     386:389:void writeToParcel(android.os.Parcel,int) -> writeToParcel
-org.android.agoo.service.ElectionService$ElectionResult$1 -> ki:
+org.android.agoo.service.ElectionService$ElectionResult$1 -> kj:
     393:393:org.android.agoo.service.ElectionService$ElectionResult createFromParcel(android.os.Parcel) -> a
     397:397:org.android.agoo.service.ElectionService$ElectionResult[] newArray(int) -> a
     391:391:java.lang.Object[] newArray(int) -> newArray
     391:391:java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-org.android.agoo.service.IElectionService -> kj:
+org.android.agoo.service.IElectionService -> kk:
     void election(java.lang.String,long,java.lang.String) -> a
-org.android.agoo.service.IElectionService$Stub -> kj$a:
+org.android.agoo.service.IElectionService$Stub -> kk$a:
     19:26:org.android.agoo.service.IElectionService asInterface(android.os.IBinder) -> a
     30:30:android.os.IBinder asBinder() -> asBinder
     34:55:boolean onTransact(int,android.os.Parcel,android.os.Parcel,int) -> onTransact
-org.android.agoo.service.IElectionService$Stub$Proxy -> kj$a$a:
+org.android.agoo.service.IElectionService$Stub$Proxy -> kk$a$a:
     android.os.IBinder a -> a
     66:66:android.os.IBinder asBinder() -> asBinder
     74:88:void election(java.lang.String,long,java.lang.String) -> a
-org.android.agoo.service.IMessageService -> kk:
+org.android.agoo.service.IMessageService -> kl:
     boolean ping() -> a
     void probe() -> b
-org.android.agoo.service.IMessageService$Stub -> kk$a:
+org.android.agoo.service.IMessageService$Stub -> kl$a:
     19:26:org.android.agoo.service.IMessageService asInterface(android.os.IBinder) -> a
     30:30:android.os.IBinder asBinder() -> asBinder
     34:57:boolean onTransact(int,android.os.Parcel,android.os.Parcel,int) -> onTransact
-org.android.agoo.service.IMessageService$Stub$Proxy -> kk$a$a:
+org.android.agoo.service.IMessageService$Stub$Proxy -> kl$a$a:
     android.os.IBinder a -> a
     68:68:android.os.IBinder asBinder() -> asBinder
     76:89:boolean ping() -> a

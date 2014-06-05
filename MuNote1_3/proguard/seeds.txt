@@ -11478,7 +11478,10 @@ com.laomu.note.R$drawable: int fresh_gray
 com.laomu.note.R$drawable: int gtk_media_pause
 com.laomu.note.R$drawable: int gtk_media_play
 com.laomu.note.R$drawable: int ic_element_cell_arrow_normal
+com.laomu.note.R$drawable: int ic_group_edit_member_more
+com.laomu.note.R$drawable: int ic_group_edit_member_more_highlighted
 com.laomu.note.R$drawable: int ic_launcher
+com.laomu.note.R$drawable: int ic_launcher_fang
 com.laomu.note.R$drawable: int ic_menu_setting
 com.laomu.note.R$drawable: int ic_menu_user
 com.laomu.note.R$drawable: int ic_title_home_default
@@ -11499,6 +11502,7 @@ com.laomu.note.R$drawable: int icon_create_voice_on
 com.laomu.note.R$drawable: int icon_loading_bg
 com.laomu.note.R$drawable: int icon_location_highlighted
 com.laomu.note.R$drawable: int icon_location_in
+com.laomu.note.R$drawable: int icon_menu_more
 com.laomu.note.R$drawable: int icon_mopi_a
 com.laomu.note.R$drawable: int icon_mopi_b
 com.laomu.note.R$drawable: int icon_share_icon
@@ -11857,6 +11861,7 @@ com.laomu.note.R$id: int tv_map_mark
 com.laomu.note.R$id: int tv_note_info
 com.laomu.note.R$id: int tv_note_time
 com.laomu.note.R$id: int tv_personal_clock
+com.laomu.note.R$id: int tv_version_history
 com.laomu.note.R$id: int tv_weather_desc
 com.laomu.note.R$id: int tv_weather_info
 com.laomu.note.R$id: int umeng_common_icon_view
@@ -12092,6 +12097,7 @@ com.laomu.note.R$string: int city_location
 com.laomu.note.R$string: int com_facebook_loading
 com.laomu.note.R$string: int create_note
 com.laomu.note.R$string: int location_mark
+com.laomu.note.R$string: int map_marks
 com.laomu.note.R$string: int personnal_clock
 com.laomu.note.R$string: int personnal_music
 com.laomu.note.R$string: int pull_to_refresh_pull_label

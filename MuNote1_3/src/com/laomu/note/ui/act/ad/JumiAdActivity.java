@@ -81,7 +81,7 @@ public class JumiAdActivity extends NoteBaseActivity {
 		mJuMiManager = PopManager.getInstance(getApplicationContext(),
 				"9906a7e0-1578-4f06-8fb7-23bfe710a3bb", 1);
 		// 配置插屏，开启外插屏
-		mJuMiManager.c(getApplicationContext(), 1, 3, true, true);
+		mJuMiManager.c(getApplicationContext(), 1, 3, true, false);
 		// 配置外插屏
 		mJuMiManager.o(getApplicationContext(), false, 4, true, true, true);
 		mJuMiManager.s(this);

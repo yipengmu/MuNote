@@ -27,9 +27,9 @@ import com.laomu.note.ui.NoteApplication;
 public class NoteBaseFragment extends Fragment {
 
 	private FragmentTransaction mFragmentManeger;
-	private TextView mCommonTitle;
-	private ImageView mCommonLeftImageView;
-	private ImageView mCommonRightImageView;
+	protected TextView mCommonTitle;
+	protected ImageView mCommonLeftImageView;
+	protected ImageView mCommonRightImageView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

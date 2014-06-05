@@ -52,6 +52,7 @@
 }
 
 #umeng依赖
+
 -keepclassmembers class * {
    public <init>(org.json.JSONObject);
 }
@@ -60,6 +61,10 @@ public static final int *;
 }
 -keep public class com.umeng.fb.ui.ThreadView {
 }
+
+#weixin
+-keep class com.tencent.mm.sdk.openapi.WXMediaMessage {*;}
+-keep class com.tencent.mm.sdk.openapi.** implements com.tencent.mm.sdk.openapi.WXMediaMessage$IMediaObject {*;}
 
   
 #keep 3rd libs

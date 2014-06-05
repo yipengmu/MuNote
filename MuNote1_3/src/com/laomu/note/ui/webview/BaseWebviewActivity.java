@@ -66,7 +66,6 @@ public class BaseWebviewActivity extends NoteBaseActivity{
 	
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 	}
 	

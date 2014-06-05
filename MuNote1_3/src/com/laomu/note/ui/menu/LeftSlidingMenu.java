@@ -3,6 +3,7 @@
  */
 package com.laomu.note.ui.menu;
 
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,12 +19,14 @@ import com.laomu.note.R;
 import com.laomu.note.ui.act.CitySelectionActivity;
 import com.laomu.note.ui.act.MapNoteActivity;
 import com.laomu.note.ui.base.NoteBaseFragment;
+import com.laomu.note.ui.imp.SlidingMenuShowLis;
 
 /**
  * @author luoyuan.myp
  * 
  *         2014-4-7
  */
+@SuppressLint("ValidFragment")
 public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener {
 	private TextView tv_personal_clock;
 	private TextView tv_map_mark;
@@ -31,6 +34,20 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
 
 	private int FLAG_FOR_CITY_LIST = 1;
 	private int FLAG_FOR_MAP_VIEW = 2;
+
+	public static String LEFT_MENU_TAG = "LeftSlidingMenu";
+	private SlidingMenuShowLis mSMShowLis ;
+
+	public LeftSlidingMenu(){
+		
+	}
+	
+	@Override
+	public void setArguments(Bundle args) {
+		// TODO Auto-generated method stub
+		super.setArguments(args);
+	}
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

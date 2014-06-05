@@ -6,6 +6,7 @@ package com.laomu.note.ui.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -56,7 +57,9 @@ public class MapNoteFragment extends NoteBaseFragment implements OnClickListener
 	private ArrayList<NoteBean> mNoteDBData;
 	private List<LocationBean> mNoteLocationData;
 	private Marker mPoiMarker;
-
+	//地图显示样式 ，1-普通模式，2-微信模式
+	private int mMapType = 1;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return mView = inflater.inflate(R.layout.map_layout, container, false);
@@ -68,13 +71,38 @@ public class MapNoteFragment extends NoteBaseFragment implements OnClickListener
 		findViews(savedInstanceState);
 		loadNoteData();
 		initViews();
-
 	}
 
 	private void initViews() {
-		setTitle(mView, mTitle);
+		setTitle(mView,0, R.string.map_marks,R.drawable.ic_menu_setting);
 		initMapView();
 		drawMapViewLayers();
+		initRightBtnLis();
+	}
+
+	private void initRightBtnLis() {
+		if(mCommonRightImageView == null){
+			return;
+		}
+		
+		mCommonRightImageView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				String[] items = {"标准视图","卫星视图"};
+				showAlertDialog(items, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						if(which == 0){
+							setMapType(AMap.MAP_TYPE_NORMAL);
+						}else{
+							setMapType(AMap.MAP_TYPE_SATELLITE);
+						}
+					}
+				});
+			}
+		});
 	}
 
 	private void loadNoteData() {
@@ -137,6 +165,15 @@ public class MapNoteFragment extends NoteBaseFragment implements OnClickListener
 				gotoNoteDetailActivity(marker);
 			}
 		});
+	}
+
+	/**地图显示样式 ，1-普通模式，2-微信模式*/
+	private void setMapType(int map){
+		if(map == 1){
+			aMap.setMapType(AMap.MAP_TYPE_NORMAL);  
+		}else if(map == 2){
+			aMap.setMapType(AMap.MAP_TYPE_SATELLITE);  
+		}
 	}
 	
 	protected void gotoNoteDetailActivity(Marker marker) {
