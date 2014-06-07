@@ -2266,6 +2266,7 @@ com.laomu.note.common.CommonDefine:
     public static final java.lang.String Weixin_AppSecret
     public static final java.lang.String OpenQQ_AppID
     public static final java.lang.String OpenQQ_AppKey
+    public static final java.lang.String WEB_SITE
     11:11:public CommonDefine()
 com.laomu.note.common.MuLog:
     13:13:public MuLog()

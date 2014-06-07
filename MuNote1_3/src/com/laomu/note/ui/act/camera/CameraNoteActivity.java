@@ -77,10 +77,11 @@ public class CameraNoteActivity extends NoteBaseActivity implements OnClickListe
 		String[] filePath = ImageManeger.getNotePictrueFiles();
 		List<String> paths = new ArrayList<String>();
 		String dirPath = ImageManeger.getExternPicturecDir() + File.separator;
-		for(int i =0;i<filePath.length;i++){
-			paths.add(dirPath + filePath[i]);
+		if(filePath != null){
+			for(int i =0;i<filePath.length;i++){
+				paths.add(dirPath + filePath[i]);
+			}
 		}
-		
 		return paths;
 	}
 	private void initView() {

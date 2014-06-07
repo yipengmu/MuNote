@@ -53,7 +53,7 @@ public class ImagePictureFragment extends NoteBaseFragment{
 	}
 
 	private void initUI() {
-		if(mImageModel != null){
+		if(mImageModel != null && mImageModel.location != null){
 			mImageView.setImageBitmap(mImageModel.bitmap);
 			mImageTime.setText(mImageModel.time);
 			mImageLocation.setText(mImageModel.location.desc);

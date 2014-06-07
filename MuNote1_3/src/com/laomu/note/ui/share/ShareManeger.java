@@ -27,12 +27,12 @@ import com.umeng.socialize.sso.UMWXHandler;
 public class ShareManeger {
 	protected static UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.login",
 			RequestType.SOCIAL);
-	private String bitMapUrl = "http://www.eoemarket.com/soft/154351.html";
+	private String bitMapUrl = CommonDefine.WEB_SITE;
 	private String shareContent = "便利贴";
 	private String mTitle = "便利贴";
 	private UMWXHandler wxHandler;
 	// 微信图文分享必须设置一个url
-	private String contentUrl = "http://www.eoemarket.com/soft/154351.html";
+	private String contentUrl = "http://bianlitie.sinaapp.com/about.html";
 	private UMWXHandler circleHandler;
 	private static ShareManeger instance = null;
 	private static Activity mActivity;
@@ -75,7 +75,7 @@ public class ShareManeger {
 		// 支持微信朋友圈
 		circleHandler = mController.getConfig().supportWXCirclePlatform(
 				NoteApplication.appContext, CommonDefine.Weixin_AppID, contentUrl);
-		circleHandler.setIcon(R.drawable.ic_launcher);
+		circleHandler.setIcon(R.drawable.ic_launcher_fang);
 		circleHandler.setWXTitle(mTitle);		
 	}
 
@@ -98,7 +98,7 @@ public class ShareManeger {
 
 	public void setBitmapResource(Context c, int id) {
 		if (id == 0) {
-			mController.setShareImage(new UMImage(c, R.drawable.ic_launcher));
+			mController.setShareImage(new UMImage(c, R.drawable.ic_launcher_fang));
 		} else {
 			mController.setShareImage(new UMImage(c, id));
 		}

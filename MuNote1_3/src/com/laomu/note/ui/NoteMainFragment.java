@@ -59,6 +59,10 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 		mSMShowLis = lis;
 	}
 	
+	public NoteMainFragment() {
+		super();
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return mView = inflater.inflate(R.layout.activity_main, container, false);
@@ -215,7 +219,7 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 		ShareManeger sm = ShareManeger.instance(getActivity());
 		sm.setShareContent(mNoteDBData.get(which).note_content);
 		sm.setBitmapUrl(null);
-		sm.setBitmapResource(getActivity(), R.drawable.ic_launcher);
+		sm.setBitmapResource(getActivity(), R.drawable.ic_launcher_fang);
 		sm.shareInfo(getActivity());
 	}
 

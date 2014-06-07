@@ -16026,34 +16026,34 @@ com.laomu.note.ui.NoteMainFragment -> com.laomu.note.ui.NoteMainFragment:
     int CODE_FOR_CAMERA_CREATE -> k
     android.view.View tv_common_head_title -> l
     com.laomu.note.ui.imp.SlidingMenuShowLis mSMShowLis -> m
-    64:64:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    69:78:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    81:82:void initData() -> a
-    85:89:void initView(android.os.Bundle) -> a
-    92:107:void initTitleView() -> b
-    110:118:void findViews() -> c
-    121:128:void initNoteListView() -> d
-    132:147:void onClick(android.view.View) -> onClick
-    150:152:void scrollTop2NoteList() -> e
-    155:160:void makeNoteByCamera() -> f
-    163:167:void makeNoteByText() -> g
-    171:180:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
-    183:186:void notifyNoteDatasChange() -> h
-    190:194:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-    198:210:boolean onItemLongClick(android.widget.AdapterView,android.view.View,int,long) -> onItemLongClick
-    215:220:void shareNoteItem(int) -> a
-    224:226:void delNoteItem(int) -> b
+    68:68:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    73:82:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    85:86:void initData() -> a
+    89:93:void initView(android.os.Bundle) -> a
+    96:111:void initTitleView() -> b
+    114:122:void findViews() -> c
+    125:132:void initNoteListView() -> d
+    136:151:void onClick(android.view.View) -> onClick
+    154:156:void scrollTop2NoteList() -> e
+    159:164:void makeNoteByCamera() -> f
+    167:171:void makeNoteByText() -> g
+    175:184:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    187:190:void notifyNoteDatasChange() -> h
+    194:198:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+    202:214:boolean onItemLongClick(android.widget.AdapterView,android.view.View,int,long) -> onItemLongClick
+    219:224:void shareNoteItem(int) -> a
+    228:230:void delNoteItem(int) -> b
     56:56:com.laomu.note.ui.imp.SlidingMenuShowLis access$0(com.laomu.note.ui.NoteMainFragment) -> a
 com.laomu.note.ui.NoteMainFragment$1 -> com.laomu.note.ui.NoteMainFragment$1:
     com.laomu.note.ui.NoteMainFragment this$0 -> a
-    96:97:void onClick(android.view.View) -> onClick
+    100:101:void onClick(android.view.View) -> onClick
 com.laomu.note.ui.NoteMainFragment$2 -> com.laomu.note.ui.NoteMainFragment$2:
     com.laomu.note.ui.NoteMainFragment this$0 -> a
-    104:105:void onClick(android.view.View) -> onClick
+    108:109:void onClick(android.view.View) -> onClick
 com.laomu.note.ui.NoteMainFragment$3 -> com.laomu.note.ui.NoteMainFragment$3:
     com.laomu.note.ui.NoteMainFragment this$0 -> a
     int val$pos -> b
-    203:208:void onClick(android.content.DialogInterface,int) -> onClick
+    207:212:void onClick(android.content.DialogInterface,int) -> onClick
 com.laomu.note.ui.SampleListFragment -> com.laomu.note.ui.SampleListFragment:
     14:14:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     18:19:void onActivityCreated(android.os.Bundle) -> onActivityCreated
@@ -16188,12 +16188,12 @@ com.laomu.note.ui.act.camera.CameraNoteActivity -> com.laomu.note.ui.act.camera.
     40:47:void onCreate(android.os.Bundle) -> onCreate
     51:53:void loadImageData() -> g
     56:73:void initPictureCards() -> h
-    77:84:java.util.List getPicturesFilePath() -> f
-    88:98:void initView() -> i
-    102:112:void onClick(android.view.View) -> onClick
-    115:118:void intoPicturesGridActivity() -> j
-    121:122:void takePhotoBtn() -> k
-    126:130:void onDestroy() -> onDestroy
+    77:85:java.util.List getPicturesFilePath() -> f
+    89:99:void initView() -> i
+    103:113:void onClick(android.view.View) -> onClick
+    116:119:void intoPicturesGridActivity() -> j
+    122:123:void takePhotoBtn() -> k
+    127:131:void onDestroy() -> onDestroy
     34:34:android.widget.ImageView access$0(com.laomu.note.ui.act.camera.CameraNoteActivity) -> a
 com.laomu.note.ui.act.camera.CameraNoteActivity$1 -> com.laomu.note.ui.act.camera.CameraNoteActivity$1:
     com.laomu.note.ui.act.camera.CameraNoteActivity this$0 -> a

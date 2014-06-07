@@ -27,5 +27,7 @@ public class CommonDefine {
 
 	public static final String OpenQQ_AppID = "1101482345";
 	public static final String OpenQQ_AppKey = "HbVXpCTeHLtSvxQc";
+	public static final String WEB_SITE = "http://bianlitie.sinaapp.com";
+
 
 }
