@@ -12,6 +12,8 @@ import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.iflytek.cloud.SpeechUtility;
+import com.laomu.note.common.CommonDefine;
 import com.laomu.note.common.lbs.LocationInfoManeger;
 import com.laomu.note.common.preferences.PreferenceCenter;
 import com.laomu.note.ui.util.Utils;
@@ -41,6 +43,12 @@ public class NoteApplication extends Application{
 //		initWeatherData();
 		initPush();
 		initUmeng();
+		initXunfeiSpeech();
+	}
+	
+	private void initXunfeiSpeech() {
+		// 设置你申请的应用appid
+		SpeechUtility.createUtility(this, "appid="+CommonDefine.XUNFEI_APPID);		
 	}
 	
 	private void initUmeng() {

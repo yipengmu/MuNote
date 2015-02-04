@@ -33,6 +33,7 @@
                 android:id="@+id/btn_camera_make"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:background="@drawable/btn_create_camera" />
 
             <Button

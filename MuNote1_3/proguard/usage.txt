@@ -2057,69 +2057,6 @@ com.hp.hpl.sparta.xpath.XPath:
     public static com.hp.hpl.sparta.xpath.XPath get(java.lang.String)
     public static com.hp.hpl.sparta.xpath.XPath get(boolean,com.hp.hpl.sparta.xpath.Step[])
     public static boolean isStringValue(java.lang.String)
-com.iflytek.speech.ErrorCode
-com.iflytek.speech.GrammarListener
-com.iflytek.speech.GrammarListener$Stub
-com.iflytek.speech.GrammarListener$Stub$Proxy
-com.iflytek.speech.ISpeechModule
-com.iflytek.speech.InitListener
-com.iflytek.speech.LexiconListener
-com.iflytek.speech.LexiconListener$Stub
-com.iflytek.speech.LexiconListener$Stub$Proxy
-com.iflytek.speech.RecognizerListener
-com.iflytek.speech.RecognizerListener$Stub
-com.iflytek.speech.RecognizerListener$Stub$Proxy
-com.iflytek.speech.RecognizerResult:
-    24:28:public RecognizerResult(java.lang.String)
-    41:41:public java.lang.String getResultString()
-com.iflytek.speech.SpeakerVerifier
-com.iflytek.speech.SpeakerVerifier$DownloadListener
-com.iflytek.speech.SpeakerVerifier$PassWord
-com.iflytek.speech.SpeechComponent
-com.iflytek.speech.SpeechConstant
-com.iflytek.speech.SpeechModule
-com.iflytek.speech.SpeechModule$1
-com.iflytek.speech.SpeechRecognizer
-com.iflytek.speech.SpeechSynthesizer
-com.iflytek.speech.SpeechUnderstander
-com.iflytek.speech.SpeechUnderstanderListener
-com.iflytek.speech.SpeechUnderstanderListener$Stub
-com.iflytek.speech.SpeechUnderstanderListener$Stub$Proxy
-com.iflytek.speech.SpeechUtility
-com.iflytek.speech.SpeechUtility$HttpGetThread
-com.iflytek.speech.SpeechUtility$RequestComponentUrlListener
-com.iflytek.speech.SynthesizeToUrlListener
-com.iflytek.speech.SynthesizeToUrlListener$Stub
-com.iflytek.speech.SynthesizeToUrlListener$Stub$Proxy
-com.iflytek.speech.SynthesizerListener
-com.iflytek.speech.SynthesizerListener$Stub
-com.iflytek.speech.SynthesizerListener$Stub$Proxy
-com.iflytek.speech.TextUnderstander
-com.iflytek.speech.TextUnderstanderListener
-com.iflytek.speech.TextUnderstanderListener$Stub
-com.iflytek.speech.TextUnderstanderListener$Stub$Proxy
-com.iflytek.speech.UnderstanderResult:
-    32:36:public UnderstanderResult(java.lang.String)
-    44:44:public java.lang.String getResultString()
-com.iflytek.speech.UtilityConfig
-com.iflytek.speech.VerifierListener
-com.iflytek.speech.VerifierResult
-com.iflytek.speech.Version
-com.iflytek.speech.VoiceWakeuper
-com.iflytek.speech.WakeuperListener
-com.iflytek.speech.WakeuperResult
-com.iflytek.speech.aidl.ISpeechRecognizer
-com.iflytek.speech.aidl.ISpeechRecognizer$Stub
-com.iflytek.speech.aidl.ISpeechRecognizer$Stub$Proxy
-com.iflytek.speech.aidl.ISpeechSynthesizer
-com.iflytek.speech.aidl.ISpeechSynthesizer$Stub
-com.iflytek.speech.aidl.ISpeechSynthesizer$Stub$Proxy
-com.iflytek.speech.aidl.ISpeechUnderstander
-com.iflytek.speech.aidl.ISpeechUnderstander$Stub
-com.iflytek.speech.aidl.ISpeechUnderstander$Stub$Proxy
-com.iflytek.speech.aidl.ITextUnderstander
-com.iflytek.speech.aidl.ITextUnderstander$Stub
-com.iflytek.speech.aidl.ITextUnderstander$Stub$Proxy
 com.jeremyfeinstein.slidingmenu.lib.CanvasTransformerBuilder
 com.jeremyfeinstein.slidingmenu.lib.CanvasTransformerBuilder$1
 com.jeremyfeinstein.slidingmenu.lib.CanvasTransformerBuilder$2
@@ -2262,6 +2199,7 @@ com.laomu.note.common.CommonDefine:
     public static final java.lang.String XUNFEI_ACTION_INPUT
     public static final java.lang.String XUNFEI_TITLE_DONE
     public static final java.lang.String XUNFEI_TITLE_CANCEL
+    public static final java.lang.String XUNFEI_APPID
     public static final java.lang.String Weixin_AppID
     public static final java.lang.String Weixin_AppSecret
     public static final java.lang.String OpenQQ_AppID
@@ -2276,6 +2214,11 @@ com.laomu.note.common.lbs.LocationInfoManeger:
     35:36:public void setLocationInfoLisener(com.laomu.note.common.lbs.LocationInfoImp)
     55:61:public void deactiveLocate()
 com.laomu.note.common.preferences.PreferenceCenter
+com.laomu.note.common.speech.SpeechJsonParser:
+    10:10:public SpeechJsonParser()
+    38:63:public static java.lang.String parseGrammarResult(java.lang.String)
+com.laomu.note.common.speech.SpeechManeger:
+    public static final int MSG_RESPONSE
 com.laomu.note.common.weather.WeatherController:
     private java.lang.String cityName
     private java.lang.String cityCode
@@ -2283,11 +2226,8 @@ com.laomu.note.common.weather.WeatherController:
     private static final java.lang.String ak
     21:21:public WeatherController()
     29:29:public void getCityWeather(java.lang.String)
-com.laomu.note.data.database.DBConfig
-com.laomu.note.data.database.old.DBManager
-com.laomu.note.data.database.old.DatabaseHelper
 com.laomu.note.ui.NoteApplication:
-    54:65:private void initWeatherData()
+    62:73:private void initWeatherData()
 com.laomu.note.ui.act.CitySelectionActivity:
     private com.laomu.note.ui.adapter.CitySelectionListViewSectionAdapter mSectionAdatper
 com.laomu.note.ui.act.CitySelectionActivity$OverlayThread:
@@ -2337,13 +2277,13 @@ com.laomu.note.ui.util.Utils:
     70:70:public Utils()
     93:96:private static boolean isSameYear(java.util.Calendar,java.util.Calendar)
     100:107:public static boolean isNetReady()
-    112:113:public static void toast(java.lang.String)
     120:125:public static android.webkit.WebResourceResponse getLocalWebResource(java.lang.String)
     129:136:private static boolean isUrlCached(java.lang.String)
     141:146:public static java.lang.String getMimeType(java.lang.String)
     155:179:public static android.graphics.Bitmap getBitmapFromUrl(java.lang.String)
     234:235:public static int prepareCameraKacha(android.content.Context)
     239:251:public static void startCameraKacha(android.content.Context,int)
+    317:322:public static boolean isActionSupport(android.content.Context)
 com.laomu.note.ui.util.Utils$1
 com.laomu.note.ui.webview.BaseWebviewActivity:
     protected com.laomu.note.ui.webview.BaseWebViewClient mBaseWebviewClient

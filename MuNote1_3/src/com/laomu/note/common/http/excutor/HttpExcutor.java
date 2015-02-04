@@ -35,7 +35,6 @@ import com.laomu.note.common.http.response.BaiduWeatherResult;
 /**
  * @author luoyuan.myp
  * 
- *         2014-4-3
  */
 public class HttpExcutor extends BaseHttp implements HttpInterface {
 

@@ -87,6 +87,8 @@ public static final int *;
 -keep class com.umeng.**{*;}
 -keep class com.umeng.socialize.**{*;}
 -keep class com.umeng.socom.**{*;}
+-keep class assets.iflytek.**{*;}
+-keep class com.iflytek.**{*;}
 #end
 
 -dontwarn net.youmi.android.**

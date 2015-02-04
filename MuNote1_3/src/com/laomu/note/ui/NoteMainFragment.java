@@ -9,8 +9,6 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,7 +19,6 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.laomu.note.R;
 import com.laomu.note.common.MuLog;
 import com.laomu.note.data.database.OrmDbManeger;
@@ -31,7 +28,6 @@ import com.laomu.note.ui.act.camera.CameraNoteActivity;
 import com.laomu.note.ui.adapter.NoteListViewAdapter;
 import com.laomu.note.ui.base.NoteBaseFragment;
 import com.laomu.note.ui.imp.SlidingMenuShowLis;
-import com.laomu.note.ui.menu.LeftSlidingMenu;
 import com.laomu.note.ui.share.ShareManeger;
 import com.umeng.socialize.sso.UMSsoHandler;
 
@@ -86,7 +82,7 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 	}
 
 	private void initView(Bundle savedInstanceState) {
-		setTitle(mView, R.drawable.ic_menu_user, R.string.app_name, R.drawable.ic_menu_setting);
+		setTitle(mView, R.drawable.icon_menu_user, R.string.app_name, R.drawable.icon_menu_setting);
 		findViews();
 		initTitleView();
 		initNoteListView();
@@ -211,7 +207,7 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 				}
 			}
 		});
-		return false;
+		return true;
 	}
 
 	protected void shareNoteItem(int which) {

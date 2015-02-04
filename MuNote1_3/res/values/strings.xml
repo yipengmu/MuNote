@@ -15,4 +15,13 @@
     <string name="app_about_us">  \t本app最初只是为了做一个小小的手机记事本。\n\t为了记录女朋友每天让我做的事情清单，并且保存相关事情的地理位置，以方便我后期好对女朋友的任何时刻的拷问对答如流而产生开发的念头的。\n\t软件并不复杂，但希望为您们的日常的工作和生活带来和方便，祝你们幸福!\n\n\t我每天都会关注你们的反馈，如果有任何你们希望的功能，通过反馈模块告诉我，我会在下一个版本中尽量为你们加进去的哈~\n\n\t一起加油!</string>
     <string name="ad_download_fee">wifi:\t下载有奖,强势返利!   当你每下载10次应用并成功启动后，请在用户反馈里面联系我们，我们就会在7个工作日内，给你返利3元钱到支付宝或银行卡。多下载多返利，利用大家的力量使用广告佣金返利模式，让大家都能赚钱！                                                                                 下载有奖哦           当你每下载10次应用并成功启动后，请在用户反馈里面联系我们，我们就会在7个工作日内，给你返利3元钱到支付宝或银行卡。多下载多返利，利用大家的力量使用广告佣金返利模式，让大家都能赚钱！   </string>
 
+        <!-- 听写 -->
+    <string name="text_begin">请开始说话&#8230;</string>
+    <string name="text_upload_contacts">上传联系人</string>
+    <string name="text_upload_userwords">上传用户词表</string>
+    <string name="text_upload_success">上传成功</string>
+    <string name="text_userword_empty">词表下载失败或内容为空</string>
+    <string name="text_download_success">下载成功</string>
+    <string name="pref_key_iat_show">iat_show</string>
+    <string name="pref_title_iat_show">显示听写界面</string>
 </resources>

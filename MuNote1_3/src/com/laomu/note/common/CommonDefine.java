@@ -20,7 +20,9 @@ public class CommonDefine {
 	public static final String XUNFEI_TITLE_DONE = "title_done";
 	/** 外部设置的弹出框取消按钮文字 */
 	public static final String XUNFEI_TITLE_CANCEL = "title_cancel";
-
+	/** xunfei appid */
+	public static final String XUNFEI_APPID = "53567c5f";
+	
 	// 便利贴
 	public static final String Weixin_AppID = "wx00bee235cb1a41e0";
 	public static final String Weixin_AppSecret = "81d534fee570af218e07676e88194787";

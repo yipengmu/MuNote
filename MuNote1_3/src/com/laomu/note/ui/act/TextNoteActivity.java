@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.json.JSONObject;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -28,9 +26,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.iflytek.speech.SpeechConstant;
 import com.laomu.note.R;
 import com.laomu.note.common.CommonDefine;
 import com.laomu.note.common.http.HttpMapDefine;
@@ -39,13 +34,13 @@ import com.laomu.note.common.http.excutor.HttpExcutor;
 import com.laomu.note.common.http.imp.HttpMethod;
 import com.laomu.note.common.http.response.BaiduWeatherResult;
 import com.laomu.note.common.lbs.LocationInfoManeger;
+import com.laomu.note.common.speech.SpeechManeger;
 import com.laomu.note.data.database.OrmDbManeger;
 import com.laomu.note.data.model.LocationBean;
 import com.laomu.note.data.model.NoteBean;
 import com.laomu.note.ui.NoteApplication;
 import com.laomu.note.ui.base.NoteBaseActivity;
 import com.laomu.note.ui.util.Utils;
-import com.tencent.weibo.sdk.android.api.util.JsonUtil;
 
 /**
  * @author luoyuan.myp
@@ -65,10 +60,25 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 	private TextView mLocationTextViewDesc;
 	private TextView mWeatherTextViewDesc;
 	private Button mBtnVoiceMakeNote;
-	
+	private SpeechManeger mSpeechManeger;
 	private LocationRecevier lbsRecevier = new LocationRecevier();
-
+	private String mSpeechMsgResult = "";
 	private static final int REQUEST_CODE_SEARCH = 1099;
+	private long originalLbsUpdateTimeStamp = 0;
+	private boolean bDefaultWeatherInfoloaded = false;
+	
+	private Handler mSpeechMsgHander  = new Handler(){
+		public void handleMessage(Message msg) {
+			mSpeechMsgResult = "";
+			if(msg.what == SpeechManeger.MSG_RESPONSE){
+				Bundle bundle = msg.getData();
+				mSpeechMsgResult = bundle.getString("msg");
+				appendNoteContent(mSpeechMsgResult);
+			}
+			
+		};
+	};
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -79,12 +89,27 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 		initView();
 	}
 
+	protected void appendNoteContent(String msgInfo) {
+		if(mEditNotecontent == null || TextUtils.isEmpty(msgInfo)){
+			return;
+		}
+		mEditNotecontent.append("\n" + msgInfo);
+	}
+
 	private void initView() {
 		setTitle(0, R.string.create_note, 0);
 		findViews();
 		initLBSServer();
 		initWeatherServer();
 		initUIWidget();
+		initSpeech();
+	}
+
+	
+	private void initSpeech() {
+		mSpeechManeger = SpeechManeger.getInstance(this);
+		mSpeechManeger.init();
+		mSpeechManeger.setMsgHandler(mSpeechMsgHander);
 	}
 
 	private void initLBSServer() {
@@ -141,17 +166,31 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 			iv_weather_icon.setVisibility(View.VISIBLE);
 		};
 	};
-
+	
 	private void startRequestWeatherInfo(final LocationBean location) {
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
 
-				if (location != null) {
+				if (location != null && needUpdateDataFromLbsUpdate()) {
 					registeWeatherCall(Utils.getWeatherUrl(location.city));
 				}
 			}
 		}, 50);
+	}
+
+	protected boolean needUpdateDataFromLbsUpdate() {
+		if(bDefaultWeatherInfoloaded == false){
+			bDefaultWeatherInfoloaded = true;
+			return true;
+		}
+		
+		long currentTime = System.currentTimeMillis();
+		if(currentTime - originalLbsUpdateTimeStamp > 1000 * 60 *5){
+			originalLbsUpdateTimeStamp = currentTime;
+			return true;
+		}
+		return false;
 	}
 
 	protected void updateWeatherUI(final String weatherInfo, String dayPictureUrl) {
@@ -200,6 +239,7 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 
 	private void initData() {
 		mNoteBean = getIntent().getParcelableExtra("note_bean");
+		originalLbsUpdateTimeStamp = System.currentTimeMillis();
 		initMode();
 	}
 
@@ -214,7 +254,6 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 	@Override
 	protected void onPause() {
 		super.onPause();
-
 		saveNote();
 	}
 
@@ -332,27 +371,12 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 			//语音输入
 			makeNoteFromVoice();
 			break;
-
-		default:
-			break;
 		}
 		return false;
 	}
 
 	private void makeNoteFromVoice() {
-		if(Utils.isActionSupport(this)){
-			Intent intent = new Intent();
-			// 指定action名字
-			intent.setAction(CommonDefine.XUNFEI_ACTION_INPUT);
-			intent.putExtra(SpeechConstant.PARAMS, "asr_ptt=1");
-			intent.putExtra(SpeechConstant.VAD_EOS, "1000");
-			// 设置弹出框的两个按钮名称
-			intent.putExtra(CommonDefine.XUNFEI_TITLE_DONE, "确定");
-			intent.putExtra(CommonDefine.XUNFEI_TITLE_CANCEL, "取消");
-			startActivityForResult(intent,REQUEST_CODE_SEARCH);
-		} else {
-			toast("语音输入有问题，请在产品建议里留言哈，我们会尽快修复的+(1.0.1011以上版本)");
-		}	
+		mSpeechManeger.showSpeechDialog();
 	}
 	
 	@Override

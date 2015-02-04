@@ -58,7 +58,7 @@ public class CameraNoteActivity extends NoteBaseActivity implements OnClickListe
 			@Override
 			public void run() {
 				String[] filePath = ImageManeger.getNotePictrueFiles();
-				if (filePath.length == 0) {
+				if (filePath == null || filePath.length == 0) {
 					return;
 				}
 

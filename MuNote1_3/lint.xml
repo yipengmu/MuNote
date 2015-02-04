@@ -3,5 +3,6 @@
     <issue id="IconDuplicatesConfig">
         <ignore path="res/drawable-mdpi/umeng_socialize_action_back_normal.png" />
     </issue>
+    <issue id="IncludeLayoutParam" severity="ignore" />
     <issue id="NewApi" severity="ignore" />
 </lint>
