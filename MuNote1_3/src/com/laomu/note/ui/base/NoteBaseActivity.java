@@ -3,8 +3,6 @@
  */
 package com.laomu.note.ui.base;
 
-import net.youmi.android.AdManager;
-import net.youmi.android.offers.OffersManager;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -47,8 +45,8 @@ public class NoteBaseActivity extends FragmentActivity{
 
 	private void initAdManeger() {
 		//youmi
-		AdManager.getInstance(this).init(CommonDefine.YOUMI_ID, CommonDefine.YOUMI_SECRET, false);
-		OffersManager.getInstance(this).onAppLaunch();
+//		AdManager.getInstance(this).init(CommonDefine.YOUMI_ID, CommonDefine.YOUMI_SECRET, false);
+//		OffersManager.getInstance(this).onAppLaunch();
 	}
 
 
@@ -113,9 +111,9 @@ public class NoteBaseActivity extends FragmentActivity{
 		// TODO Auto-generated method stub
 		super.onDestroy();
 	
-		try {
-			OffersManager.getInstance(this).onAppExit();
-		} catch (Exception e) {
-		}
+//		try {
+//			OffersManager.getInstance(this).onAppExit();
+//		} catch (Exception e) {
+//		}
 	}
 }

@@ -201,7 +201,7 @@
 
 
         <!-- youmi start -->
-        <activity
+       <!--  <activity
             android:name="net.youmi.android.AdBrowser"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
@@ -226,7 +226,7 @@
         <receiver
             android:name="net.youmi.android.offers.OffersReceiver"
             android:exported="false" >
-        </receiver>
+        </receiver> -->
         <!-- youmi end -->
 
 

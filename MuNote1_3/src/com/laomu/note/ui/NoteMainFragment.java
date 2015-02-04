@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,8 +21,15 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.laomu.note.R;
 import com.laomu.note.common.MuLog;
+import com.laomu.note.data.bean.CheckVersionBean;
 import com.laomu.note.data.database.OrmDbManeger;
 import com.laomu.note.data.model.NoteBean;
 import com.laomu.note.ui.act.TextNoteActivity;
@@ -37,8 +46,7 @@ import com.umeng.socialize.sso.UMSsoHandler;
  *         2014-2-13
  */
 @SuppressLint("ValidFragment")
-public class NoteMainFragment extends NoteBaseFragment implements OnClickListener,
-		OnItemLongClickListener, OnItemClickListener {
+public class NoteMainFragment extends NoteBaseFragment implements OnClickListener, OnItemLongClickListener, OnItemClickListener {
 	private ListView mNoteListView;
 	private NoteListViewAdapter mListViewAdapter;
 	private ArrayList<NoteBean> mNoteDBData;
@@ -48,17 +56,18 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 	private final int CODE_FOR_TEXT_CREATE = 1;
 	private int CODE_FOR_CAMERA_CREATE = 2;
 	private View tv_common_head_title;
-
-	private SlidingMenuShowLis mSMShowLis ;
+    private RequestQueue mRequestQueue;
+	private SlidingMenuShowLis mSMShowLis;
+	public String FLAG_CHECK_VERSION_URL = "http://laomu.qiniudn.com/munotecheckVersion.txt";
 	
 	public NoteMainFragment(SlidingMenuShowLis lis) {
 		mSMShowLis = lis;
 	}
-	
+
 	public NoteMainFragment() {
 		super();
 	}
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return mView = inflater.inflate(R.layout.activity_main, container, false);
@@ -70,11 +79,46 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 
 		initData();
 		initView(savedInstanceState);
-
+		new CheckVersionTask().execute();
 		// wifi下检查更新
 		// 考虑到用户流量的限制，目前我们默认在Wi-Fi接入情况下才进行自动提醒。如需要在任意网络环境下都进行更新自动提醒，则请在update调用之前添加以下代码：UmengUpdateAgent.setUpdateOnlyWifi(false)
 		// UmengUpdateAgent.update(getActivity());
 
+	}
+
+	class CheckVersionTask extends AsyncTask<Void, Void, Boolean> {
+
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+
+		        // 1 创建RequestQueue对象
+		        mRequestQueue = Volley.newRequestQueue(getActivity());
+
+            	Log.d("", "启动:" );
+		        // 2 创建StringRequest对象
+		        StringRequest mStringRequest = new StringRequest(FLAG_CHECK_VERSION_URL,
+		                new Response.Listener<String>() {
+		                    @Override
+		                    public void onResponse(String response) {
+		                    	Log.d("", "请求结果:" + response);
+		                    	NoteApplication.cvBean = JSON.parseObject(response, CheckVersionBean.class);
+		                    }
+		                }, new Response.ErrorListener() {
+		                    @Override
+		                    public void onErrorResponse(VolleyError error) {
+		                    	Log.d("", "error 请求结果:" + error.toString());
+		                    }
+		                });
+		        // 3 将StringRequest添加到RequestQueue
+		        mRequestQueue.add(mStringRequest);
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			super.onPostExecute(result);
+		}
 	}
 
 	private void initData() {
@@ -90,15 +134,15 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 
 	private void initTitleView() {
 		mCommonLeftImageView.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				mSMShowLis.showleftMenu();
 			}
 		});
-		
+
 		mCommonRightImageView.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				mSMShowLis.showRightMenu();
@@ -170,12 +214,11 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		UMSsoHandler sinaSsoHandler = ShareManeger.getController().getConfig()
-				.getSinaSsoHandler();
+		UMSsoHandler sinaSsoHandler = ShareManeger.getController().getConfig().getSinaSsoHandler();
 		if (sinaSsoHandler != null) {
 			sinaSsoHandler.authorizeCallBack(requestCode, resultCode, data);
 		}
-		
+
 		notifyNoteDatasChange();
 	}
 
@@ -224,6 +267,5 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 		OrmDbManeger.getInstance().delNote(mNoteDBData.get(pos));
 		notifyNoteDatasChange();
 	}
-
 
 }

@@ -112,6 +112,7 @@ public static final int *;
 -dontwarn com.amap.api.location.**
 -dontwarn com.autonavi.aps.amapapi.**
 -dontwarn com.amap.api.search.**
+-dontwarn com.alibaba.fastjson.**
 
 -keep class com.amap.api.**{*;}
 -keep class com.autonavi.amap.mapcore.**{*;}

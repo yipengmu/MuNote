@@ -9,12 +9,15 @@ import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.laomu.note.R;
+import com.laomu.note.ui.NoteApplication;
 import com.laomu.note.ui.base.NoteBaseActivity;
 import com.laomu.note.ui.util.Utils;
 import com.laomu.note.ui.webview.WebviewActivity;
+import com.squareup.picasso.Picasso;
 import com.umeng.message.PushAgent;
 
 /**
@@ -29,6 +32,7 @@ public class AboutUsActivity extends NoteBaseActivity implements OnClickListener
 	private Button mTvCurrentVersion;
 	private Button mBtnAppUpdate;
 	private PushAgent mPushAgent;
+	private ImageView bg_logo;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,10 @@ public class AboutUsActivity extends NoteBaseActivity implements OnClickListener
 		mTvHappyTime = (TextView) findViewById(R.id.tv_happy_time);
 		mTvCurrentVersion = (Button) findViewById(R.id.tv_app_version);
 		mBtnAppUpdate = (Button) findViewById(R.id.btn_check_app_update);
+		bg_logo = (ImageView) findViewById(R.id.iv_us_logo);
+		
+		Picasso.with(this).load(NoteApplication.cvBean.info_pic).into(bg_logo);
+		
 		mBtnAppUpdate.setOnClickListener(this);
 		mTvHappyTime.setOnClickListener(this);
 	}

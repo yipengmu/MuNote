@@ -16,6 +16,7 @@ import com.iflytek.cloud.SpeechUtility;
 import com.laomu.note.common.CommonDefine;
 import com.laomu.note.common.lbs.LocationInfoManeger;
 import com.laomu.note.common.preferences.PreferenceCenter;
+import com.laomu.note.data.bean.CheckVersionBean;
 import com.laomu.note.ui.util.Utils;
 import com.umeng.analytics.MobclickAgent;
 
@@ -29,6 +30,7 @@ public class NoteApplication extends Application{
 
 	private static LocationInfoManeger mLBSManeger = null;
 	public static Context appContext = null;
+	public static CheckVersionBean cvBean;
 	
 	@Override
 	public void onCreate() {

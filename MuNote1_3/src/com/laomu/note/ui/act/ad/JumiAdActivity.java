@@ -3,7 +3,6 @@
  */
 package com.laomu.note.ui.act.ad;
 
-import net.youmi.android.offers.OffersManager;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -59,7 +58,7 @@ public class JumiAdActivity extends NoteBaseActivity {
 		// 关闭有米log
 		// AdManager.getInstance(this).setEnableDebugLog(false);
 
-		OffersManager.getInstance(this).showOffersWall();
+//		OffersManager.getInstance(this).showOffersWall();
 		// OffersManager.getInstance(this).showOffersWallDialog(this);
 	}
 
