@@ -2336,8 +2336,7 @@ com.laomu.note.ui.act.CitySelectionActivity$OverlayThread:
 com.laomu.note.ui.act.TextNoteActivity:
     private static final int REQUEST_CODE_SEARCH
 com.laomu.note.ui.act.ad.JumiAdActivity:
-    63:63:private void startYoumiAd()
-    66:67:private void closeJumiAd()
+    private android.widget.TextView mTvDownloadInfo
 com.laomu.note.ui.act.camera.CameraPicturesActivity$DataLoadedHandler
 com.laomu.note.ui.act.camera.package-info
 com.laomu.note.ui.adapter.CitySelectionListViewSectionAdapter

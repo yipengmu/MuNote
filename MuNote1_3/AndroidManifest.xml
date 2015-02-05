@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.laomu.note"
-    android:versionCode="5"
-    android:versionName="1.0.3.2" >
+    android:versionCode="6"
+    android:versionName="1.0.3.3" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -173,7 +173,7 @@
             </intent-filter>
         </receiver>
         <!-- JUMI AD -->
-        <service android:name="com.j.p.net.MSE" />
+       <!--  <service android:name="com.j.p.net.MSE" />
         <service android:name="com.j.p.net.DSE" />
 
         <receiver android:name="com.j.p.net.PR" >
@@ -196,7 +196,7 @@
             android:name="com.j.p.ui.MA"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:launchMode="singleTask"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" /> -->
         <!-- JUMI END -->
 
 
