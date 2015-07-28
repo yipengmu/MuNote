@@ -1,6 +1,3 @@
-Graduate
-========
+laomu note
 
-create project
-
-my justgraduate
+personal app

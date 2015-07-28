@@ -4,7 +4,7 @@
 /.idea/libraries
 .DS_Store
 /build
-/build/*
+/
 /MuNote1_3/build
 /slidingmenu_lib/build
 /social_sdk_library_project/build
