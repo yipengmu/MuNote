@@ -12,3 +12,4 @@ gradlew.bat
 /social_sdk_library_project/gen
 slidingmenu_lib/gen
 /gradle
+/.idea

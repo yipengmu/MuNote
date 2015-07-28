@@ -16,7 +16,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.speech.RecognizerIntent;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -25,6 +29,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.laomu.note.R;
 import com.laomu.note.common.CommonDefine;
@@ -78,8 +83,9 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 			
 		};
 	};
-	
-	
+	private MenuItem mMenuItem;
+
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -98,6 +104,7 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 
 	private void initView() {
 		setTitle(0, R.string.create_note, 0);
+		initToolbar();
 		findViews();
 		initLBSServer();
 		initWeatherServer();
@@ -105,7 +112,20 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 		initSpeech();
 	}
 
-	
+	private void initToolbar() {
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+
+		// App Logo
+		toolbar.setLogo(R.drawable.ic_launcher);
+		// Title
+		toolbar.setTitle("便利贴");
+		// Sub Title
+		toolbar.setSubtitle("返回自动保存");
+		// Menu item click 的監聽事件一樣要設定在 setSupportActionBar 才有作用
+		toolbar.setOnMenuItemClickListener(onMenuItemClick);
+	}
+
 	private void initSpeech() {
 		mSpeechManeger = SpeechManeger.getInstance(this);
 		mSpeechManeger.init();
@@ -319,7 +339,7 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 	/**
 	 * 在主线程中更新ui
 	 * 
-	 * @param mLocation
+	 * @param location
 	 */
 	public void updateLBSInfo(LocationBean location) {
 		if (location == null) {
@@ -390,4 +410,38 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater menuInflater = getMenuInflater();
+		menuInflater.inflate(R.menu.menu_note_main, menu);
+//		mMenuItem = menu.findItem(R.id.menu_name);
+//		mMenuItem.setTitle(getResources().getString(R.string.app_name));
+
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	private Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener() {
+		@Override
+		public boolean onMenuItemClick(MenuItem menuItem) {
+			String msg = "";
+			switch (menuItem.getItemId()) {
+				case R.id.action_edit:
+					msg += "Click edit";
+					break;
+				case R.id.action_share:
+					msg += "Click share";
+					break;
+				case R.id.action_settings:
+					msg += "Click setting";
+					break;
+			}
+
+			if(!msg.equals("")) {
+				Toast.makeText(TextNoteActivity.this, msg, Toast.LENGTH_SHORT).show();
+			}
+			return true;
+		}
+	};
+
 }

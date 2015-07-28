@@ -6,6 +6,7 @@ package com.laomu.note.ui.base;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +26,7 @@ import com.umeng.socialize.controller.UMSocialService;
  *
  * 2014-2-17
  */
-public class NoteBaseActivity extends FragmentActivity{
+public class NoteBaseActivity extends ActionBarActivity{
 
 	private TextView mCommonTitle;
 	private ImageView mCommonLeftImageView;
