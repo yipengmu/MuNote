@@ -116,16 +116,16 @@ public class OrmDbManeger {
 		return list;
 	}
 
-	public void queryLocationId(LocationBean mLocation) {
-		try {
-			noteDao = mTableHelper4db.getDao(LocationBean.class);
-			noteDao.queryForId(0);
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-	}
+//	public void queryLocationId(LocationBean mLocation) {
+//		try {
+//			noteDao = mTableHelper4db.getDao(LocationBean.class);
+//			noteDao.queryForId(0);
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
 	
 	
 }

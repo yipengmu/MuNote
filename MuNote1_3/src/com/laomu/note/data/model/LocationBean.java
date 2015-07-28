@@ -13,7 +13,7 @@ import com.j256.ormlite.field.DatabaseField;
  *         2013-7-25
  */
 public class LocationBean 
-//implements Parcelable
+implements Parcelable
 {
 	@DatabaseField(generatedId=true)
 	public int id = 0;
@@ -68,6 +68,16 @@ public class LocationBean
 			return null;
 		}
 	};
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+
+	}
 
 //	public String getLongtitude() {
 //		return longtitude;

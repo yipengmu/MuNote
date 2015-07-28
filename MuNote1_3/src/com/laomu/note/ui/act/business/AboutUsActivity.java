@@ -6,6 +6,7 @@ package com.laomu.note.ui.act.business;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -53,8 +54,10 @@ public class AboutUsActivity extends NoteBaseActivity implements OnClickListener
 		mTvCurrentVersion = (Button) findViewById(R.id.tv_app_version);
 		mBtnAppUpdate = (Button) findViewById(R.id.btn_check_app_update);
 		bg_logo = (ImageView) findViewById(R.id.iv_us_logo);
-		
-		Picasso.with(this).load(NoteApplication.cvBean.info_pic).into(bg_logo);
+
+		if(NoteApplication.cvBean != null && TextUtils.isEmpty(NoteApplication.cvBean.info_pic)){
+			Picasso.with(this).load(NoteApplication.cvBean.info_pic).into(bg_logo);
+		}
 		
 		mBtnAppUpdate.setOnClickListener(this);
 		mTvHappyTime.setOnClickListener(this);
