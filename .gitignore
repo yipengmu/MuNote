@@ -2,9 +2,8 @@
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
-.DS_Store
+gradlew.bat
 /build
-/
 /MuNote1_3/build
 /slidingmenu_lib/build
 /social_sdk_library_project/build
@@ -12,3 +11,4 @@
 /social_sdk_library_project/bin
 /social_sdk_library_project/gen
 slidingmenu_lib/gen
+/gradle
