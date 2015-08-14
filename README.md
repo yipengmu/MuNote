@@ -15,6 +15,8 @@ https://github.com/googlesamples?page=3
 
 android:
 https://github.com/android-cn/android-open-project-analysis
+https://github.com/Trinea/android-open-project
+https://github.com/futurice/android-best-practices
 
 dev：
 https://github.com/yipengmu/android-dev-com
