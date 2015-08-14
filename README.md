@@ -4,7 +4,7 @@
 fornote
 
 RN:
-
+https://github.com/jondot/awesome-react-native
 jsx:
 https://facebook.github.io/react/docs/jsx-in-depth.html
 
