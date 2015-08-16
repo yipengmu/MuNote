@@ -111,26 +111,31 @@ public class TextNoteActivity extends NoteBaseActivity{
 
 	private void initToolbar() {
 		Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar);
+
+		// Title
+		toolbar.setTitle("创建便贴");
+		// Sub Title
+//		toolbar.setSubtitle("长按图标试试~");
+
 		setSupportActionBar(toolbar);
 
-		// App Logo
-		toolbar.setLogo(R.drawable.ic_launcher);
-		// Title
-		toolbar.setTitle("便利贴");
-		// Sub Title
-		toolbar.setSubtitle("长按图标试试~");
+//		toolbar.setNavigationIcon(R.drawable.icon_menu_voice);
+
+//		返回键是否显示出来
+//		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 		// Menu item click 的監聽事件一樣要設定在 setSupportActionBar 才有作用
 		toolbar.setOnMenuItemClickListener(onMenuItemClick);
-		toolbar.getlo
-		toolbar.setNavigationOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
 
-				//语音输入
-				makeNoteFromVoice();
-
-			}
-		});
+//		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//
+//				//语音输入
+//				makeNoteFromVoice();
+//
+//			}
+//		});
 	}
 
 	private void initSpeech() {
@@ -408,8 +413,9 @@ public class TextNoteActivity extends NoteBaseActivity{
 				case R.id.action_note_share:
 					shareNote();
 					break;
-				case R.id.action_note_quit:
-					finish();
+				case R.id.action_voice_make:
+					//语音输入
+					makeNoteFromVoice();
 					break;
 			}
 

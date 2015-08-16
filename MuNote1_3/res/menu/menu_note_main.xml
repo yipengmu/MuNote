@@ -9,12 +9,12 @@
         app:showAsAction="always"/>
 
     <item android:id="@+id/action_note_share"
-        android:title="分享"
+        android:title="分享便贴"
         android:orderInCategory="80"
         app:showAsAction="collapseActionView" />
 
-    <item android:id="@+id/action_note_quit"
-        android:title="退出"
+    <item android:id="@+id/action_voice_make"
+        android:title="语音输入"
         android:orderInCategory="90"
         app:showAsAction="collapseActionView" />
 
