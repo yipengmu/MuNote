@@ -1,0 +1,12 @@
+luoyuandeMacBook-Pro% java -jar AndroidKeystoreBrute_v1.05.jar -m 3 -k mu_note.keystore -d "wordlist.txt"
+Number of keys in keystore: 1
+Found alias: mu
+Creation Date: Sun Jun 23 19:26:38 CST 2013
+
+Start smart wordlist attack on key!!
+
+Capitalize first letter
+Current Pass: a || est. 0 Pass/Sec
+
+Got Password in 0 seconds
+Password is: 123456 for alias mu

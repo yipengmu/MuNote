@@ -56,14 +56,6 @@ public class NoteSettingAct extends NoteBaseActivity {
     }
 
 
-    private void openAppHistoryVersion() {
-        Intent intent = new Intent(this,WebviewActivity.class);
-
-        intent.putExtra("url", "file:///android_asset/history.html");
-        intent.putExtra("title", "历史版本");
-
-        startActivity(intent);
-    }
 
     private void gotoAboutUs() {
         Intent intent = new Intent(this,AboutUsActivity.class);

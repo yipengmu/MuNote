@@ -27,6 +27,7 @@
             style="@style/dark_grey20"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/tv_app_history"
             android:padding="10dp"
             android:text="历史版本" />
 
