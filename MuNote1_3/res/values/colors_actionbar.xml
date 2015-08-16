@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="actionbar_background">#3F51B5</color>
+    <color name="actionbar_background_dark">#303F9F</color>
     <color name="actionbar_separator">#3A5FCD</color>
     <color name="actionbar_background_start">#3A5FCD</color>
     <color name="actionbar_background_end">#27408B</color>
     <color name="actionbar_title">#FFFFFF</color>
     <color name="actionbar_background_item_pressed_start">#FF7F00</color>
     <color name="actionbar_background_item_pressed_end">#EE7600</color>
+
+    <!--黑色：[87% 普通文字] [54% 减淡文字] [26% 禁用状态/提示文字] [12% 分隔线]-->
+    <!--白色：[100% 普通文字] [70% 减淡文字] [30% 禁用状态/提示文字] [12% 分隔线]-->
+
+
+    <color name="white_text">#DDFFFFFF</color>
+    <color name="black_text">#000000</color>
+    <color name="white_text_light">#89FFFFFF</color>
+    <color name="black_text_lignt">#B2000000</color>
+
+    <color name="white_text_tint">#42FFFFFF</color>
+    <color name="black_text_tint">#4c000000</color>
+
 </resources> 

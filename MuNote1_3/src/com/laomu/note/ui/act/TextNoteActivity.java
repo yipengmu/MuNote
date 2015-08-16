@@ -122,20 +122,17 @@ public class TextNoteActivity extends NoteBaseActivity{
 //		toolbar.setNavigationIcon(R.drawable.icon_menu_voice);
 
 //		返回键是否显示出来
-//		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		// Menu item click 的監聽事件一樣要設定在 setSupportActionBar 才有作用
 		toolbar.setOnMenuItemClickListener(onMenuItemClick);
 
-//		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//
-//				//语音输入
-//				makeNoteFromVoice();
-//
-//			}
-//		});
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 	}
 
 	private void initSpeech() {

@@ -3,19 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
-    <item android:id="@+id/action_note_save"
-        android:title="保存"
+    <item
+        android:id="@+id/action_note_save"
         android:orderInCategory="100"
-        app:showAsAction="always"/>
+        android:title="保存"
+        app:showAsAction="always" />
 
-    <item android:id="@+id/action_note_share"
-        android:title="分享便贴"
-        android:orderInCategory="80"
+
+    <item
+        android:id="@+id/action_voice_make"
+        android:orderInCategory="90"
+        android:title="语音输入"
         app:showAsAction="collapseActionView" />
 
-    <item android:id="@+id/action_voice_make"
-        android:title="语音输入"
-        android:orderInCategory="90"
+    <item
+        android:id="@+id/action_note_share"
+        android:orderInCategory="80"
+        android:title="分享便贴"
         app:showAsAction="collapseActionView" />
 
 
