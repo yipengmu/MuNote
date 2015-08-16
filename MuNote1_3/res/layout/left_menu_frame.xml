@@ -21,7 +21,7 @@
             android:src="@drawable/lm_user_logo_default" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_alignParentLeft="true"
@@ -30,7 +30,7 @@
             android:id="@+id/tv_user_name" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_alignParentBottom="true"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
@@ -43,10 +43,10 @@
         style="@style/dark_grey20"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
-        android:gravity="center"
+        android:gravity="left"
         android:drawableLeft="@drawable/icon_unfollowed"
         android:drawablePadding="20dp"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="@string/personnal_clock" />
@@ -57,9 +57,9 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:drawablePadding="20dp"
-        android:gravity="center"
+        android:gravity="left"
         android:drawableLeft="@drawable/icon_location_in"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="@string/location_mark" />
@@ -71,9 +71,9 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:drawablePadding="20dp"
-        android:gravity="center"
+        android:gravity="left"
         android:drawableLeft="@drawable/lm_icon_settion"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="设置" />
@@ -85,24 +85,11 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:drawablePadding="20dp"
-        android:gravity="center"
+        android:gravity="left"
         android:drawableLeft="@drawable/icon_comment"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="帮助反馈" />
-
-    <TextView
-        android:id="@+id/tv_info"
-        style="@style/dark_grey20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:visibility="gone"
-        android:padding="10dp"
-        android:text="@string/city_location" >
-    </TextView>
-
-   
 
 </LinearLayout>

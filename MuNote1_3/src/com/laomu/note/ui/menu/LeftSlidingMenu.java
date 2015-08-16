@@ -33,7 +33,6 @@ import com.umeng.fb.FeedbackAgent;
 public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener {
     private TextView tv_personal_clock;
     private TextView tv_map_mark;
-    private TextView tv_info;
     private TextView tv_setting;
     private TextView tv_feedback;
 
@@ -77,16 +76,13 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
     private void findviews(View view) {
         tv_personal_clock = (TextView) view.findViewById(R.id.tv_personal_clock);
         tv_map_mark = (TextView) view.findViewById(R.id.tv_map_mark);
-        tv_info = (TextView) view.findViewById(R.id.tv_info);
         tv_setting = (TextView) view.findViewById(R.id.tv_setting);
         tv_feedback = (TextView) view.findViewById(R.id.tv_help_feedback);
-
 
         tv_setting.setOnClickListener(this);
         tv_feedback.setOnClickListener(this);
         tv_personal_clock.setOnClickListener(this);
         tv_map_mark.setOnClickListener(this);
-        tv_info.setOnClickListener(this);
     }
 
     @Override
@@ -95,9 +91,9 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
             case R.id.tv_personal_clock:
                 intoPerSonalClock();
                 break;
-            case R.id.tv_info:
-                intoCityList();
-                break;
+//            case R.id.tv_info:
+//                intoCityList();
+//                break;
             case R.id.tv_map_mark:
                 intoMapView();
                 break;

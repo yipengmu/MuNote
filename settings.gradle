@@ -1,5 +1,4 @@
 include ':MuNote1_3', ':slidingmenu_lib'
-include ':SlidingMenu-master'
 include ':social_sdk_library_project'
 
 

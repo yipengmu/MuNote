@@ -130,8 +130,9 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 	}
 
 	private void initView(Bundle savedInstanceState) {
-		setTitle(getString(R.string.app_name));
+		findViews();
 		mToolbar.setNavigationIcon(R.drawable.icon_menu_toolbar);
+		mToolbar.setTitle(getString(R.string.app_name));
 		mToolbar.setNavigationContentDescription("M");
 		mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
 			@Override
@@ -145,14 +146,14 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 		if(mainAct instanceof NoteBaseActivity){
 			((NoteBaseActivity)mainAct).setSupportActionBar(mToolbar);
 		}
-		mToolbar.setNavigationOnClickListener(new View.OnClickListener(){
+		mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				mSMShowLis.showleftMenu();
 			}
 		});
-		findViews();
+
 		initTitleView();
 		initNoteListView();
 	}
