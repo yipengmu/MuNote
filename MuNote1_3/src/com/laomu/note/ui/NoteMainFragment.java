@@ -6,6 +6,7 @@ package com.laomu.note.ui;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -38,6 +39,7 @@ import com.laomu.note.data.model.NoteBean;
 import com.laomu.note.ui.act.TextNoteActivity;
 import com.laomu.note.ui.act.camera.CameraNoteActivity;
 import com.laomu.note.ui.adapter.NoteListViewAdapter;
+import com.laomu.note.ui.base.NoteBaseActivity;
 import com.laomu.note.ui.base.NoteBaseFragment;
 import com.laomu.note.ui.imp.SlidingMenuShowLis;
 import com.laomu.note.ui.share.ShareManeger;
@@ -134,8 +136,20 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 		mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem menuItem) {
-				Toast.makeText(getActivity(), "menu click",Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity(), "menu click", Toast.LENGTH_LONG).show();
 				return false;
+			}
+		});
+
+		Activity mainAct = getActivity();
+		if(mainAct instanceof NoteBaseActivity){
+			((NoteBaseActivity)mainAct).setSupportActionBar(mToolbar);
+		}
+		mToolbar.setNavigationOnClickListener(new View.OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				mSMShowLis.showleftMenu();
 			}
 		});
 		findViews();

@@ -2,40 +2,100 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_home_dark"
-    android:gravity="center_horizontal"
+    android:gravity="left"
+    android:background="@color/white"
     android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/iv_lmenu_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:src="@drawable/ic_launcher" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:background="@drawable/bg_home_dark"
+        android:layout_height="150dp">
+
+        <ImageView
+            android:id="@+id/iv_lmenu_logo"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/lm_user_logo_default" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_alignParentLeft="true"
+            android:layout_above="@+id/tv_user_info"
+            android:text="User Name"
+            android:id="@+id/tv_user_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Small Text"
+            android:id="@+id/tv_user_info" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_personal_clock"
-        style="@style/white20"
-        android:layout_marginTop="20dp"
+        style="@style/dark_grey20"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
         android:gravity="center"
-        android:layout_width="fill_parent"
+        android:drawableLeft="@drawable/icon_unfollowed"
+        android:drawablePadding="20dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="@string/personnal_clock" />
 
     <TextView
         android:id="@+id/tv_map_mark"
-        style="@style/white20"
+        style="@style/dark_grey20"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:drawablePadding="20dp"
         android:gravity="center"
-        android:layout_width="fill_parent"
+        android:drawableLeft="@drawable/icon_location_in"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="@string/location_mark" />
 
+
+    <TextView
+        android:id="@+id/tv_setting"
+        style="@style/dark_grey20"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:drawablePadding="20dp"
+        android:gravity="center"
+        android:drawableLeft="@drawable/lm_icon_settion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="设置" />
+
+
+    <TextView
+        android:id="@+id/tv_help"
+        style="@style/dark_grey20"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:drawablePadding="20dp"
+        android:gravity="center"
+        android:drawableLeft="@drawable/icon_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="帮助反馈" />
+
     <TextView
         android:id="@+id/tv_info"
-        style="@style/white20"
-        android:layout_width="fill_parent"
+        style="@style/dark_grey20"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:visibility="gone"
