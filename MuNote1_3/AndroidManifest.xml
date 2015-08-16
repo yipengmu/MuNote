@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.laomu.note"
     android:versionCode="6"
-    android:versionName="1.0.3.4" >
+    android:versionName="1.0.3.20150816" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -45,7 +45,8 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <!-- YOUMI AD END -->
 
-	<!-- xunfei start-->
+
+    <!-- xunfei start -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -55,14 +56,14 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<!-- xunfei end -->
-	
+
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- xunfei end -->
     <application
-        android:name="com.laomu.note.ui.NoteApplication"
+        android:name=".ui.NoteApplication"
         android:allowBackup="true"
+        android:debuggable="true"
         android:icon="@drawable/ic_launcher_fang"
         android:label="@string/app_name"
-        android:debuggable="true"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme.Base" >
 
@@ -96,23 +97,25 @@
             android:value="0df310c924619611b33dbc6d75c34c43" />
         <!-- gaode end. -->
 
-        <activity android:name="com.laomu.note.MainActivity" >
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.laomu.note.ui.act.TextNoteActivity" />
-        <activity android:name="com.laomu.note.ui.act.camera.CameraNoteActivity" />
-        <activity android:name="com.laomu.note.ui.act.camera.CameraPicturesActivity" />
-        <activity android:name="com.laomu.note.ui.act.CitySelectionActivity" />
-        <activity android:name="com.laomu.note.ui.webview.BaseWebviewActivity" />
-        <activity android:name="com.laomu.note.ui.act.MapNoteActivity" />
-        <activity android:name="com.laomu.note.ui.webview.WebviewActivity" />
-        <activity android:name="com.laomu.note.ui.act.business.AboutUsActivity" />
-        <activity android:name="com.laomu.note.ui.act.ad.JumiAdActivity" />
-        <activity android:name="com.laomu.note.ui.act.IatDemo" />
+        <activity android:name=".ui.act.TextNoteActivity" />
+        <activity android:name=".ui.act.camera.CameraNoteActivity" />
+        <activity android:name=".ui.act.camera.CameraPicturesActivity" />
+        <activity android:name=".ui.act.CitySelectionActivity" />
+        <activity android:name=".ui.webview.BaseWebviewActivity" />
+        <activity android:name=".ui.act.MapNoteActivity" />
+        <activity android:name=".ui.act.help.HelpAct" />
+        <activity android:name=".ui.act.setting.NoteSettingAct" />
+        <activity android:name=".ui.webview.WebviewActivity" />
+        <activity android:name=".ui.act.business.AboutUsActivity" />
+        <activity android:name=".ui.act.ad.JumiAdActivity" />
+        <activity android:name=".ui.act.IatDemo" />
 
         <!-- ###################注册SDK使用的Activity###################### -->
         <!-- 分享编辑页 -->
@@ -168,13 +171,14 @@
             android:name="com.umeng.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- end uMeng -->
-        <receiver android:name="com.laomu.note.common.lbs.LocationReceiver" >
+        <receiver android:name=".common.lbs.LocationReceiver" >
             <intent-filter>
                 <action android:name="ACTTIONI_LOCATION_INFO" />
             </intent-filter>
         </receiver>
         <!-- JUMI AD -->
-       <!--  <service android:name="com.j.p.net.MSE" />
+        <!--
+        <service android:name="com.j.p.net.MSE" />
         <service android:name="com.j.p.net.DSE" />
 
         <receiver android:name="com.j.p.net.PR" >
@@ -197,12 +201,14 @@
             android:name="com.j.p.ui.MA"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:launchMode="singleTask"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" /> -->
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        -->
         <!-- JUMI END -->
 
 
         <!-- youmi start -->
-       <!--  <activity
+        <!--
+        <activity
             android:name="net.youmi.android.AdBrowser"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
@@ -227,7 +233,8 @@
         <receiver
             android:name="net.youmi.android.offers.OffersReceiver"
             android:exported="false" >
-        </receiver> -->
+        </receiver>
+        -->
         <!-- youmi end -->
 
 

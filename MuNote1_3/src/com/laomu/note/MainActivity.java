@@ -59,7 +59,7 @@ public class MainActivity extends SlidingFragmentActivity {
 	
 	private void initSlidingMenu(Bundle savedInstanceState) {
 		sm = getSlidingMenu();
-		sm.setMode(SlidingMenu.LEFT_RIGHT);
+		sm.setMode(SlidingMenu.LEFT);
 		sm.setShadowWidthRes(R.dimen.shadow_width);
 		sm.setShadowDrawable(R.drawable.shadow);
 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
@@ -71,8 +71,8 @@ public class MainActivity extends SlidingFragmentActivity {
 		frameManager.replace(R.id.menu_frame_one, new LeftSlidingMenu(), TAG_LEFT);
 
 		// 右侧menu
-		sm.setSecondaryMenu(R.layout.menu_frame_two);
-		frameManager.replace(R.id.menu_frame_two, new RightSlidingMenu(), TAG_RIGHT);
+//		sm.setSecondaryMenu(R.layout.menu_frame_two);
+//		frameManager.replace(R.id.menu_frame_two, new RightSlidingMenu(), TAG_RIGHT);
 	}
 
 	@Override

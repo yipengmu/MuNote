@@ -7,6 +7,8 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +50,33 @@ public class NoteBaseActivity extends ActionBarActivity{
 		//youmi
 //		AdManager.getInstance(this).init(CommonDefine.YOUMI_ID, CommonDefine.YOUMI_SECRET, false);
 //		OffersManager.getInstance(this).onAppLaunch();
+	}
+
+
+	protected void initToolbar(String toolbarName) {
+		Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar);
+
+		// Title
+		toolbar.setTitle(toolbarName);
+		// Sub Title
+//		toolbar.setSubtitle("长按图标试试~");
+
+		setSupportActionBar(toolbar);
+
+//		toolbar.setNavigationIcon(R.drawable.icon_menu_voice);
+
+//		返回键是否显示出来
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+		// Menu item click 的監聽事件一樣要設定在 setSupportActionBar 才有作用
+//        toolbar.setOnMenuItemClickListener(onMenuItemClick);
+
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 	}
 
 

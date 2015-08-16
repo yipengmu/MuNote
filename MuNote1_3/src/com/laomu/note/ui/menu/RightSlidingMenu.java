@@ -80,7 +80,7 @@ public class RightSlidingMenu extends NoteBaseFragment implements OnClickListene
 
 	private void openAppHistoryVersion() {
 		Intent intent = new Intent(getActivity(),WebviewActivity.class);
-		
+
 		intent.putExtra("url", "file:///android_asset/history.html");
 		intent.putExtra("title", "历史版本");
 

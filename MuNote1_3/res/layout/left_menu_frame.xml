@@ -26,7 +26,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_alignParentLeft="true"
             android:layout_above="@+id/tv_user_info"
-            android:text="User Name"
+            android:text="久仰的大名"
             android:id="@+id/tv_user_name" />
 
         <TextView
@@ -34,7 +34,7 @@
             android:layout_alignParentBottom="true"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Small Text"
+            android:text="消息"
             android:id="@+id/tv_user_info" />
     </RelativeLayout>
 
@@ -80,7 +80,7 @@
 
 
     <TextView
-        android:id="@+id/tv_help"
+        android:id="@+id/tv_help_feedback"
         style="@style/dark_grey20"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"

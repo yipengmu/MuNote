@@ -72,6 +72,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dex-cache" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/multidex/1.0.1/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jacoco" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javaResources" />
@@ -95,12 +96,13 @@
     <orderEntry type="library" exported="" name="Msc" level="project" />
     <orderEntry type="library" exported="" name="com.umeng.message.lib" level="project" />
     <orderEntry type="library" exported="" name="multidex-1.0.1" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-22.2.1" level="project" />
     <orderEntry type="library" exported="" name="Volley" level="project" />
     <orderEntry type="library" exported="" name="umeng_sdk" level="project" />
     <orderEntry type="library" exported="" name="fastjson-1.1.41" level="project" />
     <orderEntry type="library" exported="" name="ormlite-core-4.33" level="project" />
     <orderEntry type="library" exported="" name="picasso-2.2.0" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-22.0.0" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-22.2.1" level="project" />
     <orderEntry type="library" exported="" name="Android_Services_V2.2.0" level="project" />
     <orderEntry type="library" exported="" name="Android_Map_V2.2.0" level="project" />
     <orderEntry type="library" exported="" name="ormlite-android-4.33" level="project" />
