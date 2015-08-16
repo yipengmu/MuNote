@@ -10,14 +10,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -50,12 +53,10 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 	private ListView mNoteListView;
 	private NoteListViewAdapter mListViewAdapter;
 	private ArrayList<NoteBean> mNoteDBData;
-	private View btn_text_make;
-	private View btn_camera_make;
+	private ImageView btn_text_make;
 	private View mView;
 	private final int CODE_FOR_TEXT_CREATE = 1;
 	private int CODE_FOR_CAMERA_CREATE = 2;
-	private View tv_common_head_title;
     private RequestQueue mRequestQueue;
 	private SlidingMenuShowLis mSMShowLis;
 	public String FLAG_CHECK_VERSION_URL = "http://laomu.qiniudn.com/munotecheckVersion.txt";
@@ -93,7 +94,8 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 		protected Boolean doInBackground(Void... params) {
 
 		        // 1 创建RequestQueue对象
-		        mRequestQueue = Volley.newRequestQueue(getActivity());
+
+		        mRequestQueue = Volley.newRequestQueue(NoteApplication.appContext);
 
             	Log.d("", "启动:" );
 		        // 2 创建StringRequest对象
@@ -126,39 +128,42 @@ public class NoteMainFragment extends NoteBaseFragment implements OnClickListene
 	}
 
 	private void initView(Bundle savedInstanceState) {
-		setTitle(mView, R.drawable.icon_menu_user, R.string.app_name, R.drawable.icon_menu_setting);
+		setTitle(getString(R.string.app_name));
+		mToolbar.setNavigationIcon(R.drawable.icon_menu_toolbar);
+		mToolbar.setNavigationContentDescription("M");
+		mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem menuItem) {
+				Toast.makeText(getActivity(), "menu click",Toast.LENGTH_LONG).show();
+				return false;
+			}
+		});
 		findViews();
 		initTitleView();
 		initNoteListView();
 	}
 
 	private void initTitleView() {
-		mCommonLeftImageView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				mSMShowLis.showleftMenu();
-			}
-		});
-
-		mCommonRightImageView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				mSMShowLis.showRightMenu();
-			}
-		});
+//		mCommonLeftImageView.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				mSMShowLis.showleftMenu();
+//			}
+//		});
+//
+//		mCommonRightImageView.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				mSMShowLis.showRightMenu();
+//			}
+//		});
 	}
 
 	private void findViews() {
-		btn_text_make = mView.findViewById(R.id.btn_text_make);
-		btn_camera_make = mView.findViewById(R.id.btn_camera_make);
-		tv_common_head_title = mView.findViewById(R.id.tv_common_head_title);
-
+		btn_text_make = (ImageView) mView.findViewById(R.id.btn_text_make);
 		btn_text_make.setOnClickListener(this);
-		btn_camera_make.setOnClickListener(this);
-		tv_common_head_title.setOnClickListener(this);
-
 	}
 
 	private void initNoteListView() {

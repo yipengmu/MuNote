@@ -4,25 +4,15 @@
     android:layout_height="wrap_content"
     android:background="@color/white">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_alignParentTop="true"
-        android:layout_height="wrap_content"
-        android:background="@color/pale_blue"
-        android:layout_width="match_parent"
-        android:minHeight="?attr/actionBarSize">
-    </android.support.v7.widget.Toolbar>
-
-
-    <!--<include-->
-        <!--android:id="@+id/rl_text_note_head"-->
-        <!--android:layout_below="@id/toolbar"-->
-        <!--layout="@layout/common_head" />-->
+    <include
+        android:id="@+id/create_note_toolbar"
+        android:layout_below="@id/toolbar"
+        layout="@layout/common_head_with_toolbar" />
 
     <EditText
         android:id="@+id/et_text_note"
         style="@style/pale_blue_20"
-        android:layout_below="@id/toolbar"
+        android:layout_below="@id/create_note_toolbar"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_marginBottom="50dp"
@@ -33,18 +23,6 @@
         android:padding="4dp" >
 
     </EditText>
-
-    <Button
-        android:id="@+id/btn_voice_make_text"
-        android:layout_width="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginRight="10dp"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        style="@style/french_grey14"
-        android:drawableLeft="@drawable/btn_create_voice"
-        android:text="咦!试一试" />
 
     <RelativeLayout
         android:id="@+id/rl_note_desc_info"

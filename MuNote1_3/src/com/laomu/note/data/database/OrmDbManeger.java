@@ -4,9 +4,11 @@
 package com.laomu.note.data.database;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.j256.ormlite.dao.Dao;
 import com.laomu.note.data.model.LocationBean;
@@ -37,7 +39,17 @@ public class OrmDbManeger {
 		return ins ;
 	}
 	
-	public void addNote(NoteBean note){
+	public void addNote(NoteBean note) {
+		if(note == null){
+			return;
+		}
+		ArrayList<NoteBean> noteList = (ArrayList) queryNote();
+		for(NoteBean noteBean:noteList){
+			if(noteBean != null && note.id == noteBean.id){
+				//db中已存在
+				return;
+			}
+		}
 		try {
 			noteDao = mTableHelper4db.getDao(NoteBean.class);
 			noteDao.create(note);

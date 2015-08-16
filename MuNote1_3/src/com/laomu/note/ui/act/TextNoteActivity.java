@@ -3,10 +3,6 @@
  */
 package com.laomu.note.ui.act;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -25,11 +21,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.animation.AlphaAnimation;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.laomu.note.R;
 import com.laomu.note.common.CommonDefine;
@@ -47,12 +41,16 @@ import com.laomu.note.ui.NoteApplication;
 import com.laomu.note.ui.base.NoteBaseActivity;
 import com.laomu.note.ui.util.Utils;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 /**
  * @author luoyuan.myp
  * 
  *         2014-2-17
  */
-public class TextNoteActivity extends NoteBaseActivity implements OnClickListener, OnLongClickListener {
+public class TextNoteActivity extends NoteBaseActivity{
 
 	private NoteBean mNoteBean;
 	private int MODE_CREATE = 1;
@@ -64,7 +62,6 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 	private BaiduWeatherResult mWeather;
 	private TextView mLocationTextViewDesc;
 	private TextView mWeatherTextViewDesc;
-	private Button mBtnVoiceMakeNote;
 	private SpeechManeger mSpeechManeger;
 	private LocationRecevier lbsRecevier = new LocationRecevier();
 	private String mSpeechMsgResult = "";
@@ -103,7 +100,7 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 	}
 
 	private void initView() {
-		setTitle(0, R.string.create_note, 0);
+//		setTitle(0, R.string.create_note, 0);
 		initToolbar();
 		findViews();
 		initLBSServer();
@@ -113,7 +110,7 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 	}
 
 	private void initToolbar() {
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar);
 		setSupportActionBar(toolbar);
 
 		// App Logo
@@ -121,9 +118,19 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 		// Title
 		toolbar.setTitle("便利贴");
 		// Sub Title
-		toolbar.setSubtitle("返回自动保存");
+		toolbar.setSubtitle("长按图标试试~");
 		// Menu item click 的監聽事件一樣要設定在 setSupportActionBar 才有作用
 		toolbar.setOnMenuItemClickListener(onMenuItemClick);
+		toolbar.getlo
+		toolbar.setNavigationOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				//语音输入
+				makeNoteFromVoice();
+
+			}
+		});
 	}
 
 	private void initSpeech() {
@@ -246,9 +253,6 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 		mLocationTextViewDesc = (TextView) findViewById(R.id.tv_location_desc);
 		mWeatherTextViewDesc = (TextView) findViewById(R.id.tv_weather_desc);
 		iv_weather_icon = (ImageView) findViewById(R.id.iv_weather_icon);
-		mBtnVoiceMakeNote = (Button) findViewById(R.id.btn_voice_make_text);
-		mBtnVoiceMakeNote.setOnClickListener(this);
-		mBtnVoiceMakeNote.setOnLongClickListener(this);
 	}
 
 	/** 注册定位回调 */
@@ -272,9 +276,8 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 	}
 
 	@Override
-	protected void onPause() {
-		super.onPause();
-		saveNote();
+	public void onBackPressed() {
+		super.onBackPressed();
 	}
 
 	private void saveNote() {
@@ -371,30 +374,6 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 		}
 	}
 
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.btn_voice_make_text:
-			//语音输入
-			toast("长按试试哈");
-			break;
-
-		default:
-			break;
-		}
-	}
-
-	@Override
-	public boolean onLongClick(View v) {
-		switch (v.getId()) {
-		case R.id.btn_voice_make_text:
-			//语音输入
-			makeNoteFromVoice();
-			break;
-		}
-		return false;
-	}
-
 	private void makeNoteFromVoice() {
 		mSpeechManeger.showSpeechDialog();
 	}
@@ -415,8 +394,6 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater menuInflater = getMenuInflater();
 		menuInflater.inflate(R.menu.menu_note_main, menu);
-//		mMenuItem = menu.findItem(R.id.menu_name);
-//		mMenuItem.setTitle(getResources().getString(R.string.app_name));
 
 		return super.onCreateOptionsMenu(menu);
 	}
@@ -424,24 +401,24 @@ public class TextNoteActivity extends NoteBaseActivity implements OnClickListene
 	private Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener() {
 		@Override
 		public boolean onMenuItemClick(MenuItem menuItem) {
-			String msg = "";
 			switch (menuItem.getItemId()) {
-				case R.id.action_edit:
-					msg += "Click edit";
+				case R.id.action_note_save:
+					saveNote();
 					break;
-				case R.id.action_share:
-					msg += "Click share";
+				case R.id.action_note_share:
+					shareNote();
 					break;
-				case R.id.action_settings:
-					msg += "Click setting";
+				case R.id.action_note_quit:
+					finish();
 					break;
 			}
 
-			if(!msg.equals("")) {
-				Toast.makeText(TextNoteActivity.this, msg, Toast.LENGTH_SHORT).show();
-			}
 			return true;
 		}
 	};
+
+	private void shareNote() {
+
+	}
 
 }
