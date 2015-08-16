@@ -4,14 +4,15 @@
     android:layout_height="match_parent" >
 
     <include
-        android:id="@+id/map_head"
+        android:id="@+id/map_note_toolbar"
         android:layout_alignParentTop="true"
-        layout="@layout/common_head" />
+        layout="@layout/common_head_with_toolbar" />
+
 
  <com.amap.api.maps2d.MapView
         android:id="@+id/map_note_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/map_head" />
+        android:layout_below="@id/map_note_toolbar" />
 
 </RelativeLayout>

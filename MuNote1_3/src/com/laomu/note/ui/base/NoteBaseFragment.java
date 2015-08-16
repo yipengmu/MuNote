@@ -8,6 +8,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,15 +31,19 @@ public class NoteBaseFragment extends Fragment {
 	protected TextView mCommonTitle;
 	protected ImageView mCommonLeftImageView;
 	protected ImageView mCommonRightImageView;
+	protected Toolbar mToolbar;
+	protected View mBaseView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return super.onCreateView(inflater, container, savedInstanceState);
+
 	}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
+		mBaseView = view;
+		super.onViewCreated(mBaseView, savedInstanceState);
 	}
 
 	public void openPage(String fragmentName, Fragment fragment) {
@@ -67,10 +72,20 @@ public class NoteBaseFragment extends Fragment {
 		}
 	}
 
+	protected void setTitle(String toolbarName) {
+		if(mToolbar == null ){
+			if(mBaseView != null) {
+				mToolbar = (Toolbar) mBaseView.findViewById(R.id.app_toolbar);
+				mToolbar.setTitle(toolbarName);
+			}
+		}
+	}
+
 	private void initHeadViewByView(View v) {
 		mCommonTitle = (TextView) v.findViewById(R.id.tv_common_head_title);
 		mCommonLeftImageView = (ImageView) v.findViewById(R.id.iv_common_head_left);
 		mCommonRightImageView = (ImageView) v.findViewById(R.id.iv_common_head_right);
+		mToolbar = (Toolbar) v.findViewById(R.id.app_toolbar);
 	}
 
 	protected void setTitle(View v, String midTitle) {

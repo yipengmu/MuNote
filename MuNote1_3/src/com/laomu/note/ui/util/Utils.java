@@ -257,7 +257,7 @@ public class Utils {
 		// getPackageName()是你当前类的包名，0代表是获取版本信息
 		PackageInfo packInfo = null;
 		try {
-			packInfo = packageManager.getPackageInfo("com.laomu.note", 0);
+			packInfo = packageManager.getPackageInfo(c.getPackageName(), 0);
 			version = packInfo.versionName;
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();

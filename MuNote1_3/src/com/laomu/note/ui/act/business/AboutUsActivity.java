@@ -6,6 +6,7 @@ package com.laomu.note.ui.act.business;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,6 +45,10 @@ public class AboutUsActivity extends NoteBaseActivity implements OnClickListener
 	}
 
 	private void initViews() {
+
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		toolbar.setTitle("关于我们");
 		findViews();
 		setTitle(mTitle);
 		mTvCurrentVersion.setText("v " + Utils.getVersionName(this));

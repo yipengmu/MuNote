@@ -75,6 +75,7 @@ public class MapNoteFragment extends NoteBaseFragment implements OnClickListener
 
 	private void initViews() {
 		setTitle(mView,0, R.string.map_marks,R.drawable.ic_menu_setting);
+		setTitle(getString(R.string.map_marks));
 		initMapView();
 		drawMapViewLayers();
 		initRightBtnLis();

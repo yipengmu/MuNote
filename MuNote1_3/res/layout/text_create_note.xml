@@ -2,17 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white" >
+    android:background="@color/white">
 
     <include
-        android:id="@+id/rl_text_note_head"
-        android:layout_alignParentTop="true"
-        layout="@layout/common_head" />
+        android:id="@+id/create_note_toolbar"
+        android:layout_below="@id/toolbar"
+        layout="@layout/common_head_with_toolbar" />
 
     <EditText
         android:id="@+id/et_text_note"
         style="@style/pale_blue_20"
-        android:layout_below="@id/rl_text_note_head"
+        android:layout_below="@id/create_note_toolbar"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_marginBottom="50dp"
@@ -23,18 +23,6 @@
         android:padding="4dp" >
 
     </EditText>
-
-    <Button
-        android:id="@+id/btn_voice_make_text"
-        android:layout_below="@+id/rl_text_note_head"
-        android:layout_width="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        style="@style/french_grey14"
-        android:drawableLeft="@drawable/btn_create_voice"
-        android:text="咦!试一试" />
 
     <RelativeLayout
         android:id="@+id/rl_note_desc_info"
