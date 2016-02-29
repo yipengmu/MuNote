@@ -33,18 +33,22 @@
         android:layout_alignParentRight="true"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
-        android:gravity="bottom|right">
+        android:layout_marginTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="center_vertical|right">
 
         <TextView
             android:id="@+id/tv_weather_desc"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/french_grey14" />
 
         <ImageView
             android:id="@+id/iv_weather_icon"
+            android:layout_centerVertical="true"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/tv_weather_desc"
             android:layout_width="40dp"
@@ -56,6 +60,7 @@
             android:id="@+id/tv_location_desc"
             android:layout_width="wrap_content"
             android:layout_below="@+id/tv_weather_desc"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_height="wrap_content"
             style="@style/french_grey14" />

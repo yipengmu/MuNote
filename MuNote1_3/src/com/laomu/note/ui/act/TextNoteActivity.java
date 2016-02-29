@@ -109,6 +109,13 @@ public class TextNoteActivity extends NoteBaseActivity{
 		initSpeech();
 	}
 
+	@Override
+	protected void onPause() {
+		super.onPause();
+
+		saveNote();
+	}
+
 	private void initToolbar() {
 		Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar);
 
@@ -280,6 +287,8 @@ public class TextNoteActivity extends NoteBaseActivity{
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
+
+		saveNote();
 	}
 
 	private void saveNote() {

@@ -26,5 +26,10 @@
     <string name="pref_title_iat_show">显示听写界面</string>
     <string name="title_activity_login">LoginAct</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="weibosdk_demo_token_has_existed">Token 仍在有效期内，无需再次登录。</string>
+    <string name="weibosdk_demo_token_to_string_format_1">Token：%1$s \n有效期：%2$s</string>
+    <string name="weibosdk_demo_toast_auth_success">授权成功</string>
+    <string name="weibosdk_demo_toast_auth_failed">授权失败</string>
+    <string name="weibosdk_demo_toast_auth_canceled">取消授权</string>
+
 </resources>
