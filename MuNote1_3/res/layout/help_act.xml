@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    android:background="@color/white"
+    android:background="@color/pale_blue"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <include
@@ -13,6 +14,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/setting_head"
+        android:background="@color/white"
         android:orientation="vertical"
         android:padding="10dp">
 

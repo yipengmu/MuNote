@@ -1,10 +1,13 @@
 package com.jeremyfeinstein.slidingmenu.lib.app;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
@@ -20,6 +23,12 @@ public class SlidingFragmentActivity extends FragmentActivity implements Sliding
 		super.onCreate(savedInstanceState);
 		mHelper = new SlidingActivityHelper(this);
 		mHelper.onCreate(savedInstanceState);
+
+		ViewGroup contentFrameLayout = (ViewGroup) findViewById(Window.ID_ANDROID_CONTENT);
+		View parentView = contentFrameLayout.getChildAt(0);
+		if (parentView != null && Build.VERSION.SDK_INT >= 14) {
+			parentView.setFitsSystemWindows(true);
+		}
 	}
 
 	/* (non-Javadoc)

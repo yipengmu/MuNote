@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_normal" >
+    android:fitsSystemWindows="true"
+    android:background="@color/pale_blue" >
 
     <include
         android:id="@+id/main_toolbar"
@@ -12,6 +13,7 @@
         android:id="@+id/lv_note_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:layout_above="@+id/main_bottom"
         android:layout_below="@+id/main_toolbar" >
     </ListView>
@@ -20,6 +22,7 @@
         android:id="@+id/main_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:layout_alignParentBottom="true" >
 
         <LinearLayout
