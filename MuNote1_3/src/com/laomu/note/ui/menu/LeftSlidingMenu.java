@@ -13,9 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.laomu.note.R;
+import com.laomu.note.module.login.LoginAct;
 import com.laomu.note.ui.act.CitySelectionActivity;
 import com.laomu.note.ui.act.MapNoteActivity;
 import com.laomu.note.ui.act.help.HelpAct;
@@ -41,6 +43,7 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
 
     public static String LEFT_MENU_TAG = "LeftSlidingMenu";
     private SlidingMenuShowLis mSMShowLis;
+    private ImageView iv_lmenu_logo;
 
     public LeftSlidingMenu() {
 
@@ -78,10 +81,12 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
         tv_map_mark = (TextView) view.findViewById(R.id.tv_map_mark);
         tv_setting = (TextView) view.findViewById(R.id.tv_setting);
         tv_feedback = (TextView) view.findViewById(R.id.tv_help_feedback);
+        iv_lmenu_logo = (ImageView) view.findViewById(R.id.iv_lmenu_logo);
 
         tv_setting.setOnClickListener(this);
         tv_feedback.setOnClickListener(this);
         tv_personal_clock.setOnClickListener(this);
+        iv_lmenu_logo.setOnClickListener(this);
         tv_map_mark.setOnClickListener(this);
     }
 
@@ -103,10 +108,18 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
             case R.id.tv_help_feedback:
                 intoFeedback();
                 break;
+            case R.id.iv_lmenu_logo:
+                intoLoginAct();
+                break;
 
             default:
                 break;
         }
+    }
+
+    private void intoLoginAct() {
+        Intent intent = new Intent(getActivity(), LoginAct.class);
+        getActivity().startActivity(intent);
     }
 
 

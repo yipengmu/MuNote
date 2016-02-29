@@ -57,6 +57,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <!-- xunfei end -->
     <application
         android:name=".ui.NoteApplication"
@@ -288,6 +289,10 @@
         </service>
         <service android:name="com.umeng.message.UmengIntentService" />
         <!-- umegn push end -->
+        <activity
+            android:name=".module.login.LoginAct"
+            android:label="@string/title_activity_login" >
+        </activity>
     </application>
 
 </manifest>

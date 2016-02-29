@@ -1,0 +1,83 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+
+    <include
+        android:id="@+id/main_toolbar"
+        layout="@layout/common_head_with_toolbar"
+        android:layout_below="@id/toolbar" />
+
+
+    <LinearLayout
+        android:id="@+id/info_input"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_toolbar"
+        android:gravity="center"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/tet_id_info"
+            android:hint="账号"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/tet_password_info"
+            android:layout_width="fill_parent"
+            android:hint="密码"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:id="@+id/tv_sign_up"
+            android:layout_width="fill_parent"
+            android:hint="注册"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="90dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ui_common_blue1_button_selector" />
+
+            <Button
+                android:layout_width="90dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="40dp"
+                android:background="@drawable/ui_common_blue1_button_selector" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_qq" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/icon_weibo" />
+
+    </LinearLayout>
+</RelativeLayout>
