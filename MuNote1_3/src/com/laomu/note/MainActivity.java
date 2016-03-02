@@ -1,6 +1,8 @@
 package com.laomu.note;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
@@ -91,4 +93,10 @@ public class MainActivity extends SlidingFragmentActivity {
 		return super.onKeyDown(keyCode, event);
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		Log.d("mainact","onActivityResult");
+	}
 }

@@ -17,7 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.laomu.note.R;
+import com.laomu.note.common.account.AccountManager;
 import com.laomu.note.module.login.LoginAct;
+import com.laomu.note.module.login.Oauth2AccessTokenWrapper;
 import com.laomu.note.ui.act.CitySelectionActivity;
 import com.laomu.note.ui.act.MapNoteActivity;
 import com.laomu.note.ui.act.help.HelpAct;
@@ -44,6 +46,7 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
     public static String LEFT_MENU_TAG = "LeftSlidingMenu";
     private SlidingMenuShowLis mSMShowLis;
     private ImageView iv_lmenu_logo;
+    private TextView tv_user_name;
 
     public LeftSlidingMenu() {
 
@@ -82,7 +85,7 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
         tv_setting = (TextView) view.findViewById(R.id.tv_setting);
         tv_feedback = (TextView) view.findViewById(R.id.tv_help_feedback);
         iv_lmenu_logo = (ImageView) view.findViewById(R.id.iv_lmenu_logo);
-
+        tv_user_name = (TextView) view.findViewById(R.id.tv_user_name);
         tv_setting.setOnClickListener(this);
         tv_feedback.setOnClickListener(this);
         tv_personal_clock.setOnClickListener(this);
@@ -119,9 +122,22 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
 
     private void intoLoginAct() {
         Intent intent = new Intent(getActivity(), LoginAct.class);
-        getActivity().startActivity(intent);
+        getActivity().startActivityForResult(intent,0,null);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(data.getBooleanExtra("loginresult",false)){
+            //login success
+
+            Oauth2AccessTokenWrapper account = AccountManager.getInstance().getOauthAccount();
+
+            tv_user_name.setText(account.getNickName());
+
+        }
+    }
 
     private void intoFeedback() {
         Intent intent = new Intent(getActivity(), HelpAct.class);

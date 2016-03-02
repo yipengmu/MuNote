@@ -1,39 +1,31 @@
 package com.laomu.note.module.login;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.laomu.note.R;
-import com.laomu.note.lib.AccessTokenKeeper;
+import com.laomu.note.common.account.AccountManager;
 import com.laomu.note.lib.weibo.Constants;
 import com.sina.weibo.sdk.auth.AuthInfo;
-import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.auth.WeiboAuthListener;
 import com.sina.weibo.sdk.auth.sso.SsoHandler;
 import com.sina.weibo.sdk.exception.WeiboException;
-import com.sina.weibo.sdk.register.mobile.SelectCountryActivity;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class LoginAct extends ActionBarActivity {
 
     ImageView icon_weibo;
     ImageView icon_qq;
 
-    private Oauth2AccessToken mAccessToken;
+    private Oauth2AccessTokenWrapper mAccessToken;
     private AuthInfo mAuthInfo;
     private SsoHandler mSsoHandler;
-    private TextView mTokenText;
 
 
     @Override
@@ -50,6 +42,7 @@ public class LoginAct extends ActionBarActivity {
         icon_weibo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "正在跳转到微博", Toast.LENGTH_SHORT).show();
                 weiboSSo();
             }
         });
@@ -97,39 +90,18 @@ public class LoginAct extends ActionBarActivity {
         }
 
         public void onComplete(Bundle values) {
-            mAccessToken = Oauth2AccessToken.parseAccessToken(values);
-            String phoneNum = mAccessToken.getPhoneNum();
-            if (mAccessToken.isSessionValid()) {
-                updateTokenView(false);
-                AccessTokenKeeper.writeAccessToken(LoginAct.this, mAccessToken);
-                Toast.makeText(LoginAct.this, R.string.weibosdk_demo_toast_auth_success, 0).show();
-                return;
-            }
-            String code = values.getString(SelectCountryActivity.EXTRA_COUNTRY_CODE);
-            String message = getString(R.string.weibosdk_demo_toast_auth_failed);
-            if (!TextUtils.isEmpty(code)) {
-                message = new StringBuilder(String.valueOf(message)).append("\nObtained the code: ").append(code).toString();
-            }
+            mAccessToken = new Oauth2AccessTokenWrapper().parseAccessTokenProxy(values);
+            AccountManager.getInstance().setOauthAccount(mAccessToken);
+
         }
 
         public void onCancel() {
-            Toast.makeText(LoginAct.this, R.string.weibosdk_demo_toast_auth_canceled, 1).show();
+            Toast.makeText(LoginAct.this, R.string.weibosdk_demo_toast_auth_canceled, Toast.LENGTH_SHORT).show();
         }
 
         public void onWeiboException(WeiboException e) {
-            Toast.makeText(LoginAct.this, "Auth exception : " + e.getMessage(), 1).show();
+            Toast.makeText(LoginAct.this, "Auth exception : " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void updateTokenView(boolean hasExisted) {
-        String date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date(this.mAccessToken.getExpiresTime()));
-        String format = getString(R.string.weibosdk_demo_token_to_string_format_1);
-        this.mTokenText.setText(String.format(format, new Object[]{this.mAccessToken.getToken(), date}));
-        String message = String.format(format, new Object[]{this.mAccessToken.getToken(), date});
-        if (hasExisted) {
-            message = getString(R.string.weibosdk_demo_token_has_existed) + "\n" + message;
-        }
-        this.mTokenText.setText(message);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -137,5 +109,12 @@ public class LoginAct extends ActionBarActivity {
         if (this.mSsoHandler != null) {
             this.mSsoHandler.authorizeCallBack(requestCode, resultCode, data);
         }
+
+        if(mAccessToken.isSessionValid()){
+            Toast.makeText(LoginAct.this, "登录成功",Toast.LENGTH_SHORT).show();
+        }
+
+        LoginAct.this.setResult(RESULT_OK, data.putExtra("loginresult",true)); /* 关闭activity */
+        LoginAct.this.finish();
     }
 }

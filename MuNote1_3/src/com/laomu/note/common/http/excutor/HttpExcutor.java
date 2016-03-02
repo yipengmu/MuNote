@@ -3,19 +3,6 @@
  */
 package com.laomu.note.common.http.excutor;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.zip.GZIPInputStream;
-
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -32,13 +19,22 @@ import com.laomu.note.common.http.HttpReqBean;
 import com.laomu.note.common.http.imp.HttpInterface;
 import com.laomu.note.common.http.response.BaiduWeatherResult;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.zip.GZIPInputStream;
+
 /**
  * @author luoyuan.myp
  * 
  */
 public class HttpExcutor extends BaseHttp implements HttpInterface {
 
-	private HttpClient mHttpClient = null;
 	private String mUrl;
 	private InputStream is;
 	private Handler mHttpInfoHandler;
@@ -72,9 +68,6 @@ public class HttpExcutor extends BaseHttp implements HttpInterface {
 		@Override
 		public void run() {
 
-			if (mHttpClient == null) {
-				mHttpClient = new DefaultHttpClient();
-			}
 			try {
 				// 创建一个URL对象
 				URL mURL = new URL(mUrl);
