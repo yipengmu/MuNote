@@ -85,12 +85,20 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
         tv_setting = (TextView) view.findViewById(R.id.tv_setting);
         tv_feedback = (TextView) view.findViewById(R.id.tv_help_feedback);
         iv_lmenu_logo = (ImageView) view.findViewById(R.id.iv_lmenu_logo);
+
         tv_user_name = (TextView) view.findViewById(R.id.tv_user_name);
+
+
         tv_setting.setOnClickListener(this);
         tv_feedback.setOnClickListener(this);
         tv_personal_clock.setOnClickListener(this);
         iv_lmenu_logo.setOnClickListener(this);
         tv_map_mark.setOnClickListener(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
@@ -129,14 +137,14 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(data.getBooleanExtra("loginresult",false)){
-            //login success
-
-            Oauth2AccessTokenWrapper account = AccountManager.getInstance().getOauthAccount();
-
-            tv_user_name.setText(account.getNickName());
-
-        }
+//        if(data.getBooleanExtra("loginresult",false)){
+//            //login success
+//
+//            Oauth2AccessTokenWrapper account = AccountManager.getInstance().getOauthAccount();
+//
+//            tv_user_name.setText(account.getNickName());
+//
+//        }
     }
 
     private void intoFeedback() {
@@ -186,4 +194,9 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
         startActivityForResult(intent, FLAG_FOR_MAP_VIEW);
     }
 
+    public void updateView(Oauth2AccessTokenWrapper oauthAccount) {
+        if(tv_user_name != null){
+            tv_user_name.setText(oauthAccount.getNickName() + "");
+        }
+    }
 }

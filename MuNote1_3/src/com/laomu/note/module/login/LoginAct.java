@@ -110,7 +110,7 @@ public class LoginAct extends ActionBarActivity {
             this.mSsoHandler.authorizeCallBack(requestCode, resultCode, data);
         }
 
-        if(mAccessToken.isSessionValid()){
+        if(mAccessToken.getAccessToken().isSessionValid()){
             Toast.makeText(LoginAct.this, "登录成功",Toast.LENGTH_SHORT).show();
         }
 

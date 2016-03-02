@@ -7,17 +7,14 @@ import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 /**
  * Created by ${yipengmu} on 16/3/2.
  */
-public class Oauth2AccessTokenWrapper extends Oauth2AccessToken {
-
+public class Oauth2AccessTokenWrapper {
     public String nickName;
-    public Oauth2AccessToken inner;
+    public Oauth2AccessToken accessToken;
 
     public Oauth2AccessTokenWrapper parseAccessTokenProxy(Bundle values){
-
-        Oauth2AccessTokenWrapper myTo = new Oauth2AccessTokenWrapper();
-        myTo.inner = Oauth2AccessToken.parseAccessToken(values);
+        accessToken = Oauth2AccessToken.parseAccessToken(values);
         nickName = values.getString("com.sina.weibo.intent.extra.NICK_NAME");
-        return myTo;
+        return this;
     }
 
 
@@ -27,5 +24,13 @@ public class Oauth2AccessTokenWrapper extends Oauth2AccessToken {
 
     public void setNickName(String nickName) {
         nickName = nickName;
+    }
+
+    public Oauth2AccessToken getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(Oauth2AccessToken accessToken) {
+        this.accessToken = accessToken;
     }
 }

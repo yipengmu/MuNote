@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+import com.laomu.note.common.account.AccountManager;
+import com.laomu.note.module.login.Oauth2AccessTokenWrapper;
 import com.laomu.note.ui.NoteMainFragment;
 import com.laomu.note.ui.imp.SlidingMenuShowLis;
 import com.laomu.note.ui.menu.LeftSlidingMenu;
@@ -21,7 +23,7 @@ public class MainActivity extends SlidingFragmentActivity {
 	private android.support.v4.app.FragmentTransaction frameManager;
 	private long mFirstime;
 	protected SlidingMenu sm;
-	
+	private LeftSlidingMenu mLeftMenu;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,8 @@ public class MainActivity extends SlidingFragmentActivity {
 	};
 	
 	private void initSlidingMenu(Bundle savedInstanceState) {
+		mLeftMenu = new LeftSlidingMenu();
+
 		sm = getSlidingMenu();
 		sm.setMode(SlidingMenu.LEFT);
 		sm.setShadowWidthRes(R.dimen.shadow_width);
@@ -70,7 +74,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		// 左侧menu
 		setBehindContentView(R.layout.menu_frame_ono);
 		 
-		frameManager.replace(R.id.menu_frame_one, new LeftSlidingMenu(), TAG_LEFT);
+		frameManager.replace(R.id.menu_frame_one, mLeftMenu, TAG_LEFT);
 
 		// 右侧menu
 //		sm.setSecondaryMenu(R.layout.menu_frame_two);
@@ -97,6 +101,13 @@ public class MainActivity extends SlidingFragmentActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
+		if(data.getExtras().getBoolean("loginresult")){
+			updateLeftMenuAccount(AccountManager.getInstance().getOauthAccount());
+		}
 		Log.d("mainact","onActivityResult");
+	}
+
+	private void updateLeftMenuAccount(Oauth2AccessTokenWrapper oauthAccount) {
+		mLeftMenu.updateView(oauthAccount);
 	}
 }
