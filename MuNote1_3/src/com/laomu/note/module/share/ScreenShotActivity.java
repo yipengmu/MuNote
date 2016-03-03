@@ -43,7 +43,7 @@ public class ScreenShotActivity extends NoteBaseActivity {
 
 
         if(mBitmap != null){
-            ivBitmap.setImageBackgroud(mBitmap);
+            ivBitmap.setBackground(new BitmapDrawable(mBitmap));
         }
 
         btnAddText.setOnClickListener(new View.OnClickListener() {
