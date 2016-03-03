@@ -18,8 +18,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.view.animation.AlphaAnimation;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -33,10 +31,12 @@ import com.laomu.note.common.http.excutor.HttpExcutor;
 import com.laomu.note.common.http.imp.HttpMethod;
 import com.laomu.note.common.http.response.BaiduWeatherResult;
 import com.laomu.note.common.lbs.LocationInfoManeger;
+import com.laomu.note.common.screenshot.ScreenshotManager;
 import com.laomu.note.common.speech.SpeechManeger;
 import com.laomu.note.data.database.OrmDbManeger;
 import com.laomu.note.data.model.LocationBean;
 import com.laomu.note.data.model.NoteBean;
+import com.laomu.note.module.share.ScreenShotActivity;
 import com.laomu.note.ui.NoteApplication;
 import com.laomu.note.ui.base.NoteBaseActivity;
 import com.laomu.note.ui.util.Utils;
@@ -81,6 +81,7 @@ public class TextNoteActivity extends NoteBaseActivity{
 		};
 	};
 	private MenuItem mMenuItem;
+	private View rlNoteTextContainer;
 
 
 	@Override
@@ -262,6 +263,7 @@ public class TextNoteActivity extends NoteBaseActivity{
 		mLocationTextViewDesc = (TextView) findViewById(R.id.tv_location_desc);
 		mWeatherTextViewDesc = (TextView) findViewById(R.id.tv_weather_desc);
 		iv_weather_icon = (ImageView) findViewById(R.id.iv_weather_icon);
+		rlNoteTextContainer = findViewById(R.id.rl_note_text_container);
 	}
 
 	/** 注册定位回调 */
@@ -430,7 +432,18 @@ public class TextNoteActivity extends NoteBaseActivity{
 	};
 
 	private void shareNote() {
+		Bitmap bitmap = takeScreenShotEvent();
 
+		Intent intent = new Intent(TextNoteActivity.this,ScreenShotActivity.class);
+		ScreenshotManager.setScreenShotBitmap(bitmap);
+		startActivity(intent);
+
+	}
+
+	private Bitmap takeScreenShotEvent() {
+		rlNoteTextContainer.setDrawingCacheEnabled(true);
+
+		return rlNoteTextContainer.getDrawingCache();
 	}
 
 }

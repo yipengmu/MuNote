@@ -18,9 +18,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.laomu.note.R;
-import com.laomu.note.common.Camera.CameraSurfaceView;
-import com.laomu.note.common.Camera.DataLoadThread;
-import com.laomu.note.common.Camera.ImageManeger;
+import com.laomu.note.common.camera.CameraSurfaceView;
+import com.laomu.note.common.camera.DataLoadThread;
+import com.laomu.note.common.camera.ImageManeger;
 import com.laomu.note.ui.base.NoteBaseActivity;
 
 /**

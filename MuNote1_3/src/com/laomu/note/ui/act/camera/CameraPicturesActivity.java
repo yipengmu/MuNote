@@ -18,7 +18,7 @@ import android.widget.GridView;
 import android.widget.RelativeLayout;
 
 import com.laomu.note.R;
-import com.laomu.note.common.Camera.DataLoadThread;
+import com.laomu.note.common.camera.DataLoadThread;
 import com.laomu.note.ui.adapter.PicturesGridViewAdatper;
 import com.laomu.note.ui.base.NoteBaseActivity;
 import com.laomu.note.ui.fragment.ImagePictureFragment;

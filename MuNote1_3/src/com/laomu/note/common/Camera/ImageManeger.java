@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.laomu.note.common.Camera;
+package com.laomu.note.common.camera;
 
 import java.io.File;
 import java.util.List;

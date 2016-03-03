@@ -6,4 +6,4 @@
  *
  * 2014-5-20
  */
-package com.laomu.note.common.Camera;
+package com.laomu.note.common.camera;

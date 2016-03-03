@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.laomu.note.R;
 import com.laomu.note.common.MuLog;
-import com.laomu.note.common.Camera.ImageManeger;
+import com.laomu.note.common.camera.ImageManeger;
 import com.laomu.note.data.model.ImageModel;
 
 /**

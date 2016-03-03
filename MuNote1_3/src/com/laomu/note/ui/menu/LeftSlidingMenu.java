@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.laomu.note.MainActivity;
 import com.laomu.note.R;
 import com.laomu.note.common.account.AccountManager;
 import com.laomu.note.module.login.LoginAct;
@@ -47,9 +48,12 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
     private SlidingMenuShowLis mSMShowLis;
     private ImageView iv_lmenu_logo;
     private TextView tv_user_name;
+    private MainActivity mMainActivity;
+    public LeftSlidingMenu(MainActivity mainActivity) {
+        mMainActivity = mainActivity;
+    }
 
     public LeftSlidingMenu() {
-
     }
 
     @Override
@@ -130,7 +134,7 @@ public class LeftSlidingMenu extends NoteBaseFragment implements OnClickListener
 
     private void intoLoginAct() {
         Intent intent = new Intent(getActivity(), LoginAct.class);
-        getActivity().startActivityForResult(intent,0,null);
+        getActivity().startActivityForResult(intent,mMainActivity.REQ_CODE_LOGIN,null);
     }
 
     @Override

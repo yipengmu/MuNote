@@ -117,6 +117,7 @@
         <activity android:name=".ui.act.ad.JumiAdActivity" />
         <activity android:name=".ui.act.IatDemo" />
 
+        <activity android:name=".module.share.ScreenShotActivity" />
         <!-- ###################注册SDK使用的Activity###################### -->
         <!-- 分享编辑页 -->
         <activity

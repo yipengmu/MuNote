@@ -24,7 +24,8 @@ public class MainActivity extends SlidingFragmentActivity {
 	private long mFirstime;
 	protected SlidingMenu sm;
 	private LeftSlidingMenu mLeftMenu;
-	
+	public final static int REQ_CODE_LOGIN = 0;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,7 +63,7 @@ public class MainActivity extends SlidingFragmentActivity {
 	};
 	
 	private void initSlidingMenu(Bundle savedInstanceState) {
-		mLeftMenu = new LeftSlidingMenu();
+		mLeftMenu = new LeftSlidingMenu(MainActivity.this);
 
 		sm = getSlidingMenu();
 		sm.setMode(SlidingMenu.LEFT);
@@ -101,10 +102,12 @@ public class MainActivity extends SlidingFragmentActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		if(data.getExtras().getBoolean("loginresult")){
-			updateLeftMenuAccount(AccountManager.getInstance().getOauthAccount());
+		if(requestCode == REQ_CODE_LOGIN){
+			if(data.getExtras().getBoolean("loginresult")){
+				updateLeftMenuAccount(AccountManager.getInstance().getOauthAccount());
+			}
+			Log.d("mainact","onActivityResult");
 		}
-		Log.d("mainact","onActivityResult");
 	}
 
 	private void updateLeftMenuAccount(Oauth2AccessTokenWrapper oauthAccount) {
