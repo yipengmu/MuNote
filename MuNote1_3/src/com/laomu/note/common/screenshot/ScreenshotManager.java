@@ -1,6 +1,10 @@
 package com.laomu.note.common.screenshot;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.view.View;
+
+import com.laomu.note.ui.NoteApplication;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -9,20 +13,54 @@ import java.io.FileOutputStream;
  * Created by ${yipengmu} on 16/3/3.
  */
 public class ScreenshotManager {
-    private static Bitmap screenShotBitmap;
+    private static Bitmap screenShotBgBitmap;
+    private static Bitmap editTextUIBitmap;
 
-    public static Bitmap getScreenShotBitmap() {
-        return screenShotBitmap;
+    public static Bitmap getscreenShotBgBitmap() {
+        return screenShotBgBitmap;
     }
 
-    public static void setScreenShotBitmap(Bitmap screenShotBitmap) {
-        ScreenshotManager.screenShotBitmap = screenShotBitmap;
+    public static void setscreenShotBgBitmap(Bitmap screenShotBitmap) {
+        ScreenshotManager.screenShotBgBitmap = screenShotBitmap;
+    }
+
+    public static Bitmap getEditTextUIBitmap() {
+        return editTextUIBitmap;
+    }
+
+    public static void setEditTextUIBitmap(Bitmap editTextUIBitmap) {
+        ScreenshotManager.editTextUIBitmap = editTextUIBitmap;
+    }
+
+
+    /**
+     * 保存图片
+     */
+    public static boolean saveScreenShotToSDCard(Bitmap bitmap) {
+        return saveToSDCard(bitmap, getSreenShotFilePath());
+    }
+
+    public static String getSreenShotFilePath() {
+//        return  NoteApplication.appContext.getPackageResourcePath()+
+//                File.separator + "sreenshot" + File.separator + "ss.png";
+
+        return  "/sdcard/react/ss1.png";
+    }
+
+    public static Bitmap getBitmapFromView(View v) {
+        if (v == null) {
+            return null;
+        }
+        Bitmap screenshot = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(screenshot);
+        v.draw(c);
+        return screenshot;
     }
 
     /**
      * 保存图片
      */
-    public boolean saveToSDCard(Bitmap bitmap,String filePath) {
+    public static boolean saveToSDCard(Bitmap bitmap,String filePath) {
         try {
             File file = new File(filePath);
             createParentDirs(file);

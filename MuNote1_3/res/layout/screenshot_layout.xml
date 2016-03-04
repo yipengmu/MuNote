@@ -26,15 +26,16 @@
             android:scaleType="center"
             android:layout_centerInParent="true"/>
 
-        <EditText
-            android:background="#88ff0000"
+        <com.laomu.note.common.screenshot.view.SSEditText
+            android:background="@drawable/ui_red_edittext_bg_shape"
             android:id="@+id/et_tag_text"
             android:layout_width="200dp"
             android:hint="轻触编辑文案"
-            android:visibility="gone"
+            android:textColorHint="@color/red"
             android:gravity="center"
             android:layout_centerInParent="true"
             android:textColor="@color/red"
+            android:visibility="invisible"
             android:textSize="20dp"
             android:layout_height="100dp" />
 

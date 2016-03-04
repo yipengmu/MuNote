@@ -4,18 +4,19 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.TextView;
 
-import com.laomu.note.R;
-import com.laomu.note.ui.NoteApplication;
+import com.laomu.note.common.MuLog;
+import com.laomu.note.common.screenshot.ScreenshotManager;
+import com.laomu.note.module.share.ScreenShotActivity;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,6 @@ public class ScreenshotView extends TextView {
     private float mX, mY;// 临时点坐标
     private static final float TOUCH_TOLERANCE = 4;
 
-    private String mSealText = "轻触编辑文案";
     private Paint mSealPaint;
 
     // 保存Path路径的集合,用List集合来模拟栈
@@ -41,7 +41,13 @@ public class ScreenshotView extends TextView {
     private boolean isInit = false;// 用来标记保证只被初始化一次
 
     // 布局高和宽
-    private int screenWidth = 500, screenHeight = 500;
+    private float screenWidth = 500, screenHeight = 500;
+
+    // 文案编辑框起始X，起始Y
+    private float mSealRectStartX = 0, mSealRectStartY = 0;
+
+    private SealRectHolder mSealrectHolder;
+    private SealTextClickListener mSealTextClickListener;
 
     public ScreenshotView(Context context) {
         super(context);
@@ -55,17 +61,25 @@ public class ScreenshotView extends TextView {
         super(context, attrs, defStyle);
     }
 
-    public void init(int w, int h) {
+    public void init(float w, float h) {
         // 保证只被初始化一次就够了
         if (!isInit) {
             screenWidth = w;
             screenHeight = h;
 
-            bitmapBackgroud = Bitmap.createBitmap(screenWidth, screenHeight,
+            bitmapBackgroud = Bitmap.createBitmap((int)screenWidth, (int)screenHeight,
                     Bitmap.Config.ARGB_8888);
 
             // 保存一次一次绘制出来的图形
             mCanvas = new Canvas(bitmapBackgroud);
+
+
+            mSealPaint = new Paint();
+            mSealPaint.setColor(Color.RED);
+            mSealPaint.setStyle(Paint.Style.FILL);
+            mSealPaint.setTextSize(40);
+            mSealPaint.setAntiAlias(true);
+
 
             mDoodlePaint = new Paint();
             mDoodlePaint.setAntiAlias(true);
@@ -78,28 +92,41 @@ public class ScreenshotView extends TextView {
             isInit = true;
             // 保持一个path,支持多次手势涂鸦重叠
             mPath = new Path();
+
+            try {
+                bitmapSeal = BitmapFactory.decodeStream(new FileInputStream(ScreenshotManager.getSreenShotFilePath()));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+
+            mSealrectHolder = new SealRectHolder();
+            mSealrectHolder.startX = mSealRectStartX;
+            mSealrectHolder.startY = mSealRectStartY;
+            mSealrectHolder.rectHeight = bitmapSeal.getHeight();
+            mSealrectHolder.rectWidth = bitmapSeal.getWidth();
+
+            mSealRectStartX = getX();
+            mSealRectStartY = getTop();
+
+            MuLog.logd("mSealRectStartX= " + mSealRectStartX);
+            MuLog.logd("mSealRectStartY= " + mSealRectStartY);
+
         }
     }
 
     @Override
     public void onDraw(Canvas canvas) {
-//		int color = getResources().getColor(R.color.white);
-//		canvas.drawColor(color);
-
-        Bitmap bmp = BitmapFactory.decodeResource(NoteApplication.appContext.getResources(), R.drawable.ic_launcher);
-
-        if (bitmapBackgroud == null) {
-            canvas.drawBitmap(bmp, 0, 0, null);
-        } else {
-            canvas.drawBitmap(bitmapBackgroud, 0, 0, null);
+        //盖章文案绘制
+        if (bitmapSeal != null) {
+            canvas.drawBitmap(bitmapSeal, mSealRectStartX, mSealRectStartY, null);
         }
 
-        // 将前面已经画过得显示出来
-//        canvas.drawBitmap(bmp, 0, 0, null);
+        // 涂鸦绘制
         if (mPath != null) {
-            // 实时的显示
             canvas.drawPath(mPath, mDoodlePaint);
         }
+
     }
 
     // 布局的大小改变时，就会调用该方法
@@ -138,6 +165,12 @@ public class ScreenshotView extends TextView {
 
     // 按下
     private void touch_start(float x, float y) {
+
+        // 每一次记录的路径对象是不一样的
+        dp = new DrawPath();
+        dp.path = mPath;
+        dp.paint = mDoodlePaint;
+
         mPath.moveTo(x, y);
         mX = x;
         mY = y;
@@ -166,7 +199,7 @@ public class ScreenshotView extends TextView {
 
     // 重新绘制Path中的画线路径
     private void redrawOnBitmap() {
-        bitmapBackgroud = Bitmap.createBitmap(screenWidth, screenHeight,
+        bitmapBackgroud = Bitmap.createBitmap((int)screenWidth, (int)screenHeight,
                 Bitmap.Config.ARGB_8888);
         mCanvas.setBitmap(bitmapBackgroud);// 重新设置画布，相当于清空画布
 
@@ -184,34 +217,62 @@ public class ScreenshotView extends TextView {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                // 每一次记录的路径对象是不一样的
-                dp = new DrawPath();
-                dp.path = mPath;
-                dp.paint = mDoodlePaint;
                 touch_start(x, y);
-                invalidate();
+                checkSealTextClick(x, y);
                 break;
             case MotionEvent.ACTION_MOVE:
                 touch_move(x, y);
-                invalidate();
                 break;
             case MotionEvent.ACTION_UP:
                 touch_up();
-                invalidate();
                 break;
         }
 
+        invalidate();
         return true;
+    }
+
+    private void checkSealTextClick(float x, float y) {
+        if (mSealTextClickListener == null) {
+            return;
+        }
+
+        //判断当前按下触发的是否是落在编辑框区域中
+        if (x > mSealrectHolder.startX && x < mSealrectHolder.startX + mSealrectHolder.rectWidth &&
+                y > mSealrectHolder.startY && y < mSealrectHolder.startY + mSealrectHolder.rectHeight) {
+
+            //如果在区域内，则进入此逻辑：隐藏sealbitmap,展示EditText标准编辑框
+            mSealTextClickListener.onTextRectInSideClick();
+
+        } else if (x > 0 && x < mSealrectHolder.startX + mSealrectHolder.rectWidth && (y > 0 && y < mSealrectHolder.startY || (y > mSealrectHolder.startY + mSealrectHolder.rectHeight)) ||
+                y > mSealrectHolder.startY && ((x > 0 && x < mSealrectHolder.startX) || (x > mSealrectHolder.startX + mSealrectHolder.rectWidth))) {
+
+            //如果在区域外，则进入此逻辑：隐藏sealbitmap,展示EditText标准编辑框
+            mSealTextClickListener.onTextRectOutSideClick();
+
+            //隐藏seal区域bitmap绘制
+            bitmapSeal = null;
+        }
     }
 
     public void setImageBackgroud(Bitmap bitmap) {
         bitmapBackgroud = bitmap;
-        invalidate();
     }
 
-    private class DrawPath {
-        public Path path;// 路径
-        public Paint paint;// 画笔
+    public void setSealTextBitmap(Bitmap editTextUiBitmap) {
+        bitmapSeal = editTextUiBitmap;
+    }
+
+    public void setTextClickListener(SealTextClickListener listener) {
+        mSealTextClickListener = listener;
+    }
+
+    public void setSealTextLayout(float startX,float startY){
+
+        mSealRectStartX = startX;
+        mSealRectStartY = startY;
+
+        invalidate();
     }
 
 }

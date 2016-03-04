@@ -435,7 +435,7 @@ public class TextNoteActivity extends NoteBaseActivity{
 		Bitmap bitmap = takeScreenShotEvent();
 
 		Intent intent = new Intent(TextNoteActivity.this,ScreenShotActivity.class);
-		ScreenshotManager.setScreenShotBitmap(bitmap);
+		ScreenshotManager.setscreenShotBgBitmap(bitmap);
 		startActivity(intent);
 
 	}
