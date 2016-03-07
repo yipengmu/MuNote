@@ -22,45 +22,27 @@ public class SealTouchView extends ImageView {
     private Paint mSealPaint;
 
     // 布局高和宽
-    private float screenWidth = 500, screenHeight = 500;
-
-    private SealRectHolder mSealrectHolder;
+    private SealRectHolder mHolder;
     private SealTextClickListener mSealTextClickListener;
-    private Canvas mCanvas;
-
-    public RectF detectRotateRect;
-    public RectF detectDeleteRect;
-
 
     public SealTouchView(Context context) {
         super(context);
 
-        // view初始化
-        init(screenWidth, screenHeight);
+        init();
     }
 
     public SealTouchView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-        // view初始化
-        init(screenWidth, screenHeight);
+        init();
     }
 
     public SealTouchView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
-        // view初始化
-        init(screenWidth, screenHeight);
+        init();
     }
 
-    public void init(float w, float h) {
-        mSealrectHolder = new SealRectHolder();
-        mSealrectHolder.bitmapSeal = Bitmap.createBitmap((int) screenWidth, (int) screenHeight,
-                Bitmap.Config.ARGB_8888);
-
-        // 保存一次一次绘制出来的图形
-        mCanvas = new Canvas(mSealrectHolder.bitmapSeal);
-
+    public void init() {
+        mHolder = new SealRectHolder();
         mSealPaint = new Paint();
         mSealPaint.setColor(Color.RED);
         mSealPaint.setStyle(Paint.Style.FILL);
@@ -68,26 +50,34 @@ public class SealTouchView extends ImageView {
         mSealPaint.setAntiAlias(true);
 
 
-        mSealrectHolder.bitmapSeal = ScreenshotManager.getEditTextUIBitmap();
+        mHolder.bitmapSeal = ScreenshotManager.getEditTextUIBitmap();
 
-        mSealrectHolder = new SealRectHolder();
+        mHolder = new SealRectHolder();
 
 
     }
 
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+        mHolder.setContainerLayout(getWidth(),getHeight());
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        MuLog.logd("onDraw bitmapSeal = " + mSealrectHolder.bitmapSeal.getWidth() + " " + mSealrectHolder.bitmapSeal.getHeight());
-        MuLog.logd("onDraw bitmapSeal RatateIcon= " + mSealrectHolder.getRatateIconX() + " " + mSealrectHolder.getRatateIconY());
+        MuLog.logd("onDraw SealTouchView = " + getWidth() + " " + getHeight());
+        MuLog.logd("onDraw bitmapSeal = " + mHolder.bitmapSeal.getWidth() + " " + mHolder.bitmapSeal.getHeight());
+        MuLog.logd("onDraw bitmapSeal RatateIcon= " + mHolder.getRatateIconX() + " " + mHolder.getRatateIconY());
 
-        if (mSealrectHolder.bitmapSeal != null) {
-            canvas.drawBitmap(mSealrectHolder.bitmapSeal, 0, 0, null);
+        if (mHolder.bitmapSeal != null) {
+//            canvas.drawBitmap(mHolder.bitmapSeal, mHolder.getSealX(getWidth()), mHolder.getSealY(getHeight()), null);
+
+            canvas.drawBitmap(mHolder.bitmapSeal,0 ,0, null);
 
             //绘制 删除x 和 旋转箭头 按钮
-            canvas.drawBitmap(mSealrectHolder.bitmapDel, mSealrectHolder.getDelateIconX(), mSealrectHolder.getDelateIconY(), null);
-
-            canvas.drawBitmap(mSealrectHolder.bitmapRotate, mSealrectHolder.getRatateIconX(), mSealrectHolder.getRatateIconY(), null);
+//            canvas.drawBitmap(mHolder.bitmapDel, mHolder.getDelateIconX(), mHolder.getDelateIconY(), null);
+//
+//            canvas.drawBitmap(mHolder.bitmapRotate, mHolder.getRatateIconX(), mHolder.getRatateIconY(), null);
         }
     }
 
@@ -100,19 +90,23 @@ public class SealTouchView extends ImageView {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 touchDown(x, y);
-                checkSealTextClick(x, y);
+//                checkSealTextClick(x, y);
                 break;
             case MotionEvent.ACTION_MOVE:
-//                touch_move(x, y);
+                touchMove(x, y);
                 break;
             case MotionEvent.ACTION_UP:
 //                touch_up();
                 break;
         }
-        MuLog.logd("onTouchEvent event.getX()=" + event.getX() + " event.getY()=" + event.getY());
+        MuLog.logd("onTouchEvent event.getX()=" + x+ " event.getY()=" + y);
 
         invalidate();
         return true;
+    }
+
+    private void touchMove(float x, float y) {
+
     }
 
     private void touchDown(float x, float y) {
@@ -125,7 +119,7 @@ public class SealTouchView extends ImageView {
         }
 
         //判断当前按下触发的是否是落在编辑框区域中
-        if (x > 0 && x < mSealrectHolder.getSealWidth() && (y > 0 && y < mSealrectHolder.getSealHeight())) {
+        if (x > 0 && x < mHolder.getSealWidth() && (y > 0 && y < mHolder.getSealHeight())) {
 
             MuLog.logd("onTouchEvent onTextRectInSideClick" );
             //如果在区域内，则进入此逻辑：隐藏sealbitmap,展示EditText标准编辑框
@@ -152,7 +146,7 @@ public class SealTouchView extends ImageView {
      * set 盖章 bitmap
      */
     public void setSealBitmap(Bitmap bitmap) {
-        mSealrectHolder.bitmapSeal = bitmap;
+        mHolder.bitmapSeal = bitmap;
         invalidate();
     }
 }

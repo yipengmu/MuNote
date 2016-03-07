@@ -18,6 +18,8 @@ public class SealRectHolder {
     public Bitmap bitmapSeal;
     public Bitmap bitmapDel;
     public Bitmap bitmapRotate;
+    private int mContainerWidth;
+    private int mContainerHeight;
 
     public SealRectHolder() { // 导入工具按钮位图
         if (bitmapDel == null) {
@@ -49,22 +51,37 @@ public class SealRectHolder {
 
     public float getDelateIconX() {
 
-        return startX;
+        return mContainerWidth != 0 ? getSealX():0;
     }
 
     public float getDelateIconY() {
-        return startY;
+        return mContainerHeight != 0 ? getSealY():0;
     }
 
 
     public float getSealWidth() {
 
-        return bitmapSeal.getWidth();
+        return mContainerWidth != 0 ? bitmapSeal.getWidth() + getSealX():0;
     }
 
     public float getSealHeight() {
-        return bitmapSeal.getHeight();
+        return mContainerHeight != 0 ? bitmapSeal.getHeight() + getSealY():0;
     }
 
 
+    public float getSealX() {
+        return (mContainerWidth-getSealWidth())/2;
+    }
+
+
+    public float getSealY() {
+        return (mContainerHeight-getSealHeight())/2;
+    }
+
+    public void setContainerLayout(int width, int height) {
+        mContainerHeight = height;
+        mContainerWidth = width;
+
+        MuLog.logd("setContainerLayout width=" + width + " height=" + height);
+    }
 }

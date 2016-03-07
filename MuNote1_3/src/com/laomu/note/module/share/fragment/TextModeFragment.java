@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -85,6 +86,15 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
             }
         });
 
+        rl_screenshot_textedit_container.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                MuLog.logd("container onTouchEvent event.getX()=" + event.getX() + " event.getY()=" + event.getY());
+                return false;
+            }
+        });
+
         mSealTouchView.setTextClickListener(this);
     }
 
@@ -154,7 +164,6 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
 
         MuLog.logd("onTextRectOutSideClick");
         mEtTagText.setVisibility(View.GONE);
-        mEtTagText.requestFocus();
     }
 
 
@@ -162,7 +171,6 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
     public void onTextRectInSideClick() {
         MuLog.logd("onTextRectInSideClick");
         mEtTagText.setVisibility(View.VISIBLE);
-        mEtTagText.clearFocus();
     }
 
 
