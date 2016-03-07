@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import com.laomu.note.common.MuLog;
 import com.laomu.note.common.screenshot.ScreenshotManager;
 import com.laomu.note.common.screenshot.view.SealTextClickListener;
+import com.laomu.note.module.share.type.TouchModeEnum;
 
 /**
  * Created by ${yipengmu} on 16/3/7.
@@ -19,6 +22,8 @@ import com.laomu.note.common.screenshot.view.SealTextClickListener;
 public class SealTouchView extends ImageView {
 
     private Paint mSealPaint;
+    //默认为拖拽平移类型
+    private TouchModeEnum touchModeEnum = TouchModeEnum.MOVE;
 
     // 布局高和宽
     private SealRectHolder mHolder;
@@ -48,7 +53,6 @@ public class SealTouchView extends ImageView {
         mSealPaint.setTextSize(40);
         mSealPaint.setAntiAlias(true);
 
-
         mHolder.bitmapSeal = ScreenshotManager.getEditTextUIBitmap();
 
         mHolder = new SealRectHolder();
@@ -67,8 +71,8 @@ public class SealTouchView extends ImageView {
         MuLog.logd("onDraw SealTouchView = " + getWidth() + " " + getHeight());
         MuLog.logd("onDraw bitmapSeal = " + mHolder.bitmapSeal.getWidth() + " " + mHolder.bitmapSeal.getHeight());
         MuLog.logd("onDraw bitmapSeal RatateIcon= " + mHolder.getRatateIconX() + " " + mHolder.getRatateIconY());
-
-        if (mHolder.bitmapSeal != null) {
+        clearCanvas(canvas);
+        if (touchModeEnum != TouchModeEnum.DELETE) {
             canvas.drawBitmap(mHolder.bitmapSeal, mHolder.getSealX(), mHolder.getSealY(), null);
 
             //绘制 删除x 和 旋转箭头 按钮
@@ -76,6 +80,19 @@ public class SealTouchView extends ImageView {
 
             canvas.drawBitmap(mHolder.bitmapRotate, mHolder.getRatateIconX(), mHolder.getRatateIconY(), null);
         }
+
+        clearTouchModeEnum();
+    }
+
+    private void clearCanvas(Canvas canvas) {
+        Paint paint = new Paint();
+          paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+          canvas.drawPaint(paint);
+          paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC));
+    }
+
+    private void clearTouchModeEnum() {
+        touchModeEnum = TouchModeEnum.MOVE;
     }
 
 
@@ -104,17 +121,17 @@ public class SealTouchView extends ImageView {
 
     private void touchMove(float x, float y) {
         //计算x y 的差量delta值
-        if(Float.floatToIntBits(mHolder.getLastEventX()) == Float.floatToIntBits(0)){
+        if (Float.floatToIntBits(mHolder.getLastEventX()) == Float.floatToIntBits(0)) {
             mHolder.setLastEventX(x);
         }
-        if(x != mHolder.getSealX()){
+        if (x != mHolder.getSealX()) {
             mHolder.setDeltaX(x - mHolder.getLastEventX());
         }
 
-        if(Float.floatToIntBits(mHolder.getLastEventY()) == Float.floatToIntBits(0)){
+        if (Float.floatToIntBits(mHolder.getLastEventY()) == Float.floatToIntBits(0)) {
             mHolder.setLastEventY(y);
         }
-        if(y != mHolder.getSealY()){
+        if (y != mHolder.getSealY()) {
 
             mHolder.setDeltaY(y - mHolder.getLastEventY());
         }
@@ -124,6 +141,14 @@ public class SealTouchView extends ImageView {
     }
 
     private void touchDown(float x, float y) {
+        if (x > mHolder.getDelateIconX() && x < mHolder.getDelateIconX() + mHolder.bitmapDel.getWidth() &&
+                y > mHolder.getDelateIconY() && y < mHolder.getDelateIconY() + mHolder.bitmapDel.getHeight()) {
+            touchModeEnum = TouchModeEnum.DELETE;
+        }
+
+        if (x == mHolder.getDelateIconX() && y == mHolder.getDelateIconY()) {
+            touchModeEnum = TouchModeEnum.ROTATE_OR_SCALE;
+        }
     }
 
     private void checkSealTextClick(float x, float y) {
