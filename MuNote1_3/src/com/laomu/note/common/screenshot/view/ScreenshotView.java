@@ -9,21 +9,23 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.laomu.note.common.MuLog;
 import com.laomu.note.common.screenshot.ScreenshotManager;
-import com.laomu.note.module.share.ScreenShotActivity;
+import com.laomu.note.module.share.views.SealRectHolder;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScreenshotView extends TextView {
+public class ScreenshotView extends ImageView {
     private Bitmap bitmapBackgroud;
     private Bitmap bitmapDoodle;
     private Bitmap bitmapSeal;
+    private Paint mSealPaint;
+    private SSEditText mSSEditText;
 
     private Canvas mCanvas;
     private Path mPath;
@@ -31,7 +33,6 @@ public class ScreenshotView extends TextView {
     private float mX, mY;// 临时点坐标
     private static final float TOUCH_TOLERANCE = 4;
 
-    private Paint mSealPaint;
 
     // 保存Path路径的集合,用List集合来模拟栈
     private static List<DrawPath> savePath;
@@ -51,14 +52,23 @@ public class ScreenshotView extends TextView {
 
     public ScreenshotView(Context context) {
         super(context);
+
+        // view初始化
+        init(screenWidth, screenHeight);
     }
 
     public ScreenshotView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        // view初始化
+        init(screenWidth, screenHeight);
     }
 
     public ScreenshotView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+
+        // view初始化
+        init(screenWidth, screenHeight);
     }
 
     public void init(float w, float h) {
@@ -94,25 +104,33 @@ public class ScreenshotView extends TextView {
             mPath = new Path();
 
             try {
-                bitmapSeal = BitmapFactory.decodeStream(new FileInputStream(ScreenshotManager.getSreenShotFilePath()));
+                bitmapSeal = BitmapFactory.decodeStream(new FileInputStream(ScreenshotManager.getSreenShotFilePath(null)));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
 
 
             mSealrectHolder = new SealRectHolder();
-            mSealrectHolder.startX = mSealRectStartX;
-            mSealrectHolder.startY = mSealRectStartY;
-            mSealrectHolder.rectHeight = bitmapSeal.getHeight();
-            mSealrectHolder.rectWidth = bitmapSeal.getWidth();
+
 
             mSealRectStartX = getX();
             mSealRectStartY = getTop();
+
 
             MuLog.logd("mSealRectStartX= " + mSealRectStartX);
             MuLog.logd("mSealRectStartY= " + mSealRectStartY);
 
         }
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
     }
 
     @Override
@@ -238,20 +256,21 @@ public class ScreenshotView extends TextView {
         }
 
         //判断当前按下触发的是否是落在编辑框区域中
-        if (x > mSealrectHolder.startX && x < mSealrectHolder.startX + mSealrectHolder.rectWidth &&
-                y > mSealrectHolder.startY && y < mSealrectHolder.startY + mSealrectHolder.rectHeight) {
+        //判断当前按下触发的是否是落在编辑框区域中
+        if (x > 0 && x < mSealrectHolder.getSealWidth() + mSealrectHolder.bitmapSeal.getWidth() &&
+                y > mSealrectHolder.getSealHeight() && y < mSealrectHolder.getSealHeight() + mSealrectHolder.bitmapSeal.getHeight()) {
 
             //如果在区域内，则进入此逻辑：隐藏sealbitmap,展示EditText标准编辑框
             mSealTextClickListener.onTextRectInSideClick();
 
-        } else if (x > 0 && x < mSealrectHolder.startX + mSealrectHolder.rectWidth && (y > 0 && y < mSealrectHolder.startY || (y > mSealrectHolder.startY + mSealrectHolder.rectHeight)) ||
-                y > mSealrectHolder.startY && ((x > 0 && x < mSealrectHolder.startX) || (x > mSealrectHolder.startX + mSealrectHolder.rectWidth))) {
+        } else if (x > 0 && x < mSealrectHolder.getSealWidth() + mSealrectHolder.bitmapSeal.getWidth() && (y > 0 && y < mSealrectHolder.getSealHeight() || (y > mSealrectHolder.getSealHeight() + mSealrectHolder.bitmapSeal.getHeight())) ||
+                y > mSealrectHolder.getSealHeight() && ((x > 0 && x < mSealrectHolder.getSealWidth()) || (x > mSealrectHolder.getSealWidth() + mSealrectHolder.bitmapSeal.getWidth()))) {
 
             //如果在区域外，则进入此逻辑：隐藏sealbitmap,展示EditText标准编辑框
             mSealTextClickListener.onTextRectOutSideClick();
 
             //隐藏seal区域bitmap绘制
-            bitmapSeal = null;
+//            bitmapSeal = null;
         }
     }
 

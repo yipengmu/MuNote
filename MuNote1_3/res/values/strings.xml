@@ -11,11 +11,11 @@
     <string name="personnal_clock">个人闹钟</string>
     <string name="personnal_music">随身音乐</string>
     <string name="map_marks">地图足迹</string>
-   
+
     <string name="app_about_us">  \t本app最初只是为了做一个小小的手机记事本。\n\t为了记录女朋友每天让我做的事情清单，并且保存相关事情的地理位置，以方便我后期好对女朋友的任何时刻的拷问对答如流而产生开发的念头的。\n\t软件并不复杂，但希望为您们的日常的工作和生活带来和方便，祝你们幸福!\n\n\t我每天都会关注你们的反馈，如果有任何你们希望的功能，通过反馈模块告诉我，我会在下一个版本中尽量为你们加进去的哈~\n\n\t一起加油!</string>
     <string name="ad_download_fee">wifi:\t下载有奖,强势返利!   当你每下载10次应用并成功启动后，请在用户反馈里面联系我们，我们就会在7个工作日内，给你返利3元钱到支付宝或银行卡。多下载多返利，利用大家的力量使用广告佣金返利模式，让大家都能赚钱！                                                                                 下载有奖哦           当你每下载10次应用并成功启动后，请在用户反馈里面联系我们，我们就会在7个工作日内，给你返利3元钱到支付宝或银行卡。多下载多返利，利用大家的力量使用广告佣金返利模式，让大家都能赚钱！   </string>
 
-        <!-- 听写 -->
+    <!-- 听写 -->
     <string name="text_begin">请开始说话&#8230;</string>
     <string name="text_upload_contacts">上传联系人</string>
     <string name="text_upload_userwords">上传用户词表</string>
@@ -31,5 +31,8 @@
     <string name="weibosdk_demo_toast_auth_success">授权成功</string>
     <string name="weibosdk_demo_toast_auth_failed">授权失败</string>
     <string name="weibosdk_demo_toast_auth_canceled">取消授权</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

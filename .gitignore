@@ -13,4 +13,6 @@ gradlew.bat
 slidingmenu_lib/gen
 /gradle
 /.idea
+slidingmenu_lib/*.iml
+social_sdk_library_project/social_sdk_library_project.iml
 /MuNote1_3/MuNote1_3.iml

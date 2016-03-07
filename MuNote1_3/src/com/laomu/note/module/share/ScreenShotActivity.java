@@ -1,30 +1,37 @@
 package com.laomu.note.module.share;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.laomu.note.R;
-import com.laomu.note.common.MuLog;
 import com.laomu.note.common.screenshot.ScreenshotManager;
-import com.laomu.note.common.screenshot.view.ScreenshotView;
-import com.laomu.note.common.screenshot.view.SealTextClickListener;
+import com.laomu.note.module.share.fragment.DoodleModeFragment;
+import com.laomu.note.module.share.fragment.TextModeFragment;
+import com.laomu.note.module.share.type.ScreenShotModeEnum;
 import com.laomu.note.ui.base.NoteBaseActivity;
+
 
 /**
  * Created by ${yipengmu} on 16/3/3.
  */
-public class ScreenShotActivity extends NoteBaseActivity implements SealTextClickListener {
+public class ScreenShotActivity extends NoteBaseActivity implements  TextModeFragment.OnFragmentInteractionListener {
 
-    private ScreenshotView mScreenshotView;
-    private Bitmap mScreenshotBgBitmap;
-    private Bitmap mEditTextUiBitmap;
-    private Button mBtnAddText;
-    private EditText mEtTagText;
+    private TextView mTvModeText, mTvModeDoodle;
+    private FragmentManager fragmentManager;
+    private FrameLayout flScreenshotFragmentContainer;
+    private TextModeFragment mTextModeFragment;
+    private DoodleModeFragment mDoodleModeFragment;
+    private FragmentTransaction mFragmentTransaction;
+
+    //保存的背景截图文件名
+    private String mEditTextTagBitmapFileName = "screenshot_tag.png";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,94 +41,53 @@ public class ScreenShotActivity extends NoteBaseActivity implements SealTextClic
 
         initToolbar();
 
-        initData();
-
         initView();
     }
 
     private void initView() {
-        mScreenshotView = (ScreenshotView) findViewById(R.id.iv_screenshot);
-        mBtnAddText = (Button) findViewById(R.id.btn_add_text);
-        mEtTagText = (EditText) findViewById(R.id.et_tag_text);
+        flScreenshotFragmentContainer = (FrameLayout) findViewById(R.id.fl_screenshot_fragment_container);
+        flScreenshotFragmentContainer.setBackground(new BitmapDrawable(ScreenshotManager.getscreenShotBgBitmap()));
 
+        mTvModeText = (TextView) findViewById(R.id.tv_mode_text);
+        mTvModeDoodle = (TextView) findViewById(R.id.tv_mode_doodle);
 
-        initScreenshotView();
-        //处理文本框文案数据
-        initSSEditText();
-
-        mBtnAddText.setOnClickListener(new View.OnClickListener() {
+        mTvModeText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mEtTagText.requestFocus();
+                showFragments(ScreenShotModeEnum.MODE_TEXT);
             }
         });
 
+        mTvModeDoodle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragments(ScreenShotModeEnum.MODE_DOODLE);
+            }
+        });
+
+        initFragment();
+
+
     }
 
-    private void initScreenshotView() {
+    private void initFragment() {
+        mTextModeFragment = new TextModeFragment();
+        mDoodleModeFragment = new DoodleModeFragment();
+        fragmentManager = getSupportFragmentManager();
 
-        mScreenshotView.setTextClickListener(this);
-        //绘制背景图片
-        if (mScreenshotBgBitmap != null) {
-            mScreenshotView.setBackground(new BitmapDrawable(mScreenshotBgBitmap));
-            mScreenshotView.invalidate();
+        showFragments(ScreenShotModeEnum.MODE_TEXT);
+    }
+
+    private void showFragments(ScreenShotModeEnum mode) {
+        mFragmentTransaction = fragmentManager.beginTransaction();
+
+        if(mode == ScreenShotModeEnum.MODE_TEXT){
+            mFragmentTransaction.replace(R.id.fl_screenshot_fragment_container, mTextModeFragment);
+        }else if(mode == ScreenShotModeEnum.MODE_DOODLE){
+            mFragmentTransaction.replace(R.id.fl_screenshot_fragment_container, mDoodleModeFragment);
         }
-
-        mScreenshotView.post(new Runnable() {
-            @Override
-            public void run() {
-                mScreenshotView.setSealTextLayout(mEtTagText.getX(),mEtTagText.getTop());
-            }
-        });
+        mFragmentTransaction.commit();
     }
-
-    private void initSSEditText() {
-
-
-        mEtTagText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus == false) {
-                    v.setVisibility(View.INVISIBLE);
-                }
-
-//                ScreenshotManager.setEditTextUIBitmap(ScreenshotManager.getBitmapFromView(v));
-                mScreenshotView.setSealTextBitmap(ScreenshotManager.getBitmapFromView(v));
-                mScreenshotView.invalidate();
-            }
-        });
-
-        //获取drawingcache后隐藏输入框，方便后续screenshotView 做touch动作
-        mEtTagText.post(new Runnable() {
-            @Override
-            public void run() {
-                mEtTagText.setDrawingCacheEnabled(true);
-                mEditTextUiBitmap = ScreenshotManager.getBitmapFromView(mEtTagText);
-
-                if (mEditTextUiBitmap != null) {
-                    ScreenshotManager.setEditTextUIBitmap(mEditTextUiBitmap);
-
-                    ScreenshotManager.saveScreenShotToSDCard(mEditTextUiBitmap);
-                    mScreenshotView.invalidate();
-                }
-
-                mEtTagText.setVisibility(View.GONE);
-            }
-        });
-
-    }
-
-
-    private void initData() {
-        try {
-            mScreenshotBgBitmap = ScreenshotManager.getscreenShotBgBitmap();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
 
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_toolbar);
@@ -140,18 +106,7 @@ public class ScreenShotActivity extends NoteBaseActivity implements SealTextClic
     }
 
     @Override
-    public void onTextRectOutSideClick() {
+    public void onFragmentInteraction(Uri uri) {
 
-        MuLog.logd("onTextRectOutSideClick");
-        mEtTagText.setVisibility(View.VISIBLE);
-        mEtTagText.requestFocus();
-    }
-
-
-    @Override
-    public void onTextRectInSideClick() {
-        MuLog.logd("onTextRectInSideClick");
-        mEtTagText.setVisibility(View.GONE);
-        mEtTagText.clearFocus();
     }
 }

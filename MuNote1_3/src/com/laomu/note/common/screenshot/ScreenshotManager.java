@@ -36,13 +36,17 @@ public class ScreenshotManager {
     /**
      * 保存图片
      */
-    public static boolean saveScreenShotToSDCard(Bitmap bitmap) {
-        return saveToSDCard(bitmap, getSreenShotFilePath());
+    public static boolean saveScreenShotToSDCard(Bitmap bitmap,String fileName) {
+        return saveToSDCard(bitmap, getSreenShotFilePath(fileName));
     }
 
-    public static String getSreenShotFilePath() {
+    public static String getSreenShotFilePath(String fileName) {
 //        return  NoteApplication.appContext.getPackageResourcePath()+
 //                File.separator + "sreenshot" + File.separator + "ss.png";
+
+
+//        return  NoteApplication.appContext.getPackageResourcePath()+
+//                File.separator + "sreenshot" + File.separator + fileName;
 
         return  "/sdcard/react/ss1.png";
     }
