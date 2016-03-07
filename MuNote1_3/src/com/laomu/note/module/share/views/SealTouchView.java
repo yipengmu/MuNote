@@ -71,8 +71,6 @@ public class SealTouchView extends ImageView {
         if (mHolder.bitmapSeal != null) {
             canvas.drawBitmap(mHolder.bitmapSeal, mHolder.getSealX(), mHolder.getSealY(), null);
 
-//            canvas.drawBitmap(mHolder.bitmapSeal,0 ,0, null);
-
             //绘制 删除x 和 旋转箭头 按钮
             canvas.drawBitmap(mHolder.bitmapDel, mHolder.getDelateIconX(), mHolder.getDelateIconY(), null);
 
@@ -105,11 +103,27 @@ public class SealTouchView extends ImageView {
     }
 
     private void touchMove(float x, float y) {
+        //计算x y 的差量delta值
+        if(Float.floatToIntBits(mHolder.getLastEventX()) == Float.floatToIntBits(0)){
+            mHolder.setLastEventX(x);
+        }
+        if(x != mHolder.getSealX()){
+            mHolder.setDeltaX(x - mHolder.getLastEventX());
+        }
 
+        if(Float.floatToIntBits(mHolder.getLastEventY()) == Float.floatToIntBits(0)){
+            mHolder.setLastEventY(y);
+        }
+        if(y != mHolder.getSealY()){
+
+            mHolder.setDeltaY(y - mHolder.getLastEventY());
+        }
+
+
+        MuLog.logd("mDeltaX= " + mHolder.getmDeltaX() + "  mDeltaY= " + mHolder.getmDeltaY());
     }
 
     private void touchDown(float x, float y) {
-
     }
 
     private void checkSealTextClick(float x, float y) {
