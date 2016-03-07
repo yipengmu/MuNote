@@ -18,6 +18,15 @@ public class SealRectHolder {
     public Bitmap bitmapSeal;
     public Bitmap bitmapDel;
     public Bitmap bitmapRotate;
+
+    public int getmContainerWidth() {
+        return mContainerWidth;
+    }
+
+    public int getmContainerHeight() {
+        return mContainerHeight;
+    }
+
     private int mContainerWidth;
     private int mContainerHeight;
 
@@ -37,15 +46,15 @@ public class SealRectHolder {
 
 
     public float getRatateIconX() {
-        MuLog.logd("RatateIcon startX=" + startX + " bitmapSeal.getWidth()=" + bitmapSeal.getWidth());
+        MuLog.logd("RatateIcon getSealX()=" + getSealX() + "  getSealWidth()=" +  getSealWidth());
 
-        return startX + bitmapSeal.getWidth() - bitmapRotate.getWidth();
+        return getSealX() + getSealWidth() - bitmapRotate.getWidth();
     }
 
     public float getRatateIconY() {
-        MuLog.logd("RatateIcon startY=" + startY + " bitmapSeal.getHeight()=" + bitmapSeal.getHeight());
+        MuLog.logd("RatateIcon getSealY()=" + getSealY() + "  getSealHeight()=" +  getSealHeight());
 
-        return startY + bitmapSeal.getHeight()  - bitmapRotate.getHeight();
+        return getSealY() + getSealHeight() - bitmapRotate.getHeight();
 
     }
 
@@ -61,11 +70,11 @@ public class SealRectHolder {
 
     public float getSealWidth() {
 
-        return mContainerWidth != 0 ? bitmapSeal.getWidth() + getSealX():0;
+        return  bitmapSeal.getWidth();
     }
 
     public float getSealHeight() {
-        return mContainerHeight != 0 ? bitmapSeal.getHeight() + getSealY():0;
+        return bitmapSeal.getHeight();
     }
 
 

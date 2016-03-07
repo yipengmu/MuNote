@@ -67,6 +67,8 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
             public void onClick(View v) {
                 rl_screenshot_textedit_container.setClickable(true);
                 mEtTagText.setVisibility(View.VISIBLE);
+                mSealTouchView.setVisibility(View.GONE);
+                mEtTagText.requestFocus();
             }
         });
 
@@ -75,25 +77,25 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
             public void onClick(View v) {
                 if(mSealTouchView.isShown()){
                     //退出文案贴图编辑态
-                    mSealTouchView.setVisibility(View.GONE);
                     mEtTagText.setVisibility(View.VISIBLE);
+                    mSealTouchView.setVisibility(View.GONE);
                 }else {
                     //退出输入框输入态
-                    mSealTouchView.setVisibility(View.VISIBLE);
                     mEtTagText.setVisibility(View.GONE);
+                    mSealTouchView.setVisibility(View.VISIBLE);
                     handleEditTextDrawingCacheBitmap(mEtTagText);
                 }
             }
         });
 
-        rl_screenshot_textedit_container.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                MuLog.logd("container onTouchEvent event.getX()=" + event.getX() + " event.getY()=" + event.getY());
-                return false;
-            }
-        });
+//        rl_screenshot_textedit_container.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//
+//                MuLog.logd("container onTouchEvent event.getX()=" + event.getX() + " event.getY()=" + event.getY());
+//                return false;
+//            }
+//        });
 
         mSealTouchView.setTextClickListener(this);
     }
@@ -170,7 +172,11 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
     @Override
     public void onTextRectInSideClick() {
         MuLog.logd("onTextRectInSideClick");
-        mEtTagText.setVisibility(View.VISIBLE);
+        //如果 mSealTouchView 已显示则，跳过actionDown的回调事件
+        if(!mSealTouchView.isShown()){
+            mEtTagText.setVisibility(View.VISIBLE);
+            mSealTouchView.setVisibility(View.GONE);
+        }
     }
 
 

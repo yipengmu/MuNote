@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
@@ -60,7 +59,7 @@ public class SealTouchView extends ImageView {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        mHolder.setContainerLayout(getWidth(),getHeight());
+        mHolder.setContainerLayout(getWidth(), getHeight());
     }
 
     @Override
@@ -70,14 +69,14 @@ public class SealTouchView extends ImageView {
         MuLog.logd("onDraw bitmapSeal RatateIcon= " + mHolder.getRatateIconX() + " " + mHolder.getRatateIconY());
 
         if (mHolder.bitmapSeal != null) {
-//            canvas.drawBitmap(mHolder.bitmapSeal, mHolder.getSealX(getWidth()), mHolder.getSealY(getHeight()), null);
+            canvas.drawBitmap(mHolder.bitmapSeal, mHolder.getSealX(), mHolder.getSealY(), null);
 
-            canvas.drawBitmap(mHolder.bitmapSeal,0 ,0, null);
+//            canvas.drawBitmap(mHolder.bitmapSeal,0 ,0, null);
 
             //绘制 删除x 和 旋转箭头 按钮
-//            canvas.drawBitmap(mHolder.bitmapDel, mHolder.getDelateIconX(), mHolder.getDelateIconY(), null);
-//
-//            canvas.drawBitmap(mHolder.bitmapRotate, mHolder.getRatateIconX(), mHolder.getRatateIconY(), null);
+            canvas.drawBitmap(mHolder.bitmapDel, mHolder.getDelateIconX(), mHolder.getDelateIconY(), null);
+
+            canvas.drawBitmap(mHolder.bitmapRotate, mHolder.getRatateIconX(), mHolder.getRatateIconY(), null);
         }
     }
 
@@ -90,7 +89,7 @@ public class SealTouchView extends ImageView {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 touchDown(x, y);
-//                checkSealTextClick(x, y);
+                checkSealTextClick(x, y);
                 break;
             case MotionEvent.ACTION_MOVE:
                 touchMove(x, y);
@@ -99,7 +98,7 @@ public class SealTouchView extends ImageView {
 //                touch_up();
                 break;
         }
-        MuLog.logd("onTouchEvent event.getX()=" + x+ " event.getY()=" + y);
+        MuLog.logd("onTouchEvent event.getX()=" + x + " event.getY()=" + y);
 
         invalidate();
         return true;
@@ -119,15 +118,16 @@ public class SealTouchView extends ImageView {
         }
 
         //判断当前按下触发的是否是落在编辑框区域中
-        if (x > 0 && x < mHolder.getSealWidth() && (y > 0 && y < mHolder.getSealHeight())) {
+        if (x > mHolder.getSealX() && x < mHolder.getSealX() + mHolder.getSealWidth() &&
+                (y > mHolder.getSealY() && y < mHolder.getSealY() + mHolder.getSealHeight())) {
 
-            MuLog.logd("onTouchEvent onTextRectInSideClick" );
+            MuLog.logd("onTouchEvent onTextRectInSideClick");
             //如果在区域内，则进入此逻辑：隐藏sealbitmap,展示EditText标准编辑框
             mSealTextClickListener.onTextRectInSideClick();
 
         } else {
 
-            MuLog.logd("onTouchEvent onTextRectOutSideClick" );
+            MuLog.logd("onTouchEvent onTextRectOutSideClick");
             //如果在区域外，则进入此逻辑：隐藏sealbitmap,展示EditText标准编辑框
             mSealTextClickListener.onTextRectOutSideClick();
 
