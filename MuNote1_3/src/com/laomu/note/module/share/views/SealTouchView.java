@@ -71,7 +71,7 @@ public class SealTouchView extends ImageView {
         MuLog.logd("onDraw SealTouchView = " + getWidth() + " " + getHeight());
         MuLog.logd("onDraw bitmapSeal = " + mHolder.bitmapSeal.getWidth() + " " + mHolder.bitmapSeal.getHeight());
         MuLog.logd("onDraw bitmapSeal RatateIcon= " + mHolder.getRatateIconX() + " " + mHolder.getRatateIconY());
-        clearCanvas(canvas);
+
         if (touchModeEnum != TouchModeEnum.DELETE) {
             canvas.drawBitmap(mHolder.bitmapSeal, mHolder.getSealX(), mHolder.getSealY(), null);
 
@@ -84,10 +84,7 @@ public class SealTouchView extends ImageView {
     }
 
     private void clearCanvas(Canvas canvas) {
-        Paint paint = new Paint();
-          paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-          canvas.drawPaint(paint);
-          paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC));
+        canvas.drawColor(Color.TRANSPARENT,PorterDuff.Mode.CLEAR);
     }
 
     private void clearTouchModeEnum() {
@@ -140,14 +137,22 @@ public class SealTouchView extends ImageView {
     }
 
     private void touchDown(float x, float y) {
-        if (x > mHolder.getDelateIconX() && x < mHolder.getDelateIconX() + mHolder.bitmapDel.getWidth() &&
-                y > mHolder.getDelateIconY() && y < mHolder.getDelateIconY() + mHolder.bitmapDel.getHeight()) {
+        if(touchModeEnum == TouchModeEnum.DELETE){
+            return;
+        }
+
+        if (x >= mHolder.getDelateIconX() && x <= mHolder.getDelateIconX() + mHolder.bitmapDel.getWidth() &&
+                y >= mHolder.getDelateIconY() && y <= mHolder.getDelateIconY() + mHolder.bitmapDel.getHeight()) {
             touchModeEnum = TouchModeEnum.DELETE;
-        }else if (x == mHolder.getDelateIconX() && y == mHolder.getDelateIconY()) {
+        }else if (x >= mHolder.getRatateIconX() && x <= mHolder.getRatateIconX() + mHolder.bitmapRotate.getWidth() &&
+                y > mHolder.getRatateIconY() && y <= mHolder.getRatateIconY()+mHolder.bitmapRotate.getHeight()) {
             touchModeEnum = TouchModeEnum.ROTATE_OR_SCALE;
         }else{
             touchModeEnum = TouchModeEnum.MOVE;
         }
+
+        MuLog.logd("touchDown touchModeEnum= " + touchModeEnum);
+
     }
 
     public void resetTouchModeEnum(){
@@ -155,7 +160,7 @@ public class SealTouchView extends ImageView {
     }
 
     private void checkSealTextClick(float x, float y) {
-        if (mSealTextClickListener == null) {
+        if (mSealTextClickListener == null || TouchModeEnum.DELETE == touchModeEnum) {
             return;
         }
 

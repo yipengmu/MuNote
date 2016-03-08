@@ -24,7 +24,6 @@ public class DoodleTouchView extends ImageView {
     private Bitmap bitmapBackgroud;
     private Bitmap bitmapDoodle;
     private Bitmap bitmapSeal;
-    private Paint mSealPaint;
     private SSEditText mSSEditText;
 
     private Canvas mCanvas;
@@ -84,13 +83,6 @@ public class DoodleTouchView extends ImageView {
             mCanvas = new Canvas(bitmapBackgroud);
 
 
-            mSealPaint = new Paint();
-            mSealPaint.setColor(Color.RED);
-            mSealPaint.setStyle(Paint.Style.FILL);
-            mSealPaint.setTextSize(40);
-            mSealPaint.setAntiAlias(true);
-
-
             mDoodlePaint = new Paint();
             mDoodlePaint.setAntiAlias(true);
             mDoodlePaint.setStyle(Paint.Style.STROKE);
@@ -121,16 +113,6 @@ public class DoodleTouchView extends ImageView {
             MuLog.logd("mSealRectStartY= " + mSealRectStartY);
 
         }
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
     }
 
     @Override
