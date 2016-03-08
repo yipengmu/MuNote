@@ -27,7 +27,7 @@ import com.laomu.note.ui.NoteApplication;
  * {@link TextModeFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class TextModeFragment extends Fragment  implements SealTextClickListener {
+public class TextModeFragment extends Fragment implements SealTextClickListener {
 
     private Button mBtnAddText;
     private EditText mEtTagText;
@@ -35,7 +35,6 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
     private ViewGroup rl_screenshot_textedit_container;
     private Bitmap mEditTextUiBitmap;
     private StickerView mtickerView;
-//    private SealTouchView mSealTouchView;
 
     public TextModeFragment() {
         // Required empty public constructor
@@ -68,7 +67,7 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
         mtickerView.post(new Runnable() {
             @Override
             public void run() {
-                mtickerView.addBitImage(BitmapFactory.decodeResource(NoteApplication.appContext.getResources(),R.drawable.ic_launcher_fang));
+                mtickerView.addBitImage(BitmapFactory.decodeResource(NoteApplication.appContext.getResources(), R.drawable.ic_launcher_fang));
             }
         });
 
@@ -78,8 +77,7 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
             public void onClick(View v) {
                 rl_screenshot_textedit_container.setClickable(true);
                 mEtTagText.setVisibility(View.VISIBLE);
-//                mSealTouchView.setVisibility(View.GONE);
-//                mSealTouchView.resetTouchModeEnum();
+                mtickerView.setVisibility(View.GONE);
                 mEtTagText.requestFocus();
             }
         });
@@ -87,16 +85,10 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
         rl_screenshot_textedit_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if(mSealTouchView.isShown()){
-//                    //退出文案贴图编辑态
-//                    mEtTagText.setVisibility(View.VISIBLE);
-////                    mSealTouchView.setVisibility(View.GONE);
-//                }else {
-//                    //退出输入框输入态
-//                    mEtTagText.setVisibility(View.GONE);
-////                    mSealTouchView.setVisibility(View.VISIBLE);
-//                    handleEditTextDrawingCacheBitmap(mEtTagText);
-//                }
+                //退出输入框输入态
+                mEtTagText.setVisibility(View.GONE);
+                mtickerView.setVisibility(View.VISIBLE);
+                handleEditTextDrawingCacheBitmap(mEtTagText);
             }
         });
 
@@ -115,19 +107,14 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
     private void handleEditTextDrawingCacheBitmap(EditText editText) {
         mEditTextUiBitmap = ScreenshotManager.getBitmapFromView(editText);
 
-        if(mEditTextUiBitmap != null){
-            paustEditTextDrawingCacheBitmapToTouchView(mEditTextUiBitmap);
+        if (mEditTextUiBitmap != null) {
+            mtickerView.clear();
+            mtickerView.addBitImage(mEditTextUiBitmap);
+            ScreenshotManager.setEditTextUIBitmap(mEditTextUiBitmap);
         }
 
     }
 
-    private void paustEditTextDrawingCacheBitmapToTouchView(Bitmap editTextUiBitmap) {
-//        mSealTouchView.setVisibility(View.VISIBLE);
-//        mSealTouchView.setSealBitmap(editTextUiBitmap);
-        mtickerView.addBitImage(editTextUiBitmap);
-        ScreenshotManager.setEditTextUIBitmap(editTextUiBitmap);
-//        mSealTouchView.invalidate();
-    }
 
     private void initSSEditText() {
 

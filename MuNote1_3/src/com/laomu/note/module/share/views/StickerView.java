@@ -128,7 +128,10 @@ public class StickerView extends View {
 					currentStatus = STATUS_MOVE;
 					oldx = x;
 					oldy = y;
-				}// end if
+				}else {
+					//外部
+
+				}
 			}// end for each
 
 			if (!ret && currentItem != null && currentStatus == STATUS_IDLE) {// 没有贴图被选择
