@@ -81,7 +81,6 @@ public class SealTouchView extends ImageView {
             canvas.drawBitmap(mHolder.bitmapRotate, mHolder.getRatateIconX(), mHolder.getRatateIconY(), null);
         }
 
-        clearTouchModeEnum();
     }
 
     private void clearCanvas(Canvas canvas) {
@@ -144,11 +143,15 @@ public class SealTouchView extends ImageView {
         if (x > mHolder.getDelateIconX() && x < mHolder.getDelateIconX() + mHolder.bitmapDel.getWidth() &&
                 y > mHolder.getDelateIconY() && y < mHolder.getDelateIconY() + mHolder.bitmapDel.getHeight()) {
             touchModeEnum = TouchModeEnum.DELETE;
-        }
-
-        if (x == mHolder.getDelateIconX() && y == mHolder.getDelateIconY()) {
+        }else if (x == mHolder.getDelateIconX() && y == mHolder.getDelateIconY()) {
             touchModeEnum = TouchModeEnum.ROTATE_OR_SCALE;
+        }else{
+            touchModeEnum = TouchModeEnum.MOVE;
         }
+    }
+
+    public void resetTouchModeEnum(){
+        touchModeEnum = TouchModeEnum.MOVE;
     }
 
     private void checkSealTextClick(float x, float y) {

@@ -68,6 +68,7 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
                 rl_screenshot_textedit_container.setClickable(true);
                 mEtTagText.setVisibility(View.VISIBLE);
                 mSealTouchView.setVisibility(View.GONE);
+                mSealTouchView.resetTouchModeEnum();
                 mEtTagText.requestFocus();
             }
         });
@@ -166,6 +167,8 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
 
         MuLog.logd("onTextRectOutSideClick");
         mEtTagText.setVisibility(View.GONE);
+
+        mSealTouchView.resetTouchModeEnum();
     }
 
 
