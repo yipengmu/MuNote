@@ -2,6 +2,7 @@ package com.laomu.note.module.share.views;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.FloatMath;
 
 import com.laomu.note.R;
 import com.laomu.note.common.MuLog;
@@ -32,11 +33,11 @@ public class SealRectHolder {
         this.mDeltaX = mDeltaX;
     }
 
-    public float getmDeltaY() {
+    public float getDeltaY() {
         return mDeltaY;
     }
 
-    public float getmDeltaX() {
+    public float getDeltaX() {
         return mDeltaX;
     }
 
@@ -106,11 +107,11 @@ public class SealRectHolder {
 
     public float getSealWidth() {
 
-        return bitmapSeal.getWidth();
+        return bitmapSeal!=null ? bitmapSeal.getWidth() : 0;
     }
 
     public float getSealHeight() {
-        return bitmapSeal.getHeight();
+        return bitmapSeal!=null ? bitmapSeal.getHeight() : 0;
     }
 
 
@@ -128,5 +129,37 @@ public class SealRectHolder {
         mContainerWidth = width;
 
         MuLog.logd("setContainerLayout width=" + width + " height=" + height);
+    }
+
+    //mode == ZOOM 检测是否是放大scale模型
+    public boolean checkZoom() {
+        return true;
+    }
+    //mode == DRAG 检测是否是拖拽模型
+
+    public boolean checkScale() {
+        return false;
+    }
+
+    public float getMiddleSealX() {
+        return (getSealX() + getSealWidth()) / 2;
+    }
+
+    public float getMiddleSealY() {
+        return (getSealY() + getSealHeight()) / 2;
+    }
+
+    /**
+     * 两点间的距离
+     */
+    public float touchDistance(float x, float y) {
+        float dx = x - mLastEventX;
+        float dy = y - mLastEventY;
+        return FloatMath.sqrt(dx * dx + dy * dy);
+    }
+
+    public float getScale(float dis) {
+        //TODO 距离/控件宽度 模拟缩放比例
+        return dis/getmContainerWidth();
     }
 }

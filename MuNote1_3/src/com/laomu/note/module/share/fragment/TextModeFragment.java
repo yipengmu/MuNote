@@ -1,6 +1,7 @@
 package com.laomu.note.module.share.fragment;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +18,8 @@ import com.laomu.note.common.MuLog;
 import com.laomu.note.module.share.ScreenshotManager;
 import com.laomu.note.module.share.listener.SealTextClickListener;
 import com.laomu.note.module.share.views.SealTouchView;
+import com.laomu.note.module.share.views.StickerView;
+import com.laomu.note.ui.NoteApplication;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +34,8 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
     private OnFragmentInteractionListener mListener;
     private ViewGroup rl_screenshot_textedit_container;
     private Bitmap mEditTextUiBitmap;
-    private SealTouchView mSealTouchView;
+    private StickerView mtickerView;
+//    private SealTouchView mSealTouchView;
 
     public TextModeFragment() {
         // Required empty public constructor
@@ -59,15 +63,23 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
         mBtnAddText = (Button) view.findViewById(R.id.btn_add_text);
         mEtTagText = (EditText) view.findViewById(R.id.et_tag_text);
         rl_screenshot_textedit_container = (ViewGroup) view.findViewById(R.id.rl_screenshot_textedit_container);
-        mSealTouchView = (SealTouchView) view.findViewById(R.id.seal_touch_view);
+        mtickerView = (StickerView) view.findViewById(R.id.img_test);
+
+        mtickerView.post(new Runnable() {
+            @Override
+            public void run() {
+                mtickerView.addBitImage(BitmapFactory.decodeResource(NoteApplication.appContext.getResources(),R.drawable.ic_launcher_fang));
+            }
+        });
+
 
         mBtnAddText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rl_screenshot_textedit_container.setClickable(true);
                 mEtTagText.setVisibility(View.VISIBLE);
-                mSealTouchView.setVisibility(View.GONE);
-                mSealTouchView.resetTouchModeEnum();
+//                mSealTouchView.setVisibility(View.GONE);
+//                mSealTouchView.resetTouchModeEnum();
                 mEtTagText.requestFocus();
             }
         });
@@ -75,16 +87,16 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
         rl_screenshot_textedit_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mSealTouchView.isShown()){
-                    //退出文案贴图编辑态
-                    mEtTagText.setVisibility(View.VISIBLE);
-                    mSealTouchView.setVisibility(View.GONE);
-                }else {
-                    //退出输入框输入态
-                    mEtTagText.setVisibility(View.GONE);
-                    mSealTouchView.setVisibility(View.VISIBLE);
-                    handleEditTextDrawingCacheBitmap(mEtTagText);
-                }
+//                if(mSealTouchView.isShown()){
+//                    //退出文案贴图编辑态
+//                    mEtTagText.setVisibility(View.VISIBLE);
+////                    mSealTouchView.setVisibility(View.GONE);
+//                }else {
+//                    //退出输入框输入态
+//                    mEtTagText.setVisibility(View.GONE);
+////                    mSealTouchView.setVisibility(View.VISIBLE);
+//                    handleEditTextDrawingCacheBitmap(mEtTagText);
+//                }
             }
         });
 
@@ -97,7 +109,7 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
 //            }
 //        });
 
-        mSealTouchView.setTextClickListener(this);
+//        mSealTouchView.setTextClickListener(this);
     }
 
     private void handleEditTextDrawingCacheBitmap(EditText editText) {
@@ -110,10 +122,11 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
     }
 
     private void paustEditTextDrawingCacheBitmapToTouchView(Bitmap editTextUiBitmap) {
-        mSealTouchView.setVisibility(View.VISIBLE);
-        mSealTouchView.setSealBitmap(editTextUiBitmap);
+//        mSealTouchView.setVisibility(View.VISIBLE);
+//        mSealTouchView.setSealBitmap(editTextUiBitmap);
+        mtickerView.addBitImage(editTextUiBitmap);
         ScreenshotManager.setEditTextUIBitmap(editTextUiBitmap);
-        mSealTouchView.invalidate();
+//        mSealTouchView.invalidate();
     }
 
     private void initSSEditText() {
@@ -122,7 +135,8 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus == true) {
-                    mSealTouchView.setVisibility(View.GONE);
+//                    mSealTouchView.setVisibility(View.GONE);
+                    mtickerView.setVisibility(View.GONE);
                 }
             }
         });
@@ -167,7 +181,7 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
         MuLog.logd("onTextRectOutSideClick");
         mEtTagText.setVisibility(View.GONE);
 
-        mSealTouchView.resetTouchModeEnum();
+//        mSealTouchView.resetTouchModeEnum();
     }
 
 
@@ -175,10 +189,12 @@ public class TextModeFragment extends Fragment  implements SealTextClickListener
     public void onTextRectInSideClick() {
         MuLog.logd("onTextRectInSideClick");
         //如果 mSealTouchView 已显示则，跳过actionDown的回调事件
-        if(!mSealTouchView.isShown()){
-            mEtTagText.setVisibility(View.VISIBLE);
-            mSealTouchView.setVisibility(View.GONE);
-        }
+//        if(!mSealTouchView.isShown()){
+//            mEtTagText.setVisibility(View.VISIBLE);
+//            mSealTouchView.setVisibility(View.GONE);
+//        }
+
+        mEtTagText.setVisibility(View.VISIBLE);
     }
 
 

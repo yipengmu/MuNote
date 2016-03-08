@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.view.View;
 
+import com.laomu.note.module.share.views.BasePoint;
+
 import java.io.File;
 import java.io.FileOutputStream;
 
@@ -87,4 +89,11 @@ public class ScreenshotManager {
             parentPath.mkdirs();
         }
     }
+
+    //确定矩形中心点与右下方定点的两点式直线方程 (y-y1)/(y2-y1)=(x-x1)/(x2-x1)   其中要求(x1≠x2，y1≠y2)
+    public boolean generateLineEquation(BasePoint point1,BasePoint point2,BasePoint pointCheck){
+        return (pointCheck.y - point1.y) / (point2.y - point1.y) == (pointCheck.x - point1.x) / (point2.x - point1.x);
+    }
+
+
 }

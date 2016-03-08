@@ -7,6 +7,15 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
+
+    <com.laomu.note.module.share.views.StickerView
+        android:id="@+id/img_test"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:layout_margin="5dp" />
+
+
     <com.laomu.note.module.share.views.SSEditText
         android:id="@+id/et_tag_text"
         android:layout_width="200dp"
@@ -20,17 +29,6 @@
         android:textColorHint="@color/red"
         android:textSize="20dp"
         android:visibility="invisible" />
-
-    <com.laomu.note.module.share.views.SealTouchView
-        android:id="@+id/seal_touch_view"
-        android:padding="4dp"
-        android:layout_centerInParent="true"
-        android:visibility="invisible"
-        android:minHeight="100dp"
-        android:minWidth="200dp"
-        android:scaleType="fitCenter"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
