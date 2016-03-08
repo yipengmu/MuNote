@@ -2,7 +2,6 @@ package com.laomu.note.module.share.fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.laomu.note.R;
 import com.laomu.note.common.MuLog;
@@ -20,20 +18,16 @@ import com.laomu.note.module.share.listener.RegionClickListener;
 import com.laomu.note.module.share.views.StickerView;
 import com.laomu.note.ui.NoteApplication;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link TextModeFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- */
+
 public class TextModeFragment extends Fragment implements RegionClickListener {
 
     private Button mBtnAddText;
     private EditText mEtTagText;
-    private OnFragmentInteractionListener mListener;
     private ViewGroup rl_screenshot_textedit_container;
     private Bitmap mEditTextUiBitmap;
     private StickerView mStickerView;
+    private Button btnHistory1;
+    private Button btnHistory2;
 
     public TextModeFragment() {
         // Required empty public constructor
@@ -50,9 +44,6 @@ public class TextModeFragment extends Fragment implements RegionClickListener {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        Toast.makeText(getActivity(), "TextModeFragment show", Toast.LENGTH_SHORT).show();
-
         initView(view);
     }
 
@@ -62,7 +53,12 @@ public class TextModeFragment extends Fragment implements RegionClickListener {
         mEtTagText = (EditText) view.findViewById(R.id.et_tag_text);
         rl_screenshot_textedit_container = (ViewGroup) view.findViewById(R.id.rl_screenshot_textedit_container);
         mStickerView = (StickerView) view.findViewById(R.id.img_test);
+        btnHistory1 = (Button) view.findViewById(R.id.btn_history1);
+        btnHistory2 = (Button) view.findViewById(R.id.btn_history2);
+
         mStickerView.setRegionClickListener(this);
+
+
         mStickerView.post(new Runnable() {
             @Override
             public void run() {
@@ -91,16 +87,23 @@ public class TextModeFragment extends Fragment implements RegionClickListener {
             }
         });
 
-//        rl_screenshot_textedit_container.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//
-//                MuLog.logd("container onTouchEvent event.getX()=" + event.getX() + " event.getY()=" + event.getY());
-//                return false;
-//            }
-//        });
 
-//        mSealTouchView.setTextClickListener(this);
+        btnHistory1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mStickerView.clear();
+                mStickerView.addBitImage(ScreenshotManager.getBitmapFromView(btnHistory1));
+            }
+        });
+
+        btnHistory2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mStickerView.clear();
+                mStickerView.addBitImage(ScreenshotManager.getBitmapFromView(btnHistory2));
+            }
+        });
+
     }
 
     private void handleEditTextDrawingCacheBitmap(EditText editText) {
@@ -114,91 +117,21 @@ public class TextModeFragment extends Fragment implements RegionClickListener {
 
     }
 
-
-    private void initSSEditText() {
-
-        mEtTagText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus == true) {
-//                    mSealTouchView.setVisibility(View.GONE);
-                    mStickerView.setVisibility(View.GONE);
-                }
-            }
-        });
-
-        //获取drawingcache后隐藏输入框，方便后续screenshotView 做touch动作
-        mEtTagText.post(new Runnable() {
-            @Override
-            public void run() {
-                mEtTagText.setDrawingCacheEnabled(true);
-//                mEditTextUiBitmap = ScreenshotManager.getBitmapFromView(mEtTagText);
-//
-//                if (mEditTextUiBitmap != null) {
-//                    ScreenshotManager.setEditTextUIBitmap(mEditTextUiBitmap);
-//
-//                    ScreenshotManager.saveScreenShotToSDCard(mEditTextUiBitmap, mEditTextTagBitmapFileName);
-//                    mScreenshotView.invalidate();
-//                }
-
-                mEtTagText.setVisibility(View.GONE);
-            }
-        });
-
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-
     @Override
     public void onTextRectOutSideClick() {
 
         MuLog.logd("onTextRectOutSideClick");
         mEtTagText.setVisibility(View.GONE);
-
-//        mSealTouchView.resetTouchModeEnum();
     }
 
 
     @Override
     public void onTextRectInSideClick() {
         MuLog.logd("onTextRectInSideClick");
-        //如果 mSealTouchView 已显示则，跳过actionDown的回调事件
-//        if(!mSealTouchView.isShown()){
-//            mEtTagText.setVisibility(View.VISIBLE);
-//            mSealTouchView.setVisibility(View.GONE);
-//        }
 
         mStickerView.setVisibility(View.GONE);
         mEtTagText.setVisibility(View.VISIBLE);
         mEtTagText.requestFocus();
-
     }
 
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

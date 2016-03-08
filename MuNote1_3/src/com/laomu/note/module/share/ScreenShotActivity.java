@@ -20,7 +20,7 @@ import com.laomu.note.ui.base.NoteBaseActivity;
 /**
  * Created by ${yipengmu} on 16/3/3.
  */
-public class ScreenShotActivity extends NoteBaseActivity implements  TextModeFragment.OnFragmentInteractionListener {
+public class ScreenShotActivity extends NoteBaseActivity{
 
     private TextView mTvModeText, mTvModeDoodle;
     private FragmentManager fragmentManager;
@@ -104,8 +104,4 @@ public class ScreenShotActivity extends NoteBaseActivity implements  TextModeFra
         });
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 }
