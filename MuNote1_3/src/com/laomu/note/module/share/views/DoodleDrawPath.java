@@ -1,4 +1,4 @@
-package com.laomu.note.common.screenshot.view;
+package com.laomu.note.module.share.views;
 
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -6,7 +6,7 @@ import android.graphics.Path;
 /**
  * Created by ${yipengmu} on 16/3/4.
  */
-public class DrawPath {
+public class DoodleDrawPath {
 
     public Path path;
 

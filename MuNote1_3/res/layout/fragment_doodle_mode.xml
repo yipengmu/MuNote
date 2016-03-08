@@ -5,7 +5,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <com.laomu.note.common.screenshot.view.ScreenshotView
+    <com.laomu.note.module.share.views.DoodleTouchView
         android:id="@+id/iv_screenshot"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

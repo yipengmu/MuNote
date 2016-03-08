@@ -12,8 +12,8 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 
 import com.laomu.note.common.MuLog;
-import com.laomu.note.common.screenshot.ScreenshotManager;
-import com.laomu.note.common.screenshot.view.SealTextClickListener;
+import com.laomu.note.module.share.ScreenshotManager;
+import com.laomu.note.module.share.listener.SealTextClickListener;
 import com.laomu.note.module.share.type.TouchModeEnum;
 
 /**

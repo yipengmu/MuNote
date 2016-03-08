@@ -1,10 +1,8 @@
-package com.laomu.note.common.screenshot;
+package com.laomu.note.module.share;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.view.View;
-
-import com.laomu.note.ui.NoteApplication;
 
 import java.io.File;
 import java.io.FileOutputStream;

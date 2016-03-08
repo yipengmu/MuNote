@@ -1,4 +1,4 @@
-package com.laomu.note.common.screenshot.view;
+package com.laomu.note.module.share.views;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,15 +12,15 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 
 import com.laomu.note.common.MuLog;
-import com.laomu.note.common.screenshot.ScreenshotManager;
-import com.laomu.note.module.share.views.SealRectHolder;
+import com.laomu.note.module.share.ScreenshotManager;
+import com.laomu.note.module.share.listener.SealTextClickListener;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScreenshotView extends ImageView {
+public class DoodleTouchView extends ImageView {
     private Bitmap bitmapBackgroud;
     private Bitmap bitmapDoodle;
     private Bitmap bitmapSeal;
@@ -35,9 +35,9 @@ public class ScreenshotView extends ImageView {
 
 
     // 保存Path路径的集合,用List集合来模拟栈
-    private static List<DrawPath> savePath;
+    private static List<DoodleDrawPath> savePath;
     // 记录Path路径的对象
-    private DrawPath dp;
+    private DoodleDrawPath dp;
 
     private boolean isInit = false;// 用来标记保证只被初始化一次
 
@@ -50,21 +50,21 @@ public class ScreenshotView extends ImageView {
     private SealRectHolder mSealrectHolder;
     private SealTextClickListener mSealTextClickListener;
 
-    public ScreenshotView(Context context) {
+    public DoodleTouchView(Context context) {
         super(context);
 
         // view初始化
         init(screenWidth, screenHeight);
     }
 
-    public ScreenshotView(Context context, AttributeSet attrs) {
+    public DoodleTouchView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         // view初始化
         init(screenWidth, screenHeight);
     }
 
-    public ScreenshotView(Context context, AttributeSet attrs, int defStyle) {
+    public DoodleTouchView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
         // view初始化
@@ -98,7 +98,7 @@ public class ScreenshotView extends ImageView {
             mDoodlePaint.setStrokeCap(Paint.Cap.ROUND);// 形状
             mDoodlePaint.setStrokeWidth(5);// 画笔宽度
 
-            savePath = new ArrayList<DrawPath>();
+            savePath = new ArrayList<DoodleDrawPath>();
             isInit = true;
             // 保持一个path,支持多次手势涂鸦重叠
             mPath = new Path();
@@ -185,7 +185,7 @@ public class ScreenshotView extends ImageView {
     private void touch_start(float x, float y) {
 
         // 每一次记录的路径对象是不一样的
-        dp = new DrawPath();
+        dp = new DoodleDrawPath();
         dp.path = mPath;
         dp.paint = mDoodlePaint;
 
@@ -221,7 +221,7 @@ public class ScreenshotView extends ImageView {
                 Bitmap.Config.ARGB_8888);
         mCanvas.setBitmap(bitmapBackgroud);// 重新设置画布，相当于清空画布
 
-        for (DrawPath drawPath : savePath) {
+        for (DoodleDrawPath drawPath : savePath) {
             mCanvas.drawPath(drawPath.path, drawPath.paint);
         }
 

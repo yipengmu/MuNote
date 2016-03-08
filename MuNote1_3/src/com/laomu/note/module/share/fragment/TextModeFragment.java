@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,8 +14,8 @@ import android.widget.Toast;
 
 import com.laomu.note.R;
 import com.laomu.note.common.MuLog;
-import com.laomu.note.common.screenshot.ScreenshotManager;
-import com.laomu.note.common.screenshot.view.SealTextClickListener;
+import com.laomu.note.module.share.ScreenshotManager;
+import com.laomu.note.module.share.listener.SealTextClickListener;
 import com.laomu.note.module.share.views.SealTouchView;
 
 /**

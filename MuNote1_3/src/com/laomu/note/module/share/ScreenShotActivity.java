@@ -11,7 +11,6 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.laomu.note.R;
-import com.laomu.note.common.screenshot.ScreenshotManager;
 import com.laomu.note.module.share.fragment.DoodleModeFragment;
 import com.laomu.note.module.share.fragment.TextModeFragment;
 import com.laomu.note.module.share.type.ScreenShotModeEnum;

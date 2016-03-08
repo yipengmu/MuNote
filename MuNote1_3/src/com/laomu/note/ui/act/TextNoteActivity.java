@@ -31,7 +31,7 @@ import com.laomu.note.common.http.excutor.HttpExcutor;
 import com.laomu.note.common.http.imp.HttpMethod;
 import com.laomu.note.common.http.response.BaiduWeatherResult;
 import com.laomu.note.common.lbs.LocationInfoManeger;
-import com.laomu.note.common.screenshot.ScreenshotManager;
+import com.laomu.note.module.share.ScreenshotManager;
 import com.laomu.note.common.speech.SpeechManeger;
 import com.laomu.note.data.database.OrmDbManeger;
 import com.laomu.note.data.model.LocationBean;

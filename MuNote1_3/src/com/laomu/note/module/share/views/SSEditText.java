@@ -1,4 +1,4 @@
-package com.laomu.note.common.screenshot.view;
+package com.laomu.note.module.share.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
