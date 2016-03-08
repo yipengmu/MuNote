@@ -16,8 +16,7 @@ import android.widget.Toast;
 import com.laomu.note.R;
 import com.laomu.note.common.MuLog;
 import com.laomu.note.module.share.ScreenshotManager;
-import com.laomu.note.module.share.listener.SealTextClickListener;
-import com.laomu.note.module.share.views.SealTouchView;
+import com.laomu.note.module.share.listener.RegionClickListener;
 import com.laomu.note.module.share.views.StickerView;
 import com.laomu.note.ui.NoteApplication;
 
@@ -27,14 +26,14 @@ import com.laomu.note.ui.NoteApplication;
  * {@link TextModeFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class TextModeFragment extends Fragment implements SealTextClickListener {
+public class TextModeFragment extends Fragment implements RegionClickListener {
 
     private Button mBtnAddText;
     private EditText mEtTagText;
     private OnFragmentInteractionListener mListener;
     private ViewGroup rl_screenshot_textedit_container;
     private Bitmap mEditTextUiBitmap;
-    private StickerView mtickerView;
+    private StickerView mStickerView;
 
     public TextModeFragment() {
         // Required empty public constructor
@@ -62,12 +61,12 @@ public class TextModeFragment extends Fragment implements SealTextClickListener 
         mBtnAddText = (Button) view.findViewById(R.id.btn_add_text);
         mEtTagText = (EditText) view.findViewById(R.id.et_tag_text);
         rl_screenshot_textedit_container = (ViewGroup) view.findViewById(R.id.rl_screenshot_textedit_container);
-        mtickerView = (StickerView) view.findViewById(R.id.img_test);
-
-        mtickerView.post(new Runnable() {
+        mStickerView = (StickerView) view.findViewById(R.id.img_test);
+        mStickerView.setRegionClickListener(this);
+        mStickerView.post(new Runnable() {
             @Override
             public void run() {
-                mtickerView.addBitImage(BitmapFactory.decodeResource(NoteApplication.appContext.getResources(), R.drawable.ic_launcher_fang));
+                mStickerView.addBitImage(BitmapFactory.decodeResource(NoteApplication.appContext.getResources(), R.drawable.ic_launcher_fang));
             }
         });
 
@@ -77,7 +76,7 @@ public class TextModeFragment extends Fragment implements SealTextClickListener 
             public void onClick(View v) {
                 rl_screenshot_textedit_container.setClickable(true);
                 mEtTagText.setVisibility(View.VISIBLE);
-                mtickerView.setVisibility(View.GONE);
+                mStickerView.setVisibility(View.GONE);
                 mEtTagText.requestFocus();
             }
         });
@@ -87,7 +86,7 @@ public class TextModeFragment extends Fragment implements SealTextClickListener 
             public void onClick(View v) {
                 //退出输入框输入态
                 mEtTagText.setVisibility(View.GONE);
-                mtickerView.setVisibility(View.VISIBLE);
+                mStickerView.setVisibility(View.VISIBLE);
                 handleEditTextDrawingCacheBitmap(mEtTagText);
             }
         });
@@ -108,8 +107,8 @@ public class TextModeFragment extends Fragment implements SealTextClickListener 
         mEditTextUiBitmap = ScreenshotManager.getBitmapFromView(editText);
 
         if (mEditTextUiBitmap != null) {
-            mtickerView.clear();
-            mtickerView.addBitImage(mEditTextUiBitmap);
+            mStickerView.clear();
+            mStickerView.addBitImage(mEditTextUiBitmap);
             ScreenshotManager.setEditTextUIBitmap(mEditTextUiBitmap);
         }
 
@@ -123,7 +122,7 @@ public class TextModeFragment extends Fragment implements SealTextClickListener 
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus == true) {
 //                    mSealTouchView.setVisibility(View.GONE);
-                    mtickerView.setVisibility(View.GONE);
+                    mStickerView.setVisibility(View.GONE);
                 }
             }
         });
@@ -181,7 +180,10 @@ public class TextModeFragment extends Fragment implements SealTextClickListener 
 //            mSealTouchView.setVisibility(View.GONE);
 //        }
 
+        mStickerView.setVisibility(View.GONE);
         mEtTagText.setVisibility(View.VISIBLE);
+        mEtTagText.requestFocus();
+
     }
 
 

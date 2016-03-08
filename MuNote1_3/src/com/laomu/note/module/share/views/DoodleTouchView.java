@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
@@ -13,7 +12,7 @@ import android.widget.ImageView;
 
 import com.laomu.note.common.MuLog;
 import com.laomu.note.module.share.ScreenshotManager;
-import com.laomu.note.module.share.listener.SealTextClickListener;
+import com.laomu.note.module.share.listener.RegionClickListener;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -47,7 +46,7 @@ public class DoodleTouchView extends ImageView {
     private float mSealRectStartX = 0, mSealRectStartY = 0;
 
     private SealRectHolder mSealrectHolder;
-    private SealTextClickListener mSealTextClickListener;
+    private RegionClickListener mSealTextClickListener;
 
     public DoodleTouchView(Context context) {
         super(context);
@@ -264,7 +263,7 @@ public class DoodleTouchView extends ImageView {
         bitmapSeal = editTextUiBitmap;
     }
 
-    public void setTextClickListener(SealTextClickListener listener) {
+    public void setTextClickListener(RegionClickListener listener) {
         mSealTextClickListener = listener;
     }
 

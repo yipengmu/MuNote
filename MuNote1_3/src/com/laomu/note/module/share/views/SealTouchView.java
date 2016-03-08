@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -14,7 +13,7 @@ import android.widget.ImageView;
 
 import com.laomu.note.common.MuLog;
 import com.laomu.note.module.share.ScreenshotManager;
-import com.laomu.note.module.share.listener.SealTextClickListener;
+import com.laomu.note.module.share.listener.RegionClickListener;
 import com.laomu.note.module.share.type.TouchModeEnum;
 
 /**
@@ -28,7 +27,7 @@ public class SealTouchView extends ImageView {
 
     // 布局高和宽
     private SealRectHolder mHolder;
-    private SealTextClickListener mSealTextClickListener;
+    private RegionClickListener mSealTextClickListener;
 
     private Matrix matrix = new Matrix();
 
@@ -210,7 +209,7 @@ public class SealTouchView extends ImageView {
         touchModeEnum = TouchModeEnum.MOVE;
     }
 
-    public void setTextClickListener(SealTextClickListener listener) {
+    public void setTextClickListener(RegionClickListener listener) {
         mSealTextClickListener = listener;
     }
 
