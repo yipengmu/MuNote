@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.laomu.note.R;
-import com.laomu.note.module.share.fragment.TextModeFragment;
+import com.laomu.note.module.share.fragment.ImageEditFragment;
 import com.laomu.note.module.share.type.ScreenShotModeEnum;
 import com.laomu.note.ui.base.NoteBaseActivity;
 
@@ -23,7 +23,7 @@ public class ScreenShotActivity extends NoteBaseActivity {
 
     private TextView mTvModeText, mTvModeDoodle;
     private FragmentManager fragmentManager;
-    private TextModeFragment mTextModeFragment;
+    private ImageEditFragment mImageEditFragment;
     private FragmentTransaction mFragmentTransaction;
     private ImageView img_screen_bg;
     public Button mBtnAddText;
@@ -73,13 +73,21 @@ public class ScreenShotActivity extends NoteBaseActivity {
             }
         });
 
+        btnCleanDoodle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mImageEditFragment.cleanDoodleView();
+            }
+        });
+
         initFragment();
 
 
     }
 
     private void updateFragmentMode(ScreenShotModeEnum mode) {
-        mTextModeFragment.updateEditMode(mode);
+        mImageEditFragment.updateEditMode(mode);
 
         //处理toolbar
         if(mode == ScreenShotModeEnum.MODE_DOODLE){
@@ -92,11 +100,11 @@ public class ScreenShotActivity extends NoteBaseActivity {
     }
 
     private void initFragment() {
-        mTextModeFragment = TextModeFragment.newInstance(this);
+        mImageEditFragment = ImageEditFragment.newInstance(this);
 
         fragmentManager = getSupportFragmentManager();
         mFragmentTransaction = fragmentManager.beginTransaction();
-        mFragmentTransaction.replace(R.id.fl_screenshot_fragment_container, mTextModeFragment);
+        mFragmentTransaction.replace(R.id.fl_screenshot_fragment_container, mImageEditFragment);
         mFragmentTransaction.commit();
     }
 

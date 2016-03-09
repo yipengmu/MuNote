@@ -17,9 +17,6 @@ import android.view.View;
 import com.laomu.note.R;
 
 
-/**
- * @author panyi
- */
 public class StickerItem {
     private static final float MIN_SCALE = 0.15f;
     private static final int HELP_BOX_PAD = 25;

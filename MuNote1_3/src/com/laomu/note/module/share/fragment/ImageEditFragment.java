@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.laomu.note.R;
 import com.laomu.note.common.MuLog;
@@ -25,13 +24,13 @@ import com.laomu.note.module.share.views.StickerView;
 import com.laomu.note.ui.NoteApplication;
 
 
-public class TextModeFragment extends Fragment implements RegionClickListener,ColorSelectorListener {
+public class ImageEditFragment extends Fragment implements RegionClickListener,ColorSelectorListener {
 
     private ScreenShotActivity mActivity;
     private Button mBtnAddText;
     private DoodleTouchView doodleTouchView;
     private EditText mEtTagText;
-    private ViewGroup rl_screenshot_textedit_container;
+    private ViewGroup rlScreenshotTexteditContainer;
     private Bitmap mEditTextUiBitmap;
     private StickerView mStickerView;
     private Button btnHistory1;
@@ -39,13 +38,13 @@ public class TextModeFragment extends Fragment implements RegionClickListener,Co
     private ScreenShotModeEnum mMode;
     private LinearColorSelectorView linearColorSelectorView;
 
-    public TextModeFragment() {
+    public ImageEditFragment() {
         // Required empty public constructor
     }
 
 
-    public static TextModeFragment newInstance(ScreenShotActivity screenShotActivity) {
-        TextModeFragment fragment = new TextModeFragment();
+    public static ImageEditFragment newInstance(ScreenShotActivity screenShotActivity) {
+        ImageEditFragment fragment = new ImageEditFragment();
         fragment.setActivity(screenShotActivity);
         return fragment;
     }
@@ -69,7 +68,7 @@ public class TextModeFragment extends Fragment implements RegionClickListener,Co
     private void initView(View view) {
 
         mEtTagText = (EditText) view.findViewById(R.id.et_tag_text);
-        rl_screenshot_textedit_container = (ViewGroup) view.findViewById(R.id.rl_screenshot_textedit_container);
+        rlScreenshotTexteditContainer = (ViewGroup) view.findViewById(R.id.rl_screenshot_textedit_container);
         mStickerView = (StickerView) view.findViewById(R.id.img_test);
         doodleTouchView = (DoodleTouchView) view.findViewById(R.id.doodle_touch_view);
 
@@ -95,14 +94,14 @@ public class TextModeFragment extends Fragment implements RegionClickListener,Co
         mBtnAddText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rl_screenshot_textedit_container.setClickable(true);
+                rlScreenshotTexteditContainer.setClickable(true);
                 mEtTagText.setVisibility(View.VISIBLE);
                 mStickerView.setVisibility(View.GONE);
                 mEtTagText.requestFocus();
             }
         });
 
-        rl_screenshot_textedit_container.setOnClickListener(new View.OnClickListener() {
+        rlScreenshotTexteditContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //退出输入框输入态
@@ -172,5 +171,9 @@ public class TextModeFragment extends Fragment implements RegionClickListener,Co
     @Override
     public void onColorSelectorChange(int color) {
         doodleTouchView.setDoodlePaintColor(color);
+    }
+
+    public void cleanDoodleView() {
+        doodleTouchView.clearAllDoodles();
     }
 }

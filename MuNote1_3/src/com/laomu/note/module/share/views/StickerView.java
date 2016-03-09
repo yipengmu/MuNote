@@ -10,15 +10,12 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.laomu.note.module.share.fragment.TextModeFragment;
 import com.laomu.note.module.share.listener.RegionClickListener;
 
 import java.util.LinkedHashMap;
 
 /**
  * 贴图操作控件
- *
- * base from @author panyi
  */
 public class StickerView extends View{
     private static int STATUS_IDLE = 0;
