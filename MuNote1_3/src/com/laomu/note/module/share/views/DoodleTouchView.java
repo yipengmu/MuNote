@@ -24,7 +24,6 @@ public class DoodleTouchView extends ImageView {
     private Bitmap bitmapBackgroud;
     private Bitmap bitmapDoodle;
     private Bitmap bitmapSeal;
-    private SSEditText mSSEditText;
 
 //    private Canvas mCanvas;
     private Path mPath;
@@ -117,16 +116,6 @@ public class DoodleTouchView extends ImageView {
 
     @Override
     public void onDraw(Canvas canvas) {
-
-        //盖章文案绘制
-        if (bitmapSeal != null) {
-            canvas.drawBitmap(bitmapSeal, mSealRectStartX, mSealRectStartY, null);
-        }
-
-        // 涂鸦绘制
-//        if (mPath != null) {
-//            canvas.drawPath(mPath, mDoodlePaint);
-//        }
 
         for(int i=0;i<savePath.size();i++){
             canvas.drawPath(savePath.get(i).path,savePath.get(i).paint);

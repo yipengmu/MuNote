@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_screenshot_textedit_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/rl_screenshot_textedit_container"
     android:clickable="false"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
+    <com.laomu.note.module.share.views.DoodleTouchView
+        android:id="@+id/doodle_touch_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:scaleType="center" />
+
+
+
+    <com.laomu.note.module.share.views.LinearColorSelectorView
+        android:layout_width="wrap_content"
+        android:minWidth="50dp"
+        android:id="@+id/color_selector_view"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true" />
 
     <com.laomu.note.module.share.views.StickerView
         android:id="@+id/img_test"
@@ -16,7 +33,7 @@
         android:layout_margin="5dp" />
 
 
-    <com.laomu.note.module.share.views.SSEditText
+    <EditText
         android:id="@+id/et_tag_text"
         android:layout_width="200dp"
         android:layout_height="100dp"
@@ -29,7 +46,6 @@
         android:textColorHint="@color/red"
         android:textSize="20dp"
         android:visibility="invisible" />
-
 
 
 
