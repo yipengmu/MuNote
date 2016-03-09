@@ -11,4 +11,9 @@ public class DoodleDrawPath {
     public Path path;
 
     public Paint paint;// 画笔
+
+    public DoodleDrawPath() {
+        path = new Path();
+        paint = new Paint();
+    }
 }

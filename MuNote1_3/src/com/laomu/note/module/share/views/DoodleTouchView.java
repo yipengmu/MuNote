@@ -36,7 +36,7 @@ public class DoodleTouchView extends ImageView {
     // 保存Path路径的集合,用List集合来模拟栈
     private static List<DoodleDrawPath> savePath;
     // 记录Path路径的对象
-    private DoodleDrawPath dp;
+    private DoodleDrawPath doodleDrawPathItem;
 
     private boolean isInit = false;// 用来标记保证只被初始化一次
 
@@ -117,15 +117,22 @@ public class DoodleTouchView extends ImageView {
 
     @Override
     public void onDraw(Canvas canvas) {
+
         //盖章文案绘制
         if (bitmapSeal != null) {
             canvas.drawBitmap(bitmapSeal, mSealRectStartX, mSealRectStartY, null);
         }
 
         // 涂鸦绘制
-        if (mPath != null) {
-            canvas.drawPath(mPath, mDoodlePaint);
+//        if (mPath != null) {
+//            canvas.drawPath(mPath, mDoodlePaint);
+//        }
+
+        for(int i=0;i<savePath.size();i++){
+            canvas.drawPath(savePath.get(i).path,savePath.get(i).paint);
         }
+
+        canvas.save();
 
     }
 
@@ -167,11 +174,13 @@ public class DoodleTouchView extends ImageView {
     private void touch_start(float x, float y) {
 
         // 每一次记录的路径对象是不一样的
-        dp = new DoodleDrawPath();
-        dp.path = mPath;
-        dp.paint = mDoodlePaint;
+        doodleDrawPathItem = new DoodleDrawPath();
+        doodleDrawPathItem.path = mPath;
+        doodleDrawPathItem.paint = mDoodlePaint;
 
+        savePath.add(doodleDrawPathItem);
         mPath.moveTo(x, y);
+
         mX = x;
         mY = y;
     }
@@ -193,7 +202,7 @@ public class DoodleTouchView extends ImageView {
         mPath.lineTo(mX, mY);
         mCanvas.drawPath(mPath, mDoodlePaint);
         // 将一条完整的路径保存下来(相当于入栈操作)
-        savePath.add(dp);
+        savePath.add(doodleDrawPathItem);
 //		mPath = null;// 重新置空
     }
 
@@ -277,7 +286,11 @@ public class DoodleTouchView extends ImageView {
     }
 
     public void setDoodlePaintColor(int color) {
-        mDoodlePaint.setColor(color);
+        doodleDrawPathItem.paint.setColor(color);
     }
 
+    public void clearAllDoodles() {
+        savePath.clear();
+        invalidate();
+    }
 }

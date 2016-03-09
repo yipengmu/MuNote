@@ -1,13 +1,13 @@
 package com.laomu.note.module.share;
 
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.laomu.note.R;
@@ -28,7 +28,7 @@ public class ScreenShotActivity extends NoteBaseActivity{
     private TextModeFragment mTextModeFragment;
     private DoodleModeFragment mDoodleModeFragment;
     private FragmentTransaction mFragmentTransaction;
-
+    private ImageView img_screen_bg;
     //保存的背景截图文件名
     private String mEditTextTagBitmapFileName = "screenshot_tag.png";
 
@@ -44,9 +44,8 @@ public class ScreenShotActivity extends NoteBaseActivity{
     }
 
     private void initView() {
-        flScreenshotFragmentContainer = (FrameLayout) findViewById(R.id.fl_screenshot_fragment_container);
-        flScreenshotFragmentContainer.setBackground(new BitmapDrawable(ScreenshotManager.getscreenShotBgBitmap()));
-
+        img_screen_bg = (ImageView) findViewById(R.id.img_screen_bg);
+        img_screen_bg.setImageBitmap(ScreenshotManager.getscreenShotBgBitmap());
         mTvModeText = (TextView) findViewById(R.id.tv_mode_text);
         mTvModeDoodle = (TextView) findViewById(R.id.tv_mode_doodle);
 

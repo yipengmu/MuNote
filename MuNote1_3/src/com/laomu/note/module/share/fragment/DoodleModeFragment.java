@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.laomu.note.R;
 import com.laomu.note.module.share.listener.ColorSelectorListener;
@@ -16,6 +17,8 @@ public class DoodleModeFragment extends Fragment implements ColorSelectorListene
 
     private DoodleTouchView doodleTouchView;
     private LinearColorSelectorView linearColorSelectorView;
+    private Button btnCleanDoodle;
+
 
     public DoodleModeFragment() {
         // Required empty public constructor
@@ -48,9 +51,16 @@ public class DoodleModeFragment extends Fragment implements ColorSelectorListene
 
         doodleTouchView = (DoodleTouchView) view.findViewById(R.id.doodle_touch_view);
         linearColorSelectorView = (LinearColorSelectorView) view.findViewById(R.id.color_selector_view);
+        btnCleanDoodle = (Button) view.findViewById(R.id.btn_clean_doodle);
+
 
         linearColorSelectorView.setColorSelectorListener(this);
-
+        btnCleanDoodle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doodleTouchView.clearAllDoodles();
+            }
+        });
     }
 
     @Override
