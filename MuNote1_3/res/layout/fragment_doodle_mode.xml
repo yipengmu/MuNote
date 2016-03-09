@@ -12,13 +12,6 @@
         android:layout_centerInParent="true"
         android:scaleType="fitCenter" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:text="颜色选择器"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_height="wrap_content" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,5 +32,12 @@
             android:text="清除" />
 
     </LinearLayout>
+
+
+    <com.laomu.note.module.share.views.LinearColorSelectorView
+        android:layout_width="wrap_content"
+        android:minWidth="50dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true" />
 </RelativeLayout>
 
