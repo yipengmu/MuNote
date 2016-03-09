@@ -9,12 +9,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.laomu.note.R;
+import com.laomu.note.module.share.ScreenShotActivity;
 import com.laomu.note.module.share.listener.ColorSelectorListener;
 import com.laomu.note.module.share.views.DoodleTouchView;
 import com.laomu.note.module.share.views.LinearColorSelectorView;
 
 public class DoodleModeFragment extends Fragment implements ColorSelectorListener {
 
+    private static ScreenShotActivity mScreenShotActivity;
     private DoodleTouchView doodleTouchView;
     private LinearColorSelectorView linearColorSelectorView;
     private Button btnCleanDoodle;
@@ -24,10 +26,11 @@ public class DoodleModeFragment extends Fragment implements ColorSelectorListene
         // Required empty public constructor
     }
 
-    public static DoodleModeFragment newInstance(String param1, String param2) {
+    public static DoodleModeFragment newInstance(ScreenShotActivity screenShotActivity) {
         DoodleModeFragment fragment = new DoodleModeFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
+        mScreenShotActivity = screenShotActivity;
         return fragment;
     }
 
@@ -51,8 +54,7 @@ public class DoodleModeFragment extends Fragment implements ColorSelectorListene
 
         doodleTouchView = (DoodleTouchView) view.findViewById(R.id.doodle_touch_view);
         linearColorSelectorView = (LinearColorSelectorView) view.findViewById(R.id.color_selector_view);
-        btnCleanDoodle = (Button) view.findViewById(R.id.btn_clean_doodle);
-
+        btnCleanDoodle = mScreenShotActivity.btnCleanDoodle;
 
         linearColorSelectorView.setColorSelectorListener(this);
         btnCleanDoodle.setOnClickListener(new View.OnClickListener() {

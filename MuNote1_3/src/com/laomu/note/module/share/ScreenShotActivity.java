@@ -6,8 +6,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.laomu.note.R;
@@ -29,8 +31,15 @@ public class ScreenShotActivity extends NoteBaseActivity{
     private DoodleModeFragment mDoodleModeFragment;
     private FragmentTransaction mFragmentTransaction;
     private ImageView img_screen_bg;
+    public Button mBtnAddText;
+    public Button btnCleanDoodle;
+    public Button btnHistory1;
+    public Button btnHistory2;
+
     //保存的背景截图文件名
     private String mEditTextTagBitmapFileName = "screenshot_tag.png";
+    private LinearLayout llDoodleoolbar;
+    private LinearLayout llSealtextToolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +57,12 @@ public class ScreenShotActivity extends NoteBaseActivity{
         img_screen_bg.setImageBitmap(ScreenshotManager.getscreenShotBgBitmap());
         mTvModeText = (TextView) findViewById(R.id.tv_mode_text);
         mTvModeDoodle = (TextView) findViewById(R.id.tv_mode_doodle);
+        mBtnAddText = (Button) findViewById(R.id.btn_add_text);
+        btnCleanDoodle = (Button) findViewById(R.id.btn_clean_doodle);
+        btnHistory1 = (Button) findViewById(R.id.btn_history1);
+        btnHistory2 = (Button) findViewById(R.id.btn_history2);
+        llDoodleoolbar = (LinearLayout)findViewById(R.id.ll_doodle_toolbar);
+        llSealtextToolbar = (LinearLayout)findViewById(R.id.ll_sealtext_toolbar);
 
         mTvModeText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,8 +84,8 @@ public class ScreenShotActivity extends NoteBaseActivity{
     }
 
     private void initFragment() {
-        mTextModeFragment = new TextModeFragment();
-        mDoodleModeFragment = new DoodleModeFragment();
+        mTextModeFragment = TextModeFragment.newInstance(this);
+        mDoodleModeFragment = DoodleModeFragment.newInstance(this);
         fragmentManager = getSupportFragmentManager();
 
         showFragments(ScreenShotModeEnum.MODE_TEXT);
@@ -81,8 +96,12 @@ public class ScreenShotActivity extends NoteBaseActivity{
 
         if(mode == ScreenShotModeEnum.MODE_TEXT){
             mFragmentTransaction.replace(R.id.fl_screenshot_fragment_container, mTextModeFragment);
+            llSealtextToolbar.setVisibility(View.VISIBLE);
+            llDoodleoolbar.setVisibility(View.GONE);
         }else if(mode == ScreenShotModeEnum.MODE_DOODLE){
             mFragmentTransaction.replace(R.id.fl_screenshot_fragment_container, mDoodleModeFragment);
+            llSealtextToolbar.setVisibility(View.GONE);
+            llDoodleoolbar.setVisibility(View.VISIBLE);
         }
         mFragmentTransaction.commit();
     }

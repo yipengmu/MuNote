@@ -28,10 +28,10 @@
         <FrameLayout
             android:id="@+id/fl_screenshot_fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </FrameLayout>
+            android:layout_height="match_parent"></FrameLayout>
 
     </RelativeLayout>
+
 
     <LinearLayout
         android:id="@+id/ll_bottom_cell"
@@ -41,6 +41,62 @@
         android:background="@color/white"
         android:gravity="center_horizontal|bottom"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_sealtext_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_add_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btn_history1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1111" />
+
+                <Button
+                    android:id="@+id/btn_history2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="222" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_doodle_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_alignParentBottom="true"
+            android:background="#dddd11"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_doole_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="返回" />
+
+            <Button
+                android:id="@+id/btn_clean_doodle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="清除" />
+
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
@@ -55,16 +111,16 @@
 
 
             <TextView
+                android:id="@+id/tv_mode_text"
                 android:layout_width="fill_parent"
-                android:gravity="center"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:drawableTop="@drawable/ic_menu_user"
-                android:id="@+id/tv_mode_text"
-                android:textColor="@color/black"
+                android:gravity="center"
                 android:orientation="horizontal"
-                android:text="文本" />
+                android:text="文本"
+                android:textColor="@color/black" />
 
 
             <View
@@ -74,16 +130,16 @@
 
 
             <TextView
+                android:id="@+id/tv_mode_doodle"
                 android:layout_width="fill_parent"
-                android:gravity="center"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
-                android:id="@+id/tv_mode_doodle"
                 android:layout_weight="1"
-                android:textColor="@color/black"
                 android:drawableTop="@drawable/ic_menu_user"
+                android:gravity="center"
                 android:orientation="horizontal"
-                android:text="涂鸦" />
+                android:text="涂鸦"
+                android:textColor="@color/black" />
 
         </LinearLayout>
     </LinearLayout>

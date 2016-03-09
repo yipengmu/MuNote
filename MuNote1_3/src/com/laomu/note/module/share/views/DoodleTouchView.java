@@ -26,7 +26,7 @@ public class DoodleTouchView extends ImageView {
     private Bitmap bitmapSeal;
     private SSEditText mSSEditText;
 
-    private Canvas mCanvas;
+//    private Canvas mCanvas;
     private Path mPath;
     private Paint mDoodlePaint;
     private float mX, mY;// 临时点坐标
@@ -48,6 +48,14 @@ public class DoodleTouchView extends ImageView {
 
     private SealRectHolder mSealrectHolder;
     private RegionClickListener mSealTextClickListener;
+    private int currentColor = Color.BLACK;
+
+
+
+
+
+
+
 
     public DoodleTouchView(Context context) {
         super(context);
@@ -80,7 +88,7 @@ public class DoodleTouchView extends ImageView {
                     Bitmap.Config.ARGB_8888);
 
             // 保存一次一次绘制出来的图形
-            mCanvas = new Canvas(bitmapBackgroud);
+//            mCanvas = new Canvas(bitmapBackgroud);
 
 
             mDoodlePaint = new Paint();
@@ -132,8 +140,6 @@ public class DoodleTouchView extends ImageView {
             canvas.drawPath(savePath.get(i).path,savePath.get(i).paint);
         }
 
-        canvas.save();
-
     }
 
     // 布局的大小改变时，就会调用该方法
@@ -175,11 +181,11 @@ public class DoodleTouchView extends ImageView {
 
         // 每一次记录的路径对象是不一样的
         doodleDrawPathItem = new DoodleDrawPath();
-        doodleDrawPathItem.path = mPath;
+        mDoodlePaint.setColor(currentColor);
         doodleDrawPathItem.paint = mDoodlePaint;
+        doodleDrawPathItem.path.moveTo(x, y);
 
         savePath.add(doodleDrawPathItem);
-        mPath.moveTo(x, y);
 
         mX = x;
         mY = y;
@@ -191,7 +197,7 @@ public class DoodleTouchView extends ImageView {
         float dy = Math.abs(mY - y);
         if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
             // 从（mX,mY）到（x,y）画一条贝塞尔曲线，更平滑(直接用mPath.lineTo也是可以的)
-            mPath.quadTo(mX, mY, (x + mX) / 2, (y + mY) / 2);
+            doodleDrawPathItem.path.quadTo(mX, mY, (x + mX) / 2, (y + mY) / 2);
             mX = x;
             mY = y;
         }
@@ -199,21 +205,21 @@ public class DoodleTouchView extends ImageView {
 
     // 滑动太手
     private void touch_up() {
-        mPath.lineTo(mX, mY);
-        mCanvas.drawPath(mPath, mDoodlePaint);
+        doodleDrawPathItem.path.lineTo(mX, mY);
+//        mCanvas.drawPath(mPath, mDoodlePaint);
         // 将一条完整的路径保存下来(相当于入栈操作)
         savePath.add(doodleDrawPathItem);
-//		mPath = null;// 重新置空
+		mPath = null;// 重新置空
     }
 
     // 重新绘制Path中的画线路径
     private void redrawOnBitmap() {
         bitmapBackgroud = Bitmap.createBitmap((int)screenWidth, (int)screenHeight,
                 Bitmap.Config.ARGB_8888);
-        mCanvas.setBitmap(bitmapBackgroud);// 重新设置画布，相当于清空画布
+//        mCanvas.setBitmap(bitmapBackgroud);// 重新设置画布，相当于清空画布
 
         for (DoodleDrawPath drawPath : savePath) {
-            mCanvas.drawPath(drawPath.path, drawPath.paint);
+//            mCanvas.drawPath(drawPath.path, drawPath.paint);
         }
 
         invalidate();// 刷新
@@ -286,7 +292,7 @@ public class DoodleTouchView extends ImageView {
     }
 
     public void setDoodlePaintColor(int color) {
-        doodleDrawPathItem.paint.setColor(color);
+        currentColor = color;
     }
 
     public void clearAllDoodles() {

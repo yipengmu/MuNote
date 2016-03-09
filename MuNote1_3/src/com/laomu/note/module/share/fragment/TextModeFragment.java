@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import com.laomu.note.R;
 import com.laomu.note.common.MuLog;
+import com.laomu.note.module.share.ScreenShotActivity;
 import com.laomu.note.module.share.ScreenshotManager;
 import com.laomu.note.module.share.listener.RegionClickListener;
 import com.laomu.note.module.share.views.StickerView;
@@ -21,6 +22,7 @@ import com.laomu.note.ui.NoteApplication;
 
 public class TextModeFragment extends Fragment implements RegionClickListener {
 
+    private static ScreenShotActivity mActivity;
     private Button mBtnAddText;
     private EditText mEtTagText;
     private ViewGroup rl_screenshot_textedit_container;
@@ -31,6 +33,15 @@ public class TextModeFragment extends Fragment implements RegionClickListener {
 
     public TextModeFragment() {
         // Required empty public constructor
+    }
+
+
+    public static TextModeFragment newInstance(ScreenShotActivity screenShotActivity) {
+        TextModeFragment fragment = new TextModeFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        mActivity = screenShotActivity;
+        return fragment;
     }
 
 
@@ -49,13 +60,13 @@ public class TextModeFragment extends Fragment implements RegionClickListener {
 
     private void initView(View view) {
 
-        mBtnAddText = (Button) view.findViewById(R.id.btn_add_text);
         mEtTagText = (EditText) view.findViewById(R.id.et_tag_text);
         rl_screenshot_textedit_container = (ViewGroup) view.findViewById(R.id.rl_screenshot_textedit_container);
         mStickerView = (StickerView) view.findViewById(R.id.img_test);
-        btnHistory1 = (Button) view.findViewById(R.id.btn_history1);
-        btnHistory2 = (Button) view.findViewById(R.id.btn_history2);
+        btnHistory1 = mActivity.btnHistory1;
+        btnHistory2 = mActivity.btnHistory2;
 
+        mBtnAddText = mActivity.mBtnAddText;
         mStickerView.setRegionClickListener(this);
 
 
