@@ -11,6 +11,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
+import com.laomu.note.module.share.listener.ColorSelectorListener;
+
 /**
  * Created by ${yipengmu} on 16/3/9.
  *
@@ -28,6 +30,7 @@ public class LinearColorSelectorView extends ImageView {
     private int mLiearGradientStartRight;
     private Bitmap currentBitmap;
     boolean bGetDrawingCacheBitmap = false;
+    private ColorSelectorListener colorSelectorListener;
 
     public LinearColorSelectorView(Context context) {
         super(context);
@@ -110,7 +113,12 @@ public class LinearColorSelectorView extends ImageView {
 
     private void updateColorcyclePaint(int xx, int yy) {
         if (xx <= currentBitmap.getWidth() && yy <= currentBitmap.getHeight() && xx >= mLiearGradientStartLeft && xx <= mLiearGradientStartRight) {
-            mColorcyclePaint.setColor(currentBitmap.getPixel(xx, yy));
+            int pointColor = currentBitmap.getPixel(xx, yy);
+            mColorcyclePaint.setColor(pointColor);
+
+            if(colorSelectorListener != null){
+                colorSelectorListener.onColorSelectorChange(pointColor);
+            }
         } else {
             mColorcyclePaint.setColor(Color.TRANSPARENT);
         }
@@ -123,5 +131,9 @@ public class LinearColorSelectorView extends ImageView {
 
         super.onDetachedFromWindow();
 
+    }
+
+    public void setColorSelectorListener(ColorSelectorListener colorSelectorListener) {
+        this.colorSelectorListener = colorSelectorListener;
     }
 }

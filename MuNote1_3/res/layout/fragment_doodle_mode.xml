@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <com.laomu.note.module.share.views.DoodleTouchView
-        android:id="@+id/iv_screenshot"
+        android:id="@+id/doodle_touch_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_centerInParent="true"
@@ -37,6 +37,7 @@
     <com.laomu.note.module.share.views.LinearColorSelectorView
         android:layout_width="wrap_content"
         android:minWidth="50dp"
+        android:id="@+id/color_selector_view"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true" />
 </RelativeLayout>

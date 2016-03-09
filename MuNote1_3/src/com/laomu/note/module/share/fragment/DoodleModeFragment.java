@@ -1,53 +1,29 @@
 package com.laomu.note.module.share.fragment;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.laomu.note.R;
+import com.laomu.note.module.share.listener.ColorSelectorListener;
+import com.laomu.note.module.share.views.DoodleTouchView;
+import com.laomu.note.module.share.views.LinearColorSelectorView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link DoodleModeFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link DoodleModeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class DoodleModeFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class DoodleModeFragment extends Fragment implements ColorSelectorListener {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private DoodleTouchView doodleTouchView;
+    private LinearColorSelectorView linearColorSelectorView;
 
     public DoodleModeFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DoodleModeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static DoodleModeFragment newInstance(String param1, String param2) {
         DoodleModeFragment fragment = new DoodleModeFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -56,8 +32,6 @@ public class DoodleModeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -71,6 +45,12 @@ public class DoodleModeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        doodleTouchView = (DoodleTouchView) view.findViewById(R.id.doodle_touch_view);
+        linearColorSelectorView = (LinearColorSelectorView) view.findViewById(R.id.color_selector_view);
+
+        linearColorSelectorView.setColorSelectorListener(this);
+
     }
 
     @Override
@@ -78,4 +58,8 @@ public class DoodleModeFragment extends Fragment {
         super.onDetach();
     }
 
+    @Override
+    public void onColorSelectorChange(int color) {
+        doodleTouchView.setDoodlePaintColor(color);
+    }
 }
