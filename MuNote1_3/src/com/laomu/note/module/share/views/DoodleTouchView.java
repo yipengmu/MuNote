@@ -46,12 +46,8 @@ public class DoodleTouchView extends ImageView {
     // 文案编辑框起始X，起始Y
     private float mSealRectStartX = 0, mSealRectStartY = 0;
 
-    private SealRectHolder mSealrectHolder;
     private RegionClickListener mSealTextClickListener;
     private int currentColor = Color.BLACK;
-
-
-
 
 
 
@@ -108,10 +104,6 @@ public class DoodleTouchView extends ImageView {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-
-
-            mSealrectHolder = new SealRectHolder();
-
 
             mSealRectStartX = getX();
             mSealRectStartY = getTop();
@@ -233,7 +225,6 @@ public class DoodleTouchView extends ImageView {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 touch_start(x, y);
-                checkSealTextClick(x, y);
                 break;
             case MotionEvent.ACTION_MOVE:
                 touch_move(x, y);
@@ -245,30 +236,6 @@ public class DoodleTouchView extends ImageView {
 
         invalidate();
         return true;
-    }
-
-    private void checkSealTextClick(float x, float y) {
-        if (mSealTextClickListener == null) {
-            return;
-        }
-
-        //判断当前按下触发的是否是落在编辑框区域中
-        //判断当前按下触发的是否是落在编辑框区域中
-        if (x > 0 && x < mSealrectHolder.getSealWidth() + mSealrectHolder.bitmapSeal.getWidth() &&
-                y > mSealrectHolder.getSealHeight() && y < mSealrectHolder.getSealHeight() + mSealrectHolder.bitmapSeal.getHeight()) {
-
-            //如果在区域内，则进入此逻辑：隐藏sealbitmap,展示EditText标准编辑框
-            mSealTextClickListener.onTextRectInSideClick();
-
-        } else if (x > 0 && x < mSealrectHolder.getSealWidth() + mSealrectHolder.bitmapSeal.getWidth() && (y > 0 && y < mSealrectHolder.getSealHeight() || (y > mSealrectHolder.getSealHeight() + mSealrectHolder.bitmapSeal.getHeight())) ||
-                y > mSealrectHolder.getSealHeight() && ((x > 0 && x < mSealrectHolder.getSealWidth()) || (x > mSealrectHolder.getSealWidth() + mSealrectHolder.bitmapSeal.getWidth()))) {
-
-            //如果在区域外，则进入此逻辑：隐藏sealbitmap,展示EditText标准编辑框
-            mSealTextClickListener.onTextRectOutSideClick();
-
-            //隐藏seal区域bitmap绘制
-//            bitmapSeal = null;
-        }
     }
 
     public void setImageBackgroud(Bitmap bitmap) {
