@@ -11,27 +11,35 @@
         layout="@layout/common_head_with_toolbar" />
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_above="@+id/ll_bottom_cell"
         android:layout_below="@+id/create_note_toolbar"
-        android:background="@color/pale_blue"
+        android:background="@color/black"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/img_screen_bg"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_margin="5dp" />
+            android:layout_gravity="center" />
 
         <FrameLayout
             android:id="@+id/fl_screenshot_fragment_container"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_height="match_parent"></FrameLayout>
 
     </RelativeLayout>
 
+
+
+    <com.laomu.note.module.share.views.LinearColorSelectorView
+        android:layout_width="wrap_content"
+        android:minWidth="50dp"
+        android:id="@+id/color_selector_view"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true" />
 
     <LinearLayout
         android:id="@+id/ll_bottom_cell"

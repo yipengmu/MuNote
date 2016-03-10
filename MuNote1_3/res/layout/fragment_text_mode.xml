@@ -18,12 +18,6 @@
 
 
 
-    <com.laomu.note.module.share.views.LinearColorSelectorView
-        android:layout_width="wrap_content"
-        android:minWidth="50dp"
-        android:id="@+id/color_selector_view"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true" />
 
     <com.laomu.note.module.share.views.StickerView
         android:id="@+id/img_test"

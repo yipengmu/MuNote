@@ -71,8 +71,7 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
         rlScreenshotTexteditContainer = (ViewGroup) view.findViewById(R.id.rl_screenshot_textedit_container);
         mStickerView = (StickerView) view.findViewById(R.id.img_test);
         doodleTouchView = (DoodleTouchView) view.findViewById(R.id.doodle_touch_view);
-
-        linearColorSelectorView = (LinearColorSelectorView) view.findViewById(R.id.color_selector_view);
+        linearColorSelectorView = mActivity.linearColorSelectorView;
         linearColorSelectorView.setColorSelectorListener(this);
 
         btnHistory1 = mActivity.btnHistory1;
@@ -163,8 +162,10 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
 
         if (mMode == ScreenShotModeEnum.MODE_DOODLE) {
             doodleTouchView.setVisibility(View.VISIBLE);
+            linearColorSelectorView.setVisibility(View.VISIBLE);
         } else if (mMode == ScreenShotModeEnum.MODE_TEXT) {
             doodleTouchView.setVisibility(View.GONE);
+            linearColorSelectorView.setVisibility(View.GONE);
         }
     }
 

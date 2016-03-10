@@ -14,7 +14,7 @@ public class ScreenshotManager {
     private static Bitmap screenShotBgBitmap;
     private static Bitmap editTextUIBitmap;
 
-    public static Bitmap getscreenShotBgBitmap() {
+    public static Bitmap getScreenshotBgBitmap() {
         return screenShotBgBitmap;
     }
 
@@ -89,4 +89,7 @@ public class ScreenshotManager {
     }
 
 
+    public static int getImageWidthFromStruction(Bitmap bg, int height) {
+        return bg.getWidth() * height / bg.getHeight();
+    }
 }
