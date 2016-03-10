@@ -24,10 +24,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:clickable="true"
+        android:padding="4dp"
         android:layout_margin="5dp" />
 
 
-    <EditText
+    <com.laomu.note.module.share.views.SealEditText
         android:id="@+id/et_tag_text"
         android:layout_width="200dp"
         android:layout_height="100dp"

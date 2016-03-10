@@ -19,7 +19,9 @@ import com.laomu.note.module.share.listener.ColorSelectorListener;
 import com.laomu.note.module.share.listener.RegionClickListener;
 import com.laomu.note.module.share.type.ScreenShotModeEnum;
 import com.laomu.note.module.share.views.DoodleTouchView;
+import com.laomu.note.module.share.views.EditTextWatcher;
 import com.laomu.note.module.share.views.LinearColorSelectorView;
+import com.laomu.note.module.share.views.SealEditText;
 import com.laomu.note.module.share.views.StickerView;
 import com.laomu.note.ui.NoteApplication;
 
@@ -29,7 +31,7 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
     private ScreenShotActivity mActivity;
     private Button mBtnAddText;
     private DoodleTouchView doodleTouchView;
-    private EditText mEtTagText;
+    private SealEditText mEtTagText;
     private ViewGroup rlScreenshotTexteditContainer;
     private Bitmap mEditTextUiBitmap;
     private StickerView mStickerView;
@@ -67,7 +69,7 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
 
     private void initView(View view) {
 
-        mEtTagText = (EditText) view.findViewById(R.id.et_tag_text);
+        mEtTagText = (SealEditText) view.findViewById(R.id.et_tag_text);
         rlScreenshotTexteditContainer = (ViewGroup) view.findViewById(R.id.rl_screenshot_textedit_container);
         mStickerView = (StickerView) view.findViewById(R.id.img_test);
         doodleTouchView = (DoodleTouchView) view.findViewById(R.id.doodle_touch_view);
@@ -85,9 +87,25 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
         mStickerView.post(new Runnable() {
             @Override
             public void run() {
-                mStickerView.addBitImage(BitmapFactory.decodeResource(NoteApplication.appContext.getResources(), R.drawable.ic_launcher_fang));
+                mStickerView.addBitImage(BitmapFactory.decodeResource(NoteApplication.appContext.getResources(), R.drawable.af_seal_text_bg_default));
             }
         });
+
+
+        rlScreenshotTexteditContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //退出输入框输入态
+                if(mEtTagText.isOutofMaxCharNum()){
+                    mEtTagText.checkMaxNumber();
+                }else {
+                    mEtTagText.setVisibility(View.GONE);
+                    mStickerView.setVisibility(View.VISIBLE);
+                    handleEditTextDrawingCacheBitmap(mEtTagText);
+                }
+            }
+        });
+
 
 
         mBtnAddText.setOnClickListener(new View.OnClickListener() {
@@ -97,33 +115,27 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
                 mEtTagText.setVisibility(View.VISIBLE);
                 mStickerView.setVisibility(View.GONE);
                 mEtTagText.requestFocus();
+                mStickerView.invalidate();
             }
         });
-
-        rlScreenshotTexteditContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //退出输入框输入态
-                mEtTagText.setVisibility(View.GONE);
-                mStickerView.setVisibility(View.VISIBLE);
-                handleEditTextDrawingCacheBitmap(mEtTagText);
-            }
-        });
-
 
         btnHistory1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mEtTagText.setVisibility(View.GONE);
                 mStickerView.clear();
                 mStickerView.addBitImage(ScreenshotManager.getBitmapFromView(btnHistory1));
+                mStickerView.invalidate();
             }
         });
 
         btnHistory2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mEtTagText.setVisibility(View.GONE);
                 mStickerView.clear();
                 mStickerView.addBitImage(ScreenshotManager.getBitmapFromView(btnHistory2));
+                mStickerView.invalidate();
             }
         });
 
