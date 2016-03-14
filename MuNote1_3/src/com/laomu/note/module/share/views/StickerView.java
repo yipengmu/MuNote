@@ -186,7 +186,7 @@ public class StickerView extends View{
                 break;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
-                ret = true;
+                ret = false;
                 currentStatus = STATUS_IDLE;
 
                 for (Integer id : bank.keySet()) {
