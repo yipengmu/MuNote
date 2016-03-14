@@ -23,6 +23,7 @@ public class PreferenceCenter {
 	private Editor mEditor;
 	private String WEATHER_CITY_NAME_LIST = "weather_city_name_list";
 	private String LOCAL_CACHE_URL_JSONED = "local_cache_url_jsoned";
+	private String DOODDLE_MASKER_HAS_SHOWED = "dooddle_masker_has_showed";
 
 
 	private static PreferenceCenter mInstance = null;
@@ -58,4 +59,13 @@ public class PreferenceCenter {
 		return mPref.getString(LOCAL_CACHE_URL_JSONED, null);
 	}
 
+	public boolean getDoodleFirstShowed() {
+		return mPref.getBoolean(DOODDLE_MASKER_HAS_SHOWED, false);
+	}
+
+
+	public void setDoodleFirstShowed(){
+		mEditor.putBoolean(DOODDLE_MASKER_HAS_SHOWED, true);
+		mEditor.commit();
+	}
 }

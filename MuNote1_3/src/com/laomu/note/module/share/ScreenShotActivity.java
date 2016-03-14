@@ -5,14 +5,19 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.laomu.note.R;
+import com.laomu.note.common.preferences.PreferenceCenter;
 import com.laomu.note.module.share.fragment.ImageEditFragment;
 import com.laomu.note.module.share.listener.ImageEditLayoutListener;
 import com.laomu.note.module.share.type.ScreenShotModeEnum;
@@ -35,11 +40,13 @@ public class ScreenShotActivity extends NoteBaseActivity implements ImageEditLay
     public Button btnHistory1;
     public Button btnHistory2;
     public LinearColorSelectorView linearColorSelectorView;
+    private FrameLayout screenshotFrameLayoutContainer;
 
     //保存的背景截图文件名
     public LinearLayout llDoodleoolbar;
     public LinearLayout llSealtextToolbar;
     private FrameLayout mFrameLayoutContainer;
+    private View doodleFirsttimeMasker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +66,8 @@ public class ScreenShotActivity extends NoteBaseActivity implements ImageEditLay
         imgScreenBg.setImageBitmap(bg);
         mFrameLayoutContainer = (FrameLayout)findViewById(R.id.fl_screenshot_fragment_container);
         updateEditImageFrameLayout(bg);
+
+        mFrameLayoutContainer = (FrameLayout) findViewById(R.id.fl_screenshot_fragment_container);
         mTvModeText = (TextView) findViewById(R.id.tv_mode_text);
         mTvModeDoodle = (TextView) findViewById(R.id.tv_mode_doodle);
         mBtnAddText = (Button) findViewById(R.id.btn_add_text);
@@ -68,6 +77,9 @@ public class ScreenShotActivity extends NoteBaseActivity implements ImageEditLay
         llDoodleoolbar = (LinearLayout) findViewById(R.id.ll_doodle_toolbar);
         linearColorSelectorView = (LinearColorSelectorView) findViewById(R.id.color_selector_view);
         llSealtextToolbar = (LinearLayout) findViewById(R.id.ll_sealtext_toolbar);
+        doodleFirsttimeMasker = findViewById(R.id.ll_doodle_firsttime_masker);
+        screenshotFrameLayoutContainer = (FrameLayout) findViewById(R.id.fl_screenshot_fragment_container);
+
 
         mTvModeText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,8 +104,9 @@ public class ScreenShotActivity extends NoteBaseActivity implements ImageEditLay
             }
         });
 
-        initFragment();
 
+        initFragment();
+        checkDoodleFirstTimeMasker();
 
     }
 
@@ -102,10 +115,27 @@ public class ScreenShotActivity extends NoteBaseActivity implements ImageEditLay
             @Override
             public void run() {
                 mFrameLayoutContainer.getLayoutParams().height = imgScreenBg.getMeasuredHeight();
-                mFrameLayoutContainer.getLayoutParams().width = ScreenshotManager.getImageWidthFromStruction(bg,mFrameLayoutContainer.getLayoutParams().height);
+                mFrameLayoutContainer.getLayoutParams().width = ScreenshotManager.getImageWidthFromStruction(bg, mFrameLayoutContainer.getLayoutParams().height);
                 mFrameLayoutContainer.invalidate();
             }
         });
+    }
+
+    private void checkDoodleFirstTimeMasker() {
+        boolean isDooledHasShowed = PreferenceCenter.getPreferences().getDoodleFirstShowed();
+        if (isDooledHasShowed) {
+            doodleFirsttimeMasker.setVisibility(View.GONE);
+        } else {
+            doodleFirsttimeMasker.setVisibility(View.VISIBLE);
+            doodleFirsttimeMasker.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    doodleFirsttimeMasker.setVisibility(View.GONE);
+                    PreferenceCenter.getPreferences().setDoodleFirstShowed();
+                }
+
+            });
+        }
 
     }
 
@@ -113,10 +143,10 @@ public class ScreenShotActivity extends NoteBaseActivity implements ImageEditLay
         mImageEditFragment.updateEditMode(mode);
 
         //处理toolbar
-        if(mode == ScreenShotModeEnum.MODE_DOODLE){
+        if (mode == ScreenShotModeEnum.MODE_DOODLE) {
             llDoodleoolbar.setVisibility(View.VISIBLE);
             llSealtextToolbar.setVisibility(View.GONE);
-        }else {
+        } else {
             llDoodleoolbar.setVisibility(View.GONE);
             llSealtextToolbar.setVisibility(View.VISIBLE);
         }
@@ -146,6 +176,36 @@ public class ScreenShotActivity extends NoteBaseActivity implements ImageEditLay
                 finish();
             }
         });
+
+        toolbar.setOnMenuItemClickListener(onMenuItemClick);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_note_main, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    private Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.action_share_next_step:
+                    shareForNextStep();
+                    break;
+            }
+
+            return true;
+        }
+    };
+
+    private void shareForNextStep() {
+        Bitmap finalBitmap = ScreenshotManager.getBitmapFromView(screenshotFrameLayoutContainer);
+        //jump to common share activity
+        Toast.makeText(getApplication(), "next step..", Toast.LENGTH_SHORT).show();
     }
 
     @Override

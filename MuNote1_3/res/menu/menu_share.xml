@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.laomu.note.module.login.LoginAct">
+    <item
+        android:id="@+id/action_share_next_step"
+        android:orderInCategory="100"
+        android:title="下一步"
+        app:showAsAction="always" />
+</menu>

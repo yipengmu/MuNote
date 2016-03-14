@@ -11,6 +11,7 @@
         layout="@layout/common_head_with_toolbar" />
 
     <RelativeLayout
+        android:id="@+id/rl_screenshot_container"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_above="@+id/ll_bottom_cell"
@@ -27,19 +28,18 @@
         <FrameLayout
             android:id="@+id/fl_screenshot_fragment_container"
             android:layout_width="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_height="match_parent"></FrameLayout>
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"></FrameLayout>
 
     </RelativeLayout>
 
 
-
     <com.laomu.note.module.share.views.LinearColorSelectorView
-        android:layout_width="wrap_content"
-        android:minWidth="50dp"
         android:id="@+id/color_selector_view"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:minWidth="50dp" />
 
     <LinearLayout
         android:id="@+id/ll_bottom_cell"
@@ -57,6 +57,7 @@
             android:layout_alignParentBottom="true"
             android:gravity="center"
             android:orientation="horizontal">
+
             <Button
                 android:id="@+id/btn_add_text"
                 android:layout_width="wrap_content"
@@ -67,6 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/btn_history1"
                     android:layout_width="wrap_content"
@@ -85,11 +87,11 @@
             android:id="@+id/ll_doodle_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_alignParentBottom="true"
             android:background="#dddd11"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <Button
                 android:id="@+id/btn_doole_back"
@@ -152,5 +154,25 @@
         </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:id="@+id/ll_doodle_firsttime_masker"
+        android:background="@color/half_transparent"
+        android:gravity="center"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/tv_doodle_masker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/loading_01"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="轻触屏幕即可涂鸦"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </RelativeLayout>
