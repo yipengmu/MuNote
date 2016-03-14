@@ -95,9 +95,9 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
             @Override
             public void onClick(View v) {
                 //退出输入框输入态
-                if(mEtTagText.isOutofMaxCharNum()){
+                if (mEtTagText.isOutofMaxCharNum()) {
                     mEtTagText.checkMaxNumber();
-                }else if(mEtTagText.isShown()){
+                } else if (mEtTagText.isShown()) {
                     mEtTagText.setVisibility(View.GONE);
                     mStickerView.setVisibility(View.VISIBLE);
 
@@ -108,7 +108,7 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
                         //可能导致选装框不消失
 //            mStickerView.clear();
 //            mStickerView.addBitImage(mEditTextUiBitmap);
-                        mStickerView.updateBitImage(mEditTextUiBitmap,0);
+                        mStickerView.updateBitImage(mEditTextUiBitmap,1);
                         ScreenshotManager.setEditTextUIBitmap(mEditTextUiBitmap);
                     }
 
@@ -116,11 +116,25 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
             }
         });
 
+        mEtTagText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean bfocus) {
+                if(!bfocus){
+
+                    mEditTextUiBitmap = ScreenshotManager.getBitmapFromView(mEtTagText);
+                    mStickerView.clear();
+                    mStickerView.addBitImage(mEditTextUiBitmap);
+                    ScreenshotManager.setEditTextUIBitmap(mEditTextUiBitmap);
+                }
+
+            }
+        });
 
 
         mBtnAddText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mEtTagText.clearFocus();
                 rlScreenshotTexteditContainer.setClickable(true);
                 mEtTagText.setVisibility(View.VISIBLE);
                 mStickerView.setVisibility(View.GONE);
@@ -132,6 +146,7 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
         btnHistory1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mEtTagText.clearFocus();
                 editTextCurrentString = btnHistory1.getText().toString();
                 mEtTagText.setText(editTextCurrentString);
                 mStickerView.updateBitImage(ScreenshotManager.getBitmapFromView(mEtTagText));

@@ -6,8 +6,13 @@ android {
 
     defaultConfig {
         targetSdkVersion 21
+
+        ndk {
+            abiFilters "armeabi-v7a", "x86", "armeabi"
+        }
         multiDexEnabled true
     }
+
     buildTypes {
         release {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
