@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.laomu.note.R;
 import com.laomu.note.common.MuLog;
@@ -19,7 +18,6 @@ import com.laomu.note.module.share.listener.ColorSelectorListener;
 import com.laomu.note.module.share.listener.RegionClickListener;
 import com.laomu.note.module.share.type.ScreenShotModeEnum;
 import com.laomu.note.module.share.views.DoodleTouchView;
-import com.laomu.note.module.share.views.EditTextWatcher;
 import com.laomu.note.module.share.views.LinearColorSelectorView;
 import com.laomu.note.module.share.views.SealEditText;
 import com.laomu.note.module.share.views.StickerView;
@@ -101,7 +99,18 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
                 }else {
                     mEtTagText.setVisibility(View.GONE);
                     mStickerView.setVisibility(View.VISIBLE);
-                    handleEditTextDrawingCacheBitmap(mEtTagText);
+
+                    mEditTextUiBitmap = ScreenshotManager.getBitmapFromView(mEtTagText);
+
+                    if (mEditTextUiBitmap != null) {
+
+                        //可能导致选装框不消失
+//            mStickerView.clear();
+//            mStickerView.addBitImage(mEditTextUiBitmap);
+                        mStickerView.updateBitImage(mEditTextUiBitmap,0);
+                        ScreenshotManager.setEditTextUIBitmap(mEditTextUiBitmap);
+                    }
+
                 }
             }
         });
@@ -141,16 +150,6 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
 
     }
 
-    private void handleEditTextDrawingCacheBitmap(EditText editText) {
-        mEditTextUiBitmap = ScreenshotManager.getBitmapFromView(editText);
-
-        if (mEditTextUiBitmap != null) {
-            mStickerView.clear();
-            mStickerView.addBitImage(mEditTextUiBitmap);
-            ScreenshotManager.setEditTextUIBitmap(mEditTextUiBitmap);
-        }
-
-    }
 
     @Override
     public void onTextRectOutSideClick() {
