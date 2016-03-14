@@ -74,6 +74,17 @@ public class StickerItem {
         }// end if
     }
 
+    public void updateBitmap(Bitmap updateBit, View parentView){
+        this.bitmap = updateBit;
+
+        int bitWidth = Math.min(updateBit.getWidth(), updateBit.getWidth() >> 1);
+        int bitHeight = (int) bitWidth * updateBit.getHeight() / updateBit.getWidth();
+        int left = (parentView.getWidth() >> 1) - (bitWidth >> 1);
+        int top = (parentView.getHeight() >> 1) - (bitHeight >> 1);
+
+        this.dstRect = new RectF(left, top, left + bitWidth, top + bitHeight);
+    }
+
     public void init(Bitmap addBit, View parentView) {
         this.bitmap = addBit;
         this.srcRect = new Rect(0, 0, addBit.getWidth(), addBit.getHeight());

@@ -72,6 +72,18 @@ public class StickerView extends View{
         this.invalidate();// 重绘视图
     }
 
+    public void updateBitImage(final Bitmap upBitmap,int index) {
+        StickerItem item = bank.get(index);
+        if(item != null){
+            item.init(upBitmap,this);
+            bank.put(index, item);
+            this.invalidate();// 重绘视图
+        }
+    }
+
+    public void updateBitImage(final Bitmap upBitmap) {
+        updateBitImage(upBitmap, 1);
+    }
     /**
      * 绘制客户页面
      */
@@ -174,7 +186,7 @@ public class StickerView extends View{
                 break;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
-                ret = false;
+                ret = true;
                 currentStatus = STATUS_IDLE;
 
                 for (Integer id : bank.keySet()) {

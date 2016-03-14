@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.laomu.note.R;
 import com.laomu.note.common.MuLog;
@@ -19,7 +18,6 @@ import com.laomu.note.module.share.listener.ColorSelectorListener;
 import com.laomu.note.module.share.listener.RegionClickListener;
 import com.laomu.note.module.share.type.ScreenShotModeEnum;
 import com.laomu.note.module.share.views.DoodleTouchView;
-import com.laomu.note.module.share.views.EditTextWatcher;
 import com.laomu.note.module.share.views.LinearColorSelectorView;
 import com.laomu.note.module.share.views.SealEditText;
 import com.laomu.note.module.share.views.StickerView;
@@ -40,8 +38,9 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
     private ScreenShotModeEnum mMode;
     private LinearColorSelectorView linearColorSelectorView;
 
+    private String editTextCurrentString = "轻触编辑文案";
+
     public ImageEditFragment() {
-        // Required empty public constructor
     }
 
 
@@ -98,10 +97,21 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
                 //退出输入框输入态
                 if(mEtTagText.isOutofMaxCharNum()){
                     mEtTagText.checkMaxNumber();
-                }else {
+                }else if(mEtTagText.isShown()){
                     mEtTagText.setVisibility(View.GONE);
                     mStickerView.setVisibility(View.VISIBLE);
-                    handleEditTextDrawingCacheBitmap(mEtTagText);
+
+                    mEditTextUiBitmap = ScreenshotManager.getBitmapFromView(mEtTagText);
+
+                    if (mEditTextUiBitmap != null) {
+
+                        //可能导致选装框不消失
+//            mStickerView.clear();
+//            mStickerView.addBitImage(mEditTextUiBitmap);
+                        mStickerView.updateBitImage(mEditTextUiBitmap,0);
+                        ScreenshotManager.setEditTextUIBitmap(mEditTextUiBitmap);
+                    }
+
                 }
             }
         });
@@ -122,35 +132,25 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
         btnHistory1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editTextCurrentString = btnHistory1.getText().toString();
+                mEtTagText.setText(editTextCurrentString);
+                mStickerView.updateBitImage(ScreenshotManager.getBitmapFromView(mEtTagText));
                 mEtTagText.setVisibility(View.GONE);
-                mStickerView.clear();
-                mStickerView.addBitImage(ScreenshotManager.getBitmapFromView(btnHistory1));
-                mStickerView.invalidate();
             }
         });
 
         btnHistory2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editTextCurrentString = btnHistory2.getText().toString();
+                mEtTagText.setText(editTextCurrentString);
+                mStickerView.updateBitImage(ScreenshotManager.getBitmapFromView(mEtTagText));
                 mEtTagText.setVisibility(View.GONE);
-                mStickerView.clear();
-                mStickerView.addBitImage(ScreenshotManager.getBitmapFromView(btnHistory2));
-                mStickerView.invalidate();
             }
         });
 
     }
 
-    private void handleEditTextDrawingCacheBitmap(EditText editText) {
-        mEditTextUiBitmap = ScreenshotManager.getBitmapFromView(editText);
-
-        if (mEditTextUiBitmap != null) {
-            mStickerView.clear();
-            mStickerView.addBitImage(mEditTextUiBitmap);
-            ScreenshotManager.setEditTextUIBitmap(mEditTextUiBitmap);
-        }
-
-    }
 
     @Override
     public void onTextRectOutSideClick() {
