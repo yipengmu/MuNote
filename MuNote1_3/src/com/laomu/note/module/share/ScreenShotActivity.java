@@ -1,5 +1,6 @@
 package com.laomu.note.module.share;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -183,7 +184,7 @@ public class ScreenShotActivity extends NoteBaseActivity implements ImageEditLay
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_note_main, menu);
+        menuInflater.inflate(R.menu.menu_share, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -204,8 +205,11 @@ public class ScreenShotActivity extends NoteBaseActivity implements ImageEditLay
 
     private void shareForNextStep() {
         Bitmap finalBitmap = ScreenshotManager.getBitmapFromView(screenshotFrameLayoutContainer);
+        ScreenshotManager.setScreenshotResultBitmap(finalBitmap);
         //jump to common share activity
         Toast.makeText(getApplication(), "next step..", Toast.LENGTH_SHORT).show();
+
+        startActivity(new Intent(this,ScreenShotResultActivity.class));
     }
 
     @Override

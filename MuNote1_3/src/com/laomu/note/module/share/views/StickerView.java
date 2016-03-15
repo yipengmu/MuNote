@@ -58,6 +58,7 @@ public class StickerView extends View{
 
         rectPaint.setColor(Color.RED);
         rectPaint.setAlpha(100);
+        rectPaint.setAntiAlias(true);
 
     }
     public void addBitImage(final Bitmap addBit) {

@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 public class ScreenshotManager {
     private static Bitmap screenShotBgBitmap;
     private static Bitmap editTextUIBitmap;
+    private static Bitmap resultBitmap;
 
     public static Bitmap getScreenshotBgBitmap() {
         return screenShotBgBitmap;
@@ -91,5 +92,15 @@ public class ScreenshotManager {
 
     public static int getImageWidthFromStruction(Bitmap bg, int height) {
         return bg.getWidth() * height / bg.getHeight();
+    }
+
+
+    public static void setScreenshotResultBitmap(Bitmap bitmap) {
+
+        resultBitmap = bitmap;
+    }
+
+    public static Bitmap getScreenshotResultBitmap() {
+        return resultBitmap;
     }
 }

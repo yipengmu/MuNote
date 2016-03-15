@@ -104,10 +104,7 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
                     mEditTextUiBitmap = ScreenshotManager.getBitmapFromView(mEtTagText);
 
                     if (mEditTextUiBitmap != null) {
-
                         //可能导致选装框不消失
-//            mStickerView.clear();
-//            mStickerView.addBitImage(mEditTextUiBitmap);
                         mStickerView.updateBitImage(mEditTextUiBitmap,1);
                         ScreenshotManager.setEditTextUIBitmap(mEditTextUiBitmap);
                     }
