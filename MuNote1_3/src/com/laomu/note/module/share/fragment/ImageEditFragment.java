@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 
 import com.laomu.note.R;
@@ -15,16 +18,17 @@ import com.laomu.note.common.MuLog;
 import com.laomu.note.module.share.ScreenShotActivity;
 import com.laomu.note.module.share.ScreenshotManager;
 import com.laomu.note.module.share.listener.ColorSelectorListener;
+import com.laomu.note.module.share.listener.LinearPaletteTouchListener;
 import com.laomu.note.module.share.listener.RegionClickListener;
 import com.laomu.note.module.share.type.ScreenShotModeEnum;
 import com.laomu.note.module.share.views.DoodleTouchView;
-import com.laomu.note.module.share.views.LinearColorSelectorView;
+import com.laomu.note.module.share.views.LinearPaletteSelectorView;
 import com.laomu.note.module.share.views.SealEditText;
 import com.laomu.note.module.share.views.StickerView;
 import com.laomu.note.ui.NoteApplication;
 
 
-public class ImageEditFragment extends Fragment implements RegionClickListener,ColorSelectorListener {
+public class ImageEditFragment extends Fragment implements RegionClickListener,ColorSelectorListener,LinearPaletteTouchListener {
 
     private ScreenShotActivity mActivity;
     private Button mBtnAddText;
@@ -35,8 +39,8 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
     private StickerView mStickerView;
     private Button btnHistory1;
     private Button btnHistory2;
-    private ScreenShotModeEnum mMode;
-    private LinearColorSelectorView linearColorSelectorView;
+    private ScreenShotModeEnum screenShotModeEnum;
+    private LinearPaletteSelectorView linearPaletteSelectorView;
 
     private String editTextCurrentString = "轻触编辑文案";
 
@@ -72,8 +76,9 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
         rlScreenshotTexteditContainer = (ViewGroup) view.findViewById(R.id.rl_screenshot_textedit_container);
         mStickerView = (StickerView) view.findViewById(R.id.img_test);
         doodleTouchView = (DoodleTouchView) view.findViewById(R.id.doodle_touch_view);
-        linearColorSelectorView = mActivity.linearColorSelectorView;
-        linearColorSelectorView.setColorSelectorListener(this);
+        linearPaletteSelectorView = mActivity.linearPaletteSelectorView;
+        linearPaletteSelectorView.setColorSelectorListener(this);
+        doodleTouchView.setLinearPaletteTouchListener(this);
 
         btnHistory1 = mActivity.btnHistory1;
         btnHistory2 = mActivity.btnHistory2;
@@ -105,13 +110,13 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
 
                     if (mEditTextUiBitmap != null) {
                         //可能导致选装框不消失
-                        mStickerView.updateBitImage(mEditTextUiBitmap,1);
-                        ScreenshotManager.setEditTextUIBitmap(mEditTextUiBitmap);
+                        mStickerView.updateBitImage(mEditTextUiBitmap, 1);
                     }
 
                 }
             }
         });
+
 
         mEtTagText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -121,7 +126,6 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
                     mEditTextUiBitmap = ScreenshotManager.getBitmapFromView(mEtTagText);
                     mStickerView.clear();
                     mStickerView.addBitImage(mEditTextUiBitmap);
-                    ScreenshotManager.setEditTextUIBitmap(mEditTextUiBitmap);
                 }
 
             }
@@ -182,14 +186,14 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
 
 
     public void updateEditMode(ScreenShotModeEnum mode) {
-        mMode = mode;
-
-        if (mMode == ScreenShotModeEnum.MODE_DOODLE) {
+        screenShotModeEnum = mode;
+ 
+        if (screenShotModeEnum == ScreenShotModeEnum.MODE_DOODLE) {
             doodleTouchView.setVisibility(View.VISIBLE);
-            linearColorSelectorView.setVisibility(View.VISIBLE);
-        } else if (mMode == ScreenShotModeEnum.MODE_TEXT) {
+            linearPaletteSelectorView.setVisibility(View.VISIBLE);
+        } else if (screenShotModeEnum == ScreenShotModeEnum.MODE_TEXT) {
             doodleTouchView.setVisibility(View.GONE);
-            linearColorSelectorView.setVisibility(View.GONE);
+            linearPaletteSelectorView.setVisibility(View.GONE);
         }
     }
 
@@ -200,5 +204,58 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
 
     public void cleanDoodleView() {
         doodleTouchView.clearAllDoodles();
+    }
+
+
+    @Override
+    public void onPaletteTouchDown() {
+        AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
+        alphaAnimation.setDuration(300);
+        alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                linearPaletteSelectorView.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        linearPaletteSelectorView.startAnimation(alphaAnimation);
+    }
+
+    @Override
+    public void onPaletteTouchUp() {
+
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+        alphaAnimation.setDuration(500);
+        alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                linearPaletteSelectorView.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        linearPaletteSelectorView.startAnimation(alphaAnimation);
+    }
+
+    public String getEditTextCurrentString() {
+        editTextCurrentString = mEtTagText.getText().toString();
+        return editTextCurrentString;
     }
 }

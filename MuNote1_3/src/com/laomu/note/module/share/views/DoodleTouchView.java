@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.laomu.note.common.MuLog;
 import com.laomu.note.module.share.ScreenshotManager;
+import com.laomu.note.module.share.listener.LinearPaletteTouchListener;
 import com.laomu.note.module.share.listener.RegionClickListener;
 
 import java.io.FileInputStream;
@@ -20,7 +21,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoodleTouchView extends ImageView {
+public class DoodleTouchView extends ImageView{
     private Bitmap bitmapBackgroud;
     private Bitmap bitmapDoodle;
     private Bitmap bitmapSeal;
@@ -30,7 +31,7 @@ public class DoodleTouchView extends ImageView {
     private Paint mDoodlePaint;
     private float mX, mY;// 临时点坐标
     private static final float TOUCH_TOLERANCE = 4;
-
+    private LinearPaletteTouchListener linearPaletteTouchListener;
 
     // 保存Path路径的集合,用List集合来模拟栈
     private static List<DoodleDrawPath> savePath;
@@ -170,6 +171,10 @@ public class DoodleTouchView extends ImageView {
 
         mX = x;
         mY = y;
+
+        if(linearPaletteTouchListener != null){
+            linearPaletteTouchListener.onPaletteTouchDown();
+        }
     }
 
     // 正在滑动中
@@ -191,6 +196,11 @@ public class DoodleTouchView extends ImageView {
         // 将一条完整的路径保存下来(相当于入栈操作)
         savePath.add(doodleDrawPathItem);
 		mPath = null;// 重新置空
+
+
+        if(linearPaletteTouchListener != null){
+            linearPaletteTouchListener.onPaletteTouchUp();
+        }
     }
 
     // 重新绘制Path中的画线路径
@@ -255,4 +265,10 @@ public class DoodleTouchView extends ImageView {
         savePath.clear();
         invalidate();
     }
+
+
+    public void setLinearPaletteTouchListener(LinearPaletteTouchListener linearPaletteTouchListener) {
+        this.linearPaletteTouchListener = linearPaletteTouchListener;
+    }
+
 }

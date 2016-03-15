@@ -12,15 +12,16 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 
 import com.laomu.note.module.share.listener.ColorSelectorListener;
+import com.laomu.note.module.share.listener.LinearPaletteTouchListener;
 
 /**
  * Created by ${yipengmu} on 16/3/9.
  *
  * 用于颜色选择器
  */
-public class LinearColorSelectorView extends ImageView {
-    private float mLastedX;
-    private float mLastedY;
+public class LinearPaletteSelectorView extends ImageView {
+    private int mLastedX;
+    private int mLastedY;
 
     Paint mColorcyclePaint;
     Paint mGradientPaint;
@@ -31,13 +32,14 @@ public class LinearColorSelectorView extends ImageView {
     private Bitmap currentBitmap;
     boolean bGetDrawingCacheBitmap = false;
     private ColorSelectorListener colorSelectorListener;
+    private LinearPaletteTouchListener linearPaletteTouchListener;
 
-    public LinearColorSelectorView(Context context) {
+    public LinearPaletteSelectorView(Context context) {
         super(context);
         init();
     }
 
-    public LinearColorSelectorView(Context context, AttributeSet attrs) {
+    public LinearPaletteSelectorView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
@@ -97,18 +99,41 @@ public class LinearColorSelectorView extends ImageView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
         float x = event.getX();
         float y = event.getY();
 
-        mLastedX = x;
-        mLastedY = y;
-
-        checkDrawingCacheBitmap();
-        updateColorcyclePaint((int) mLastedX, (int) mLastedY);
+        mLastedX = (int)x;
+        mLastedY = (int)y;
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                touch_start(x, y);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                touch_move(mLastedX, mLastedY);
+                break;
+            case MotionEvent.ACTION_UP:
+                touch_up();
+                break;
+        }
 
         invalidate();
         return true;
+    }
+
+
+    private void touch_up() {
+        if(linearPaletteTouchListener != null){
+            linearPaletteTouchListener.onPaletteTouchUp();
+        }
+    }
+
+    private void touch_move(int x, int y) {
+        checkDrawingCacheBitmap();
+        updateColorcyclePaint(x, y);
+    }
+
+    private void touch_start(float x, float y) {
+
     }
 
     private void updateColorcyclePaint(int xx, int yy) {
@@ -136,4 +161,10 @@ public class LinearColorSelectorView extends ImageView {
     public void setColorSelectorListener(ColorSelectorListener colorSelectorListener) {
         this.colorSelectorListener = colorSelectorListener;
     }
+
+    public void setLinearPaletteTouchListener(LinearPaletteTouchListener linearPaletteTouchListener) {
+        this.linearPaletteTouchListener = linearPaletteTouchListener;
+    }
 }
+
+

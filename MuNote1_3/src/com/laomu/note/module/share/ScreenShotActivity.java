@@ -2,6 +2,7 @@ package com.laomu.note.module.share;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -21,8 +24,9 @@ import com.laomu.note.R;
 import com.laomu.note.common.preferences.PreferenceCenter;
 import com.laomu.note.module.share.fragment.ImageEditFragment;
 import com.laomu.note.module.share.listener.ImageEditLayoutListener;
+import com.laomu.note.module.share.listener.LinearPaletteTouchListener;
 import com.laomu.note.module.share.type.ScreenShotModeEnum;
-import com.laomu.note.module.share.views.LinearColorSelectorView;
+import com.laomu.note.module.share.views.LinearPaletteSelectorView;
 import com.laomu.note.ui.base.NoteBaseActivity;
 
 
@@ -38,16 +42,19 @@ public class ScreenShotActivity extends NoteBaseActivity implements ImageEditLay
     private ImageView imgScreenBg;
     public Button mBtnAddText;
     public Button btnCleanDoodle;
+    private LinearLayout sealHistoryContainer;
     public Button btnHistory1;
     public Button btnHistory2;
-    public LinearColorSelectorView linearColorSelectorView;
+    public LinearPaletteSelectorView linearPaletteSelectorView;
     private FrameLayout screenshotFrameLayoutContainer;
+
 
     //保存的背景截图文件名
     public LinearLayout llDoodleoolbar;
     public LinearLayout llSealtextToolbar;
     private FrameLayout mFrameLayoutContainer;
     private View doodleFirsttimeMasker;
+    private ScreenShotModeEnum ACTION_MODE = ScreenShotModeEnum.MODE_TEXT;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,11 +83,11 @@ public class ScreenShotActivity extends NoteBaseActivity implements ImageEditLay
         btnHistory1 = (Button) findViewById(R.id.btn_history1);
         btnHistory2 = (Button) findViewById(R.id.btn_history2);
         llDoodleoolbar = (LinearLayout) findViewById(R.id.ll_doodle_toolbar);
-        linearColorSelectorView = (LinearColorSelectorView) findViewById(R.id.color_selector_view);
+        linearPaletteSelectorView = (LinearPaletteSelectorView) findViewById(R.id.color_selector_view);
         llSealtextToolbar = (LinearLayout) findViewById(R.id.ll_sealtext_toolbar);
         doodleFirsttimeMasker = findViewById(R.id.ll_doodle_firsttime_masker);
         screenshotFrameLayoutContainer = (FrameLayout) findViewById(R.id.fl_screenshot_fragment_container);
-
+        sealHistoryContainer = (LinearLayout) findViewById(R.id.ll_seal_history_container);
 
         mTvModeText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,6 +124,7 @@ public class ScreenShotActivity extends NoteBaseActivity implements ImageEditLay
             public void run() {
                 mFrameLayoutContainer.getLayoutParams().height = imgScreenBg.getMeasuredHeight();
                 mFrameLayoutContainer.getLayoutParams().width = ScreenshotManager.getImageWidthFromStruction(bg, mFrameLayoutContainer.getLayoutParams().height);
+                mFrameLayoutContainer.setBackground(new BitmapDrawable(getResources(), bg));
                 mFrameLayoutContainer.invalidate();
             }
         });
@@ -141,13 +149,13 @@ public class ScreenShotActivity extends NoteBaseActivity implements ImageEditLay
     }
 
     private void updateFragmentMode(ScreenShotModeEnum mode) {
+        ACTION_MODE = mode;
         mImageEditFragment.updateEditMode(mode);
 
         //处理toolbar
         if (mode == ScreenShotModeEnum.MODE_DOODLE) {
             llDoodleoolbar.setVisibility(View.VISIBLE);
             llSealtextToolbar.setVisibility(View.GONE);
-        } else {
             llDoodleoolbar.setVisibility(View.GONE);
             llSealtextToolbar.setVisibility(View.VISIBLE);
         }
@@ -209,11 +217,13 @@ public class ScreenShotActivity extends NoteBaseActivity implements ImageEditLay
         //jump to common share activity
         Toast.makeText(getApplication(), "next step..", Toast.LENGTH_SHORT).show();
 
-        startActivity(new Intent(this,ScreenShotResultActivity.class));
+        PreferenceCenter.getPreferences().addScreenShotHistory(text);
+        startActivity(new Intent(this, ScreenShotResultActivity.class));
     }
 
     @Override
     public void onImageLayoutFinished(float width, float height) {
 
     }
+
 }

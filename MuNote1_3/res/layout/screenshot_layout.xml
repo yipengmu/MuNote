@@ -34,10 +34,11 @@
     </RelativeLayout>
 
 
-    <com.laomu.note.module.share.views.LinearColorSelectorView
+    <com.laomu.note.module.share.views.LinearPaletteSelectorView
         android:id="@+id/color_selector_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_below="@+id/create_note_toolbar"
         android:layout_alignParentRight="true"
         android:minWidth="50dp" />
 
@@ -66,6 +67,7 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
+                android:id="@+id/ll_seal_history_container"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
