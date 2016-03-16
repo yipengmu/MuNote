@@ -71,17 +71,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btn_history1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1111" />
-
-                <Button
-                    android:id="@+id/btn_history2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="222" />
             </LinearLayout>
         </LinearLayout>
 

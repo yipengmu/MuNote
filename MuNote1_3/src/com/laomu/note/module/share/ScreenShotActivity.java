@@ -29,6 +29,10 @@ import com.laomu.note.module.share.type.ScreenShotModeEnum;
 import com.laomu.note.module.share.views.LinearPaletteSelectorView;
 import com.laomu.note.ui.base.NoteBaseActivity;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+
 
 /**
  * Created by ${yipengmu} on 16/3/3.
@@ -43,8 +47,7 @@ public class ScreenShotActivity extends NoteBaseActivity implements ImageEditLay
     public Button mBtnAddText;
     public Button btnCleanDoodle;
     private LinearLayout sealHistoryContainer;
-    public Button btnHistory1;
-    public Button btnHistory2;
+    public ArrayList<Button> sealHistoryItems = new ArrayList<>();
     public LinearPaletteSelectorView linearPaletteSelectorView;
     private FrameLayout screenshotFrameLayoutContainer;
 
@@ -80,8 +83,7 @@ public class ScreenShotActivity extends NoteBaseActivity implements ImageEditLay
         mTvModeDoodle = (TextView) findViewById(R.id.tv_mode_doodle);
         mBtnAddText = (Button) findViewById(R.id.btn_add_text);
         btnCleanDoodle = (Button) findViewById(R.id.btn_clean_doodle);
-        btnHistory1 = (Button) findViewById(R.id.btn_history1);
-        btnHistory2 = (Button) findViewById(R.id.btn_history2);
+        sealHistoryContainer = (LinearLayout) findViewById(R.id.ll_seal_history_container);
         llDoodleoolbar = (LinearLayout) findViewById(R.id.ll_doodle_toolbar);
         linearPaletteSelectorView = (LinearPaletteSelectorView) findViewById(R.id.color_selector_view);
         llSealtextToolbar = (LinearLayout) findViewById(R.id.ll_sealtext_toolbar);
@@ -114,8 +116,21 @@ public class ScreenShotActivity extends NoteBaseActivity implements ImageEditLay
 
 
         initFragment();
+        initSealHistoryContent();
         checkDoodleFirstTimeMasker();
 
+    }
+
+    private void initSealHistoryContent() {
+        JSONArray jsonArray = PreferenceCenter.getPreferences().getSealContentHistory();
+        if(jsonArray != null && jsonArray.length() > 0) {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                Button button = new Button(getApplicationContext());
+                button.setText((String) jsonArray.opt(i));
+                sealHistoryItems.add(button);
+                sealHistoryContainer.addView(button);
+            }
+        }
     }
 
     private void updateEditImageFrameLayout(final Bitmap bg) {
@@ -217,7 +232,7 @@ public class ScreenShotActivity extends NoteBaseActivity implements ImageEditLay
         //jump to common share activity
         Toast.makeText(getApplication(), "next step..", Toast.LENGTH_SHORT).show();
 
-        PreferenceCenter.getPreferences().addScreenShotHistory(text);
+        PreferenceCenter.getPreferences().addSealContentHistory(mImageEditFragment.getEditTextCurrentString());
         startActivity(new Intent(this, ScreenShotResultActivity.class));
     }
 

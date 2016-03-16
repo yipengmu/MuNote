@@ -3,6 +3,7 @@ package com.laomu.note.module.share.fragment;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -25,7 +26,7 @@ import com.laomu.note.module.share.views.DoodleTouchView;
 import com.laomu.note.module.share.views.LinearPaletteSelectorView;
 import com.laomu.note.module.share.views.SealEditText;
 import com.laomu.note.module.share.views.StickerView;
-import com.laomu.note.ui.NoteApplication;
+import java.util.ArrayList;
 
 
 public class ImageEditFragment extends Fragment implements RegionClickListener,ColorSelectorListener,LinearPaletteTouchListener {
@@ -37,11 +38,9 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
     private ViewGroup rlScreenshotTexteditContainer;
     private Bitmap mEditTextUiBitmap;
     private StickerView mStickerView;
-    private Button btnHistory1;
-    private Button btnHistory2;
     private ScreenShotModeEnum screenShotModeEnum;
     private LinearPaletteSelectorView linearPaletteSelectorView;
-
+    public ArrayList<Button> sealHistoryItems;
     private String editTextCurrentString = "轻触编辑文案";
 
     public ImageEditFragment() {
@@ -79,22 +78,11 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
         linearPaletteSelectorView = mActivity.linearPaletteSelectorView;
         linearPaletteSelectorView.setColorSelectorListener(this);
         doodleTouchView.setLinearPaletteTouchListener(this);
-
-        btnHistory1 = mActivity.btnHistory1;
-        btnHistory2 = mActivity.btnHistory2;
-
+        sealHistoryItems = mActivity.sealHistoryItems;
         mBtnAddText = mActivity.mBtnAddText;
         mStickerView.setRegionClickListener(this);
 
         updateEditMode(ScreenShotModeEnum.MODE_TEXT);
-
-        mStickerView.post(new Runnable() {
-            @Override
-            public void run() {
-                mStickerView.addBitImage(BitmapFactory.decodeResource(NoteApplication.appContext.getResources(), R.drawable.af_seal_text_bg_default));
-            }
-        });
-
 
         rlScreenshotTexteditContainer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +109,7 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
         mEtTagText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean bfocus) {
-                if(!bfocus){
+                if (!bfocus) {
 
                     mEditTextUiBitmap = ScreenshotManager.getBitmapFromView(mEtTagText);
                     mStickerView.clear();
@@ -144,27 +132,36 @@ public class ImageEditFragment extends Fragment implements RegionClickListener,C
             }
         });
 
-        btnHistory1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEtTagText.clearFocus();
-                editTextCurrentString = btnHistory1.getText().toString();
-                mEtTagText.setText(editTextCurrentString);
-                mStickerView.updateBitImage(ScreenshotManager.getBitmapFromView(mEtTagText));
-                mEtTagText.setVisibility(View.GONE);
-            }
-        });
+        initSealHistoryItems();
 
-        btnHistory2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editTextCurrentString = btnHistory2.getText().toString();
-                mEtTagText.setText(editTextCurrentString);
-                mStickerView.updateBitImage(ScreenshotManager.getBitmapFromView(mEtTagText));
-                mEtTagText.setVisibility(View.GONE);
-            }
-        });
 
+    }
+
+    private void initSealHistoryItems() {
+        for (int i = 0; sealHistoryItems != null && i < sealHistoryItems.size(); i++) {
+            final int finalI = i;
+            sealHistoryItems.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    doSealItemsClick(sealHistoryItems.get(finalI).getText().toString());
+                }
+            });
+        }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doSealItemsClick("");
+            }
+        },50);
+    }
+
+    private void doSealItemsClick(String sealText) {
+        mEtTagText.clearFocus();
+        editTextCurrentString = sealText ;
+        mEtTagText.setText(editTextCurrentString);
+        mStickerView.updateBitImage(ScreenshotManager.getBitmapFromView(mEtTagText));
+        mEtTagText.setVisibility(View.GONE);
     }
 
 
